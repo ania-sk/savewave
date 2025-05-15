@@ -15,8 +15,11 @@ class HomeController
     {
         $this->view = new TemplateEngine(Paths::VIEW);
     }
+
     public function home()
     {
-        $this->view->render("/index.php");
+        $this->view->render("/index.php", [
+            'title' => 'Home page'
+        ]);
     }
 }
