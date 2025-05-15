@@ -3,7 +3,7 @@
 <body>
     <header class="header flex-conteiner">
         <div class="logo-box">
-            <a class="link flex-conteiner" href="savings-boat.php">
+            <a class="link flex-conteiner" href="/mainPage">
                 <img
                     class="logo-sw"
                     src="/assets/imgs/save-wave-circle.png"
