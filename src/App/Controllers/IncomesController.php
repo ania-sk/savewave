@@ -7,7 +7,7 @@ namespace App\Controllers;
 use Framework\TemplateEngine;
 use App\Config\Paths;
 
-class MainPageController
+class IncomesController
 {
     private TemplateEngine $view;
 
@@ -16,11 +16,13 @@ class MainPageController
         $this->view = new TemplateEngine(Paths::VIEW);
     }
 
-    public function mainPage()
+    public function incomes()
     {
-        echo $this->view->render("/mainPage.php", [
-            'title' => 'Budget Application',
-            'cssLink' => 'mainPage.css'
+        echo $this->view->render("/incomes.php", [
+            'title' => 'Incomes',
+            'cssLink' => 'incomes.css',
+            'cssLink2' => 'mainPage.css',
+            'jsLink' => 'incomes.js'
         ]);
     }
 }

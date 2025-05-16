@@ -8,4 +8,6 @@
     <link rel="icon" href="/assets/imgs/save-wave-circle.png" />
     <link rel="stylesheet" href="/assets/global.css" />
     <link rel="stylesheet" href="/assets/<?php echo e($cssLink) ?>" />
+    <link rel="stylesheet" href="/assets/<?php echo e($cssLink2) ?>" />
+
 </head>

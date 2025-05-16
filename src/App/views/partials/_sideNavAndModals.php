@@ -44,7 +44,7 @@
     <!-- sidenav -->
     <nav class="side-nav-box flex-conteiner">
         <a
-            href="incomes.php"
+            href="/incomes"
             class="link nav-box flex-conteiner"
             data-tooltip="Incomes">
             <ion-icon class="nav-icon" name="cash-outline"></ion-icon>
