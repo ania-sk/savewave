@@ -1,0 +1,376 @@
+/* ////////////////////////////// */
+/* SECTION SIDE NAV*/
+/* ////////////////////////////// */
+.section-side-nav {
+  position: fixed;
+  top: 0;
+  width: 40rem;
+  height: 100%;
+  background-color: #ebe1f8;
+  padding: 2.4rem;
+  overflow-x: hidden;
+  transition: all 0.5s ease-in-out;
+}
+/* ********** */
+/* nav hide */
+.nav-hide .section-side-nav {
+  width: 9rem;
+  transition: all 0.5s ease-in-out;
+}
+
+.nav-hide .section-main {
+  margin-left: 9rem;
+  transition: all 0.5s ease-in-out;
+}
+
+.nav-hide .side-nav-button-hide,
+.nav-hide .logo-box,
+.nav-hide .link span {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.nav-hide .btn-box .btn--modal {
+  display: none;
+}
+
+.nav-hide .btn-box .btn--icon {
+  opacity: 1;
+  pointer-events: all;
+  visibility: visible;
+  background-color: #ebe1f8;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.5s ease-in;
+}
+
+.nav-hide .btn-box .btn--icon .header-icon {
+  color: #0d7c66;
+  font-size: 4rem;
+  transition: all 0.4s;
+}
+
+.nav-hide .btn-box .btn--icon .header-icon:hover {
+  transform: scale(1.1);
+  color: #3d9685;
+}
+
+.nav-hide .side-nav-button-show {
+  display: block;
+  height: 7rem;
+  transition: all 0.9s;
+}
+
+.nav-hide .nav-box {
+  width: auto;
+}
+
+.nav-hide .btn-box {
+  flex-direction: column;
+}
+
+/* ********** */
+
+.logo-box img {
+  width: 7rem;
+  position: relative;
+}
+
+.logo-box .link:hover {
+  transform: scale(1);
+}
+
+.side-nav-box {
+  font-size: 3rem;
+  font-weight: 300;
+  height: 70%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 4.8rem 0 2.4rem 0;
+}
+
+.nav-box {
+  border-radius: 11px;
+  width: 100%;
+  padding: 0.4rem;
+  position: relative;
+  z-index: 0;
+}
+
+/* tooltips */
+.nav-hide .nav-icon::after {
+  content: "aaaaaaa"; /* Pobiera tekst z data-tooltip */
+  position: absolute;
+  z-index: 10;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #444;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: none;
+  transition: opacity 0.2s ease;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.nav-hide .nav-icon:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ********** */
+
+.link {
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.link:hover,
+.link:active {
+  color: #3d9685;
+  transform: scale(1.03);
+}
+
+.side-nav-button-show {
+  display: none;
+}
+
+.side-nav-button-show,
+.side-nav-button-hide {
+  color: #0d7c66;
+  font-size: 3rem;
+  position: absolute;
+
+  top: 4.5rem;
+  right: 2rem;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.side-nav-button-show:hover,
+.side-nav-button-hide:hover {
+  color: #3d9685;
+  transform: scale(1.1);
+}
+
+.nav-icon {
+  font-size: 3.5rem;
+}
+
+.nav-box:nth-last-child(-n + 1) {
+  margin-top: auto;
+}
+/* ////////////////////////////// */
+/* MODAL SECTION*/
+/* ////////////////////////////// */
+.btn-box {
+  width: 100%;
+}
+
+.btn--modal {
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  width: 50%;
+  padding: 1.2rem;
+}
+
+.btn-box .btn--icon {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.btn--modal:hover {
+  background-color: #ebe1f8;
+}
+
+.btn--modal .header-icon {
+  display: none;
+}
+
+#modal-income,
+#modal-expense {
+  display: none;
+}
+
+#modal-income *:focus,
+#modal-expense *:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.5rem rgba(61, 150, 134, 0.5);
+}
+
+.modal-box {
+  position: fixed;
+  z-index: 1;
+  padding-top: 12.8rem;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(108, 98, 121, 0.7);
+}
+
+.modal-content {
+  position: relative;
+  background-color: #ebe1f8;
+  margin: auto;
+  border-radius: 11px;
+  overflow: hidden;
+  max-width: fit-content;
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+
+  -webkit-animation-name: showmodal;
+  -webkit-animation-duration: 0s;
+  animation-name: showmodal;
+  animation-duration: 0.3s;
+}
+
+@-webkit-keyframes showmodal {
+  from {
+    top: 300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes showmodal {
+  from {
+    top: 300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.close {
+  color: #ebe1f8;
+  order: 1;
+  font-size: 4.4rem;
+  margin-left: auto;
+  transition: all 0.5s;
+}
+
+.close:hover,
+.close:focus {
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  justify-content: flex-start;
+  padding: 0.8rem 3.2rem;
+  background-color: #0d7c66;
+  color: #e7f2f0;
+}
+
+.header-icon {
+  color: #e7f2f0;
+  font-size: 3rem;
+}
+
+.modal-body {
+  padding: 1.6rem 3.2rem 0rem;
+}
+
+.modal-form-box,
+.input-form-box {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.input-form-box {
+  width: 100%;
+  gap: 1.2rem;
+}
+
+.input-form-box label {
+  font-size: 1.8rem;
+}
+
+.input-form-box select,
+.input-form-box input {
+  font-family: inherit;
+  font-size: 1.6rem;
+  height: 100%;
+  width: 100%;
+  padding: 1.2rem 1.2rem 1.2rem 4.8rem;
+  border: none;
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.date-category-box input,
+.date-category-box select {
+  padding: 1.2rem;
+}
+.modal-icon {
+  color: #0d7c66;
+  position: absolute;
+  left: 4rem;
+}
+
+#cash-icon {
+  top: 11.5rem;
+}
+
+#text-icon {
+  top: 21rem;
+}
+
+/* ////////////////////////////// */
+/* MAIN SECTION*/
+/* ////////////////////////////// */
+.section-main {
+  margin-left: 40rem;
+  transition: all 0.9s;
+}
+
+.main-header {
+  background-color: #0d7c66;
+  color: #ebe1f8;
+  font-size: 3.6rem;
+  font-weight: 400;
+  text-align: center;
+  padding: 3.2rem;
+  text-transform: uppercase;
+  letter-spacing: 7px;
+}
+
+.grid-rows-3 {
+  height: 90vh;
+}
+
+.box {
+  border-bottom: solid 1px #0d7c66;
+}
+
+.header {
+  font-size: 2rem;
+}
+
+.current-month {
+  flex-direction: column;
+}
+/* --- 01 TYPOGRAPHY SYSTEM
+- Font size system (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+--- 02 Whitespace
+- Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128 */

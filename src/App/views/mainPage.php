@@ -1,4 +1,7 @@
-<?php include $this->resolve("partials/_header.php"); ?>
+<?php
+include $this->resolve("partials/_header.php");
+include $this->resolve("partials/_sideNavAndModals.php");
+?>
 
 <body class="">
     <!-- MAIN SECTION -->

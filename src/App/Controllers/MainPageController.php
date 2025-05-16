@@ -19,7 +19,8 @@ class MainPageController
     public function mainPage()
     {
         echo $this->view->render("/mainPage.php", [
-            'title' => 'Budget Application'
+            'title' => 'Budget Application',
+            'cssLink' => 'mainPage.css'
         ]);
     }
 }

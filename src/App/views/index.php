@@ -29,7 +29,7 @@
         <!-- HERO SECTION -->
         <section class="section-hero grid-cols-2 mrg-bottom">
             <div class="hero-img-box flex-conteiner">
-                <img class="hero-img" src="imgs/hero.png" alt="" />
+                <img class="hero-img" src="/assets/imgs/hero.png" alt="" />
             </div>
             <div class="hero-text-box flex-conteiner">
                 <h1 class="heading">
