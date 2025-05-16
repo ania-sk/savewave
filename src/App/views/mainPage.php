@@ -11,7 +11,9 @@ include $this->resolve("partials/_sideNavAndModals.php");
         </header>
     </main>
 
-
+    <?php
+    include $this->resolve("partials/_scripts.php");
+    ?>
 </body>
 
 </html>
