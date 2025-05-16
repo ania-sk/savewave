@@ -1,0 +1,46 @@
+.side-nav-box > a:nth-child(2) {
+  background-color: #0d7c66;
+  color: #ebe1f8;
+  width: 100%;
+  border-radius: 11px;
+  padding: 0.4rem;
+}
+
+.side-nav-box > a:nth-child(2):hover {
+  color: #ebe1f8;
+}
+
+.nav-hide .side-nav-box > a:nth-child(2) {
+  width: auto;
+}
+/* SECTION MAIN */
+/* ************* */
+.section-main {
+  padding: 4.8rem;
+  flex-direction: column;
+}
+
+.expense-heading {
+  font-size: 3.4rem;
+  text-transform: uppercase;
+  color: #0d7c66;
+}
+
+.header-btn--icon {
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.header-icon-modal {
+  color: #0d7c66;
+  font-size: 4rem;
+  transition: all 0.3s;
+}
+
+.header-icon-modal:hover,
+.header-icon-modal:active {
+  color: #3d9685;
+  transform: scale(1.1);
+}

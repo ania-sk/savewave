@@ -50,7 +50,7 @@
             <ion-icon class="nav-icon" name="cash-outline"></ion-icon>
             <span>Incomes</span>
         </a>
-        <a href="expenses.php" class="link nav-box flex-conteiner">
+        <a href="/expenses" class="link nav-box flex-conteiner">
             <ion-icon class="nav-icon" name="file-tray-full-outline"></ion-icon>
             <span>Expenses</span>
         </a>
