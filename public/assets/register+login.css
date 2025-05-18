@@ -1,0 +1,128 @@
+body {
+  background-color: rgba(13, 124, 102, 0.5);
+}
+/********************/
+/* SECTION SINGUP */
+/* SECTION LOGIN */
+/********************/
+.section-login,
+.section-singup {
+  flex-direction: column;
+  padding: 4.8rem;
+
+  background-color: #ebe1f8;
+  width: 29vw;
+  margin: 6rem auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.logo-box {
+  margin-bottom: 2.4rem;
+}
+
+.logo-sw {
+  width: 10rem;
+}
+
+.header-save {
+  font-size: 4.4rem;
+}
+.login-form-box,
+.singup-form-box {
+  flex-direction: column;
+  align-items: flex-start;
+  color: #0d7c66;
+}
+
+.input-box {
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  width: 22vw;
+  gap: 1.5rem;
+}
+
+.input-box label {
+  padding: 0 0.8rem;
+  font-size: 2rem;
+}
+
+.input-box input {
+  font-family: inherit;
+  font-size: inherit;
+  height: 100%;
+  width: 100%;
+  padding: 1.2rem 3.2rem;
+  border: none;
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  color: #6c6279;
+  font-weight: 400;
+  position: relative;
+}
+
+.input-box input::placeholder {
+  color: #ac9cc1;
+  font-weight: 300;
+}
+
+.login-form-box *:focus,
+.singup-form-box *:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.5rem rgba(61, 150, 134, 0.5);
+}
+
+.form-icon {
+  position: absolute;
+  top: 5.1rem;
+  left: 1rem;
+  color: #ac9cc1;
+}
+
+.question-box {
+  font-size: 1.4rem;
+  color: #0d7c66;
+  gap: 0.8rem;
+}
+
+.question-box .link {
+  font-weight: 700;
+}
+
+/* ERRORS */
+.error-box {
+  display: none;
+}
+
+.error-icon {
+  position: absolute;
+  top: 5rem;
+  right: 1rem;
+}
+
+.session-error,
+.show-error .error-box {
+  display: block;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  margin-left: auto;
+}
+
+.show-error input {
+  border: solid 2px #0d7c66;
+}
+
+.show-error .error-text {
+  margin-top: -1rem;
+}
+
+/*  
+  - Font size system (px)
+    10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+  
+  --- 02 Whitespace
+  
+  - Spacing system (px)
+    2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+    */
