@@ -11,6 +11,10 @@ class ValidationExceptionMiddleware implements MiddlewareInterface
 {
     public function process(callable $next)
     {
-        $next();
+        try {
+            $next();
+        } catch (ValidationException $e) {
+            redirectTo("/register");
+        }
     }
 }
