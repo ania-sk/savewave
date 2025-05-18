@@ -22,24 +22,19 @@ include $this->resolve("partials/_header.php");
                     type="email"
                     placeholder="me@example.com"
                     name="email"
-                    value="<?php if (isset($_SESSION['formEmailValue'])) {
-                                echo $_SESSION['formEmailValue'];
-                                unset($_SESSION['formEmailValue']);
-                            } ?>" />
-                <?php if (isset($_SESSION['emailInDatabase'])): ?>
-                    <p class="session-error">
-                        <?php echo $_SESSION['emailInDatabase']; ?>
-                    </p>
-                    <?php unset($_SESSION['emailInDatabase']); ?>
+                    value="" />
+                <ion-icon class="form-icon" name="mail"></ion-icon>
+
+
+                <?php if (array_key_exists('email', $errors)) : ?>
+                    <div>
+                        <p class="error-text"><?php echo e($errors['email'][0]); ?></p>
+                        <ion-icon class="error-icon" name="alert"></ion-icon>
+                    </div>
                 <?php endif; ?>
 
-                <ion-icon class="form-icon" name="mail"></ion-icon>
-                <div class="error-box">
-                    <p class="error-text">Looks like this is not an email</p>
-
-                    <ion-icon class="error-icon" name="alert"></ion-icon>
-                </div>
             </div>
+
 
             <div class="input-box flex-conteiner">
                 <label for="username">Username</label>
@@ -48,15 +43,15 @@ include $this->resolve("partials/_header.php");
                     type="text"
                     placeholder="moneySaver"
                     name="username"
-                    value="<?php if (isset($_SESSION['formUsernameValue'])) {
-                                echo $_SESSION['formUsernameValue'];
-                                unset($_SESSION['formUsernameValue']);
-                            } ?>" />
+                    value="" />
                 <ion-icon class="form-icon" name="person-add"></ion-icon>
-                <div class="error-box">
-                    <p class="error-text">Username cannot be empty or shorter then 4 characters</p>
-                    <ion-icon class="error-icon" name="alert"></ion-icon>
-                </div>
+
+                <?php if (array_key_exists('username', $errors)) : ?>
+                    <div>
+                        <p class="error-text"><?php echo e($errors['username'][0]); ?></p>
+                        <ion-icon class="error-icon" name="alert"></ion-icon>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <div class="input-box flex-conteiner">
@@ -66,15 +61,15 @@ include $this->resolve("partials/_header.php");
                     type="password"
                     placeholder="********"
                     name="password"
-                    value="<?php if (isset($_SESSION['formPasswordValue'])) {
-                                echo $_SESSION['formPasswordValue'];
-                                unset($_SESSION['formPasswordValue']);
-                            } ?>" />
+                    value="" />
                 <ion-icon class="form-icon" name="lock-closed"></ion-icon>
-                <div class="error-box">
-                    <p class="error-text">Password cannot be empty or shorter then 6 characters </p>
-                    <ion-icon class="error-icon" name="alert"></ion-icon>
-                </div>
+
+                <?php if (array_key_exists('password', $errors)) : ?>
+                    <div>
+                        <p class="error-text"><?php echo e($errors['password'][0]); ?></p>
+                        <ion-icon class="error-icon" name="alert"></ion-icon>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <div class="input-box flex-conteiner">
@@ -84,15 +79,15 @@ include $this->resolve("partials/_header.php");
                     type="password"
                     placeholder="********"
                     name="confirm-password"
-                    value="<?php if (isset($_SESSION['formConfirmPasswordValue'])) {
-                                echo $_SESSION['formConfirmPasswordValue'];
-                                unset($_SESSION['formConfirmPasswordValue']);
-                            } ?>" />
+                    value="" />
                 <ion-icon class="form-icon" name="lock-closed"></ion-icon>
-                <div class="error-box">
-                    <p class="error-text">Looks like this password is diffrent</p>
-                    <ion-icon class="error-icon" name="alert"></ion-icon>
-                </div>
+
+                <?php if (array_key_exists('confirm-password', $errors)) : ?>
+                    <div>
+                        <p class="error-text"><?php echo e($errors['confirm-password'][0]); ?></p>
+                        <ion-icon class="error-icon" name="alert"></ion-icon>
+                    </div>
+                <?php endif; ?>
                 <button type="submit" class="btn btn--full btn--form">Sing-up</button>
             </div>
         </form>
@@ -103,6 +98,9 @@ include $this->resolve("partials/_header.php");
     </section>
 
     <!--  -->
+    <?php
+    include $this->resolve("partials/_scripts.php");
+    ?>
 
 </body>
 
