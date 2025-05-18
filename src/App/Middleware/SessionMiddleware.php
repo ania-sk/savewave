@@ -15,8 +15,8 @@ class SessionMiddleware implements MiddlewareInterface
             throw new SessionException("Session alredy active.");
         }
 
-        if (headers_sent()) {
-            throw new SessionException("Headers already sent.");
+        if (headers_sent($filename, $line)) {
+            throw new SessionException("Headers already sent.Consider outputted form {$filename} - Line: {$line}.");
         }
 
         session_start();
