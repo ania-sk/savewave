@@ -21,4 +21,9 @@ class AuthController
             ]
         );
     }
+
+    public function register()
+    {
+        dd($_POST);
+    }
 }

@@ -15,4 +15,5 @@ function registerRoutes(App $app)
     $app->get('/incomes', [IncomesController::class, 'incomes']);
     $app->get('/expenses', [ExpensesController::class, 'expenses']);
     $app->get('/register', [AuthController::class, 'registerView']);
+    $app->post('/register', [AuthController::class, 'register']);
 }
