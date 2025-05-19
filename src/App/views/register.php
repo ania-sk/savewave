@@ -22,7 +22,7 @@ include $this->resolve("partials/_header.php");
                     type="email"
                     placeholder="me@example.com"
                     name="email"
-                    value="" />
+                    value="<?php echo e($oldFormData['email'] ?? ''); ?>" />
                 <ion-icon class="form-icon" name="mail"></ion-icon>
 
 
@@ -43,7 +43,7 @@ include $this->resolve("partials/_header.php");
                     type="text"
                     placeholder="moneySaver"
                     name="username"
-                    value="" />
+                    value="<?php echo e($oldFormData['username'] ?? ''); ?>" />
                 <ion-icon class="form-icon" name="person-add"></ion-icon>
 
                 <?php if (array_key_exists('username', $errors)) : ?>
