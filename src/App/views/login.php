@@ -5,7 +5,7 @@ include $this->resolve("partials/_header.php");
 <body>
     <section class="section-login flex-conteiner">
         <div class="logo-box">
-            <a class="link flex-conteiner" href="main.php">
+            <a class="link flex-conteiner" href="/">
                 <img
                     class="logo-sw"
                     src="/assets/imgs/save-wave-circle.png"
