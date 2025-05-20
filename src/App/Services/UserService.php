@@ -9,4 +9,11 @@ use Framework\Database;
 class UserService
 {
     public function __construct(private Database $db) {}
+
+    public function isEmailTaken(string $email)
+    {
+        $this->db->query(
+            "SELECT COUNT(*) FROM users WHERE email = :email"
+        );
+    }
 }
