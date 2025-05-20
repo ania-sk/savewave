@@ -15,6 +15,8 @@ include $this->resolve("partials/_header.php");
         </div>
 
         <form method="post" class="login-form-box flex-conteiner">
+            <?php include $this->resolve('partials/_csrf.php'); ?>
+
             <div class="input-box flex-conteiner">
                 <label for="username">Email</label>
                 <input
