@@ -66,7 +66,7 @@
             <ion-icon class="nav-icon" name="settings-outline"></ion-icon>
             <span>Settings</span>
         </a>
-        <a href="main.php" class="link nav-box flex-conteiner">
+        <a href="/logout" class="link nav-box flex-conteiner">
             <ion-icon class="nav-icon" name="log-out-outline"></ion-icon>
             <span>Logout</span>
         </a>
