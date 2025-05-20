@@ -34,7 +34,7 @@ class AuthController
 
         $this->userService->create($_POST);
 
-        redirectTo('/');
+        redirectTo('/mainPage');
     }
 
     public function loginView()
