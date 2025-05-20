@@ -22,12 +22,15 @@ include $this->resolve("partials/_header.php");
                     type="email"
                     placeholder="me@example.com"
                     name="email"
-                    required />
+                    value="<?php echo e($oldFormData['email'] ?? ''); ?>" />
                 <ion-icon class="form-icon" name="mail"></ion-icon>
-                <div class="error-box">
-                    <p class="error-text">Looks like this is not a correct email</p>
-                    <ion-icon class="error-icon" name="alert"></ion-icon>
-                </div>
+                <?php if (array_key_exists('email', $errors)) : ?>
+                    <div>
+                        <p class="error-text"><?php echo e($errors['email'][0]); ?></p>
+                        <ion-icon class="error-icon" name="alert"></ion-icon>
+                    </div>
+                <?php endif; ?>
+
             </div>
 
             <div class="input-box flex-conteiner">
@@ -36,13 +39,14 @@ include $this->resolve("partials/_header.php");
                     id="password"
                     type="password"
                     placeholder="********"
-                    name="password"
-                    required />
+                    name="password" />
                 <ion-icon class="form-icon" name="lock-closed"></ion-icon>
-                <div class="error-box">
-                    <p class="error-text">Password cannot be empty</p>
-                    <ion-icon class="error-icon" name="alert"></ion-icon>
-                </div>
+                <?php if (array_key_exists('password', $errors)) : ?>
+                    <div>
+                        <p class="error-text"><?php echo e($errors['password'][0]); ?></p>
+                        <ion-icon class="error-icon" name="alert"></ion-icon>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <button type="submit" class="btn btn--full btn--form">Login</button>
