@@ -24,4 +24,17 @@ class UserService
             throw new ValidationException(['email' => 'Email is already taken']);
         }
     }
+
+    public function create(array $formData)
+    {
+        $this->db->query(
+            "INSERT INTO users(email, username, password)
+            VALUES(:email, :username, :password)",
+            [
+                'email' => $formData['email'],
+                'username' => $formData['username'],
+                'password' => $formData['password']
+            ]
+        );
+    }
 }
