@@ -14,7 +14,7 @@
         <!-- NAVIGATION -->
         <nav class="header-nav">
             <div class="btn-box flex-conteiner">
-                <a href="login.php" class="btn">Login</a>
+                <a href="/login" class="btn">Login</a>
                 <a href="/register" class="btn btn--full">Sing-up</a>
             </div>
         </nav>
@@ -41,7 +41,7 @@
                 </p>
 
                 <div class="btn-box flex-conteiner">
-                    <a href="login.php" class="btn">Login</a>
+                    <a href="/login" class="btn">Login</a>
                     <a href="/register" class="btn btn--full">Sing-up</a>
                 </div>
             </div>
