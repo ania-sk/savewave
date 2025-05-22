@@ -81,20 +81,29 @@
                 <ion-icon class="header-icon" name="add-circle"></ion-icon>
                 <p>Add income</p>
             </div>
+
             <div class="modal-body flex-conteiner">
-                <form action="" class="modal-form-box flex-conteiner">
+
+                <!-- FORM -->
+
+                <form method="post" class="modal-form-box flex-conteiner">
+
                     <div class="input-form-box flex-conteiner">
                         <label for="amount">Amount</label>
                         <input
                             id="amount"
                             type="number"
                             name="amount"
-                            value="0"
-                            required />
+                            value="0" />
                         <ion-icon
                             id="cash-icon"
                             class="modal-icon"
                             name="cash-outline"></ion-icon>
+                        <?php if (array_key_exists('amount', $errors)) : ?>
+                            <div>
+                                <?php echo e("błąd"); ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
 
                     <div class="input-form-box flex-conteiner">
@@ -113,7 +122,12 @@
                     <div class="flex-conteiner date-category-box">
                         <div class="input-form-box flex-conteiner">
                             <label for="date">Date</label>
-                            <input id="date" type="date" name="date" required />
+                            <input id="date" type="date" name="date" />
+                            <?php if (array_key_exists('date', $errors)) : ?>
+                                <div>
+                                    <?php echo e($errors['date'][0]); ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
 
                         <div class="input-form-box flex-conteiner">
@@ -151,8 +165,7 @@
                             id="amount"
                             type="number"
                             name="amount"
-                            value="0"
-                            required />
+                            value="0" />
                         <ion-icon
                             id="cash-icon"
                             class="modal-icon"
@@ -175,7 +188,7 @@
                     <div class="flex-conteiner date-category-box">
                         <div class="input-form-box flex-conteiner">
                             <label for="date">Date</label>
-                            <input id="date" type="date" name="date" required />
+                            <input id="date" type="date" name="date" />
                         </div>
 
                         <div class="input-form-box flex-conteiner">

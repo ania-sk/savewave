@@ -83,6 +83,12 @@ window.onclick = function (event) {
     modalExpense.style.display = "none";
   }
 };
+//errors
+document.addEventListener("DOMContentLoaded", function () {
+  if (document.body.classList.contains("modal-income-open")) {
+    modalIncome.style.display = "block";
+  }
+});
 
 //get modal btn-icons
 const btnIconModalIncome = document.querySelector("#icon-btn-modal-income");
