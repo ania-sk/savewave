@@ -3,7 +3,9 @@ include $this->resolve("partials/_header.php");
 include $this->resolve("partials/_sideNavAndModals.php");
 ?>
 
-<body class="<?php isset($errors) ? 'modal-income-open' : '' ?>">
+
+<body class="<?php echo !empty($errors) ? 'modal-income-open' : ''; ?>">
+
     <!-- MAIN SECTION -->
     <main class="section-main">
         <header class="main-header">
@@ -12,8 +14,10 @@ include $this->resolve("partials/_sideNavAndModals.php");
     </main>
 
     <?php
+
     include $this->resolve("partials/_scripts.php");
     ?>
+
 </body>
 
 </html>

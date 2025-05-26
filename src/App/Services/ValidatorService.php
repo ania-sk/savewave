@@ -39,12 +39,12 @@ class ValidatorService
         ]);
     }
 
-    public function validateTransaction(array $formData)
+    public function validateIncome(array $formData)
     {
         $this->validator->validate($formData, [
             'amount' => ['required'],
             'date' => ['required'],
-            'comment' => [''],
+            'comment' => [],
             'category' => ['required']
         ]);
     }

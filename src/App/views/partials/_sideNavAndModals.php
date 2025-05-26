@@ -88,20 +88,22 @@
 
                 <form method="post" class="modal-form-box flex-conteiner">
 
+                    <?php include $this->resolve("partials/_csrf.php"); ?>
+
                     <div class="input-form-box flex-conteiner">
                         <label for="amount">Amount</label>
                         <input
                             id="amount"
                             type="number"
                             name="amount"
-                            value="0" />
+                            value="<?php echo e($oldFormData['amount'] ?? ''); ?>" />
                         <ion-icon
                             id="cash-icon"
                             class="modal-icon"
                             name="cash-outline"></ion-icon>
                         <?php if (array_key_exists('amount', $errors)) : ?>
                             <div>
-                                <?php echo e("błąd"); ?>
+                                <?php echo e($errors['amount'][0]); ?>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -112,7 +114,8 @@
                             type="text"
                             name="comment"
                             id="comment"
-                            placeholder="About income..." />
+                            placeholder="About income..."
+                            value="<?php echo e($oldFormData['comment'] ?? ''); ?>" />
                         <ion-icon
                             id="text-icon"
                             class="modal-icon"
@@ -122,7 +125,8 @@
                     <div class="flex-conteiner date-category-box">
                         <div class="input-form-box flex-conteiner">
                             <label for="date">Date</label>
-                            <input id="date" type="date" name="date" />
+                            <input id="date" type="date" name="date"
+                                value="<?php echo e($oldFormData['date'] ?? ''); ?>" />
                             <?php if (array_key_exists('date', $errors)) : ?>
                                 <div>
                                     <?php echo e($errors['date'][0]); ?>
@@ -141,9 +145,14 @@
                                 <option value="other">Other</option>
                             </select>
                         </div>
+                        <?php if (array_key_exists('category', $errors)) : ?>
+                            <div>
+                                <?php echo e($errors['category'][0]); ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
 
-                    <button type="submit" class="btn btn--modal">Save</button>
+                    <button id="income-submit" type="submit" class="btn btn--modal">Save</button>
                 </form>
             </div>
         </div>
