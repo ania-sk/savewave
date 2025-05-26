@@ -96,14 +96,15 @@
                             id="amount"
                             type="number"
                             name="amount"
-                            value="<?php echo e($oldFormData['amount'] ?? ''); ?>" />
+                            value="<?php echo e($oldFormData['amount'] ?? '0'); ?>" />
                         <ion-icon
                             id="cash-icon"
                             class="modal-icon"
                             name="cash-outline"></ion-icon>
                         <?php if (array_key_exists('amount', $errors)) : ?>
                             <div>
-                                <?php echo e($errors['amount'][0]); ?>
+                                <p class="error-text"><?php echo e($errors['amount'][0]); ?></p>
+                                <ion-icon class="error-icon" name="alert"></ion-icon>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -129,7 +130,7 @@
                                 value="<?php echo e($oldFormData['date'] ?? ''); ?>" />
                             <?php if (array_key_exists('date', $errors)) : ?>
                                 <div>
-                                    <?php echo e($errors['date'][0]); ?>
+                                    <p class="error-text"><?php echo e($errors['date'][0]); ?></p>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -144,12 +145,13 @@
                                 <option value="repayment">Debt repayment</option>
                                 <option value="other">Other</option>
                             </select>
+                            <?php if (array_key_exists('category', $errors)) : ?>
+                                <div>
+                                    <p class="error-text"><?php echo e($errors['category'][0]); ?></p>
+                                </div>
+                            <?php endif; ?>
                         </div>
-                        <?php if (array_key_exists('category', $errors)) : ?>
-                            <div>
-                                <?php echo e($errors['category'][0]); ?>
-                            </div>
-                        <?php endif; ?>
+
                     </div>
 
                     <button id="income-submit" type="submit" class="btn btn--modal">Save</button>
