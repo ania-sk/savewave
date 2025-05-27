@@ -10,7 +10,7 @@
 
             <!-- FORM -->
 
-            <form method="post" class="modal-form-box flex-conteiner">
+            <form method="post" action="/mainPage/income" class="modal-form-box flex-conteiner">
 
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
@@ -27,12 +27,11 @@
                         id="cash-icon"
                         class="modal-icon"
                         name="cash-outline"></ion-icon>
-                    <?php if (array_key_exists('incomeAmount', $errors)) : ?>
+                    <?php if (($activeForm === 'income') && array_key_exists('incomeAmount', $errors)) : ?>
                         <div>
                             <p class="error-text"><?php echo e($errors['incomeAmount'][0]); ?></p>
                             <ion-icon class="error-icon" name="alert"></ion-icon>
                         </div>
-                        <?php $incomeError = !empty($errors['incomeAmount'][0]); ?>
                     <?php endif; ?>
 
                 </div>
@@ -56,11 +55,10 @@
                         <label for="date">Date</label>
                         <input id="date" type="date" name="incomeDate"
                             value="<?php echo e($oldFormData['incomeDate'] ?? ''); ?>" />
-                        <?php if (array_key_exists('incomeDate', $errors)) : ?>
+                        <?php if (($activeForm === 'income') && array_key_exists('incomeDate', $errors)) : ?>
                             <div>
                                 <p class="error-text"><?php echo e($errors['incomeDate'][0]); ?></p>
                             </div>
-                            <?php $incomeError = !empty($errors['incomeDate'][0]); ?>
                         <?php endif; ?>
                     </div>
 
@@ -74,11 +72,10 @@
                             <option value="repayment">Debt repayment</option>
                             <option value="other">Other</option>
                         </select>
-                        <?php if (array_key_exists('incomeCategory', $errors)) : ?>
+                        <?php if (($activeForm === 'income') && array_key_exists('incomeCategory', $errors)) : ?>
                             <div>
                                 <p class="error-text"><?php echo e($errors['incomeCategory'][0]); ?></p>
                             </div>
-                            <?php $incomeError = !empty($errors['incomeCategory'][0]); ?>
                         <?php endif; ?>
                     </div>
                 </div>

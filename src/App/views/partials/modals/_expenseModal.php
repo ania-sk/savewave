@@ -9,8 +9,7 @@
 
             <!-- FORM -->
 
-            <form method="post" class="modal-form-box flex-conteiner">
-                <?php $expenseError = false; ?>
+            <form method="post" action="/mainPage/expense" class="modal-form-box flex-conteiner">
 
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
@@ -27,7 +26,7 @@
                         id="cash-icon"
                         class="modal-icon"
                         name="cash-outline"></ion-icon>
-                    <?php if (array_key_exists('expenseAmount', $errors)) : ?>
+                    <?php if (($activeForm === 'expense') && array_key_exists('expenseAmount', $errors)) : ?>
                         <div>
                             <p class="error-text"><?php echo e($errors['expenseAmount'][0]); ?></p>
                             <ion-icon class="error-icon" name="alert"></ion-icon>
@@ -54,7 +53,7 @@
                     <div class="input-form-box flex-conteiner">
                         <label for="date">Date</label>
                         <input id="date" type="date" name="expenseDate" value="<?php echo e($oldFormData['expenseDate'] ?? ''); ?>" />
-                        <?php if (array_key_exists('expenseDate', $errors)) : ?>
+                        <?php if (($activeForm === 'expense') && array_key_exists('expenseDate', $errors)) : ?>
                             <div>
                                 <p class="error-text"><?php echo e($errors['expenseDate'][0]); ?></p>
                             </div>
@@ -72,7 +71,7 @@
                             <option value="repayment">Entertainment</option>
                             <option value="other">Other</option>
                         </select>
-                        <?php if (array_key_exists('expenseCategory', $errors)) : ?>
+                        <?php if (($activeForm === 'expense') && array_key_exists('expenseCategory', $errors)) : ?>
                             <div>
                                 <p class="error-text"><?php echo e($errors['expenseCategory'][0]); ?></p>
                             </div>
@@ -82,7 +81,9 @@
                 </div>
 
                 <button type="submit" class="btn btn--modal">Save</button>
+
             </form>
+
         </div>
     </div>
 </section>

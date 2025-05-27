@@ -4,8 +4,8 @@ include $this->resolve("partials/_sideNavAndModals.php");
 ?>
 
 
-<body class="<?php echo ($incomeError === true) ? 'modal-income-open' : '';
-                echo ($expenseError === true) ? 'modal-expense-open' : ''; ?>">
+<body class="<?php echo ($activeForm === 'income') ? 'modal-income-open' : '';
+                echo ($activeForm === 'expense') ? 'modal-expense-open' : ''; ?>">
 
 
     <!-- MAIN SECTION -->
