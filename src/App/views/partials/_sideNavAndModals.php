@@ -1,7 +1,3 @@
-<?php
-$incomeError = false;
-$expenseError = false;
-?>
 <section class="section-side-nav">
     <div class="logo-box mrg-bottom">
         <a class="link flex-conteiner" href="mainPage">
