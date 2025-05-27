@@ -1,3 +1,7 @@
+<?php
+$incomeError = false;
+$expenseError = false;
+?>
 <section class="section-side-nav">
     <div class="logo-box mrg-bottom">
         <a class="link flex-conteiner" href="mainPage">
@@ -90,33 +94,37 @@
 
                     <?php include $this->resolve("partials/_csrf.php"); ?>
 
+                    <input type="hidden" name="form_type" value="income">
+
                     <div class="input-form-box flex-conteiner">
                         <label for="amount">Amount</label>
                         <input
                             id="amount"
                             type="number"
-                            name="amount"
-                            value="<?php echo e($oldFormData['amount'] ?? '0'); ?>" />
+                            name="incomeAmount"
+                            value="<?php echo e($oldFormData['incomeAmount'] ?? '0'); ?>" />
                         <ion-icon
                             id="cash-icon"
                             class="modal-icon"
                             name="cash-outline"></ion-icon>
-                        <?php if (array_key_exists('amount', $errors)) : ?>
+                        <?php if (array_key_exists('incomeAmount', $errors)) : ?>
                             <div>
-                                <p class="error-text"><?php echo e($errors['amount'][0]); ?></p>
+                                <p class="error-text"><?php echo e($errors['incomeAmount'][0]); ?></p>
                                 <ion-icon class="error-icon" name="alert"></ion-icon>
                             </div>
+                            <?php $incomeError = !empty($errors['incomeAmount'][0]); ?>
                         <?php endif; ?>
+
                     </div>
 
                     <div class="input-form-box flex-conteiner">
                         <label for="comment">Comment</label>
                         <input
                             type="text"
-                            name="comment"
+                            name="incomeComment"
                             id="comment"
                             placeholder="About income..."
-                            value="<?php echo e($oldFormData['comment'] ?? ''); ?>" />
+                            value="<?php echo e($oldFormData['incomeComment'] ?? ''); ?>" />
                         <ion-icon
                             id="text-icon"
                             class="modal-icon"
@@ -126,18 +134,19 @@
                     <div class="flex-conteiner date-category-box">
                         <div class="input-form-box flex-conteiner">
                             <label for="date">Date</label>
-                            <input id="date" type="date" name="date"
-                                value="<?php echo e($oldFormData['date'] ?? ''); ?>" />
-                            <?php if (array_key_exists('date', $errors)) : ?>
+                            <input id="date" type="date" name="incomeDate"
+                                value="<?php echo e($oldFormData['incomeDate'] ?? ''); ?>" />
+                            <?php if (array_key_exists('incomeDate', $errors)) : ?>
                                 <div>
-                                    <p class="error-text"><?php echo e($errors['date'][0]); ?></p>
+                                    <p class="error-text"><?php echo e($errors['incomeDate'][0]); ?></p>
                                 </div>
+                                <?php $incomeError = !empty($errors['incomeDate'][0]); ?>
                             <?php endif; ?>
                         </div>
 
                         <div class="input-form-box flex-conteiner">
                             <label for="category">Category</label>
-                            <select name="category" id="category">
+                            <select name="incomeCategory" id="category">
                                 <option value="">Choose category:</option>
 
                                 <option value="salary">Salary</option>
@@ -145,17 +154,19 @@
                                 <option value="repayment">Debt repayment</option>
                                 <option value="other">Other</option>
                             </select>
-                            <?php if (array_key_exists('category', $errors)) : ?>
+                            <?php if (array_key_exists('incomeCategory', $errors)) : ?>
                                 <div>
-                                    <p class="error-text"><?php echo e($errors['category'][0]); ?></p>
+                                    <p class="error-text"><?php echo e($errors['incomeCategory'][0]); ?></p>
                                 </div>
+                                <?php $incomeError = !empty($errors['incomeCategory'][0]); ?>
                             <?php endif; ?>
                         </div>
-
                     </div>
 
                     <button id="income-submit" type="submit" class="btn btn--modal">Save</button>
+
                 </form>
+
             </div>
         </div>
     </section>
@@ -169,27 +180,44 @@
                 <p>Add expense</p>
             </div>
             <div class="modal-body flex-conteiner">
-                <form action="" class="modal-form-box flex-conteiner">
+
+                <!-- FORM -->
+
+                <form method="post" class="modal-form-box flex-conteiner">
+                    <?php $expenseError = false; ?>
+
+                    <?php include $this->resolve("partials/_csrf.php"); ?>
+
+                    <input type="hidden" name="form_type" value="expense">
+
                     <div class="input-form-box flex-conteiner">
                         <label for="amount">Amount</label>
                         <input
                             id="amount"
                             type="number"
-                            name="amount"
-                            value="0" />
+                            name="expenseAmount"
+                            value="<?php echo e($oldFormData['expenseAmount'] ?? '0'); ?>" />
                         <ion-icon
                             id="cash-icon"
                             class="modal-icon"
                             name="cash-outline"></ion-icon>
+                        <?php if (array_key_exists('expenseAmount', $errors)) : ?>
+                            <div>
+                                <p class="error-text"><?php echo e($errors['expenseAmount'][0]); ?></p>
+                                <ion-icon class="error-icon" name="alert"></ion-icon>
+                            </div>
+                        <?php endif; ?>
+
                     </div>
 
                     <div class="input-form-box flex-conteiner">
                         <label for="comment">Comment</label>
                         <input
                             type="text"
-                            name="comment"
+                            name="expenseComment"
                             id="comment"
-                            placeholder="About expense..." />
+                            placeholder="About expense..."
+                            value=" <?php echo e($oldFormData['expenseComment'] ?? ''); ?>" />
                         <ion-icon
                             id="text-icon"
                             class="modal-icon"
@@ -199,12 +227,18 @@
                     <div class="flex-conteiner date-category-box">
                         <div class="input-form-box flex-conteiner">
                             <label for="date">Date</label>
-                            <input id="date" type="date" name="date" />
+                            <input id="date" type="date" name="expenseDate" value="<?php echo e($oldFormData['expenseDate'] ?? ''); ?>" />
+                            <?php if (array_key_exists('expenseDate', $errors)) : ?>
+                                <div>
+                                    <p class="error-text"><?php echo e($errors['expenseDate'][0]); ?></p>
+                                </div>
+                            <?php endif; ?>
+
                         </div>
 
                         <div class="input-form-box flex-conteiner">
                             <label for="category">Category</label>
-                            <select name="category" id="category">
+                            <select name="expenseCategory" id="category">
                                 <option value="">Choose category:</option>
 
                                 <option value="salary">Bills</option>
@@ -212,6 +246,12 @@
                                 <option value="repayment">Entertainment</option>
                                 <option value="other">Other</option>
                             </select>
+                            <?php if (array_key_exists('expenseCategory', $errors)) : ?>
+                                <div>
+                                    <p class="error-text"><?php echo e($errors['expenseCategory'][0]); ?></p>
+                                </div>
+                            <?php endif; ?>
+
                         </div>
                     </div>
 

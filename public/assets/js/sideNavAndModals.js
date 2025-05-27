@@ -101,3 +101,9 @@ document.addEventListener("DOMContentLoaded", function () {
     modalIncome.style.display = "block";
   }
 });
+//errors in expense form
+document.addEventListener("DOMContentLoaded", function () {
+  if (document.body.classList.contains("modal-expense-open")) {
+    modalExpense.style.display = "block";
+  }
+});

@@ -4,7 +4,9 @@ include $this->resolve("partials/_sideNavAndModals.php");
 ?>
 
 
-<body class="<?php echo !empty($errors) ? 'modal-income-open' : ''; ?>">
+<body class="<?php echo ($incomeError === true) ? 'modal-income-open' : '';
+                echo ($expenseError === true) ? 'modal-expense-open' : ''; ?>">
+
 
     <!-- MAIN SECTION -->
     <main class="section-main">

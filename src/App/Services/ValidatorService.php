@@ -42,10 +42,20 @@ class ValidatorService
     public function validateIncome(array $formData)
     {
         $this->validator->validate($formData, [
-            'amount' => ['required'],
-            'date' => ['required'],
-            'comment' => [],
-            'category' => ['required']
+            'incomeAmount' => ['required'],
+            'incomeDate' => ['required'],
+            'incomeComment' => [],
+            'incomeCategory' => ['required']
+        ]);
+    }
+
+    public function validateExpense(array $formData)
+    {
+        $this->validator->validate($formData, [
+            'expenseAmount' => ['required'],
+            'expenseDate' => ['required'],
+            'expenseComment' => [],
+            'expenseCategory' => ['required']
         ]);
     }
 }

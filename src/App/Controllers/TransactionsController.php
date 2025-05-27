@@ -16,4 +16,9 @@ class TransactionsController
     {
         $this->validatorService->validateIncome($_POST);
     }
+
+    public function addExpense()
+    {
+        $this->validatorService->validateExpense($_POST);
+    }
 }
