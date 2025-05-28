@@ -38,10 +38,22 @@ class UserService
                 'password' => $password
             ]
         );
+        $userId = (int) $this->db->id();
+
+        $this->copyDefaultCategories($userId);
 
         session_regenerate_id();
 
         $_SESSION['user'] = $this->db->id();
+    }
+
+    private function copyDefaultCategories(int $userId)
+    {
+        $this->db->query(
+            "INSERT INTO incomes_category_assigned_to_users (user_id, name)
+             SELECT :user_id, name FROM incomes_category_default",
+            ['user_id' => $userId]
+        );
     }
 
     public function login(array $formData)
