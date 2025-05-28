@@ -72,11 +72,13 @@
                         <label for="category">Category</label>
                         <select name="incomeCategory" id="category">
                             <option value="">Choose category:</option>
-
-                            <option value="salary">Salary</option>
-                            <option value="sale">Sale</option>
-                            <option value="repayment">Debt repayment</option>
-                            <option value="other">Other</option>
+                            <?php if (!empty($categories)): ?>
+                                <?php foreach ($categories as $category): ?>
+                                    <option value="<?php echo e($category['id']); ?>">
+                                        <?php echo e($category['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </select>
                         <?php if (($activeForm === 'income') && array_key_exists('incomeCategory', $errors)) : ?>
                             <div>

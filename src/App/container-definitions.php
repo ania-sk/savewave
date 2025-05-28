@@ -7,7 +7,8 @@ use App\Config\Paths;
 use App\Services\{
     ValidatorService,
     UserService,
-    TransactionService
+    TransactionService,
+    CategoryService
 };
 
 return [
@@ -20,12 +21,18 @@ return [
     ], $_ENV['DB_USER'], $_ENV['DB_PASS']),
     UserService::class => function (Container $container) {
         $db = $container->get(Database::class);
+        $categoryService = $container->get(CategoryService::class);
 
-        return new UserService($db);
+        return new UserService($db, $categoryService);
     },
     TransactionService::class => function (Container $container) {
         $db = $container->get(Database::class);
 
         return new TransactionService($db);
+    },
+    CategoryService::class => function (Container $container) {
+        $db = $container->get(Database::class);
+
+        return new CategoryService($db);
     }
 ];
