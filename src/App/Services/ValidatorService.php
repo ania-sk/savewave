@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use DateTime;
 use Framework\Validator;
-use Framework\Rules\{RequiredRule, EmailRule, MatchRule, LengthMaxRule, NumericRule};
+use Framework\Rules\{RequiredRule, EmailRule, MatchRule, LengthMaxRule, NumericRule, DateFormatRule};
 
 class ValidatorService
 {
@@ -20,6 +21,7 @@ class ValidatorService
         $this->validator->add('match', new MatchRule());
         $this->validator->add('lengthMax', new LengthMaxRule());
         $this->validator->add('numeric', new NumericRule());
+        $this->validator->add('dateFormat', new DateFormatRule());
     }
 
     public function validateRegister(array $formData)
@@ -45,7 +47,7 @@ class ValidatorService
     {
         $this->validator->validate($formData, [
             'incomeAmount' => ['required', 'numeric'],
-            'incomeDate' => ['required'],
+            'incomeDate' => ['required', 'dateFormat:Y-m-d'],
             'incomeComment' => ['lengthMax:255'],
             'incomeCategory' => ['required']
         ]);
@@ -55,7 +57,7 @@ class ValidatorService
     {
         $this->validator->validate($formData, [
             'expenseAmount' => ['required', 'numeric'],
-            'expenseDate' => ['required'],
+            'expenseDate' => ['required', 'dateFormat:Y-m-d'],
             'expenseComment' => ['lengthMax:255'],
             'expenseCategory' => ['required']
         ]);
