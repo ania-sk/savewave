@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Services\ValidatorService;
+use App\Services\{ValidatorService, TransactionService};
 use Framework\Exceptions\ValidationException;
 
 class TransactionsController
 {
     public function __construct(
-        private ValidatorService $validatorService
+        private ValidatorService $validatorService,
+        private TransactionService $transactionService
     ) {}
 
     public function addIncome()
@@ -22,8 +23,8 @@ class TransactionsController
 
                 // Jeśli walidacja się powiodła – wykonaj dalsze operacje np. zapis do bazy
                 // ...
-                header("Location: /mainPage");
-                exit();
+                $this->transactionService->createIncome($_POST);
+                redirectTo('/mainPage');
             } catch (ValidationException $ex) {
                 $_SESSION['activeForm'] = $_POST['form_type'] ?? 'income';
                 $_SESSION['errors'] = $ex->errors;
