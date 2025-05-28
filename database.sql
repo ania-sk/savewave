@@ -34,3 +34,37 @@ CREATE TABLE IF NOT EXISTS incomes(
     FOREIGN KEY(user_id) REFERENCES users(id),
     FOREIGN KEY(income_category_assigned_to_user_id) REFERENCES incomes_category_assigned_to_users(id)
 );
+
+-- default income categories
+INSERT INTO incomes_category_default (name)
+SELECT 'Salary'
+FROM DUAL
+WHERE NOT EXISTS (
+    SELECT 1 FROM incomes_category_default WHERE name = 'Salary'
+
+);
+
+INSERT INTO incomes_category_default (name)
+SELECT 'Sale'
+FROM DUAL
+WHERE NOT EXISTS (
+    SELECT 1 FROM incomes_category_default WHERE name = 'Sale'
+
+);
+
+INSERT INTO incomes_category_default (name)
+SELECT 'Debt repayment'
+FROM DUAL
+WHERE NOT EXISTS (
+    SELECT 1 FROM incomes_category_default WHERE name = 'Debt repayment'
+
+);
+
+INSERT INTO incomes_category_default (name)
+SELECT 'Other'
+FROM DUAL
+WHERE NOT EXISTS (
+    SELECT 1 FROM incomes_category_default WHERE name = 'Other'
+
+);
+-- 
