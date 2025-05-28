@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use Framework\Validator;
-use Framework\Rules\{RequiredRule, EmailRule, MatchRule};
+use Framework\Rules\{RequiredRule, EmailRule, MatchRule, LengthMaxRule};
 
 class ValidatorService
 {
@@ -18,6 +18,7 @@ class ValidatorService
         $this->validator->add('required', new RequiredRule());
         $this->validator->add('email', new EmailRule());
         $this->validator->add('match', new MatchRule());
+        $this->validator->add('lengthMax', new LengthMaxRule());
     }
 
     public function validateRegister(array $formData)
@@ -44,7 +45,7 @@ class ValidatorService
         $this->validator->validate($formData, [
             'incomeAmount' => ['required'],
             'incomeDate' => ['required'],
-            'incomeComment' => [],
+            'incomeComment' => ['lengthMax:255'],
             'incomeCategory' => ['required']
         ]);
     }
@@ -54,7 +55,7 @@ class ValidatorService
         $this->validator->validate($formData, [
             'expenseAmount' => ['required'],
             'expenseDate' => ['required'],
-            'expenseComment' => [],
+            'expenseComment' => ['lengthMax:255'],
             'expenseCategory' => ['required']
         ]);
     }

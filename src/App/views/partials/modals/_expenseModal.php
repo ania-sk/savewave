@@ -47,6 +47,13 @@
                         id="text-icon"
                         class="modal-icon"
                         name="document-text-outline"></ion-icon>
+
+                    <?php if (($activeForm === 'expense') && array_key_exists('expenseComment', $errors)) : ?>
+                        <div>
+                            <p class="error-text"><?php echo e($errors['expenseComment'][0]); ?></p>
+                            <ion-icon class="error-icon" name="alert"></ion-icon>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="flex-conteiner date-category-box">
