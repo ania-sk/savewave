@@ -19,4 +19,13 @@ class CategoryService
             ['user_id' => $userId]
         );
     }
+
+    public function getUserCategories(int $userId): array
+    {
+        $this->db->query(
+            "SELECT id, name FROM incomes_category_assigned_to_users WHERE user_id = :user_id",
+            ['user_id' => $userId]
+        );
+        return $this->db->fetchAll();
+    }
 }

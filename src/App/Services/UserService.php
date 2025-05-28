@@ -53,7 +53,7 @@ class UserService
 
         session_regenerate_id();
 
-        $_SESSION['user'] = $this->db->id();
+        $_SESSION['user'] = $userId;
     }
 
     public function login(array $formData)
