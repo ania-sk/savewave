@@ -82,5 +82,21 @@ class TransactionService
         return $incomes;
     }
 
-    public function getUserExpenses() {}
+    public function getUserExpenses()
+    {
+        $expenses = $this->db->query(
+            "SELECT 
+                e.amount, 
+                e.expense_comment, 
+                e.date_of_expense, 
+                c.name
+            FROM expenses AS e
+            JOIN expenses_category_assigned_to_users AS c 
+            ON e.expense_category_assigned_to_user_id = c.id
+            WHERE e.user_id = :user_id",
+            ['user_id' => $_SESSION['user']]
+        )->fetchAll();
+
+        return $expenses;
+    }
 }

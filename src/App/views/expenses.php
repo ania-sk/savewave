@@ -30,45 +30,18 @@ include $this->resolve("partials/_sideNavAndModals.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td data-label="No.">1.</td>
-                        <td data-label="Amount">3200</td>
-                        <td data-label="Category">Salary</td>
-                        <td data-label="Comment"></td>
-                        <td data-label="Date">10-10-2024</td>
-                    </tr>
+                    <?php $i = 1; ?>
+                    <?php foreach ($expenses as $expense): ?>
+                        <tr>
+                            <td data-label="No."><?php echo e($i); ?></td>
+                            <td data-label="Amount"><?php echo e($expense['amount']); ?></td>
+                            <td data-label="Category"><?php echo e($expense['name']); ?></td>
+                            <td data-label="Comment"><?php echo e($expense['expense_comment']); ?></td>
+                            <td data-label="Date"><?php echo e($expense['date_of_expense']); ?></td>
+                        </tr>
+                        <?php $i = $i + 1; ?>
+                    <?php endforeach; ?>
 
-                    <tr>
-                        <td data-label="No.">2.</td>
-                        <td data-label="Amount">200</td>
-                        <td data-label="Category">Sale</td>
-                        <td data-label="Comment">Armchair on olx</td>
-                        <td data-label="Date">12-10-2024</td>
-                    </tr>
-
-                    <tr>
-                        <td data-label="No.">3.</td>
-                        <td data-label="Amount">25</td>
-                        <td data-label="Category">Sale</td>
-                        <td data-label="Comment">Book on olx</td>
-                        <td data-label="Date">15-10-2024</td>
-                    </tr>
-
-                    <tr>
-                        <td data-label="No.">4.</td>
-                        <td data-label="Amount">200</td>
-                        <td data-label="Category">Sale</td>
-                        <td data-label="Comment">Armchair on olx</td>
-                        <td data-label="Date">12-10-2024</td>
-                    </tr>
-
-                    <tr>
-                        <td data-label="No.">5.</td>
-                        <td data-label="Amount">25</td>
-                        <td data-label="Category">Sale</td>
-                        <td data-label="Comment">Book on olx</td>
-                        <td data-label="Date">15-10-2024</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
