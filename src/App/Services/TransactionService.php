@@ -63,4 +63,24 @@ class TransactionService
             ]
         );
     }
+
+    public function getUserIncomes()
+    {
+        $incomes = $this->db->query(
+            "SELECT 
+                i.amount, 
+                i.income_comment, 
+                i.date_of_income, 
+                c.name
+            FROM incomes AS i
+            JOIN incomes_category_assigned_to_users AS c 
+            ON i.income_category_assigned_to_user_id = c.id
+            WHERE i.user_id = :user_id",
+            ['user_id' => $_SESSION['user']]
+        )->fetchAll();
+
+        return $incomes;
+    }
+
+    public function getUserExpenses() {}
 }
