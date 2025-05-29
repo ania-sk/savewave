@@ -37,7 +37,7 @@ include $this->resolve("partials/_sideNavAndModals.php");
                             <td data-label="Amount"><?php echo e($expense['amount']); ?></td>
                             <td data-label="Category"><?php echo e($expense['name']); ?></td>
                             <td data-label="Comment"><?php echo e($expense['expense_comment']); ?></td>
-                            <td data-label="Date"><?php echo e($expense['date_of_expense']); ?></td>
+                            <td data-label="Date"><?php echo e($expense['formatted_date']); ?></td>
                         </tr>
                         <?php $i = $i + 1; ?>
                     <?php endforeach; ?>

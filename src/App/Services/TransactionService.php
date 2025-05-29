@@ -70,7 +70,7 @@ class TransactionService
             "SELECT 
                 i.amount, 
                 i.income_comment, 
-                i.date_of_income, 
+                DATE_FORMAT(i.date_of_income, '%Y-%m-%d') as formatted_date,
                 c.name
             FROM incomes AS i
             JOIN incomes_category_assigned_to_users AS c 
@@ -88,7 +88,7 @@ class TransactionService
             "SELECT 
                 e.amount, 
                 e.expense_comment, 
-                e.date_of_expense, 
+                DATE_FORMAT(e.date_of_expense, '%Y-%m-%d') as formatted_date,
                 c.name
             FROM expenses AS e
             JOIN expenses_category_assigned_to_users AS c 
