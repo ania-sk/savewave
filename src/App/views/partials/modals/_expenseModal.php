@@ -8,11 +8,12 @@
         <div class="modal-body flex-conteiner">
 
             <!-- FORM -->
-
+            <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
             <form method="post" action="/mainPage/expense" class="modal-form-box flex-conteiner">
 
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
+                <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                 <input type="hidden" name="form_type" value="expense">
 
                 <div class="input-form-box flex-conteiner">

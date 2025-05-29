@@ -3,7 +3,8 @@ include $this->resolve("partials/_header.php");
 include $this->resolve("partials/_sideNavAndModals.php");
 ?>
 
-<body class="">
+<body class="<?php echo ($activeForm === 'income') ? 'modal-income-open' : '';
+                echo ($activeForm === 'expense') ? 'modal-expense-open' : ''; ?>">
     <!-- MAIN SECTION -->
     <!-- TABLE INCOME -->
     <main class="section-main flex-conteiner">
