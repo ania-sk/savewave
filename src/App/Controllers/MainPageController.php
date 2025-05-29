@@ -19,14 +19,16 @@ class MainPageController
     public function mainPage()
     {
         $userId = (int)$_SESSION['user'];
-        $categories = $this->categoryService->getUserCategories($userId);
+        $incomeCategories = $this->categoryService->getUserIncomeCategories($userId);
+        $expenseCategories = $this->categoryService->getUserExpenseCategories($userId);
 
         echo $this->view->render("/mainPage.php", [
             'title' => 'Budget Application',
             'cssLink' => 'mainPage.css',
             'cssLink2' => '',
             'jsLink' => '',
-            'categories' => $categories
+            'incomeCategories' => $incomeCategories,
+            'expenseCategories' => $expenseCategories
         ]);
     }
 }

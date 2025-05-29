@@ -72,10 +72,10 @@
                         <label for="category">Category</label>
                         <select name="incomeCategory" id="category">
                             <option value="">Choose category:</option>
-                            <?php if (!empty($categories)): ?>
-                                <?php foreach ($categories as $category): ?>
-                                    <option value="<?php echo e($category['id']); ?>">
-                                        <?php echo e($category['name']); ?>
+                            <?php if (!empty($incomeCategories)): ?>
+                                <?php foreach ($incomeCategories as $incomeCategory): ?>
+                                    <option value="<?php echo e($incomeCategory['id']); ?>">
+                                        <?php echo e($incomeCategory['name']); ?>
                                     </option>
                                 <?php endforeach; ?>
                             <?php endif; ?>

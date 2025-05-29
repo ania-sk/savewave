@@ -11,7 +11,7 @@ class CategoryService
 
     public function __construct(private Database $db) {}
 
-    public function copyDefaultCategories(int $userId)
+    public function copyDefaultIncomeCategories(int $userId)
     {
         $this->db->query(
             "INSERT INTO incomes_category_assigned_to_users (user_id, name)
@@ -20,10 +20,28 @@ class CategoryService
         );
     }
 
-    public function getUserCategories(int $userId): array
+    public function getUserIncomeCategories(int $userId): array
     {
         $this->db->query(
             "SELECT id, name FROM incomes_category_assigned_to_users WHERE user_id = :user_id",
+            ['user_id' => $userId]
+        );
+        return $this->db->fetchAll();
+    }
+
+    public function copyDefaultExpenseCategories(int $userId)
+    {
+        $this->db->query(
+            "INSERT INTO expenses_category_assigned_to_users (user_id, name)
+             SELECT :user_id, name FROM expenses_category_default",
+            ['user_id' => $userId]
+        );
+    }
+
+    public function getUserExpenseCategories(int $userId): array
+    {
+        $this->db->query(
+            "SELECT id, name FROM expenses_category_assigned_to_users WHERE user_id = :user_id",
             ['user_id' => $userId]
         );
         return $this->db->fetchAll();

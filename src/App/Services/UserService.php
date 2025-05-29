@@ -49,7 +49,8 @@ class UserService
         $userId = (int) $this->db->id();
 
 
-        $this->categoryService->copyDefaultCategories($userId);
+        $this->categoryService->copyDefaultIncomeCategories($userId);
+        $this->categoryService->copyDefaultExpenseCategories($userId);
 
         session_regenerate_id();
 
