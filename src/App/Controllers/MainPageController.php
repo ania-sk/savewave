@@ -10,11 +10,8 @@ use App\Config\Paths;
 
 class MainPageController
 {
-    private CategoryService $categoryService;
-    public function __construct(private TemplateEngine $view, CategoryService $categoryService)
-    {
-        $this->categoryService = $categoryService;
-    }
+
+    public function __construct(private TemplateEngine $view, private CategoryService $categoryService) {}
 
     public function mainPage()
     {
