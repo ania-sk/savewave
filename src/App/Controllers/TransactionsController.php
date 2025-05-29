@@ -45,8 +45,8 @@ class TransactionsController
 
                 // Jeśli walidacja się powiodła – wykonaj dalsze operacje np. zapis do bazy
                 // ...
-                header("Location: /mainPage");
-                exit();
+                $this->transactionService->createExpense($_POST);
+                redirectTo('/mainPage');
             } catch (ValidationException $ex) {
                 $_SESSION['activeForm'] = $_POST['form_type'] ?? 'expense';
                 $_SESSION['errors'] = $ex->errors;

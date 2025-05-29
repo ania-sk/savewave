@@ -36,4 +36,31 @@ class TransactionService
             ]
         );
     }
+
+    public function createExpense(array $formData)
+    {
+        $formattedDate = "{$formData['expenseDate']} 00:00:00";
+        $this->db->query(
+            "INSERT INTO expenses(
+                user_id, 
+                expense_category_assigned_to_user_id, 
+                amount, 
+                date_of_expense, 
+                expense_comment
+            ) VALUES(
+                :user_id, 
+                :expense_category_assigned_to_user_id, 
+                :amount, 
+                :date_of_expense, 
+                :expense_comment
+            )",
+            [
+                'user_id' => $_SESSION['user'],
+                'expense_category_assigned_to_user_id' => $formData['expenseCategory'],
+                'amount' => $formData['expenseAmount'],
+                'date_of_expense' => $formattedDate,
+                'expense_comment' => $formData['expenseComment']
+            ]
+        );
+    }
 }

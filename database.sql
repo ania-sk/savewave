@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS expenses(
     user_id BIGINT(20) UNSIGNED NOT NULL,
     expense_category_assigned_to_user_id BIGINT(20) UNSIGNED NOT NULL,
     amount DECIMAL(8,2),    
-    date_of_income DATETIME NOT NULL,
+    date_of_expense DATETIME NOT NULL,
     expense_comment VARCHAR(255),
     PRIMARY KEY(id),
     FOREIGN KEY(user_id) REFERENCES users(id),
