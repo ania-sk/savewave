@@ -76,7 +76,8 @@
 
                             <?php if (!empty($expenseCategories)): ?>
                                 <?php foreach ($expenseCategories as $expenseCategory): ?>
-                                    <option value="<?php echo e($expenseCategory['id']); ?>">
+                                    <option value="<?php echo e($expenseCategory['id']); ?>"
+                                        <?php echo isset($oldFormData['expenseCategory']) && $oldFormData['expenseCategory'] == $expenseCategory['id'] ? 'selected' : ''; ?>>
                                         <?php echo e($expenseCategory['name']); ?>
                                     </option>
                                 <?php endforeach; ?>

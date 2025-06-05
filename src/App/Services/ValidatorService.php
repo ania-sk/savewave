@@ -6,7 +6,14 @@ namespace App\Services;
 
 use DateTime;
 use Framework\Validator;
-use Framework\Rules\{RequiredRule, EmailRule, MatchRule, LengthMaxRule, NumericRule, DateFormatRule};
+use Framework\Rules\{
+    RequiredRule,
+    EmailRule,
+    MatchRule,
+    LengthMaxRule,
+    NumericRule,
+    DateFormatRule
+};
 
 class ValidatorService
 {

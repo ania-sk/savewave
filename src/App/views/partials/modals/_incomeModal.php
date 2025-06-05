@@ -75,7 +75,8 @@
                             <option value="">Choose category:</option>
                             <?php if (!empty($incomeCategories)): ?>
                                 <?php foreach ($incomeCategories as $incomeCategory): ?>
-                                    <option value="<?php echo e($incomeCategory['id']); ?>">
+                                    <option value="<?php echo e($incomeCategory['id']); ?>"
+                                        <?php echo isset($oldFormData['incomeCategory']) && $oldFormData['incomeCategory'] == $incomeCategory['id'] ? 'selected' : ''; ?>>
                                         <?php echo e($incomeCategory['name']); ?>
                                     </option>
                                 <?php endforeach; ?>
