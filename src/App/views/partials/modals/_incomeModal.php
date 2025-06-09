@@ -81,6 +81,9 @@
                                     </option>
                                 <?php endforeach; ?>
                             <?php endif; ?>
+                            <option value="add_new" <?php echo (isset($oldFormData['incomeCategory']) && $oldFormData['incomeCategory'] == 'add_new') ? 'selected' : ''; ?>>
+                                + Add new category
+                            </option>
                         </select>
                         <?php if (($activeForm === 'income') && array_key_exists('incomeCategory', $errors)) : ?>
                             <div>
@@ -89,11 +92,11 @@
                         <?php endif; ?>
                     </div>
                 </div>
-
                 <button id="income-submit" type="submit" class="btn btn--modal">Save</button>
-
             </form>
 
+            <!-- ADD NEW INCOME CATEGORY -->
+            <?php include $this->resolve("partials/modals/_addIncomeCategoryModal"); ?>
         </div>
     </div>
 </section>

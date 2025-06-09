@@ -1,0 +1,37 @@
+<section id="modal-add-income-category" class="modal-box">
+    <div id="income-add-category" class="modal-content">
+        <div class="modal-header flex-conteiner">
+            <!-- Zamknięcie modala – przekierowanie do głównego formularza -->
+            <span class="close-add-category">&times;</span>
+            <ion-icon class="header-icon" name="add-circle"></ion-icon>
+            <p>Add new category</p>
+        </div>
+        <div class="modal-body flex-conteiner">
+            <form id="form-add-category" method="post" action="/mainPage/addCategory" class="modal-form-box flex-conteiner">
+                <?php include $this->resolve("partials/_csrf.php"); ?>
+                <!-- Przekierowanie po dodaniu kategorii na stronę z formularzem dochodu -->
+                <input type="hidden" name="redirect_to" value="/mainPage/income?showIncomeModal=1">
+
+                <div class="input-form-box flex-conteiner">
+                    <label for="newCategoryName">New category</label>
+                    <input type="text" id="newCategoryName" name="newCategoryName" placeholder="Insert new category name" required>
+                    <ion-icon
+                        id="bulb-icon"
+                        class="modal-icon"
+                        name="bulb-outline"></ion-icon>
+                </div>
+                <?php
+                if (isset($_SESSION['add_category_error'])) {
+                    echo '<div class="error-text">' . $_SESSION['add_category_error'] . '</div>';
+                    unset($_SESSION['add_category_error']);
+                }
+                ?>
+                <button id="income-submit" type="submit" class="btn btn--modal">Save</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+
+</script>

@@ -58,7 +58,7 @@ const modalExpense = document.querySelector("#modal-expense");
 const btnModalIncome = document.querySelector("#btn-modal-income");
 const btnModalExpense = document.querySelector("#btn-modal-expense");
 
-//get x
+//get x  (income and expens modal)
 const xEls = document.querySelectorAll(".close");
 
 btnModalIncome.onclick = function () {
@@ -106,4 +106,32 @@ document.addEventListener("DOMContentLoaded", function () {
   if (document.body.classList.contains("modal-expense-open")) {
     modalExpense.style.display = "block";
   }
+});
+
+//ADD CATEGORY MODALS
+
+var addCategorySelectedInForm = document.getElementById("category");
+const modalAddIncomeCategory = document.getElementById(
+  "modal-add-income-category"
+);
+
+document.addEventListener("DOMContentLoaded", function () {
+  addCategorySelectedInForm.addEventListener("change", function () {
+    if (this.value === "add_new") {
+      modalAddIncomeCategory.style.display = "block";
+      this.value = "";
+    }
+  });
+});
+
+// function closeAddCategoryModal() {
+//   addIncomeCategoryModal.style.display = "none";
+// }  onclick="closeAddCategoryModal();"
+
+//get x  (add category)
+const xAddCategory = document.querySelectorAll(".close-add-category");
+xAddCategory.forEach(function (element) {
+  element.onclick = function () {
+    modalAddIncomeCategory.style.display = "none";
+  };
 });

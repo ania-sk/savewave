@@ -178,7 +178,7 @@
 .btn--modal {
   font-size: 1.6rem;
   letter-spacing: 1px;
-  width: 50%;
+  width: 100%;
   padding: 1.2rem;
 }
 
@@ -196,6 +196,7 @@
   display: none;
 }
 
+#modal-add-income-category,
 #modal-income,
 #modal-expense {
   display: none;
@@ -256,6 +257,7 @@
   }
 }
 
+.close-add-category,
 .close {
   color: #ebe1f8;
   order: 1;
@@ -264,6 +266,8 @@
   transition: all 0.5s;
 }
 
+.close-add-category:hover,
+.close-add-category:focus,
 .close:hover,
 .close:focus {
   color: #333;
@@ -332,6 +336,16 @@
 }
 
 #text-icon {
+  top: 4.2rem;
+}
+
+/* add category modal */
+
+#income-add-category {
+  max-width: 35rem;
+}
+
+#bulb-icon {
   top: 4.2rem;
 }
 
