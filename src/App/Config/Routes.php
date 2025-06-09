@@ -6,7 +6,7 @@ namespace App\Config;
 
 use Framework\App;
 
-use App\Controllers\{HomeController, MainPageController, IncomesController, ExpensesController, AuthController, TransactionsController};
+use App\Controllers\{HomeController, MainPageController, IncomesController, ExpensesController, AuthController, TransactionsController, CategoryController};
 use App\Middleware\{AuthRequiredMiddleware, GuestOnlyMiddleware};
 
 function registerRoutes(App $app)
@@ -22,4 +22,5 @@ function registerRoutes(App $app)
     $app->get('/logout', [AuthController::class, 'logout'])->add(AuthRequiredMiddleware::class);
     $app->post('/mainPage/income', [TransactionsController::class, 'addIncome'])->add(AuthRequiredMiddleware::class);
     $app->post('/mainPage/expense', [TransactionsController::class, 'addExpense'])->add(AuthRequiredMiddleware::class);
+    $app->post('/mainPage/addCategory', [CategoryController::class, 'addNewCategory'])->add(AuthRequiredMiddleware::class);
 }

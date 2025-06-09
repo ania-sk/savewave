@@ -124,14 +124,17 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// function closeAddCategoryModal() {
-//   addIncomeCategoryModal.style.display = "none";
-// }  onclick="closeAddCategoryModal();"
-
 //get x  (add category)
 const xAddCategory = document.querySelectorAll(".close-add-category");
 xAddCategory.forEach(function (element) {
   element.onclick = function () {
     modalAddIncomeCategory.style.display = "none";
   };
+});
+
+//errors in add category
+document.addEventListener("DOMContentLoaded", function () {
+  if (document.body.classList.contains("modal-add-income-category-open")) {
+    modalAddIncomeCategory.style.display = "block";
+  }
 });

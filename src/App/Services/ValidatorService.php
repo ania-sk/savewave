@@ -69,4 +69,11 @@ class ValidatorService
             'expenseCategory' => ['required']
         ]);
     }
+
+    public function validateNewCategory(array $formData)
+    {
+        $this->validator->validate($formData, [
+            'newCategoryName' => ['required']
+        ]);
+    }
 }
