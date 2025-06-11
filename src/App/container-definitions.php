@@ -13,7 +13,10 @@ use App\Services\{
 
 return [
     TemplateEngine::class => fn() => new TemplateEngine(Paths::VIEW),
-    ValidatorService::class => fn() => new ValidatorService(),
+    ValidatorService::class => function (Container $container) {
+        $categoryService = $container->get(CategoryService::class);
+        return new ValidatorService($categoryService);
+    },
     Database::class => fn() => new Database($_ENV['DB_DRIVER'], [
         'host' => $_ENV['DB_HOST'],
         'port' => $_ENV['DB_PORT'],

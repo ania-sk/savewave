@@ -12,15 +12,19 @@ use Framework\Rules\{
     MatchRule,
     LengthMaxRule,
     NumericRule,
-    DateFormatRule
+    DateFormatRule,
+    UniqueCategoryRule
 };
+use App\Services\CategoryService;
 
 class ValidatorService
 {
     private Validator $validator;
+    private CategoryService $categoryService;
 
-    public function __construct()
+    public function __construct(CategoryService $categoryService)
     {
+        $this->categoryService = $categoryService;
         $this->validator = new Validator();
 
         $this->validator->add('required', new RequiredRule());
@@ -72,8 +76,11 @@ class ValidatorService
 
     public function validateNewCategory(array $formData)
     {
+        $existingCategories = $this->categoryService->getUserIncomeCategories($_SESSION['user']);
+        $uniqueRule = new UniqueCategoryRule($existingCategories);
+        $this->validator->add('uniqueName', $uniqueRule);
         $this->validator->validate($formData, [
-            'newCategoryName' => ['required']
+            'newCategoryName' => ['required', 'uniqueName']
         ]);
     }
 }

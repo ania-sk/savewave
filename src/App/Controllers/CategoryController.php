@@ -23,13 +23,14 @@ class CategoryController
             try {
                 $this->validatorService->validateNewCategory($_POST);
 
-                // $this->categoryService->createCategory($_POST);
+                $this->categoryService->createUserCategory($_POST);
 
                 redirectTo($redirectPath);
             } catch (ValidationException $ex) {
                 $_SESSION['activeForm'] = 'addCategory';
                 $_SESSION['errors'] = $ex->errors;
                 $_SESSION['oldFormData'] = $_POST;
+                $_SESSION['newCategoryName'] = $_POST;
 
                 header("Location: " . $redirectPath);
                 exit();

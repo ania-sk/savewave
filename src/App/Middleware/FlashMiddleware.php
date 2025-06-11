@@ -24,6 +24,10 @@ class FlashMiddleware implements MiddlewareInterface
 
         unset($_SESSION['activeForm']);
 
+        $this->view->addGlobal('newCategoryName', $_SESSION['newCategoryName'] ?? []);
+
+        unset($_SESSION['newCategoryName']);
+
         $next();
     }
 }

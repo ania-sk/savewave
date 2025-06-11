@@ -46,4 +46,27 @@ class CategoryService
         );
         return $this->db->fetchAll();
     }
+
+    public function createUserCategory(array $formData)
+    {
+        $newCategoryName = trim($formData['newCategoryName'] ?? '');
+        $userId =  $_SESSION['user'];
+
+        $categoriesAssignedToUser = $this->getUserIncomeCategories($userId);
+
+        foreach ($categoriesAssignedToUser as $category) {
+            if (isset($category['name']) && strcasecmp($newCategoryName, $category['name']) === 0) {
+                return;
+            }
+        }
+
+        $this->db->query(
+            "INSERT INTO incomes_category_assigned_to_users (user_id, name)
+            VALUES (:user_id, :name)",
+            [
+                'user_id' => $userId,
+                'name' => $newCategoryName
+            ]
+        );
+    }
 }

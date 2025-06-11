@@ -19,7 +19,7 @@
 
                 <div class="input-form-box flex-conteiner">
                     <label for="newCategoryName">New category</label>
-                    <input type="text" id="newCategoryName" name="newCategoryName" placeholder="Insert new category name">
+                    <input type="text" id="newCategoryName" name="newCategoryName" value="<?php echo e($oldFormData['newCategoryName'] ?? ''); ?>" placeholder="Insert new category name">
                     <ion-icon
                         id="bulb-icon"
                         class="modal-icon"
