@@ -71,7 +71,7 @@
 
                     <div class="input-form-box flex-conteiner">
                         <label for="category">Category</label>
-                        <select name="expenseCategory" id="category">
+                        <select name="expenseCategory" id="expenseCategory">
                             <option value="">Choose category:</option>
 
                             <?php if (!empty($expenseCategories)): ?>
@@ -82,6 +82,9 @@
                                     </option>
                                 <?php endforeach; ?>
                             <?php endif; ?>
+                            <option value="add_new_expense_category" <?php echo (isset($oldFormData['expenseCategory']) && $oldFormData['expenseCategory'] == 'add_new_expense_category') ? 'selected' : ''; ?>>
+                                + Add new category
+                            </option>
                         </select>
                         <?php if (($activeForm === 'expense') && array_key_exists('expenseCategory', $errors)) : ?>
                             <div>
@@ -95,6 +98,9 @@
                 <button type="submit" class="btn btn--modal">Save</button>
 
             </form>
+
+            <!-- ADD NEW Expense CATEGORY -->
+            <?php include $this->resolve("partials/modals/_addExpenseCategoryModal.php"); ?>
 
         </div>
     </div>

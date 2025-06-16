@@ -196,6 +196,7 @@
   display: none;
 }
 
+#modal-add-expense-category,
 #modal-add-income-category,
 #modal-income,
 #modal-expense {
@@ -340,7 +341,7 @@
 }
 
 /* add category modal */
-
+#expense-add-category,
 #income-add-category {
   max-width: 35rem;
 }

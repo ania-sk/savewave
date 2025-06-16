@@ -110,6 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //ADD CATEGORY MODALS
 
+//incomes
 var addCategorySelectedInForm = document.getElementById("category");
 const modalAddIncomeCategory = document.getElementById(
   "modal-add-income-category"
@@ -124,11 +125,29 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+//expenses
+var addExpenseCategorySelectedInForm =
+  document.getElementById("expenseCategory");
+const modalAddExpenseCategory = document.getElementById(
+  "modal-add-expense-category"
+);
+
+document.addEventListener("DOMContentLoaded", function () {
+  addExpenseCategorySelectedInForm.addEventListener("change", function () {
+    if (this.value === "add_new_expense_category") {
+      modalAddExpenseCategory.style.display = "block";
+      this.value = "";
+    }
+  });
+});
+
 //get x  (add category)
 const xAddCategory = document.querySelectorAll(".close-add-category");
+
 xAddCategory.forEach(function (element) {
   element.onclick = function () {
     modalAddIncomeCategory.style.display = "none";
+    modalAddExpenseCategory.style.display = "none";
   };
 });
 
