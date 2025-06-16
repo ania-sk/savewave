@@ -47,7 +47,7 @@ class CategoryService
         return $this->db->fetchAll();
     }
 
-    public function createUserCategory(array $formData)
+    public function createUserIncomeCategory(array $formData)
     {
         $newCategoryName = trim($formData['newCategoryName'] ?? '');
         $userId =  $_SESSION['user'];
@@ -62,6 +62,29 @@ class CategoryService
 
         $this->db->query(
             "INSERT INTO incomes_category_assigned_to_users (user_id, name)
+            VALUES (:user_id, :name)",
+            [
+                'user_id' => $userId,
+                'name' => $newCategoryName
+            ]
+        );
+    }
+
+    public function createUserExpenseCategory(array $formData)
+    {
+        $newCategoryName = trim($formData['newCategoryName'] ?? '');
+        $userId =  $_SESSION['user'];
+
+        $categoriesAssignedToUser = $this->getUserExpenseCategories($userId);
+
+        foreach ($categoriesAssignedToUser as $category) {
+            if (isset($category['name']) && strcasecmp($newCategoryName, $category['name']) === 0) {
+                return;
+            }
+        }
+
+        $this->db->query(
+            "INSERT INTO expenses_category_assigned_to_users (user_id, name)
             VALUES (:user_id, :name)",
             [
                 'user_id' => $userId,

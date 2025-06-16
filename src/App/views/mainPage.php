@@ -6,7 +6,8 @@ include $this->resolve("partials/_sideNavAndModals.php");
 
 <body class="<?php echo ($activeForm === 'income') ? 'modal-income-open' : '';
                 echo ($activeForm === 'expense') ? 'modal-expense-open' : '';
-                echo ($activeForm === 'addIncomeCategory') ? 'modal-add-income-category-open modal-income-open' : ''; ?>">
+                echo ($activeForm === 'addIncomeCategory') ? 'modal-add-income-category-open modal-income-open' : '';
+                echo ($activeForm === 'addExpenseCategory') ? 'modal-add-expense-category-open modal-expense-open' : ''; ?>">
 
 
     <!-- MAIN SECTION -->

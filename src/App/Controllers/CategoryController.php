@@ -23,11 +23,35 @@ class CategoryController
             try {
                 $this->validatorService->validateNewIncomeCategory($_POST);
 
-                $this->categoryService->createUserCategory($_POST);
+                $this->categoryService->createUserIncomeCategory($_POST);
 
                 redirectTo($redirectPath);
             } catch (ValidationException $ex) {
                 $_SESSION['activeForm'] = 'addIncomeCategory';
+                $_SESSION['errors'] = $ex->errors;
+                $_SESSION['oldFormData'] = $_POST;
+                $_SESSION['newCategoryName'] = $_POST;
+
+                header("Location: " . $redirectPath);
+                exit();
+            }
+        }
+    }
+
+    public function addNewExpenseCategory()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+
+            try {
+                $this->validatorService->validateNewExpenseCategory($_POST);
+
+                $this->categoryService->createUserExpenseCategory($_POST);
+
+                redirectTo($redirectPath);
+            } catch (ValidationException $ex) {
+                $_SESSION['activeForm'] = 'addExpenseCategory';
                 $_SESSION['errors'] = $ex->errors;
                 $_SESSION['oldFormData'] = $_POST;
                 $_SESSION['newCategoryName'] = $_POST;

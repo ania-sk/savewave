@@ -157,3 +157,9 @@ document.addEventListener("DOMContentLoaded", function () {
     modalAddIncomeCategory.style.display = "block";
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (document.body.classList.contains("modal-add-expense-category-open")) {
+    modalAddExpenseCategory.style.display = "block";
+  }
+});

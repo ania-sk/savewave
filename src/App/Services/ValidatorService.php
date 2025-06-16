@@ -83,4 +83,14 @@ class ValidatorService
             'newCategoryName' => ['required', 'uniqueName']
         ]);
     }
+
+    public function validateNewExpenseCategory(array $formData)
+    {
+        $existingCategories = $this->categoryService->getUserExpenseCategories($_SESSION['user']);
+        $uniqueRule = new UniqueCategoryRule($existingCategories);
+        $this->validator->add('uniqueName', $uniqueRule);
+        $this->validator->validate($formData, [
+            'newCategoryName' => ['required', 'uniqueName']
+        ]);
+    }
 }
