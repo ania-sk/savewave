@@ -47,7 +47,24 @@
 }
 /* TABLE INCOME */
 /* ************ */
+.td-edit,
+.td-delete {
+  position: relative;
+}
 
+.icon-delete,
+.icon-edit {
+  position: absolute;
+  left: 3rem;
+}
+
+.icon-edit {
+  color: #f47812f8;
+}
+
+.icon-delete {
+  color: #f41212;
+}
 /*  
 - Font size system (px)
   10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98

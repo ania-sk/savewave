@@ -30,6 +30,8 @@ include $this->resolve("partials/_sideNavAndModals.php");
                         <th scope="col">Category</th>
                         <th scope="col">Comment</th>
                         <th scope="col">Date</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,6 +43,8 @@ include $this->resolve("partials/_sideNavAndModals.php");
                             <td data-label="Category"><?php echo e($income['name']); ?></td>
                             <td data-label="Comment"><?php echo e($income['income_comment']); ?></td>
                             <td data-label="Date"><?php echo e($income['formatted_date']); ?></td>
+                            <td data-label="Edit" class="td-edit"><ion-icon class="icon-edit" name="create-outline"></ion-icon></td>
+                            <td data-label="Delete" class="td-delete"><ion-icon class="icon-delete" name="trash-outline"></ion-icon></td>
                         </tr>
                         <?php $i = $i + 1; ?>
                     <?php endforeach; ?>

@@ -96,7 +96,7 @@
             </form>
 
             <!-- ADD NEW INCOME CATEGORY -->
-            <?php include $this->resolve("partials/modals/_addIncomeCategoryModal"); ?>
+            <?php include $this->resolve("partials/modals/_addIncomeCategoryModal.php"); ?>
         </div>
     </div>
 </section>

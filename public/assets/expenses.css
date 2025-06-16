@@ -44,3 +44,32 @@
   color: #3d9685;
   transform: scale(1.1);
 }
+
+/* TABLE EXPENSES */
+/* ************ */
+.td-edit,
+.td-delete {
+  position: relative;
+}
+
+.icon-delete,
+.icon-edit {
+  position: absolute;
+  left: 3rem;
+}
+
+.icon-edit {
+  color: #f47812f8;
+}
+
+.icon-delete {
+  color: #f41212;
+}
+
+.icon-delete:hover,
+.icon-edit:hover,
+.icon-delete:active,
+.icon-edit:active {
+  cursor: pointer;
+  transform: scale(1.1);
+}
