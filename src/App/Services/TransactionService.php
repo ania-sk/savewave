@@ -99,4 +99,28 @@ class TransactionService
 
         return $expenses;
     }
+
+    public function getUserIncome(string $id)
+    {
+        return $this->db->query(
+            "SELECT *,  DATE_FORMAT(date, '%Y-%m-%d') as formatted_date
+            FROM incomes
+            WHERE id = :id AND user_id = :user_id",
+            [
+                'id' => $id,
+                'user_id' => $_SESSION['user']
+            ]
+        )->find();
+    }
+
+    // public function deleteIncome(int $id)
+    // {
+    //     $this->db->query(
+    //         "DELETE FROM incomes WHERE id = :id AND user_id",
+    //         [
+    //             'id' => $id,
+    //             'user_id' => $_SESSION['user']
+    //         ]
+    //     );
+    // }
 }

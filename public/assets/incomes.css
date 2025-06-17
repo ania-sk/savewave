@@ -47,23 +47,30 @@
 }
 /* TABLE INCOME */
 /* ************ */
-.td-edit,
-.td-delete {
-  position: relative;
+.btn-box {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 1rem;
 }
 
-.icon-delete,
-.icon-edit {
-  position: absolute;
-  left: 3rem;
-}
-
-.icon-edit {
+.edit--icon {
   color: #f47812f8;
+  font-size: 2.5rem;
+  transition: all 0.3s;
 }
 
-.icon-delete {
+.edit--icon:hover,
+.edit--icon:active,
+.delete--icon:hover,
+.delete--icon:active {
+  transform: scale(1.1);
+}
+
+.delete--icon {
   color: #f41212;
+  font-size: 2.5rem;
+  transition: all 0.3s;
 }
 /*  
 - Font size system (px)
