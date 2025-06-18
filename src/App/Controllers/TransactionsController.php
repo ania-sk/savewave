@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use Framework\TemplateEngine;
 use App\Services\{ValidatorService, TransactionService};
 use Framework\Exceptions\ValidationException;
 
@@ -12,8 +11,7 @@ class TransactionsController
 {
     public function __construct(
         private ValidatorService $validatorService,
-        private TransactionService $transactionService,
-        private TemplateEngine $view
+        private TransactionService $transactionService
     ) {}
 
     public function addIncome()
@@ -60,19 +58,6 @@ class TransactionsController
                 exit();
             }
         }
-    }
-
-    public function editIncome(array $params)
-    {
-        $income = $this->transactionService->getUserIncome($params['income']);
-
-        if (!$income) {
-            redirectTo('/incomes');
-        }
-
-        echo $this->view->render('incomes.php', [
-            'income' => $income
-        ]);
     }
 
     // public function deleteIncome(array $params)

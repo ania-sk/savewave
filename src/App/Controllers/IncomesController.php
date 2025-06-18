@@ -23,6 +23,8 @@ class IncomesController
 
         $incomes = $this->transactionService->getUserIncomes();
 
+        $incomeToEdit = $_SESSION['income'] ?? null;
+
         echo $this->view->render("/incomes.php", [
             'title' => 'Incomes',
             'cssLink' => 'incomes.css',
@@ -30,7 +32,22 @@ class IncomesController
             'jsLink' => 'incomes.js',
             'incomes' => $incomes,
             'incomeCategories' => $incomeCategories,
-            'expenseCategories' => $expenseCategories
+            'expenseCategories' => $expenseCategories,
+            'income'            => $incomeToEdit
         ]);
+    }
+
+    public function editIncome(array $params): void
+    {
+        $income = $this->transactionService->getUserIncome($params['income']);
+
+        if (!$income) {
+            redirectTo('/incomes');
+        }
+
+        $_SESSION['activeForm'] = 'editIncome';
+        $_SESSION['income'] = $income;
+
+        redirectTo('/incomes');
     }
 }

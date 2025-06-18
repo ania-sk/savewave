@@ -1,6 +1,7 @@
 <?php
 include $this->resolve("partials/_header.php");
 include $this->resolve("partials/_sideNavAndModals.php");
+include $this->resolve("partials/modals/_editIncomeModal.php");
 ?>
 
 <body class="<?php echo ($activeForm === 'income') ? 'modal-income-open' : '';
@@ -44,7 +45,7 @@ include $this->resolve("partials/_sideNavAndModals.php");
                             <td data-label="Comment"><?php echo e($income['income_comment']); ?></td>
                             <td data-label="Date"><?php echo e($income['formatted_date']); ?></td>
                             <td data-label="Edit" class="td-edit">
-                                <button class="btn-box">
+                                <button class="btn-box btn--edit">
                                     <ion-icon class="edit--icon" name="create-outline"></ion-icon>
                                 </button>
                             </td>
