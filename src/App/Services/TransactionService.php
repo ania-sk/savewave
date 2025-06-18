@@ -114,6 +114,27 @@ class TransactionService
         )->find();
     }
 
+    public function updateIncome(array $formData, int $id)
+    {
+        $formattedDate = "{$formData['incomeDate']} 00:00:00";
+
+        $this->db->query(
+            "UPDATE incomes
+             SET income_category_assigned_to_user_id = :income_category_assigned_to_user_id, 
+                 amount = :amount, 
+                 date_of_income = :date_of_income, 
+                 income_comment = :income_comment 
+             WHERE id = :id AND user_id = :user_id",
+            [
+                'user_id' => $_SESSION['user'],
+                'income_category_assigned_to_user_id' => $formData['incomeCategory'],
+                'amount' => $formData['incomeAmount'],
+                'date_of_income' => $formattedDate,
+                'income_comment' => $formData['incomeComment'],
+                'id' => $id
+            ]
+        );
+    }
     // public function deleteIncome(int $id)
     // {
     //     $this->db->query(

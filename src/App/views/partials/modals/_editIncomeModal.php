@@ -8,7 +8,7 @@
 
         <div class="modal-body flex-conteiner">
             <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
-            <form method="post" action="/incomes/updateIncome" class="modal-form-box flex-conteiner">
+            <form method="post" action="/incomes/<?php echo e($incomeToEdit['id']); ?>" class="modal-form-box flex-conteiner">
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
                 <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">

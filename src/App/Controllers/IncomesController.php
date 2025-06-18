@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use Framework\TemplateEngine;
-use App\Services\{TransactionService, CategoryService};
+use App\Services\{TransactionService, CategoryService, ValidatorService};
 
 class IncomesController
 {
     public function __construct(
         private TemplateEngine $view,
         private TransactionService $transactionService,
-        private CategoryService $categoryService
+        private CategoryService $categoryService,
+        private ValidatorService $validatorService
     ) {}
 
     public function incomes()
@@ -49,5 +50,20 @@ class IncomesController
         $_SESSION['incomeToEdit'] = $incomeToEdit;
 
         redirectTo('/incomes');
+    }
+
+    public function updateIncome(array $params)
+    {
+        $incomeToEdit = $this->transactionService->getUserIncome($params['income']);
+
+        if (!$incomeToEdit) {
+            redirectTo('/incomes');
+        }
+
+        $this->validatorService->validateIncome($_POST);
+
+        $this->transactionService->updateIncome($_POST, $incomeToEdit['id']);
+
+        redirectTo($_SERVER['HTTP_REFERER']);
     }
 }
