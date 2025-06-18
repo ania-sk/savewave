@@ -45,9 +45,10 @@ include $this->resolve("partials/modals/_editIncomeModal.php");
                             <td data-label="Comment"><?php echo e($income['income_comment']); ?></td>
                             <td data-label="Date"><?php echo e($income['formatted_date']); ?></td>
                             <td data-label="Edit" class="td-edit">
-                                <button class="btn-box btn--edit">
+                                <a href="/incomes/<?php echo e($income['id']); ?>" class=" btn-box btn--edit">
                                     <ion-icon class="edit--icon" name="create-outline"></ion-icon>
-                                </button>
+
+                                </a>
                             </td>
                             <td data-label="Delete" class="td-delete">
                                 <button class="btn-box ">

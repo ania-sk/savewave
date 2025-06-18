@@ -23,7 +23,7 @@ class IncomesController
 
         $incomes = $this->transactionService->getUserIncomes();
 
-        $incomeToEdit = $_SESSION['income'] ?? null;
+        $incomeToEdit = $_SESSION['incomeToEdit'] ?? null;
 
         echo $this->view->render("/incomes.php", [
             'title' => 'Incomes',
@@ -33,20 +33,20 @@ class IncomesController
             'incomes' => $incomes,
             'incomeCategories' => $incomeCategories,
             'expenseCategories' => $expenseCategories,
-            'income'            => $incomeToEdit
+            'incomeToEdit'            => $incomeToEdit
         ]);
     }
 
     public function editIncome(array $params): void
     {
-        $income = $this->transactionService->getUserIncome($params['income']);
+        $incomeToEdit = $this->transactionService->getUserIncome($params['income']);
 
-        if (!$income) {
+        if (!$incomeToEdit) {
             redirectTo('/incomes');
         }
 
         $_SESSION['activeForm'] = 'editIncome';
-        $_SESSION['income'] = $income;
+        $_SESSION['incomeToEdit'] = $incomeToEdit;
 
         redirectTo('/incomes');
     }

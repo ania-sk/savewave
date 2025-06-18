@@ -68,6 +68,7 @@ class TransactionService
     {
         $incomes = $this->db->query(
             "SELECT 
+                i.id,
                 i.amount, 
                 i.income_comment, 
                 DATE_FORMAT(i.date_of_income, '%Y-%m-%d') as formatted_date,
@@ -103,7 +104,7 @@ class TransactionService
     public function getUserIncome(string $id)
     {
         return $this->db->query(
-            "SELECT *,  DATE_FORMAT(date, '%Y-%m-%d') as formatted_date
+            "SELECT *,  DATE_FORMAT(date_of_income, '%Y-%m-%d') as formatted_date
             FROM incomes
             WHERE id = :id AND user_id = :user_id",
             [

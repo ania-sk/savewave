@@ -1,4 +1,4 @@
-<section id="modal-edit-income" class="modal-box">
+<section id="modal-edit-income" class="modal-box" style="<?= (isset($activeForm) && $activeForm === 'editIncome') ? 'display: block;' : ''; ?>">
     <div class="modal-content">
         <div class="modal-header flex-conteiner">
             <span id="close-edit-income-modal" class="close">&times;</span>
@@ -11,18 +11,15 @@
             <form method="post" action="/incomes/updateIncome" class="modal-form-box flex-conteiner">
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
-
                 <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
-
                 <input type="hidden" name="form_type" value="editIncome">
-
-                <input type="hidden" name="incomeId" value="<?php echo e($income['id'] ?? ''); ?>">
+                <input type="hidden" name="incomeId" value="<?php echo e($incomeToEdit['id'] ?? ''); ?>">
 
                 <!-- "Amount" -->
                 <div class="input-form-box flex-conteiner">
                     <label for="edit-amount">Amount</label>
                     <input id="edit-amount" type="number" name="incomeAmount"
-                        value="<?php echo e($oldFormData['incomeAmount'] ?? ($income['amount'] ?? '0')); ?>" />
+                        value="<?php echo e($oldFormData['incomeAmount'] ?? ($incomeToEdit['amount'] ?? '0')); ?>" />
                     <ion-icon id="cash-icon" class="modal-icon" name="cash-outline"></ion-icon>
                     <?php if ($activeForm === 'editIncome' && isset($errors['incomeAmount'])): ?>
                         <div>
@@ -37,7 +34,7 @@
                     <label for="edit-comment">Comment</label>
                     <input id="edit-comment" type="text" name="incomeComment"
                         placeholder="About income..."
-                        value="<?php echo e($oldFormData['incomeComment'] ?? ($income['income_comment'] ?? '')); ?>" />
+                        value="<?php echo e($oldFormData['incomeComment'] ?? ($incomeToEdit['income_comment'] ?? '')); ?>" />
                     <ion-icon id="text-icon" class="modal-icon" name="document-text-outline"></ion-icon>
                     <?php if ($activeForm === 'editIncome' && isset($errors['incomeComment'])): ?>
                         <div>
@@ -52,7 +49,7 @@
                     <div class="input-form-box flex-conteiner">
                         <label for="edit-date">Date</label>
                         <input id="edit-date" type="date" name="incomeDate"
-                            value="<?php echo e($oldFormData['incomeDate'] ?? ($income['date'] ?? '')); ?>" />
+                            value="<?php echo e($oldFormData['incomeDate'] ?? ($incomeToEdit['formatted_date'] ?? '')); ?>" />
                         <?php if ($activeForm === 'editIncome' && isset($errors['incomeDate'])): ?>
                             <div>
                                 <p class="error-text"><?php echo e($errors['incomeDate'][0]); ?></p>
@@ -68,7 +65,7 @@
                                 <?php foreach ($incomeCategories as $incomeCategory): ?>
                                     <option value="<?php echo e($incomeCategory['id']); ?>"
                                         <?php echo ((isset($oldFormData['incomeCategory']) && $oldFormData['incomeCategory'] == $incomeCategory['id'])
-                                            || (isset($income['category_id']) && $income['category_id'] == $incomeCategory['id'])) ? 'selected' : ''; ?>>
+                                            || (isset($incomeToEdit['income_category_assigned_to_user_id']) && $incomeToEdit['income_category_assigned_to_user_id'] == $incomeCategory['id'])) ? 'selected' : ''; ?>>
                                         <?php echo e($incomeCategory['name']); ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -88,7 +85,6 @@
 
                 <button id="edit-income-submit" type="submit" class="btn btn--modal">Save Changes</button>
             </form>
-
 
             <?php include $this->resolve("partials/modals/_addIncomeCategoryModal.php"); ?>
         </div>
