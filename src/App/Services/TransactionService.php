@@ -135,14 +135,14 @@ class TransactionService
             ]
         );
     }
-    // public function deleteIncome(int $id)
-    // {
-    //     $this->db->query(
-    //         "DELETE FROM incomes WHERE id = :id AND user_id",
-    //         [
-    //             'id' => $id,
-    //             'user_id' => $_SESSION['user']
-    //         ]
-    //     );
-    // }
+    public function deleteIncome(int $id)
+    {
+        $this->db->query(
+            "DELETE FROM incomes WHERE id = :id AND user_id = :user_id",
+            [
+                'id' => $id,
+                'user_id' => $_SESSION['user']
+            ]
+        );
+    }
 }

@@ -59,9 +59,4 @@ class TransactionsController
             }
         }
     }
-
-    // public function deleteIncome(array $params)
-    // {
-    //     $this->transactionService->deleteIncome((int) $params['income']);
-    // }
 }

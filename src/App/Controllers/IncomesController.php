@@ -76,4 +76,12 @@ class IncomesController
 
         redirectTo($_SERVER['HTTP_REFERER']);
     }
+
+
+    public function deleteIncome(array $params)
+    {
+        $this->transactionService->deleteIncome((int) $params['income']);
+
+        redirectTo('/incomes');
+    }
 }

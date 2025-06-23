@@ -52,9 +52,13 @@ include $this->resolve("partials/modals/_editIncomeModal.php");
                                 </a>
                             </td>
                             <td data-label="Delete" class="td-delete">
-                                <button class="btn-box ">
-                                    <ion-icon class="delete--icon" name="trash-outline"></ion-icon>
-                                </button>
+                                <form action="/incomes/<?php echo e($income['id']); ?>" method="POST">
+                                    <input type="hidden" name="_METHOD" value="DELETE">
+
+                                    <?php include $this->resolve("partials/_csrf.php"); ?>
+                                    <button class="btn-box"><ion-icon class="delete--icon" name="trash-outline"></ion-icon></button>
+
+                                </form>
                             </td>
                         </tr>
                         <?php $i = $i + 1; ?>
