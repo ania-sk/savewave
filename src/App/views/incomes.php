@@ -22,6 +22,7 @@ include $this->resolve("partials/modals/_editIncomeModal.php");
                     name="add-circle"></ion-icon>
             </button>
         </div>
+
         <div class="table-income-box">
             <table class="table table-income">
                 <thead>

@@ -55,14 +55,24 @@ class IncomesController
     public function updateIncome(array $params)
     {
         $incomeToEdit = $this->transactionService->getUserIncome($params['income']);
+        $_SESSION['activeForm'] = 'editIncome';
 
         if (!$incomeToEdit) {
             redirectTo('/incomes');
         }
 
-        $this->validatorService->validateIncome($_POST);
+        $errors = $this->validatorService->validateIncome($_POST);
+
+        if (!empty($errors)) {
+            $_SESSION['errors'] = $errors;
+            $_SESSION['oldFormData'] = $_POST;
+            $_SESSION['activeForm'] = 'editIncome';
+            redirectTo($_SERVER['HTTP_REFERER']);
+        }
 
         $this->transactionService->updateIncome($_POST, $incomeToEdit['id']);
+
+        unset($_SESSION['activeForm']);
 
         redirectTo($_SERVER['HTTP_REFERER']);
     }

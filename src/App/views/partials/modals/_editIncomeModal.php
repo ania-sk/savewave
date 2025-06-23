@@ -1,4 +1,5 @@
 <section id="modal-edit-income" class="modal-box" style="<?= (isset($activeForm) && $activeForm === 'editIncome') ? 'display: block;' : ''; ?>">
+
     <div class="modal-content">
         <div class="modal-header flex-conteiner">
             <span id="close-edit-income-modal" class="close">&times;</span>
@@ -89,4 +90,5 @@
             <?php include $this->resolve("partials/modals/_addIncomeCategoryModal.php"); ?>
         </div>
     </div>
+
 </section>
