@@ -12,7 +12,7 @@ function dd(mixed $value)
 
 function e(mixed $value): string
 {
-    return htmlspecialchars((string) $value);
+    return htmlspecialchars((string) ($value ?? ''), ENT_QUOTES, 'UTF-8');
 }
 
 function redirectTo(string $path)
