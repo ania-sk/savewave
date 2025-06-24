@@ -1,0 +1,15 @@
+.side-nav-box > a:nth-child(5) {
+  background-color: #0d7c66;
+  color: #ebe1f8;
+  width: 100%;
+  border-radius: 11px;
+  padding: 0.4rem;
+}
+
+.side-nav-box > a:nth-child(5):hover {
+  color: #ebe1f8;
+}
+
+.nav-hide .side-nav-box > a:nth-child(5) {
+  width: auto;
+}

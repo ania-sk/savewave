@@ -62,7 +62,7 @@
             <ion-icon class="nav-icon" name="heart-half-outline"></ion-icon>
             <span>Goals</span>
         </a>
-        <a href="#" class="link nav-box flex-conteiner">
+        <a href="/settings" class="link nav-box flex-conteiner">
             <ion-icon class="nav-icon" name="settings-outline"></ion-icon>
             <span>Settings</span>
         </a>
