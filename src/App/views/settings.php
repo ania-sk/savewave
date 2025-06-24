@@ -47,6 +47,8 @@ include $this->resolve("partials/_sideNavAndModals.php");
 
                     </table>
 
+                    <button id="add-income-category-btn" class="btn btn--modal">Add new categorie</button>
+
                 </div>
             </div>
 
@@ -86,7 +88,7 @@ include $this->resolve("partials/_sideNavAndModals.php");
                             </tr>
                         </tbody>
                     </table>
-
+                    <button id="add-expense-category-btn" class="btn btn--modal">Add new categorie</button>
                 </div>
             </div>
         </div>
