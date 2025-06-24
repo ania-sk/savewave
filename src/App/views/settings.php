@@ -34,7 +34,7 @@ include $this->resolve("partials/_sideNavAndModals.php");
                             <?php $i = 1; ?>
                             <?php foreach ($incomeCategories as $incomeCategory): ?>
                                 <tr>
-                                    <td data-label="No."><?php echo e($i); ?></td>
+                                    <td data-label="No."><?php echo e($i); ?>.</td>
                                     <td data-label="Categories"><?php echo e($incomeCategory['name']); ?></td>
                                     <td data-label="Edit" class="td-edit">
                                         <a href="/settings" class="btn-box btn--edit">
@@ -87,7 +87,7 @@ include $this->resolve("partials/_sideNavAndModals.php");
                             <?php $i = 1; ?>
                             <?php foreach ($expenseCategories as $expenseCategory): ?>
                                 <tr>
-                                    <td data-label="No."><?php echo e($i); ?></td>
+                                    <td data-label="No."><?php echo e($i); ?>.</td>
                                     <td data-label="Categories"><?php echo e($expenseCategory['name']); ?></td>
                                     <td data-label="Edit" class="td-edit">
                                         <a href="/settings" class="btn-box btn--edit">

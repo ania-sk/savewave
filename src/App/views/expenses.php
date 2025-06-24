@@ -40,7 +40,7 @@ include $this->resolve("partials/modals/_editExpenseModal.php");
                     <?php foreach ($expenses as $expense): ?>
                         <tr>
                             <td data-label="No."><?php echo e($i); ?></td>
-                            <td data-label="Amount"><?php echo e($expense['amount']); ?></td>
+                            <td data-label="Amount"><?php echo e($expense['amount']); ?>.</td>
                             <td data-label="Category"><?php echo e($expense['name']); ?></td>
                             <td data-label="Comment"><?php echo e($expense['expense_comment']); ?></td>
                             <td data-label="Date"><?php echo e($expense['formatted_date']); ?></td>

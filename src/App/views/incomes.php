@@ -40,7 +40,7 @@ include $this->resolve("partials/modals/_editIncomeModal.php");
                     <?php $i = 1; ?>
                     <?php foreach ($incomes as $income): ?>
                         <tr>
-                            <td data-label="No."><?php echo e($i); ?></td>
+                            <td data-label="No."><?php echo e($i); ?>.</td>
                             <td data-label="Amount"><?php echo e($income['amount']); ?></td>
                             <td data-label="Category"><?php echo e($income['name']); ?></td>
                             <td data-label="Comment"><?php echo e($income['income_comment']); ?></td>
