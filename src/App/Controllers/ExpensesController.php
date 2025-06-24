@@ -73,6 +73,7 @@ class ExpensesController
         $this->transactionService->updateExpense($_POST, $expenseToEdit['id']);
 
         unset($_SESSION['activeForm']);
+        unset($_SESSION['expenseToEdit']);
 
         redirectTo($_SERVER['HTTP_REFERER']);
     }

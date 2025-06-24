@@ -73,6 +73,7 @@ class IncomesController
         $this->transactionService->updateIncome($_POST, $incomeToEdit['id']);
 
         unset($_SESSION['activeForm']);
+        unset($_SESSION['incomeToEdit']);
 
         redirectTo($_SERVER['HTTP_REFERER']);
     }

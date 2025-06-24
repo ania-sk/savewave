@@ -86,4 +86,14 @@ class UserService
 
         session_regenerate_id();
     }
+
+    public function getUsername(int $userId)
+    {
+        return $username = $this->db->query(
+            "SELECT username FROM users WHERE id = :id",
+            [
+                'id' => $userId
+            ]
+        )->find();
+    }
 }

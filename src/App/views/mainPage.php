@@ -13,7 +13,7 @@ include $this->resolve("partials/_sideNavAndModals.php");
     <!-- MAIN SECTION -->
     <main class="section-main">
         <header class="main-header">
-            <p>Welcome to savings</p>
+            <p>Welcome to savings, <?php echo e($username['username']); ?>!</p>
         </header>
     </main>
 
