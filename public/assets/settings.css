@@ -34,7 +34,7 @@
 }
 /* category settings */
 .section-category-set {
-  gap: 6rem;
+  gap: 8rem;
 }
 
 .btn-box {
@@ -61,4 +61,102 @@
   color: #f41212;
   font-size: 2.5rem;
   transition: all 0.3s;
+}
+
+/* NEW CATEGORY FORM SECTION */
+.add-category-form {
+  margin-top: 2.4rem;
+  padding: 1.6rem;
+  border: 1px solid #0d7c66;
+  border-radius: 11px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.category-field {
+  margin-bottom: 1.6rem;
+}
+
+.category-field label {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 1.6rem;
+}
+
+.category-field input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.6rem;
+  border: 1px solid #d7c3f1;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+/* ACCOUNT DETAILS SECTION */
+
+.account-sec {
+  flex-direction: column;
+  padding: 3.6rem;
+  border-radius: 11px;
+  width: 90%;
+  max-width: 600px;
+  margin: 2.4rem auto;
+}
+
+.account-details-container {
+  width: 100%;
+}
+
+/* Single data editing section */
+.account-edit-section {
+  margin-bottom: 2.4rem;
+}
+
+/* Form within the account section */
+.account-form {
+  display: grid;
+  gap: 1.6rem;
+  margin-top: 1.6rem;
+}
+
+.account-field label {
+  font-size: 1.8rem;
+  margin-bottom: 1.6rem;
+  display: block;
+}
+
+.account-field input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.6rem;
+  border: 1px solid #d7c3f1;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+/* Account deletion section */
+.account-delete {
+  margin-top: 4rem;
+  border-top: 1px solid #d7c3f1;
+  padding-top: 2.4rem;
+  text-align: center;
+}
+
+/* Delete Account Button Style */
+.btn--delete {
+  background-color: #f41212;
+  color: #fff;
+  border: none;
+  font-size: 1.6rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: 11px;
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.btn--delete:hover,
+.btn--delete:active {
+  background-color: #d10d0d;
+  transform: scale(1.02);
 }

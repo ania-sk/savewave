@@ -63,6 +63,14 @@ body {
   padding: 3.6rem;
 }
 
+.heading-tertiary {
+  font-size: 3rem;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  text-align: center;
+  padding: 3.6rem;
+}
+
 .header-save {
   font-size: 3rem;
   text-transform: uppercase;
