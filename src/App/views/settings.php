@@ -33,16 +33,19 @@ include $this->resolve("partials/_sideNavAndModals.php");
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td data-label="No.">1.</td>
-                                <td data-label="Categories">Income</td>
-                                <td data-label="Edit" class="td-edit">
-                                    <a href="/settings" class="btn-box btn--edit">
-                                        <ion-icon class="edit--icon" name="create-outline"></ion-icon>
-                                    </a>
-                                </td>
-                            </tr>
-
+                            <?php $i = 1; ?>
+                            <?php foreach ($incomeCategories as $incomeCategory): ?>
+                                <tr>
+                                    <td data-label="No."><?php echo e($i); ?></td>
+                                    <td data-label="Categories"><?php echo e($incomeCategory['name']); ?></td>
+                                    <td data-label="Edit" class="td-edit">
+                                        <a href="/settings" class="btn-box btn--edit">
+                                            <ion-icon class="edit--icon" name="create-outline"></ion-icon>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php $i = $i + 1; ?>
+                            <?php endforeach; ?>
                         </tbody>
 
                     </table>
@@ -76,24 +79,19 @@ include $this->resolve("partials/_sideNavAndModals.php");
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td data-label="No.">1.</td>
-                                <td data-label="Categories">Expense</td>
-                                <td data-label="Edit" class="td-edit">
-                                    <a href="/settings" class="btn-box btn--edit">
-                                        <ion-icon class="edit--icon" name="create-outline"></ion-icon>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="No.">1.</td>
-                                <td data-label="Categories">Expense</td>
-                                <td data-label="Edit" class="td-edit">
-                                    <a href="/settings" class="btn-box btn--edit">
-                                        <ion-icon class="edit--icon" name="create-outline"></ion-icon>
-                                    </a>
-                                </td>
-                            </tr>
+                            <?php $i = 1; ?>
+                            <?php foreach ($expenseCategories as $expenseCategory): ?>
+                                <tr>
+                                    <td data-label="No."><?php echo e($i); ?></td>
+                                    <td data-label="Categories"><?php echo e($expenseCategory['name']); ?></td>
+                                    <td data-label="Edit" class="td-edit">
+                                        <a href="/settings" class="btn-box btn--edit">
+                                            <ion-icon class="edit--icon" name="create-outline"></ion-icon>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php $i = $i + 1; ?>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
 
@@ -122,8 +120,8 @@ include $this->resolve("partials/_sideNavAndModals.php");
                 <div class="account-edit-section">
                     <form class="account-form" action="/settings/updateEmail" method="post">
                         <div class="account-field">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" value="" required>
+                            <label for="email">Email: <?php echo e($email['email']); ?></label>
+                            <input type="email" id="email" name="email" placeholder="Enter new email" value="" required>
                         </div>
                         <button type="submit" class="btn btn--full btn--modal">Update Email</button>
                     </form>
@@ -133,8 +131,8 @@ include $this->resolve("partials/_sideNavAndModals.php");
                 <div class="account-edit-section">
                     <form class="account-form" action="/settings/updateUsername" method="post">
                         <div class="account-field">
-                            <label for="username">Username:</label>
-                            <input type="text" id="username" name="username" value="" required>
+                            <label for="username">Username: <?php echo e($username['username']); ?></label>
+                            <input type="text" id="username" name="username" value="" placeholder="Enetr new Username" required>
                         </div>
                         <button type="submit" class="btn btn--full btn--modal">Update Username</button>
                     </form>

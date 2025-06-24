@@ -96,4 +96,14 @@ class UserService
             ]
         )->find();
     }
+
+    public function getUserEmail(int $userId)
+    {
+        return $email = $this->db->query(
+            "SELECT email FROM users WHERE id = :id",
+            [
+                'id' => $userId
+            ]
+        )->find();
+    }
 }

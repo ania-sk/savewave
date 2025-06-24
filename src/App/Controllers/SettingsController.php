@@ -21,6 +21,8 @@ class SettingsController
         $userId = (int)$_SESSION['user'];
         $incomeCategories = $this->categoryService->getUserIncomeCategories($userId);
         $expenseCategories = $this->categoryService->getUserExpenseCategories($userId);
+        $email = $this->userService->getUserEmail($userId);
+        $username = $this->userService->getUsername($userId);
 
         echo $this->view->render("/settings.php", [
             'title' => 'Settings',
@@ -28,7 +30,9 @@ class SettingsController
             'cssLink2' => 'mainPage.css',
             'jsLink' => '',
             'incomeCategories' => $incomeCategories,
-            'expenseCategories' => $expenseCategories
+            'expenseCategories' => $expenseCategories,
+            'email' => $email,
+            'username' => $username
         ]);
     }
 }
