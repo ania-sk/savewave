@@ -13,3 +13,52 @@
 .nav-hide .side-nav-box > a:nth-child(5) {
   width: auto;
 }
+/* SECTION MAIN */
+/* ************* */
+.section-main {
+  padding: 4.8rem;
+  flex-direction: column;
+}
+
+.settings-heading {
+  font-size: 3.4rem;
+  text-transform: uppercase;
+  color: #0d7c66;
+}
+
+.header-btn--icon {
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+}
+/* category settings */
+.section-category-set {
+  gap: 6rem;
+}
+
+.btn-box {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+.edit--icon {
+  color: #f47812f8;
+  font-size: 2.5rem;
+  transition: all 0.3s;
+}
+
+.edit--icon:hover,
+.edit--icon:active,
+.delete--icon:hover,
+.delete--icon:active {
+  transform: scale(1.1);
+}
+
+.delete--icon {
+  color: #f41212;
+  font-size: 2.5rem;
+  transition: all 0.3s;
+}
