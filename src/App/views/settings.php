@@ -4,9 +4,7 @@ include $this->resolve("partials/_sideNavAndModals.php");
 ?>
 
 <body class="<?php echo ($activeForm === 'income') ? 'modal-income-open' : '';
-                echo ($activeForm === 'expense') ? 'modal-expense-open' : '';
-                echo ($activeForm === 'addIncomeCategory') ? 'modal-add-income-category-open modal-income-open' : '';
-                echo ($activeForm === 'addExpenseCategory') ? 'modal-add-expense-category-open modal-expense-open' : ''; ?>">>
+                echo ($activeForm === 'expense') ? 'modal-expense-open' : ''; ?>">>
 
     <!-- MAIN SECTION -->
     <main class="section-main flex-conteiner">
@@ -54,10 +52,17 @@ include $this->resolve("partials/_sideNavAndModals.php");
                 <!-- add new income form -->
                 <div class="add-category-form">
                     <form action="/settings/addIncomeCategory" method="post">
+                        <?php include $this->resolve("partials/_csrf.php"); ?>
+                        <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                         <div class="category-field">
                             <label for="income-category">New Income Category:</label>
-                            <input type="text" id="income-category" name="categoryName" placeholder="Enter new income category" required>
+                            <input type="text" id="income-category" name="newCategoryName" placeholder="Enter new income category">
                         </div>
+                        <?php if (array_key_exists('newCategoryName', $errors)) : ?>
+                            <div>
+                                <p class="error-text"><?php echo e($errors['newCategoryName'][0]); ?></p>
+                            </div>
+                        <?php endif; ?>
                         <button id="add-income-category-btn" class="btn btn--modal">Add new categorie</button>
                     </form>
                 </div>
@@ -99,10 +104,18 @@ include $this->resolve("partials/_sideNavAndModals.php");
                 <!-- add new expense form -->
                 <div class="add-category-form">
                     <form action="/settings/addExpenseCategory" method="post">
+                        <?php include $this->resolve("partials/_csrf.php"); ?>
+                        <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                         <div class="category-field">
                             <label for="expense-category">New Expense Category:</label>
-                            <input type="text" id="expense-category" name="categoryName" placeholder="Enter new expense category" required>
+                            <input type="text" id="expense-category" name="newCategoryName" placeholder="Enter new expense category" required>
                         </div>
+                        <?php if (array_key_exists('newCategoryName', $errors)) : ?>
+                            <div>
+                                <p class="error-text"><?php echo e($errors['newCategoryName'][0]); ?></p>
+                            </div>
+                        <?php endif; ?>
+
                         <button id="add-expense-category-btn" class="btn btn--modal" type="submit">Add new categorie</button>
                     </form>
                 </div>

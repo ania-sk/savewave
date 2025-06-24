@@ -34,6 +34,6 @@ class UniqueCategoryRule implements RuleInterface
 
     public function getMessage(array $data, string $field, array $params): string
     {
-        return "Enter another category name.";
+        return "This category already exists, please enter another one";
     }
 }
