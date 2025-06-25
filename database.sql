@@ -127,3 +127,9 @@ FROM DUAL
 WHERE NOT EXISTS (
     SELECT 1 FROM expenses_category_default WHERE name = 'Other'
 );
+
+ALTER TABLE incomes_category_assigned_to_users
+  ADD COLUMN is_active TINYINT(1) NOT NULL DEFAULT 1;
+
+ALTER TABLE expenses_category_assigned_to_users
+  ADD COLUMN is_active TINYINT(1) NOT NULL DEFAULT 1;
