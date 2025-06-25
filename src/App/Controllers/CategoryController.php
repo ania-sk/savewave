@@ -90,10 +90,10 @@ class CategoryController
 
         try {
             if ($categoryType === 'income') {
-                $_POST['newCategoryName'] = trim($_POST['categoryName'] ?? '');
+                $_POST['newCategoryName'] = trim($_POST['newCategoryName'] ?? '');
                 $this->validatorService->validateNewIncomeCategory($_POST);
             } elseif ($categoryType === 'expense') {
-                $_POST['newCategoryName'] = trim($_POST['categoryName'] ?? '');
+                $_POST['newCategoryName'] = trim($_POST['newCategoryName'] ?? '');
                 $this->validatorService->validateNewExpenseCategory($_POST);
             } else {
                 redirectTo($redirectTo);
@@ -101,10 +101,11 @@ class CategoryController
         } catch (ValidationException $e) {
             $_SESSION['errors'] = $e->errors;
             $_SESSION['oldFormData'] = $_POST;
+            $_SESSION['categoryToEdit'] = $categoryToEdit;
             redirectTo($redirectTo);
         }
 
-        $newName = trim($_POST['categoryName']);
+        $newName = trim($_POST['newCategoryName']);
 
         if ($categoryType === 'income') {
             $this->categoryService->updateUserIncomeCategory($categoryId, $newName);

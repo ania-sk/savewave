@@ -54,6 +54,10 @@
   display: none;
 }
 
+.modal-edit-category-open #modal-edit-category {
+  display: block;
+}
+
 .edit--icon:hover,
 .edit--icon:active,
 .delete--icon:hover,

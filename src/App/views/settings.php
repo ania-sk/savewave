@@ -5,7 +5,8 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
 ?>
 
 <body class="<?php echo ($activeForm === 'income') ? 'modal-income-open' : '';
-                echo ($activeForm === 'expense') ? 'modal-expense-open' : ''; ?>">>
+                echo ($activeForm === 'expense') ? 'modal-expense-open' : '';
+                echo ($activeForm === 'editCategory') ? 'modal-edit-category-open' : ''; ?>">
 
     <!-- MAIN SECTION -->
     <main class="section-main flex-conteiner">
@@ -60,7 +61,7 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                             <label for="income-category">New Income Category:</label>
                             <input type="text" id="income-category" name="newCategoryName" placeholder="Enter new income category">
                         </div>
-                        <?php if (array_key_exists('newCategoryName', $errors)) : ?>
+                        <?php if ($activeForm === 'addIncomeCategory' && array_key_exists('newCategoryName', $errors)) : ?>
                             <div>
                                 <p class="error-text"><?php echo e($errors['newCategoryName'][0]); ?></p>
                             </div>
@@ -114,7 +115,7 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                             <label for="expense-category">New Expense Category:</label>
                             <input type="text" id="expense-category" name="newCategoryName" placeholder="Enter new expense category" required>
                         </div>
-                        <?php if (array_key_exists('newCategoryName', $errors)) : ?>
+                        <?php if ($activeForm === 'addExpenseCategory' && array_key_exists('newCategoryName', $errors)) : ?>
                             <div>
                                 <p class="error-text"><?php echo e($errors['newCategoryName'][0]); ?></p>
                             </div>

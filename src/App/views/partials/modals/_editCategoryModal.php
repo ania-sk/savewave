@@ -22,14 +22,14 @@
 
                 <div class="input-form-box flex-conteiner">
                     <label for="edit-category-name">Category Name</label>
-                    <input id="edit-category-name" type="text" name="categoryName"
-                        value="<?php echo e($oldFormData['categoryName'] ?? ($categoryToEdit['name'] ?? '')); ?>"
+                    <input id="edit-category-name" type="text" name="newCategoryName"
+                        value="<?php echo e($oldFormData['newCategoryName'] ?? ($categoryToEdit['name'] ?? '')); ?>"
                         placeholder="Enter new category name" />
                     <ion-icon id="cash-icon" class="modal-icon" name="medal-outline"></ion-icon>
 
-                    <?php if ($activeForm === 'editCategory' && isset($errors['categoryName'])): ?>
+                    <?php if ($activeForm === 'editCategory' && isset($errors['newCategoryName'])): ?>
                         <div>
-                            <p class="error-text"><?php echo e($errors['categoryName'][0]); ?></p>
+                            <p class="error-text"><?php echo e($errors['newCategoryName'][0]); ?></p>
                             <ion-icon class="error-icon" name="alert"></ion-icon>
                         </div>
                     <?php endif; ?>
@@ -38,7 +38,4 @@
             </form>
         </div>
     </div>
-    <pre><?php var_dump($_SESSION); ?></pre>
-    <pre><?php var_dump($categoryToEdit['id']); ?></pre>
-    <pre><?php var_dump($categoryToEdit['type'], $activeForm); ?></pre>
 </section>

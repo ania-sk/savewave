@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
   window.openEditCategoryModal = function (id, name, type) {
     editCategoryModal.style.display = "block";
     editCategoryModal.querySelector("input[name='categoryId']").value = id;
-    editCategoryModal.querySelector("input[name='categoryName']").value = name;
+    editCategoryModal.querySelector("input[name='newCategoryName']").value =
+      name;
     editCategoryModal.querySelector("input[name='categoryType']").value = type;
     editCategoryModal.querySelector("form").action = `/settings/${id}`;
   };
@@ -25,4 +26,9 @@ document.addEventListener("DOMContentLoaded", function () {
       editCategoryModal.style.display = "none";
     }
   });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.activeForm === "editCategory") {
+    document.getElementById("modal-edit-category").style.display = "block";
+  }
 });
