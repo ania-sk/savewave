@@ -20,13 +20,24 @@ class CategoryService
         );
     }
 
-    public function getUserIncomeCategories(int $userId): array
+    public function getUserActiveIncomeCategories(int $userId): array
     {
         $this->db->query(
             "SELECT id, name 
              FROM incomes_category_assigned_to_users 
              WHERE user_id = :user_id
              AND is_active = 1",
+            ['user_id' => $userId]
+        );
+        return $this->db->fetchAll();
+    }
+
+    public function getUserAllIncomeCategories(int $userId): array
+    {
+        $this->db->query(
+            "SELECT id, name, is_active
+             FROM incomes_category_assigned_to_users 
+             WHERE user_id = :user_id",
             ['user_id' => $userId]
         );
         return $this->db->fetchAll();
@@ -58,10 +69,22 @@ class CategoryService
         $newCategoryName = trim($formData['newCategoryName'] ?? '');
         $userId =  $_SESSION['user'];
 
-        $categoriesAssignedToUser = $this->getUserIncomeCategories($userId);
+        $categoriesAssignedToUser = $this->getUserAllIncomeCategories($userId);
 
         foreach ($categoriesAssignedToUser as $category) {
             if (isset($category['name']) && strcasecmp($newCategoryName, $category['name']) === 0) {
+                if ((int) $category['is_active'] === 0) {
+                    $this->db->query(
+                        "UPDATE incomes_category_assigned_to_users
+                        SET is_active = 1
+                        WHERE id = :id 
+                        AND user_id = :uid",
+                        [
+                            'id' => $category['id'],
+                            'uid' => $userId
+                        ]
+                    );
+                }
                 return;
             }
         }

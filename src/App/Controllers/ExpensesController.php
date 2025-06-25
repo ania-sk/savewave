@@ -19,7 +19,7 @@ class ExpensesController
     public function expenses()
     {
         $userId = (int)$_SESSION['user'];
-        $incomeCategories = $this->categoryService->getUserIncomeCategories($userId);
+        $incomeCategories = $this->categoryService->getUserActiveIncomeCategories($userId);
         $expenseCategories = $this->categoryService->getUserExpenseCategories($userId);
 
         $expenses = $this->transactionService->getUserExpenses();

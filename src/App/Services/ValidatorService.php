@@ -76,7 +76,7 @@ class ValidatorService
 
     public function validateNewIncomeCategory(array $formData)
     {
-        $existingCategories = $this->categoryService->getUserIncomeCategories($_SESSION['user']);
+        $existingCategories = $this->categoryService->getUserActiveIncomeCategories($_SESSION['user']);
         $uniqueRule = new UniqueCategoryRule($existingCategories);
         $this->validator->add('uniqueName', $uniqueRule);
         $this->validator->validate($formData, [

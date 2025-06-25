@@ -19,7 +19,7 @@ class SettingsController
     public function settings()
     {
         $userId = (int)$_SESSION['user'];
-        $incomeCategories = $this->categoryService->getUserIncomeCategories($userId);
+        $incomeCategories = $this->categoryService->getUserActiveIncomeCategories($userId);
         $expenseCategories = $this->categoryService->getUserExpenseCategories($userId);
         $email = $this->userService->getUserEmail($userId);
         $username = $this->userService->getUsername($userId);

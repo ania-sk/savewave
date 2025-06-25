@@ -19,7 +19,7 @@ class IncomesController
     public function incomes()
     {
         $userId = (int)$_SESSION['user'];
-        $incomeCategories = $this->categoryService->getUserIncomeCategories($userId);
+        $incomeCategories = $this->categoryService->getUserActiveIncomeCategories($userId);
         $expenseCategories = $this->categoryService->getUserExpenseCategories($userId);
 
         $incomes = $this->transactionService->getUserIncomes();
