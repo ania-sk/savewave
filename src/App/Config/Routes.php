@@ -47,4 +47,7 @@ function registerRoutes(App $app)
     $app->get('/expenses/{expense}', [ExpensesController::class, 'editExpense']);
     $app->post('/expenses/{expense}', [ExpensesController::class, 'updateExpense']);
     $app->delete('/expenses/{expense}', [ExpensesController::class, 'deleteExpense']);
+
+    $app->get('/settings/{category}', [CategoryController::class, 'editCategory']);
+    $app->post('/settings/{category}', [CategoryController::class, 'updateCategory']);
 }

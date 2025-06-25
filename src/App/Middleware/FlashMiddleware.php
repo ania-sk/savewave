@@ -28,6 +28,10 @@ class FlashMiddleware implements MiddlewareInterface
 
         unset($_SESSION['newCategoryName']);
 
+        $this->view->addGlobal('categoryToEdit', $_SESSION['categoryToEdit'] ?? null);
+
+        unset($_SESSION['categoryToEdit']);
+
         $next();
     }
 }

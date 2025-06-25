@@ -92,4 +92,47 @@ class CategoryService
             ]
         );
     }
+
+    public function getUserCategoryById(int $id): ?array
+    {
+        $userId = $_SESSION['user'] ?? null;
+
+        $category = $this->db->query(
+            "SELECT * FROM incomes_category_assigned_to_users WHERE id = :id AND user_id = :uid",
+            ['id' => $id, 'uid' => $userId]
+        )->find();
+
+        if ($category) {
+            $category['type'] = 'income';
+            return $category;
+        }
+
+        $category = $this->db->query(
+            "SELECT * FROM expenses_category_assigned_to_users WHERE id = :id AND user_id = :uid",
+            ['id' => $id, 'uid' => $userId]
+        )->find();
+
+        if ($category) {
+            $category['type'] = 'expense';
+            return $category;
+        }
+
+        return null;
+    }
+
+    public function updateUserIncomeCategory(int $id, string $name): void
+    {
+        $this->db->query(
+            "UPDATE incomes_category_assigned_to_users SET name = :name WHERE id = :id AND user_id = :uid",
+            ['name' => $name, 'id' => $id, 'uid' => $_SESSION['user']]
+        );
+    }
+
+    public function updateUserExpenseCategory(int $id, string $name): void
+    {
+        $this->db->query(
+            "UPDATE expenses_category_assigned_to_users SET name = :name WHERE id = :id AND user_id = :uid",
+            ['name' => $name, 'id' => $id, 'uid' => $_SESSION['user']]
+        );
+    }
 }

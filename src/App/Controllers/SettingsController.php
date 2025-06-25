@@ -28,7 +28,7 @@ class SettingsController
             'title' => 'Settings',
             'cssLink' => 'settings.css',
             'cssLink2' => 'mainPage.css',
-            'jsLink' => '',
+            'jsLink' => 'settings.js',
             'incomeCategories' => $incomeCategories,
             'expenseCategories' => $expenseCategories,
             'email' => $email,

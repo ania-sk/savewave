@@ -1,6 +1,7 @@
 <?php
 include $this->resolve("partials/_header.php");
 include $this->resolve("partials/_sideNavAndModals.php");
+include $this->resolve("partials/modals/_editCategoryModal.php");
 ?>
 
 <body class="<?php echo ($activeForm === 'income') ? 'modal-income-open' : '';
@@ -37,9 +38,10 @@ include $this->resolve("partials/_sideNavAndModals.php");
                                     <td data-label="No."><?php echo e($i); ?>.</td>
                                     <td data-label="Categories"><?php echo e($incomeCategory['name']); ?></td>
                                     <td data-label="Edit" class="td-edit">
-                                        <a href="/settings" class="btn-box btn--edit">
+                                        <button class="btn-box btn--edit"
+                                            onclick="openEditCategoryModal(<?= $incomeCategory['id']; ?>, '<?= e($incomeCategory['name']); ?>', 'income')">
                                             <ion-icon class="edit--icon" name="create-outline"></ion-icon>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                                 <?php $i = $i + 1; ?>
@@ -66,6 +68,7 @@ include $this->resolve("partials/_sideNavAndModals.php");
                         <button id="add-income-category-btn" class="btn btn--modal">Add new categorie</button>
                     </form>
                 </div>
+
             </div>
 
             <!-- EXPENSE CATEGORIES -->
@@ -90,9 +93,10 @@ include $this->resolve("partials/_sideNavAndModals.php");
                                     <td data-label="No."><?php echo e($i); ?>.</td>
                                     <td data-label="Categories"><?php echo e($expenseCategory['name']); ?></td>
                                     <td data-label="Edit" class="td-edit">
-                                        <a href="/settings" class="btn-box btn--edit">
+                                        <button class="btn-box btn--edit"
+                                            onclick="openEditCategoryModal(<?= $expenseCategory['id']; ?>, '<?= e($expenseCategory['name']); ?>', 'expense')">
                                             <ion-icon class="edit--icon" name="create-outline"></ion-icon>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                                 <?php $i = $i + 1; ?>

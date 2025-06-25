@@ -61,4 +61,58 @@ class CategoryController
             }
         }
     }
+
+    public function editCategory(array $params)
+    {
+        $categoryId = (int)$params['category'];
+        $categoryToEdit = $this->categoryService->getUserCategoryById($categoryId);
+
+        if (!$categoryToEdit) {
+            redirectTo('/settings');
+        }
+
+        $_SESSION['activeForm'] = 'editCategory';
+        $_SESSION['categoryToEdit'] = $categoryToEdit;
+
+        redirectTo('/settings');
+    }
+
+    public function updateCategory(array $params)
+    {
+        $categoryId = (int) $params['category'];
+        $categoryType = $_POST['categoryType'] ?? null;
+        $redirectTo = $_POST['redirect_to'] ?? '/settings';
+
+        $categoryToEdit = $this->categoryService->getUserCategoryById($categoryId);
+        $_SESSION['activeForm'] = 'editCategory';
+        $_SESSION['categoryToEdit'] = $categoryToEdit;
+
+
+        try {
+            if ($categoryType === 'income') {
+                $_POST['newCategoryName'] = trim($_POST['categoryName'] ?? '');
+                $this->validatorService->validateNewIncomeCategory($_POST);
+            } elseif ($categoryType === 'expense') {
+                $_POST['newCategoryName'] = trim($_POST['categoryName'] ?? '');
+                $this->validatorService->validateNewExpenseCategory($_POST);
+            } else {
+                redirectTo($redirectTo);
+            }
+        } catch (ValidationException $e) {
+            $_SESSION['errors'] = $e->errors;
+            $_SESSION['oldFormData'] = $_POST;
+            redirectTo($redirectTo);
+        }
+
+        $newName = trim($_POST['categoryName']);
+
+        if ($categoryType === 'income') {
+            $this->categoryService->updateUserIncomeCategory($categoryId, $newName);
+        } else {
+            $this->categoryService->updateUserExpenseCategory($categoryId, $newName);
+        }
+
+        unset($_SESSION['activeForm'], $_SESSION['categoryToEdit']);
+        redirectTo($redirectTo);
+    }
 }
