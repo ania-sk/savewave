@@ -116,4 +116,13 @@ class CategoryController
         unset($_SESSION['activeForm'], $_SESSION['categoryToEdit']);
         redirectTo($redirectTo);
     }
+
+    public function deleteCategory(array $params)
+    {
+        $id   = (int) $params['category'];
+        $type = $_POST['categoryType'] ?? null;
+        $this->categoryService->deactivateCategory($id, $type);
+
+        redirectTo($redirectTo ?? '/settings');
+    }
 }

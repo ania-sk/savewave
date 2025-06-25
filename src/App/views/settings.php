@@ -30,6 +30,7 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                                 <th scope="col">No.</th>
                                 <th scope="col">Categorie</th>
                                 <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,6 +44,17 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                                             onclick="openEditCategoryModal(<?= $incomeCategory['id']; ?>, '<?= e($incomeCategory['name']); ?>', 'income')">
                                             <ion-icon class="edit--icon" name="create-outline"></ion-icon>
                                         </button>
+                                    </td>
+                                    <td data-label="Delete" class="td-delete">
+                                        <form method="post" action="/settings/<?= $incomeCategory['id'] ?>/delete">
+                                            <?php include $this->resolve("partials/_csrf.php"); ?>
+                                            <input type="hidden" name="redirect_to" value="<?= $currentUrl ?>">
+                                            <input type="hidden" name="categoryType" value="income">
+                                            <button type="submit" onclick="return confirm('Remove this category?')"
+                                                class="btn-box">
+                                                <ion-icon class="delete--icon" name="trash-outline"></ion-icon>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 <?php $i = $i + 1; ?>
@@ -85,6 +97,7 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                                 <th scope="col">No.</th>
                                 <th scope="col">Categorie</th>
                                 <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,6 +111,17 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                                             onclick="openEditCategoryModal(<?= $expenseCategory['id']; ?>, '<?= e($expenseCategory['name']); ?>', 'expense')">
                                             <ion-icon class="edit--icon" name="create-outline"></ion-icon>
                                         </button>
+                                    </td>
+                                    <td data-label="Delete" class="td-delete">
+                                        <form method="post" action="/settings/<?= $expenseCategory['id'] ?>/delete">
+                                            <?php include $this->resolve("partials/_csrf.php"); ?>
+                                            <input type="hidden" name="redirect_to" value="<?= $currentUrl ?>">
+                                            <input type="hidden" name="categoryType" value="expense">
+                                            <button type="submit" onclick="return confirm('Remove this category?')"
+                                                class="btn-box">
+                                                <ion-icon class="delete--icon" name="trash-outline"></ion-icon>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 <?php $i = $i + 1; ?>

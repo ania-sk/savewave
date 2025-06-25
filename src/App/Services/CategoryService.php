@@ -23,7 +23,10 @@ class CategoryService
     public function getUserIncomeCategories(int $userId): array
     {
         $this->db->query(
-            "SELECT id, name FROM incomes_category_assigned_to_users WHERE user_id = :user_id",
+            "SELECT id, name 
+             FROM incomes_category_assigned_to_users 
+             WHERE user_id = :user_id
+             AND is_active = 1",
             ['user_id' => $userId]
         );
         return $this->db->fetchAll();
@@ -41,7 +44,10 @@ class CategoryService
     public function getUserExpenseCategories(int $userId): array
     {
         $this->db->query(
-            "SELECT id, name FROM expenses_category_assigned_to_users WHERE user_id = :user_id",
+            "SELECT id, name 
+             FROM expenses_category_assigned_to_users 
+             WHERE user_id = :user_id
+             AND is_active = 1",
             ['user_id' => $userId]
         );
         return $this->db->fetchAll();
@@ -133,6 +139,24 @@ class CategoryService
         $this->db->query(
             "UPDATE expenses_category_assigned_to_users SET name = :name WHERE id = :id AND user_id = :uid",
             ['name' => $name, 'id' => $id, 'uid' => $_SESSION['user']]
+        );
+    }
+
+    public function deactivateCategory(int $id, string $type): void
+    {
+        $table = $type === 'income'
+            ? 'incomes_category_assigned_to_users'
+            : 'expenses_category_assigned_to_users';
+
+        $this->db->query(
+            "UPDATE {$table} 
+          SET is_active = 0 
+          WHERE id = :id 
+          AND user_id = :uid",
+            [
+                'id'  => $id,
+                'uid' => $_SESSION['user']
+            ]
         );
     }
 }
