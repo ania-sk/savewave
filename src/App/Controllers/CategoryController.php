@@ -129,6 +129,8 @@ class CategoryController
         $type = $_POST['categoryType'] ?? null;
         $this->categoryService->deactivateCategory($id, $type);
 
+        $_SESSION['success'] = 'Category has been deleted successfully!';
+
         redirectTo($redirectTo ?? '/settings');
     }
 }
