@@ -190,12 +190,21 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
 
                 <!--  Username -->
                 <div class="account-edit-section">
-                    <form class="account-form" action="/settings/updateUsername" method="post">
+                    <form class="account-form" action="/settings/update/username" method="post">
                         <?php include $this->resolve("partials/_csrf.php"); ?>
+
+                        <input type="hidden" name="form_type" value="editUsername">
 
                         <div class="account-field">
                             <label for="username">Username: <?php echo e($username['username']); ?></label>
-                            <input type="text" id="username" name="username" value="" placeholder="Enetr new Username">
+                            <input type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Enetr new Username"
+                                value="<?= e($oldFormData['username'] ?? '') ?>">
+                            <?php if ($activeForm === 'editUsername' && isset($errors['username'])): ?>
+                                <p class="error-text"><?= e($errors['username'][0]) ?></p>
+                            <?php endif; ?>
                         </div>
                         <button type="submit" class="btn btn--full btn--set">Update Username</button>
                     </form>

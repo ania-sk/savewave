@@ -64,4 +64,24 @@ class SettingsController
 
         redirectTo($redirectTo);
     }
+
+    public function updateUsername()
+    {
+        $redirectTo = '/settings';
+
+        $userId = $_SESSION['user'] ?? null;
+        $_SESSION['activeForm'] = $_POST['form_type'] ?? null;
+
+        $newUsername = trim($_POST['username']);
+
+        $this->validatorService->validateUsername($_POST);
+
+        $this->userService->updateUsername($userId, $newUsername);
+
+        $_SESSION['success'] = 'Your Username has been updated successfully!';
+
+        unset($_SESSION['activeForm']);
+
+        redirectTo($redirectTo);
+    }
 }

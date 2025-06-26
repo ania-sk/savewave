@@ -100,4 +100,11 @@ class ValidatorService
             'email' => ['required', 'email']
         ]);
     }
+
+    public function validateUsername(array $formData)
+    {
+        $this->validator->validate($formData, [
+            'username' => ['required']
+        ]);
+    }
 }

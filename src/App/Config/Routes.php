@@ -53,4 +53,5 @@ function registerRoutes(App $app)
     $app->post('/settings/{category}/delete', [CategoryController::class, 'deleteCategory']);
 
     $app->post('/settings/email/update', [SettingsController::class, 'updateEmail']);
+    $app->post('/settings/update/username', [SettingsController::class, 'updateUsername']);
 }

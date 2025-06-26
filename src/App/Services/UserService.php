@@ -114,4 +114,12 @@ class UserService
             ]
         )->find();
     }
+
+    public function updateUsername(int $userId, string $newUsername)
+    {
+        $this->db->query(
+            "UPDATE users SET username = :username WHERE id = :uid",
+            ['username' => $newUsername, 'uid' => $userId]
+        );
+    }
 }
