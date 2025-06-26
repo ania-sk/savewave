@@ -12,8 +12,10 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
     <main class="section-main flex-conteiner">
         <!-- FLASH INFORMATION -->
         <?php if (!empty($success)): ?>
-            <div class="flash flash--success">
-                <?php echo e($success) ?>
+            <div class="modal-header flex-conteiner flash flash--success">
+                <span id="close-flash" class="close">&times;</span>
+                <ion-icon class="header-icon" name="flash-outline"></ion-icon>
+                <p><?php echo e($success) ?></p>
             </div>
         <?php endif; ?>
 

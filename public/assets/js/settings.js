@@ -32,3 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("modal-edit-category").style.display = "block";
   }
 });
+
+//FLASH DIV
+document.addEventListener("DOMContentLoaded", function () {
+  //get flash div
+  const flashDiv = document.querySelector(".flash");
+  //get X button
+  const closeButton = document.querySelector("#close-flash");
+
+  closeButton.addEventListener("click", () => {
+    flashDiv.style.display = "none";
+  });
+});
