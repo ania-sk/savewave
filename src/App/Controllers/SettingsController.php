@@ -58,8 +58,9 @@ class SettingsController
         $this->userService->isEmailTaken($email);
         $this->userService->updateEmail($email, $userId);
 
-        unset($_SESSION['activeForm'], $_SESSION['categoryToEdit'], $_SESSION['errors'], $_SESSION['oldFormData']);
+        $_SESSION['success'] = 'Your email has been updated successfully!';
 
+        unset($_SESSION['activeForm']);
 
         redirectTo($redirectTo);
     }

@@ -10,6 +10,13 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
 
     <!-- MAIN SECTION -->
     <main class="section-main flex-conteiner">
+        <!-- FLASH INFORMATION -->
+        <?php if (!empty($success)): ?>
+            <div class="flash flash--success">
+                <?php echo e($success) ?>
+            </div>
+        <?php endif; ?>
+
         <div class="settings-heading flex-conteiner">
             <ion-icon class="nav-icon" name="settings-outline"></ion-icon>
             <p>Settings</p>

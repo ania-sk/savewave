@@ -20,6 +20,9 @@ class FlashMiddleware implements MiddlewareInterface
 
         unset($_SESSION['oldFormData']);
 
+        $this->view->addGlobal('success', $_SESSION['success'] ?? null);
+        unset($_SESSION['success']);
+
         $this->view->addGlobal('activeForm', $_SESSION['activeForm'] ?? null);
 
         unset($_SESSION['activeForm']);
