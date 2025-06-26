@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use Framework\TemplateEngine;
 use App\Services\{CategoryService, ValidatorService, UserService};
+use Framework\Exceptions\ValidationException;
 
 class SettingsController
 {
@@ -34,5 +35,32 @@ class SettingsController
             'email' => $email,
             'username' => $username
         ]);
+    }
+
+    public function updateEmail()
+    {
+        $redirectTo = $_POST['redirect_to'] ?? '/settings';
+        $userId = $_SESSION['user'] ?? null;
+
+        $_SESSION['activeForm'] = 'updateEmail';
+
+        try {
+            $this->validatorService->validateUpdateEmail($_POST);
+        } catch (ValidationException $e) {
+
+            $_SESSION['errors'] = $e->errors;
+            $_SESSION['oldFormData'] = $_POST;
+            redirectTo($redirectTo);
+        }
+
+        $email = trim($_POST['email']);
+
+        $this->userService->isEmailTaken($email);
+        $this->userService->updateEmail($email, $userId);
+
+        unset($_SESSION['activeForm'], $_SESSION['categoryToEdit'], $_SESSION['errors'], $_SESSION['oldFormData']);
+
+
+        redirectTo($redirectTo);
     }
 }

@@ -93,4 +93,11 @@ class ValidatorService
             'newCategoryName' => ['required', 'uniqueName']
         ]);
     }
+
+    public function validateUpdateEmail(array $formData): void
+    {
+        $this->validator->validate($formData, [
+            'email' => ['required', 'email']
+        ]);
+    }
 }

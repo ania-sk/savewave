@@ -160,34 +160,49 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
 
                 <!--  Email -->
                 <div class="account-edit-section">
-                    <form class="account-form" action="/settings/updateEmail" method="post">
+                    <form class="account-form" action="/settings/email/update" method="post">
+                        <?php include $this->resolve("partials/_csrf.php"); ?>
                         <div class="account-field">
                             <label for="email">Email: <?php echo e($email['email']); ?></label>
-                            <input type="email" id="email" name="email" placeholder="Enter new email" value="" required>
+                            <input type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter new email"
+                                value="<?= e($oldFormData['email'] ?? '') ?>">
+
+                            <?php if ($activeForm === 'updateEmail' && isset($errors['email'])): ?>
+                                <p class="error-text"><?= e($errors['email'][0]) ?></p>
+                            <?php endif; ?>
                         </div>
-                        <button type="submit" class="btn btn--full btn--modal">Update Email</button>
+                        <button type="submit" class="btn btn--full btn--set">Update Email</button>
+
                     </form>
                 </div>
 
                 <!--  Username -->
                 <div class="account-edit-section">
                     <form class="account-form" action="/settings/updateUsername" method="post">
+                        <?php include $this->resolve("partials/_csrf.php"); ?>
+
                         <div class="account-field">
                             <label for="username">Username: <?php echo e($username['username']); ?></label>
-                            <input type="text" id="username" name="username" value="" placeholder="Enetr new Username" required>
+                            <input type="text" id="username" name="username" value="" placeholder="Enetr new Username">
                         </div>
-                        <button type="submit" class="btn btn--full btn--modal">Update Username</button>
+                        <button type="submit" class="btn btn--full btn--set">Update Username</button>
                     </form>
                 </div>
 
                 <!-- Password -->
                 <div class="account-edit-section">
                     <form class="account-form" action="/settings/updatePassword" method="post">
+                        <?php include $this->resolve("partials/_csrf.php"); ?>
+
                         <div class="account-field">
                             <label for="password">New Password:</label>
                             <input type="password" id="password" name="password" placeholder="Enter new password">
                         </div>
-                        <button type="submit" class="btn btn--full btn--modal">Update Password</button>
+                        <button type="submit" class="btn btn--full btn--set">Update Password</button>
+
                     </form>
                 </div>
 

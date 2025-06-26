@@ -29,8 +29,16 @@ class UserService
         )->count();
 
         if ($emailCount > 0) {
-            throw new ValidationException(['email' => 'Email is already taken']);
+            throw new ValidationException(['email' => ['Email is already taken']]);
         }
+    }
+
+    public function updateEmail(string $email, int $userId)
+    {
+        $this->db->query(
+            "UPDATE users SET email = :email WHERE id = :uid",
+            ['email' => $email, 'uid' => $userId]
+        );
     }
 
     public function create(array $formData)
