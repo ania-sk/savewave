@@ -122,4 +122,13 @@ class UserService
             ['username' => $newUsername, 'uid' => $userId]
         );
     }
+
+    public function updatePassword(int $userId, string $newPassword)
+    {
+        $password = password_hash($newPassword, PASSWORD_BCRYPT, ['cost' => 12]);
+        $this->db->query(
+            "UPDATE users SET password = :password WHERE id = :uid",
+            ['password' => $password, 'uid' => $userId]
+        );
+    }
 }

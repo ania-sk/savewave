@@ -107,4 +107,12 @@ class ValidatorService
             'username' => ['required']
         ]);
     }
+
+    public function validateNewPassword(array $formData)
+    {
+        $this->validator->validate($formData, [
+            'password' => ['required'],
+            'confirm-password' => ['required', 'match:password']
+        ]);
+    }
 }

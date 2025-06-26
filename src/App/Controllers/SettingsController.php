@@ -84,4 +84,24 @@ class SettingsController
 
         redirectTo($redirectTo);
     }
+
+    public function updatePassword()
+    {
+        $redirectTo = '/settings';
+
+        $userId = $_SESSION['user'] ?? null;
+        $_SESSION['activeForm'] = $_POST['form_type'] ?? null;
+
+        $newPassword = $_POST['password'];
+
+        $this->validatorService->validateNewPassword($_POST);
+
+        $this->userService->updatePassword($userId, $newPassword);
+
+        $_SESSION['success'] = 'Your password has been updated successfully!';
+
+        unset($_SESSION['activeForm']);
+
+        redirectTo($redirectTo);
+    }
 }

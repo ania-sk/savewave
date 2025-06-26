@@ -212,12 +212,30 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
 
                 <!-- Password -->
                 <div class="account-edit-section">
-                    <form class="account-form" action="/settings/updatePassword" method="post">
+                    <form class="account-form" action="/settings/update/password" method="post">
                         <?php include $this->resolve("partials/_csrf.php"); ?>
+
+                        <input type="hidden" name="form_type" value="editPassword">
 
                         <div class="account-field">
                             <label for="password">New Password:</label>
-                            <input type="password" id="password" name="password" placeholder="Enter new password">
+                            <input type="password" id="password" class="password-input" name="password" placeholder="Enter new password">
+
+                            <?php if ($activeForm === 'editPassword' && isset($errors['password'])): ?>
+                                <div>
+                                    <p class="error-text"><?php echo e($errors['password'][0]); ?></p>
+                                    <ion-icon class="error-icon" name="alert"></ion-icon>
+                                </div>
+                            <?php endif; ?>
+
+                            <input type="password" id="passwordConfirm" name="confirm-password" placeholder="Confrirm new password">
+
+                            <?php if ($activeForm === 'editPassword' && isset($errors['confirm-password'])): ?>
+                                <div>
+                                    <p class="error-text"><?php echo e($errors['confirm-password'][0]); ?></p>
+                                    <ion-icon class="error-icon" name="alert"></ion-icon>
+                                </div>
+                            <?php endif; ?>
                         </div>
                         <button type="submit" class="btn btn--full btn--set">Update Password</button>
 

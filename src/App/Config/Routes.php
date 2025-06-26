@@ -54,4 +54,5 @@ function registerRoutes(App $app)
 
     $app->post('/settings/email/update', [SettingsController::class, 'updateEmail']);
     $app->post('/settings/update/username', [SettingsController::class, 'updateUsername']);
+    $app->post('/settings/update/password', [SettingsController::class, 'updatePassword']);
 }
