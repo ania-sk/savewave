@@ -25,6 +25,8 @@ class CategoryController
 
                 $this->categoryService->createUserIncomeCategory($_POST);
 
+                $_SESSION['success'] = 'Category has been added successfully!';
+
                 redirectTo($redirectPath);
             } catch (ValidationException $ex) {
                 $_SESSION['activeForm'] = 'addIncomeCategory';
@@ -48,6 +50,8 @@ class CategoryController
                 $this->validatorService->validateNewExpenseCategory($_POST);
 
                 $this->categoryService->createUserExpenseCategory($_POST);
+
+                $_SESSION['success'] = 'Category has been added successfully!';
 
                 redirectTo($redirectPath);
             } catch (ValidationException $ex) {
@@ -112,6 +116,8 @@ class CategoryController
         } else {
             $this->categoryService->updateUserExpenseCategory($categoryId, $newName);
         }
+
+        $_SESSION['success'] = 'Category has been updated successfully!';
 
         unset($_SESSION['activeForm'], $_SESSION['categoryToEdit']);
         redirectTo($redirectTo);
