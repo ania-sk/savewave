@@ -86,7 +86,7 @@ class ValidatorService
 
     public function validateNewExpenseCategory(array $formData)
     {
-        $existingCategories = $this->categoryService->getUserExpenseCategories($_SESSION['user']);
+        $existingCategories = $this->categoryService->getUserActiveExpenseCategories($_SESSION['user']);
         $uniqueRule = new UniqueCategoryRule($existingCategories);
         $this->validator->add('uniqueName', $uniqueRule);
         $this->validator->validate($formData, [

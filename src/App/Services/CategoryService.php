@@ -52,7 +52,7 @@ class CategoryService
         );
     }
 
-    public function getUserExpenseCategories(int $userId): array
+    public function getUserActiveExpenseCategories(int $userId): array
     {
         $this->db->query(
             "SELECT id, name 
@@ -64,9 +64,20 @@ class CategoryService
         return $this->db->fetchAll();
     }
 
+    public function getUserAllExpenseCategories(int $userId): array
+    {
+        $this->db->query(
+            "SELECT id, name 
+             FROM expenses_category_assigned_to_users 
+             WHERE user_id = :user_id",
+            ['user_id' => $userId]
+        );
+        return $this->db->fetchAll();
+    }
+
     public function createUserIncomeCategory(array $formData)
     {
-        $newCategoryName = trim($formData['newCategoryName'] ?? '');
+        $newCategoryName = $this->normalizeCategoryName($formData['newCategoryName'] ?? '');
         $userId =  $_SESSION['user'];
 
         $categoriesAssignedToUser = $this->getUserAllIncomeCategories($userId);
@@ -101,13 +112,25 @@ class CategoryService
 
     public function createUserExpenseCategory(array $formData)
     {
-        $newCategoryName = trim($formData['newCategoryName'] ?? '');
+        $newCategoryName = $this->normalizeCategoryName($formData['newCategoryName'] ?? '');
         $userId =  $_SESSION['user'];
 
-        $categoriesAssignedToUser = $this->getUserExpenseCategories($userId);
+        $categoriesAssignedToUser = $this->getUserAllExpenseCategories($userId);
 
         foreach ($categoriesAssignedToUser as $category) {
             if (isset($category['name']) && strcasecmp($newCategoryName, $category['name']) === 0) {
+                if ((int) $category['is_active'] === 0) {
+                    $this->db->query(
+                        "UPDATE expenses_category_assigned_to_users
+                        SET is_active = 1
+                        WHERE id = :id 
+                        AND user_id = :uid",
+                        [
+                            'id' => $category['id'],
+                            'uid' => $userId
+                        ]
+                    );
+                }
                 return;
             }
         }
@@ -151,6 +174,7 @@ class CategoryService
 
     public function updateUserIncomeCategory(int $id, string $name): void
     {
+        $name = $this->normalizeCategoryName($name);
         $this->db->query(
             "UPDATE incomes_category_assigned_to_users SET name = :name WHERE id = :id AND user_id = :uid",
             ['name' => $name, 'id' => $id, 'uid' => $_SESSION['user']]
@@ -159,6 +183,7 @@ class CategoryService
 
     public function updateUserExpenseCategory(int $id, string $name): void
     {
+        $name = $this->normalizeCategoryName($name);
         $this->db->query(
             "UPDATE expenses_category_assigned_to_users SET name = :name WHERE id = :id AND user_id = :uid",
             ['name' => $name, 'id' => $id, 'uid' => $_SESSION['user']]
@@ -181,5 +206,13 @@ class CategoryService
                 'uid' => $_SESSION['user']
             ]
         );
+    }
+
+    private function normalizeCategoryName(string $name): string
+    {
+        $clean = preg_replace('/\s+/', ' ', trim($name));
+        $lower = mb_strtolower($clean, 'UTF-8');
+
+        return mb_convert_case($lower, MB_CASE_TITLE, 'UTF-8');
     }
 }

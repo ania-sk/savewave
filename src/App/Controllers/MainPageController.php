@@ -17,7 +17,7 @@ class MainPageController
     {
         $userId = (int)$_SESSION['user'];
         $incomeCategories = $this->categoryService->getUserActiveIncomeCategories($userId);
-        $expenseCategories = $this->categoryService->getUserExpenseCategories($userId);
+        $expenseCategories = $this->categoryService->getUserActiveExpenseCategories($userId);
 
         $username =  $this->userService->getUsername($userId);
 
