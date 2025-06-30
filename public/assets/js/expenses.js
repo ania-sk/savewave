@@ -31,3 +31,46 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 });
+
+//chart
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("incomePieChart");
+  if (!canvas) return;
+
+  const labels = JSON.parse(canvas.dataset.chartLabels);
+  const data = JSON.parse(canvas.dataset.chartData);
+
+  new Chart(canvas, {
+    type: "doughnut",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          data: data,
+          backgroundColor: [
+            "#4e73df",
+            "#1cc88a",
+            "#36b9cc",
+            "#f6c23e",
+            "#e74a3b",
+            "#858796",
+          ],
+        },
+      ],
+    },
+    options: {
+      cutout: "50%",
+      plugins: {
+        legend: { position: "bottom" },
+        datalabels: {
+          color: "#fff",
+          formatter: (val, ctx) =>
+            `${val} (${(
+              (val / ctx.dataset.data.reduce((a, b) => a + b, 0)) *
+              100
+            ).toFixed(1)}%)`,
+        },
+      },
+    },
+  });
+});

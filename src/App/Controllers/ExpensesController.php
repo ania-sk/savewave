@@ -22,7 +22,20 @@ class ExpensesController
         $incomeCategories = $this->categoryService->getUserActiveIncomeCategories($userId);
         $expenseCategories = $this->categoryService->getUserActiveExpenseCategories($userId);
 
-        $expenses = $this->transactionService->getUserExpenses();
+        $startDate = trim($_GET['start_date'] ?? '');
+        $endDate  = trim($_GET['end_date']   ?? '');
+
+        if ($startDate !== '' && $endDate !== '') {
+
+            $dtStart = $startDate . ' 00:00:00';
+            $dtEnd   = $endDate   . ' 23:59:59';
+
+            $expenses = $this->transactionService->getUserExpensesByDateRange($userId, $dtStart, $dtEnd);
+            $sumsByCat = $this->transactionService->getExpenseSumsByCategoryAndDateRange($userId, $dtStart, $dtEnd);
+        } else {
+            $expenses = $this->transactionService->getUserExpenses($userId);
+            $sumsByCat = $this->transactionService->getExpenseSumsByCategory($userId);
+        }
 
         $expenseToEdit = $_SESSION['expenseToEdit'] ?? null;
 
@@ -34,7 +47,11 @@ class ExpensesController
             'expenses' => $expenses,
             'incomeCategories' => $incomeCategories,
             'expenseCategories' => $expenseCategories,
-            'expenseToEdit' => $expenseToEdit
+            'expenseToEdit' => $expenseToEdit,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+            'chartLabels' => array_column($sumsByCat, 'category'),
+            'chartData' => array_map(fn($r) => (float)$r['total'], $sumsByCat)
         ]);
     }
 

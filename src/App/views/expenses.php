@@ -9,7 +9,7 @@ include $this->resolve("partials/modals/_editExpenseModal.php");
                 echo ($activeForm === 'addIncomeCategory') ? 'modal-add-income-category-open modal-income-open' : '';
                 echo ($activeForm === 'addExpenseCategory') ? 'modal-add-expense-category-open modal-expense-open' : ''; ?>">
     <!-- MAIN SECTION -->
-    <!-- TABLE EXPENSE -->
+
     <main class="section-main flex-conteiner">
         <div class="expense-heading flex-conteiner">
             <ion-icon class="nav-icon" name="file-tray-full-outline"></ion-icon>
@@ -22,6 +22,25 @@ include $this->resolve("partials/modals/_editExpenseModal.php");
                     name="remove-circle"></ion-icon>
             </button>
         </div>
+        <div class="flex-conteiner">
+            <form method="get" action="/expenses" class="date-filter date-form-box">
+                <div class="">
+                    <label for="start_date">From</label>
+                    <input id="start_date" type="date" name="start_date"
+                        value="<?php echo e($start_date ?? ''); ?>" />
+                </div>
+                <div class="">
+                    <label for="end_date">To</label>
+                    <input id="end_date" type="date" name="end_date"
+                        value="<?php echo e($end_date ?? ''); ?>" />
+                </div>
+                <button type="submit" class="btn btn--form">Find</button>
+                <a href="/expenses" class="btn btn--link btn--clean">Clean filter</a>
+
+
+            </form>
+        </div>
+        <!-- TABLE EXPENSE -->
         <div class="table-income-box">
             <table class="table table-income">
                 <thead>
@@ -36,11 +55,12 @@ include $this->resolve("partials/modals/_editExpenseModal.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1; ?>
+                    <?php $i = 1;
+                    $sum = 0; ?>
                     <?php foreach ($expenses as $expense): ?>
                         <tr>
-                            <td data-label="No."><?php echo e($i); ?></td>
-                            <td data-label="Amount"><?php echo e($expense['amount']); ?>.</td>
+                            <td data-label="No."><?php echo e($i); ?>.</td>
+                            <td data-label="Amount"><?php echo e($expense['amount']); ?></td>
                             <td data-label="Category"><?php echo e($expense['name']); ?></td>
                             <td data-label="Comment"><?php echo e($expense['expense_comment']); ?></td>
                             <td data-label="Date"><?php echo e($expense['formatted_date']); ?></td>
@@ -60,11 +80,25 @@ include $this->resolve("partials/modals/_editExpenseModal.php");
                                 </form>
                             </td>
                         </tr>
-                        <?php $i = $i + 1; ?>
+                        <?php $i = $i + 1;
+                        $sum =  $sum + $expense['amount']; ?>
                     <?php endforeach; ?>
+                    <tr>
+                        <td>Sum:</td>
+                        <td><?php echo e($sum); ?></td>
+                    </tr>
 
                 </tbody>
             </table>
+        </div>
+
+        <div class="chart-container" style="max-width: 500px; margin: 2rem auto;">
+            <canvas
+                id="incomePieChart"
+                data-chart-labels='<?php echo e(json_encode($chartLabels, JSON_UNESCAPED_UNICODE)); ?>'
+                data-chart-data='<?php echo e(json_encode($chartData)); ?>'
+                style="max-width:500px; margin:2rem auto;"></canvas>
+
         </div>
     </main>
 

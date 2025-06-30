@@ -164,6 +164,69 @@ class TransactionService
         return $expenses;
     }
 
+    public function getUserExpensesByDateRange(int $userId, string $startDate, string $endDate): array
+    {
+        $expenses =  $this->db->query(
+            "SELECT
+             e.id,
+             e.amount, 
+             e.expense_comment, 
+             DATE_FORMAT(e.date_of_expense, '%Y-%m-%d') as formatted_date,
+             c.name
+           FROM expenses AS e
+           JOIN expenses_category_assigned_to_users AS c
+             ON e.expense_category_assigned_to_user_id = c.id
+          WHERE e.user_id = :uid
+            AND e.date_of_expense BETWEEN :start AND :end
+          ORDER BY e.date_of_expense DESC",
+            [
+                'uid'   => $userId,
+                'start' => $startDate,
+                'end'   => $endDate
+            ]
+        )->fetchAll();
+
+        return $expenses;
+    }
+
+    public function getExpenseSumsByCategory(int $userId): array
+    {
+        $expenses = $this->db->query(
+            "SELECT c.name AS category, 
+            SUM(e.amount) AS total
+           FROM expenses AS e
+           JOIN expenses_category_assigned_to_users AS c
+             ON e.expense_category_assigned_to_user_id = c.id
+          WHERE e.user_id = :uid
+          GROUP BY e.expense_category_assigned_to_user_id",
+            ['uid' => $userId]
+        )->fetchAll();
+
+        return $expenses;
+    }
+
+    public function getExpenseSumsByCategoryAndDateRange(int $userId, string $startDate, string $endDate): array
+    {
+        $expenses = $this->db->query(
+            "SELECT c.name AS category, 
+            SUM(e.amount) AS total
+           FROM expenses AS e
+           JOIN expenses_category_assigned_to_users AS c
+             ON e.expense_category_assigned_to_user_id = c.id
+          WHERE e.user_id = :uid
+            AND e.date_of_expense BETWEEN :start AND :end
+          GROUP BY e.expense_category_assigned_to_user_id",
+            [
+                'uid'   => $userId,
+                'start' => $startDate,
+                'end'   => $endDate,
+            ]
+        )->fetchAll();
+
+        return $expenses;
+    }
+
+
     public function getUserIncome(string $id)
     {
         return $this->db->query(
