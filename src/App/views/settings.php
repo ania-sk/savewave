@@ -245,7 +245,8 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                 <!-- delete account -->
                 <div class="account-delete">
                     <p>Danger Zone</p>
-                    <form action="/settings/deleteAccount" method="post" onsubmit="return confirm('Czy na pewno chcesz usunąć konto? Operacja jest nieodwracalna.');">
+                    <form action="/settings/deleteAccount" method="post" onsubmit="return confirm('Are you sure you want to delete your account? The operation is irreversible.');">
+                        <?php include $this->resolve("partials/_csrf.php"); ?>
                         <button type="submit" class="btn btn--modal btn--delete">Delete Account</button>
                     </form>
                 </div>

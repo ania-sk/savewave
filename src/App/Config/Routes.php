@@ -48,11 +48,12 @@ function registerRoutes(App $app)
     $app->post('/expenses/{expense}', [ExpensesController::class, 'updateExpense']);
     $app->delete('/expenses/{expense}', [ExpensesController::class, 'deleteExpense']);
 
-    $app->get('/settings/{category}', [CategoryController::class, 'editCategory']);
-    $app->post('/settings/{category}', [CategoryController::class, 'updateCategory']);
-    $app->post('/settings/{category}/delete', [CategoryController::class, 'deleteCategory']);
-
     $app->post('/settings/email/update', [SettingsController::class, 'updateEmail']);
     $app->post('/settings/update/username', [SettingsController::class, 'updateUsername']);
     $app->post('/settings/update/password', [SettingsController::class, 'updatePassword']);
+    $app->post('/settings/deleteAccount', [SettingsController::class, 'deleteAccount']);
+
+    $app->get('/settings/{category}', [CategoryController::class, 'editCategory']);
+    $app->post('/settings/{category}', [CategoryController::class, 'updateCategory']);
+    $app->post('/settings/{category}/delete', [CategoryController::class, 'deleteCategory']);
 }

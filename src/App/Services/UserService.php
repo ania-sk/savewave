@@ -131,4 +131,12 @@ class UserService
             ['password' => $password, 'uid' => $userId]
         );
     }
+
+    public function deleteById($id)
+    {
+        $this->db->query("
+        DELETE FROM users WHERE id = :id", [
+            'id' => $id
+        ]);
+    }
 }

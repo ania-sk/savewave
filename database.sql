@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS incomes_category_assigned_to_users(
     user_id BIGINT(20) UNSIGNED NOT NULL,
     name VARCHAR(255) NOT NULL,
     PRIMARY KEY(id),
-    FOREIGN KEY(user_id) REFERENCES users(id)
+    FOREIGN KEY(user_id) REFERENCES users(id)  ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS incomes(
@@ -32,8 +32,8 @@ CREATE TABLE IF NOT EXISTS incomes(
     date_of_income DATETIME NOT NULL,
     income_comment VARCHAR(255),
     PRIMARY KEY(id),
-    FOREIGN KEY(user_id) REFERENCES users(id),
-    FOREIGN KEY(income_category_assigned_to_user_id) REFERENCES incomes_category_assigned_to_users(id)
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY(income_category_assigned_to_user_id) REFERENCES incomes_category_assigned_to_users(id)  ON DELETE CASCADE
 );
 
 -- default income categories
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS expenses_category_assigned_to_users(
     user_id BIGINT(20) UNSIGNED NOT NULL,
     name VARCHAR(255) NOT NULL,
     PRIMARY KEY(id),
-    FOREIGN KEY(user_id) REFERENCES users(id)
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS expenses(
@@ -92,8 +92,8 @@ CREATE TABLE IF NOT EXISTS expenses(
     date_of_expense DATETIME NOT NULL,
     expense_comment VARCHAR(255),
     PRIMARY KEY(id),
-    FOREIGN KEY(user_id) REFERENCES users(id),
-    FOREIGN KEY(expense_category_assigned_to_user_id) REFERENCES expenses_category_assigned_to_users(id)
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY(expense_category_assigned_to_user_id) REFERENCES expenses_category_assigned_to_users(id) ON DELETE CASCADE
 );
 
 -- default expense categories

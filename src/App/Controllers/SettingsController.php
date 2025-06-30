@@ -104,4 +104,15 @@ class SettingsController
 
         redirectTo($redirectTo);
     }
+
+    public function deleteAccount()
+    {
+
+        $userId = $_SESSION['user'] ?? null;
+
+        $this->userService->deleteById($userId);
+
+        session_destroy();
+        redirectTo('/');
+    }
 }
