@@ -56,7 +56,8 @@ include $this->resolve("partials/modals/_editIncomeModal.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1; ?>
+                    <?php $i = 1;
+                    $sum = 0; ?>
                     <?php foreach ($incomes as $income): ?>
                         <tr>
                             <td data-label="No."><?php echo e($i); ?>.</td>
@@ -80,11 +81,23 @@ include $this->resolve("partials/modals/_editIncomeModal.php");
                                 </form>
                             </td>
                         </tr>
-                        <?php $i = $i + 1; ?>
+                        <?php $i = $i + 1;
+                        $sum =  $sum + $income['amount'] ?>
                     <?php endforeach; ?>
-
+                    <tr>
+                        <td>Sum:</td>
+                        <td><?php echo e($sum); ?></td>
+                    </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="chart-container" style="max-width: 500px; margin: 2rem auto;">
+            <canvas
+                id="incomePieChart"
+                data-chart-labels='<?php echo e(json_encode($chartLabels, JSON_UNESCAPED_UNICODE)); ?>'
+                data-chart-data='<?php echo e(json_encode($chartData)); ?>'
+                style="max-width:500px; margin:2rem auto;"></canvas>
+
         </div>
     </main>
     <?php

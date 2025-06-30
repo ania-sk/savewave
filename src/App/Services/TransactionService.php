@@ -108,6 +108,43 @@ class TransactionService
         return $incomes;
     }
 
+    public function getIncomeSumsByCategory(int $userId): array
+    {
+        $incomes = $this->db->query(
+            "SELECT c.name AS category, 
+            SUM(i.amount) AS total
+           FROM incomes AS i
+           JOIN incomes_category_assigned_to_users AS c
+             ON i.income_category_assigned_to_user_id = c.id
+          WHERE i.user_id = :uid
+          GROUP BY i.income_category_assigned_to_user_id",
+            ['uid' => $userId]
+        )->fetchAll();
+
+        return $incomes;
+    }
+
+    public function getIncomeSumsByCategoryAndDateRange(int $userId, string $startDate, string $endDate): array
+    {
+        $incomes = $this->db->query(
+            "SELECT c.name AS category, 
+            SUM(i.amount) AS total
+           FROM incomes AS i
+           JOIN incomes_category_assigned_to_users AS c
+             ON i.income_category_assigned_to_user_id = c.id
+          WHERE i.user_id = :uid
+            AND i.date_of_income BETWEEN :start AND :end
+          GROUP BY i.income_category_assigned_to_user_id",
+            [
+                'uid'   => $userId,
+                'start' => $startDate,
+                'end'   => $endDate,
+            ]
+        )->fetchAll();
+
+        return $incomes;
+    }
+
     public function getUserExpenses()
     {
         $expenses = $this->db->query(

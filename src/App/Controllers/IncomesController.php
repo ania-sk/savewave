@@ -31,8 +31,10 @@ class IncomesController
             $dtEnd   = $endDate   . ' 23:59:59';
 
             $incomes = $this->transactionService->getUserIncomesByDateRange($userId, $dtStart, $dtEnd);
+            $sumsByCat = $this->transactionService->getIncomeSumsByCategoryAndDateRange($userId, $dtStart, $dtEnd);
         } else {
             $incomes = $this->transactionService->getUserIncomes($userId);
+            $sumsByCat = $this->transactionService->getIncomeSumsByCategory($userId);
         }
 
         $incomeToEdit = $_SESSION['incomeToEdit'] ?? null;
@@ -45,9 +47,11 @@ class IncomesController
             'incomes' => $incomes,
             'incomeCategories' => $incomeCategories,
             'expenseCategories' => $expenseCategories,
-            'incomeToEdit'            => $incomeToEdit,
-            'start_date'       => $startDate,
-            'end_date'         => $endDate,
+            'incomeToEdit' => $incomeToEdit,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+            'chartLabels' => array_column($sumsByCat, 'category'),
+            'chartData' => array_map(fn($r) => (float)$r['total'], $sumsByCat)
         ]);
     }
 
