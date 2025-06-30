@@ -22,7 +22,18 @@ class IncomesController
         $incomeCategories = $this->categoryService->getUserActiveIncomeCategories($userId);
         $expenseCategories = $this->categoryService->getUserActiveExpenseCategories($userId);
 
-        $incomes = $this->transactionService->getUserIncomes();
+        $startDate = trim($_GET['start_date'] ?? '');
+        $endDate  = trim($_GET['end_date']   ?? '');
+
+        if ($startDate !== '' && $endDate !== '') {
+
+            $dtStart = $startDate . ' 00:00:00';
+            $dtEnd   = $endDate   . ' 23:59:59';
+
+            $incomes = $this->transactionService->getUserIncomesByDateRange($userId, $dtStart, $dtEnd);
+        } else {
+            $incomes = $this->transactionService->getUserIncomes($userId);
+        }
 
         $incomeToEdit = $_SESSION['incomeToEdit'] ?? null;
 
@@ -34,7 +45,9 @@ class IncomesController
             'incomes' => $incomes,
             'incomeCategories' => $incomeCategories,
             'expenseCategories' => $expenseCategories,
-            'incomeToEdit'            => $incomeToEdit
+            'incomeToEdit'            => $incomeToEdit,
+            'start_date'       => $startDate,
+            'end_date'         => $endDate,
         ]);
     }
 

@@ -64,7 +64,7 @@ class TransactionService
         );
     }
 
-    public function getUserIncomes()
+    public function getUserIncomes($userId)
     {
         $incomes = $this->db->query(
             "SELECT 
@@ -77,7 +77,32 @@ class TransactionService
             JOIN incomes_category_assigned_to_users AS c 
             ON i.income_category_assigned_to_user_id = c.id
             WHERE i.user_id = :user_id",
-            ['user_id' => $_SESSION['user']]
+            ['user_id' => $userId]
+        )->fetchAll();
+
+        return $incomes;
+    }
+
+    public function getUserIncomesByDateRange(int $userId, string $startDate, string $endDate): array
+    {
+        $incomes =  $this->db->query(
+            "SELECT
+             i.id,
+             i.amount, 
+             i.income_comment, 
+             DATE_FORMAT(i.date_of_income, '%Y-%m-%d') as formatted_date,
+             c.name
+           FROM incomes AS i
+           JOIN incomes_category_assigned_to_users AS c
+             ON i.income_category_assigned_to_user_id = c.id
+          WHERE i.user_id = :uid
+            AND i.date_of_income BETWEEN :start AND :end
+          ORDER BY i.date_of_income DESC",
+            [
+                'uid'   => $userId,
+                'start' => $startDate,
+                'end'   => $endDate
+            ]
         )->fetchAll();
 
         return $incomes;

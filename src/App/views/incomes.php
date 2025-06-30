@@ -27,12 +27,12 @@ include $this->resolve("partials/modals/_editIncomeModal.php");
                 <div class="">
                     <label for="start_date">From</label>
                     <input id="start_date" type="date" name="start_date"
-                        value="<?php echo e($oldFormData['start_date'] ?? ''); ?>" />
+                        value="<?php echo e($start_date ?? ''); ?>" />
                 </div>
                 <div class="">
                     <label for="end_date">To</label>
                     <input id="end_date" type="date" name="end_date"
-                        value="<?php echo e($oldFormData['end_date'] ?? ''); ?>" />
+                        value="<?php echo e($end_date ?? ''); ?>" />
                 </div>
                 <button type="submit" class="btn btn--form">Filtr</button>
                 <a href="/incomes" class="btn btn--link btn--clean">Clean filtr</a>
