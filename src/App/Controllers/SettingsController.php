@@ -113,6 +113,10 @@ class SettingsController
         $this->userService->deleteById($userId);
 
         session_destroy();
+
+        session_start();
+        $_SESSION['success'] = 'Your account has been permanently deleted.';
+
         redirectTo('/');
     }
 }

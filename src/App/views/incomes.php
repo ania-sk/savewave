@@ -22,6 +22,25 @@ include $this->resolve("partials/modals/_editIncomeModal.php");
                     name="add-circle"></ion-icon>
             </button>
         </div>
+        <div class="flex-conteiner">
+            <form method="get" action="/incomes" class="date-filter grid-cols-4 date-form-box">
+                <div class="">
+                    <label for="start_date">From</label>
+                    <input id="start_date" type="date" name="start_date"
+                        value="<?php echo e($oldFormData['start_date'] ?? ''); ?>" />
+                </div>
+                <div class="">
+                    <label for="end_date">To</label>
+                    <input id="end_date" type="date" name="end_date"
+                        value="<?php echo e($oldFormData['end_date'] ?? ''); ?>" />
+                </div>
+                <button type="submit" class="btn btn--form">Filtr</button>
+                <a href="/incomes" class="btn btn--link btn--clean">Clean filtr</a>
+
+
+            </form>
+        </div>
+
 
         <div class="table-income-box">
             <table class="table table-income">

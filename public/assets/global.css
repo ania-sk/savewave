@@ -43,6 +43,11 @@ body {
   grid-template-columns: repeat(3, 1fr);
 }
 
+.grid-cols-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .grid-rows-3 {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
