@@ -23,7 +23,7 @@ include $this->resolve("partials/modals/_editIncomeModal.php");
             </button>
         </div>
         <div class="flex-conteiner">
-            <form method="get" action="/incomes" class="date-filter grid-cols-4 date-form-box">
+            <form method="get" action="/incomes" class="date-filter date-form-box">
                 <div class="">
                     <label for="start_date">From</label>
                     <input id="start_date" type="date" name="start_date"
@@ -34,8 +34,8 @@ include $this->resolve("partials/modals/_editIncomeModal.php");
                     <input id="end_date" type="date" name="end_date"
                         value="<?php echo e($end_date ?? ''); ?>" />
                 </div>
-                <button type="submit" class="btn btn--form">Filtr</button>
-                <a href="/incomes" class="btn btn--link btn--clean">Clean filtr</a>
+                <button type="submit" class="btn btn--form">Find</button>
+                <a href="/incomes" class="btn btn--link btn--clean">Clean filter</a>
 
 
             </form>
