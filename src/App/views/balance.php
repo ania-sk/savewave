@@ -15,7 +15,7 @@ include $this->resolve("partials/_sideNavAndModals.php");
         </div>
         <!-- DATE FILTER -->
         <section class="flex-conteiner">
-            <form method="get" action="/expenses" class="date-filter date-form-box">
+            <form method="get" action="/balance" class="date-filter date-form-box">
                 <div class="">
                     <label for="start_date">From</label>
                     <input id="start_date" type="date" name="start_date"
@@ -27,15 +27,18 @@ include $this->resolve("partials/_sideNavAndModals.php");
                         value="<?php echo e($end_date ?? ''); ?>" />
                 </div>
                 <button type="submit" class="btn btn--form">Find</button>
-                <a href="/expenses" class="btn btn--link btn--clean">Clean filter</a>
+                <a href="/balance" class="btn btn--link btn--clean">Clean filter</a>
             </form>
         </section>
         <!-- BALANCE -->
         <section class="section-balance">
             <div class="balance-box flex-conteiner">
-                <p>Your savings: 1580</p>
-                <ion-icon name="thumbs-up-outline"></ion-icon>
-                <ion-icon name="thumbs-down-outline"></ion-icon>
+                <p>Your savings: <?php echo e($balance); ?></p>
+                <?php if ($balance > 0): ?>
+                    <ion-icon name="thumbs-up-outline"></ion-icon>
+                <?php else: ?>
+                    <ion-icon name="thumbs-down-outline"></ion-icon>
+                <?php endif; ?>
             </div>
         </section>
         <!-- INCOMES/EXPENSES CHARTS -->
@@ -46,15 +49,15 @@ include $this->resolve("partials/_sideNavAndModals.php");
                     <p>Incomes</p>
                 </div>
                 <div class="total-box flex-conteiner">
-                    <p>Total: 1500</p>
+                    <p>Total: <?php echo e($totalIncome); ?></p>
                     <ion-icon name="trending-up-outline"></ion-icon>
 
                 </div>
                 <div class="chart-container" style="max-width: 500px; margin: 2rem auto;">
                     <canvas
                         id="incomePieChart"
-                        data-chart-labels='<?php echo e(json_encode($chartLabels, JSON_UNESCAPED_UNICODE)); ?>'
-                        data-chart-data='<?php echo e(json_encode($chartData)); ?>'
+                        data-income-chart-labels='<?php echo e(json_encode($incomeChartLabels, JSON_UNESCAPED_UNICODE)); ?>'
+                        data-income-chart-data='<?php echo e(json_encode($incomeChartData)); ?>'
                         style="max-width:500px; margin:2rem auto;"></canvas>
 
                 </div>
@@ -65,15 +68,15 @@ include $this->resolve("partials/_sideNavAndModals.php");
                     <p>Expenses</p>
                 </div>
                 <div class="total-box flex-conteiner">
-                    <p>Total: 1500</p>
+                    <p>Total: <?php echo e($totalExpense); ?></p>
                     <ion-icon name="trending-down-outline"></ion-icon>
 
                 </div>
                 <div class="chart-container" style="max-width: 500px; margin: 2rem auto;">
                     <canvas
                         id="expensePieChart"
-                        data-chart-labels='<?php echo e(json_encode($chartLabels, JSON_UNESCAPED_UNICODE)); ?>'
-                        data-chart-data='<?php echo e(json_encode($chartData)); ?>'
+                        data-expense-chart-labels='<?php echo e(json_encode($expenseChartLabels, JSON_UNESCAPED_UNICODE)); ?>'
+                        data-expense-chart-data='<?php echo e(json_encode($expenseChartData)); ?>'
                         style="max-width:500px; margin:2rem auto;"></canvas>
 
                 </div>
@@ -89,21 +92,25 @@ include $this->resolve("partials/_sideNavAndModals.php");
                 <thead>
                     <tr>
                         <th scope="col">No.</th>
+                        <th scope="col">Amount</th>
                         <th scope="col">Type</th>
                         <th scope="col">Category</th>
+
                         <th scope="col">Date</th>
-                        <th scope="col">Amount</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
-                    <tr>
-                        <td data-label="No."><?php echo e($i); ?>.</td>
-                        <td data-label="Type"> </td>
-                        <td data-label="Category"> </td>
-                        <td data-label="Date"> </td>
-                        <td data-label="Amount"> </td>
-                    </tr>
+                    <?php foreach ($transactions as $transaction): ?>
+                        <tr>
+                            <td data-label="No."><?php echo e($i); ?>.</td>
+                            <td data-label="Amount"><?php echo e($transaction['amount']); ?></td>
+                            <td data-label="Type"><?php echo e($transaction['type']); ?></td>
+                            <td data-label="Category"><?php echo e($transaction['category']); ?></td>
+                            <td data-label="Date"><?php echo e($transaction['date']); ?></td>
+                        </tr>
+                        <?php $i = $i + 1; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </section>
