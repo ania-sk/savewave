@@ -22,6 +22,7 @@ include $this->resolve("partials/modals/_editExpenseModal.php");
                     name="remove-circle"></ion-icon>
             </button>
         </div>
+        <!-- DATE FILTER -->
         <div class="flex-conteiner">
             <form method="get" action="/expenses" class="date-filter date-form-box">
                 <div class="">
@@ -36,8 +37,6 @@ include $this->resolve("partials/modals/_editExpenseModal.php");
                 </div>
                 <button type="submit" class="btn btn--form">Find</button>
                 <a href="/expenses" class="btn btn--link btn--clean">Clean filter</a>
-
-
             </form>
         </div>
         <!-- TABLE EXPENSE -->

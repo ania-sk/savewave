@@ -54,7 +54,7 @@
             <ion-icon class="nav-icon" name="file-tray-full-outline"></ion-icon>
             <span>Expenses</span>
         </a>
-        <a href="#" class="link nav-box flex-conteiner">
+        <a href="/balance" class="link nav-box flex-conteiner">
             <ion-icon class="nav-icon" name="stats-chart-outline"></ion-icon>
             <span>Balance</span>
         </a>

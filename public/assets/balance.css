@@ -1,0 +1,134 @@
+.side-nav-box > a:nth-child(3) {
+  background-color: #0d7c66;
+  color: #ebe1f8;
+  width: 100%;
+  border-radius: 11px;
+  padding: 0.4rem;
+}
+
+.side-nav-box > a:nth-child(3):hover {
+  color: #ebe1f8;
+}
+
+.nav-hide .side-nav-box > a:nth-child(3) {
+  width: auto;
+}
+
+/* SECTION MAIN */
+/* ************* */
+
+.section-main {
+  padding: 4.8rem;
+  flex-direction: column;
+  gap: 4.4rem;
+}
+
+.balance-heading {
+  font-size: 3.4rem;
+  text-transform: uppercase;
+  color: #0d7c66;
+}
+
+/* DATE FILTER */
+/* **************** */
+
+/* ================================
+   DATE FILTER – .date-form-box
+   ================================ */
+.date-form-box {
+  display: grid;
+  grid-template-columns:
+    minmax(15rem, 1fr) /* „From” */
+    minmax(15rem, 1fr) /* „To” */
+    auto
+    auto;
+  gap: 1.2rem;
+  align-items: center;
+
+  width: 100%;
+  margin: 2rem auto;
+
+  padding: 1rem;
+  background: #f4f0fa;
+  border-radius: 1rem;
+}
+
+/* --------------------------------
+       Pola formularza (label + input)
+       -------------------------------- */
+.date-form-box label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-size: 1.6rem;
+}
+
+.date-form-box select,
+.date-form-box input {
+  width: 100%;
+  height: 100%;
+
+  padding: 1.2rem 1.2rem 1.2rem 4.8rem;
+  font-family: inherit;
+  font-size: 1.6rem;
+
+  border: none;
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.date-form-box input[type="date"] {
+  padding: 1rem;
+  font-size: 1.4rem;
+}
+
+/* -------------------------------
+       Przyciski: Filtr i Wyczyść
+       ------------------------------- */
+.date-form-box button,
+.date-form-box .btn--clean {
+  padding: 1rem;
+  font-size: 1.4rem;
+  white-space: nowrap;
+  text-align: center;
+  width: 10rem;
+}
+/* SECTION BALANCE */
+.balance-box {
+  font-size: 2.4rem;
+  border: solid 1px #0d7c66;
+  padding: 1.6rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* SECTION CHARTS */
+.section-charts {
+  gap: 3rem;
+}
+
+.chart-heading {
+  color: #0d7c66;
+  font-size: 2.4rem;
+  margin-bottom: 1.6rem;
+}
+
+.incomes-chart,
+.expenses-chart {
+  border: solid 1px #f4f0fa;
+  border-radius: 1.2rem;
+  padding: 1.6rem;
+  box-shadow: 0 5px 10px #f4f0fa;
+}
+.total-box {
+  font-size: 2rem;
+  background-color: #f4f0fa;
+  border-radius: 1.2rem;
+  padding: 1.2rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* TRANSACTIONS TABLE */
+.table-heading {
+  font-size: 2.4rem;
+  margin-bottom: 1.4rem;
+}
