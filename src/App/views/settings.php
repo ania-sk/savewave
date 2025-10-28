@@ -222,7 +222,7 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
 
                             <?php if ($activeForm === 'editPassword' && isset($errors['password'])): ?>
                                 <div>
-                                    <p class="error-text"><?php echo e($errors['password'][0]); ?></p>
+                                    <p class="error-text error-text--show"><?php echo e($errors['password'][0]); ?></p>
                                     <ion-icon class="error-icon" name="alert"></ion-icon>
                                 </div>
                             <?php endif; ?>
@@ -231,7 +231,7 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
 
                             <?php if ($activeForm === 'editPassword' && isset($errors['confirm-password'])): ?>
                                 <div>
-                                    <p class="error-text"><?php echo e($errors['confirm-password'][0]); ?></p>
+                                    <p class="error-text error-text--show"><?php echo e($errors['confirm-password'][0]); ?></p>
                                     <ion-icon class="error-icon" name="alert"></ion-icon>
                                 </div>
                             <?php endif; ?>
