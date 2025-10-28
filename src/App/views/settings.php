@@ -1,6 +1,5 @@
 <?php
 include $this->resolve("partials/_header.php");
-include $this->resolve("partials/_sideNavAndModals.php");
 include $this->resolve("partials/modals/_editCategoryModal.php");
 ?>
 
@@ -256,6 +255,7 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
     </main>
 
     <?php
+    include $this->resolve("partials/_sideNavAndModals.php");
     include $this->resolve("partials/_scripts.php");
     ?>
 </body>
