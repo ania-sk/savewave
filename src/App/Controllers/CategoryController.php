@@ -123,6 +123,38 @@ class CategoryController
         redirectTo($redirectTo);
     }
 
+    public function addCategoryLimit(array $params): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $categoryId = (int) $params['category'];
+            $categoryType = $_POST['categoryType'] ?? null;
+            $redirectTo = $_POST['redirect_to'] ?? '/settings';
+            $limitRaw = $_POST['monthly_limit'] ?? null;
+
+            $_SESSION['activeForm'] = 'limitModal';
+            $_SESSION['categoryToEdit'] = $this->categoryService->getUserCategoryById($categoryId);
+
+            if (!is_numeric($limitRaw) || $limitRaw < 0) {
+                $_SESSION['errors']['monthly_limit'][] = 'Limit must be a non-negative number.';
+                $_SESSION['oldFormData'] = $_POST;
+                redirectTo($redirectTo);
+            }
+
+            $limit = (float) $limitRaw;
+
+            try {
+                $this->categoryService->updateCategoryLimit($categoryId, $categoryType, $limit);
+                $_SESSION['success'] = 'Monthly limit has been updated successfully!';
+                unset($_SESSION['activeForm'], $_SESSION['categoryToEdit'], $_SESSION['oldFormData']);
+            } catch (\Throwable $e) {
+                $_SESSION['errors']['monthly_limit'][] = 'Failed to update limit.';
+            }
+
+            redirectTo($redirectTo);
+        }
+    }
+
+
     public function deleteCategory(array $params)
     {
         $id   = (int) $params['category'];
