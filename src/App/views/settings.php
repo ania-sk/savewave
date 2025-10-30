@@ -36,7 +36,9 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                         <thead>
                             <tr>
                                 <th scope="col">No.</th>
-                                <th scope="col">Categorie</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Limit</th>
+                                <th scope="col">Add limit</th>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>
                             </tr>
@@ -47,6 +49,12 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                                 <tr>
                                     <td data-label="No."><?php echo e($i); ?>.</td>
                                     <td data-label="Categories"><?php echo e($incomeCategory['name']); ?></td>
+                                    <td data-label="Limit">Limit</td>
+                                    <td data-label="Add limit">
+                                        <button class="btn-box btn--add-limit">
+                                            <ion-icon class="add-limit--icon" name="hand-right-outline"></ion-icon>
+                                        </button>
+                                    </td>
                                     <td data-label="Edit" class="td-edit">
                                         <button class="btn-box btn--edit"
                                             onclick="openEditCategoryModal(<?= $incomeCategory['id']; ?>, '<?= e($incomeCategory['name']); ?>', 'income')">
@@ -103,7 +111,9 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                         <thead>
                             <tr>
                                 <th scope="col">No.</th>
-                                <th scope="col">Categorie</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Limit</th>
+                                <th scope="col">Add limit</th>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>
                             </tr>
@@ -114,6 +124,12 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                                 <tr>
                                     <td data-label="No."><?php echo e($i); ?>.</td>
                                     <td data-label="Categories"><?php echo e($expenseCategory['name']); ?></td>
+                                    <td data-label="Limit">Limit</td>
+                                    <td data-label="Add limit">
+                                        <button class="btn-box btn--add-limit">
+                                            <ion-icon class="add-limit--icon" name="hand-right-outline"></ion-icon>
+                                        </button>
+                                    </td>
                                     <td data-label="Edit" class="td-edit">
                                         <button class="btn-box btn--edit"
                                             onclick="openEditCategoryModal(<?= $expenseCategory['id']; ?>, '<?= e($expenseCategory['name']); ?>', 'expense')">

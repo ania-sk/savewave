@@ -45,7 +45,13 @@
 }
 
 .edit--icon {
-  color: #f47812f8;
+  color: #003049;
+  font-size: 2.5rem;
+  transition: all 0.3s;
+}
+
+.add-limit--icon {
+  color: #f77f00;
   font-size: 2.5rem;
   transition: all 0.3s;
 }
@@ -61,12 +67,14 @@
 .edit--icon:hover,
 .edit--icon:active,
 .delete--icon:hover,
-.delete--icon:active {
+.delete--icon:active,
+.add-limit--icon:hover,
+.add-limit--icon:active {
   transform: scale(1.1);
 }
 
 .delete--icon {
-  color: #f41212;
+  color: #d62828;
   font-size: 2.5rem;
   transition: all 0.3s;
 }
@@ -172,7 +180,7 @@
 
 /* Delete Account Button Style */
 .btn--delete {
-  background-color: #f41212;
+  background-color: #dc7f9b;
   color: #fff;
   border: none;
   font-size: 1.6rem;

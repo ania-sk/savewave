@@ -120,7 +120,7 @@
 }
 
 .edit--icon {
-  color: #f47812f8;
+  color: #003049;
   font-size: 2.5rem;
   transition: all 0.3s;
 }
@@ -133,7 +133,7 @@
 }
 
 .delete--icon {
-  color: #f41212;
+  color: #d62828;
   font-size: 2.5rem;
   transition: all 0.3s;
 }
