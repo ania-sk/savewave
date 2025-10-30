@@ -49,7 +49,7 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                                 <tr>
                                     <td data-label="No."><?php echo e($i); ?>.</td>
                                     <td data-label="Categories"><?php echo e($incomeCategory['name']); ?></td>
-                                    <td data-label="Limit">Limit</td>
+                                    <td data-label="Limit"><?= $incomeCategory['monthly_limit'] !== null ? e($incomeCategory['monthly_limit']) : "NL"  ?></td>
                                     <td data-label="Add limit">
                                         <button class="btn-box btn--add-limit">
                                             <ion-icon class="add-limit--icon" name="hand-right-outline"></ion-icon>
@@ -124,7 +124,7 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                                 <tr>
                                     <td data-label="No."><?php echo e($i); ?>.</td>
                                     <td data-label="Categories"><?php echo e($expenseCategory['name']); ?></td>
-                                    <td data-label="Limit">Limit</td>
+                                    <td data-label="Limit"><?= $expenseCategory['monthly_limit'] !== null ? e($expenseCategory['monthly_limit']) : "NL"; ?></td>
                                     <td data-label="Add limit">
                                         <button class="btn-box btn--add-limit">
                                             <ion-icon class="add-limit--icon" name="hand-right-outline"></ion-icon>

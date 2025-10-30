@@ -23,7 +23,7 @@ class CategoryService
     public function getUserActiveIncomeCategories(int $userId): array
     {
         $this->db->query(
-            "SELECT id, name 
+            "SELECT id, name, monthly_limit
              FROM incomes_category_assigned_to_users 
              WHERE user_id = :user_id
              AND is_active = 1",
@@ -55,7 +55,7 @@ class CategoryService
     public function getUserActiveExpenseCategories(int $userId): array
     {
         $this->db->query(
-            "SELECT id, name 
+            "SELECT id, name, monthly_limit
              FROM expenses_category_assigned_to_users 
              WHERE user_id = :user_id
              AND is_active = 1",
@@ -205,6 +205,26 @@ class CategoryService
                 'id'  => $id,
                 'uid' => $_SESSION['user']
             ]
+        );
+    }
+
+    public function updateCategoryLimit(int $id, string $type, float $limit): void
+    {
+        $table = $type === 'income'
+            ? 'incomes_category_assigned_to_users'
+            : 'expenses_category_assigned_to_users';
+
+        $this->db->query(
+            "UPDATE {$table}
+            SET monthly_limit = :limit 
+            WHERE id = :id
+            AND user_id = :uid",
+            [
+                'limit' => $limit,
+                'id' => $id,
+                'uid' => $_SESSION['user']
+            ]
+
         );
     }
 
