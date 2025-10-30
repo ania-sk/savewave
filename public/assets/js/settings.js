@@ -44,3 +44,44 @@ document.addEventListener("DOMContentLoaded", function () {
     flashDiv.style.display = "none";
   });
 });
+
+// ADD MONTHLY LIMIT MODAL
+document.addEventListener("DOMContentLoaded", function () {
+  //get add limit modal
+  const limitModal = document.getElementById("modal-add-limit");
+  //get close btn
+  const closeButton = document.querySelector("#close-add-limit-modal");
+
+  //global function to open modal with limit data
+  window.openAddLimitModal = function (id, limit, type) {
+    limitModal.style.display = "block";
+
+    // set form action
+    limitModal.querySelector("form").action = `/settings/${id}/limit`;
+
+    // set category type
+    limitModal.querySelector("input[name='categoryType']").value = type;
+
+    // set limit value or placeholder
+    const input = limitModal.querySelector("input[name='monthly_limit']");
+    if (limit !== null) {
+      input.value = limit;
+      input.placeholder = "";
+    } else {
+      input.value = "";
+      input.placeholder = "Enter monthly limit";
+    }
+  };
+
+  // close modal on X click
+  closeButton.addEventListener("click", () => {
+    limitModal.style.display = "none";
+  });
+
+  // close modal on background click
+  window.addEventListener("click", (event) => {
+    if (event.target === limitModal) {
+      limitModal.style.display = "none";
+    }
+  });
+});

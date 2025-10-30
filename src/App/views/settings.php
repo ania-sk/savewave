@@ -1,6 +1,7 @@
 <?php
 include $this->resolve("partials/_header.php");
 include $this->resolve("partials/modals/_editCategoryModal.php");
+include $this->resolve("partials/modals/_limitModal.php");
 ?>
 
 <body class="<?php echo ($activeForm === 'income') ? 'modal-income-open' : '';
@@ -51,7 +52,9 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                                     <td data-label="Categories"><?php echo e($incomeCategory['name']); ?></td>
                                     <td data-label="Limit"><?= $incomeCategory['monthly_limit'] !== null ? e($incomeCategory['monthly_limit']) : "NL"  ?></td>
                                     <td data-label="Add limit">
-                                        <button class="btn-box btn--add-limit">
+                                        <button class="btn-box btn--add-limit"
+                                            onclick="openAddLimitModal(<?= $incomeCategory['id']; ?>, <?= $incomeCategory['monthly_limit'] !== null ? e($incomeCategory['monthly_limit']) : 'null' ?>, 'income')">
+
                                             <ion-icon class="add-limit--icon" name="hand-right-outline"></ion-icon>
                                         </button>
                                     </td>
@@ -126,7 +129,8 @@ include $this->resolve("partials/modals/_editCategoryModal.php");
                                     <td data-label="Categories"><?php echo e($expenseCategory['name']); ?></td>
                                     <td data-label="Limit"><?= $expenseCategory['monthly_limit'] !== null ? e($expenseCategory['monthly_limit']) : "NL"; ?></td>
                                     <td data-label="Add limit">
-                                        <button class="btn-box btn--add-limit">
+                                        <button class="btn-box btn--add-limit"
+                                            onclick="openAddLimitModal(<?= $expenseCategory['id']; ?>, <?= $expenseCategory['monthly_limit'] !== null ? e($expenseCategory['monthly_limit']) : 'null' ?>, 'expense')">
                                             <ion-icon class="add-limit--icon" name="hand-right-outline"></ion-icon>
                                         </button>
                                     </td>

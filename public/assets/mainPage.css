@@ -332,10 +332,8 @@
   left: 2rem;
 }
 
-#cash-icon {
-  top: 4.2rem;
-}
-
+#hand-icon,
+#cash-icon,
 #text-icon {
   top: 4.2rem;
 }
