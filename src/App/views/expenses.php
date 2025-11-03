@@ -59,7 +59,11 @@ include $this->resolve("partials/modals/_editExpenseModal.php");
                         <tr>
                             <td data-label="No."><?php echo e($i); ?>.</td>
                             <td data-label="Amount"><?php echo e($expense['amount']); ?></td>
-                            <td data-label="Category"><?php echo e($expense['name']); ?></td>
+                            <td data-label="Category"><?php echo e($expense['name']); ?>
+                                <?php if ($expense['monthly_limit'] !== null && $expense['monthly_limit'] != 0) : ?>
+                                    <span class="limit-label"><?= e((int)$expense['monthly_limit']) ?></span>
+                                <?php endif; ?>
+                            </td>
                             <td data-label="Comment"><?php echo e($expense['expense_comment']); ?></td>
                             <td data-label="Date"><?php echo e($expense['formatted_date']); ?></td>
                             <td data-label="Edit" class="td-edit">

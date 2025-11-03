@@ -105,7 +105,10 @@ include $this->resolve("partials/_header.php");
                             <td data-label="No."><?php echo e($i); ?>.</td>
                             <td data-label="Amount"><?php echo e($transaction['amount']); ?></td>
                             <td data-label="Type"><?php echo e($transaction['type']); ?></td>
-                            <td data-label="Category"><?php echo e($transaction['category']); ?></td>
+                            <td data-label="Category"><?php echo e($transaction['category']); ?> <?php if ($transaction['type'] === "Expense" && $transaction['monthly_limit'] !== null && $transaction['monthly_limit'] != 0) : ?>
+                                    <span class="limit-label"><?= e((int)$transaction['monthly_limit']) ?></span>
+                                <?php endif; ?>
+                            </td>
                             <td data-label="Date"><?php echo e($transaction['date']); ?></td>
                         </tr>
                         <?php $i = $i + 1; ?>

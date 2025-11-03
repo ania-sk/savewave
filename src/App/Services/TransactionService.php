@@ -153,7 +153,8 @@ class TransactionService
                 e.amount, 
                 e.expense_comment, 
                 DATE_FORMAT(e.date_of_expense, '%Y-%m-%d') as formatted_date,
-                c.name
+                c.name,
+                c.monthly_limit
             FROM expenses AS e
             JOIN expenses_category_assigned_to_users AS c 
             ON e.expense_category_assigned_to_user_id = c.id
@@ -172,7 +173,8 @@ class TransactionService
              e.amount, 
              e.expense_comment, 
              DATE_FORMAT(e.date_of_expense, '%Y-%m-%d') as formatted_date,
-             c.name
+             c.name,
+             c.monthly_limit
            FROM expenses AS e
            JOIN expenses_category_assigned_to_users AS c
              ON e.expense_category_assigned_to_user_id = c.id

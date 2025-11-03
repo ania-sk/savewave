@@ -38,8 +38,6 @@ include $this->resolve("partials/modals/_limitModal.php");
                             <tr>
                                 <th scope="col">No.</th>
                                 <th scope="col">Category</th>
-                                <th scope="col">Limit</th>
-                                <th scope="col">Add limit</th>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>
                             </tr>
@@ -50,14 +48,7 @@ include $this->resolve("partials/modals/_limitModal.php");
                                 <tr>
                                     <td data-label="No."><?php echo e($i); ?>.</td>
                                     <td data-label="Categories"><?php echo e($incomeCategory['name']); ?></td>
-                                    <td data-label="Limit"><?= $incomeCategory['monthly_limit'] !== null ? e($incomeCategory['monthly_limit']) : "NL"  ?></td>
-                                    <td data-label="Add limit">
-                                        <button class="btn-box btn--add-limit"
-                                            onclick="openAddLimitModal(<?= $incomeCategory['id']; ?>, <?= $incomeCategory['monthly_limit'] !== null ? e($incomeCategory['monthly_limit']) : 'null' ?>, 'income')">
 
-                                            <ion-icon class="add-limit--icon" name="hand-right-outline"></ion-icon>
-                                        </button>
-                                    </td>
                                     <td data-label="Edit" class="td-edit">
                                         <button class="btn-box btn--edit"
                                             onclick="openEditCategoryModal(<?= $incomeCategory['id']; ?>, '<?= e($incomeCategory['name']); ?>', 'income')">
@@ -127,7 +118,7 @@ include $this->resolve("partials/modals/_limitModal.php");
                                 <tr>
                                     <td data-label="No."><?php echo e($i); ?>.</td>
                                     <td data-label="Categories"><?php echo e($expenseCategory['name']); ?></td>
-                                    <td data-label="Limit"><?= $expenseCategory['monthly_limit'] !== null ? e($expenseCategory['monthly_limit']) : "NL"; ?></td>
+                                    <td data-label="Limit"><?= ($expenseCategory['monthly_limit'] !== null && $expenseCategory['monthly_limit'] != 0) ? e((int)$expenseCategory['monthly_limit']) : "NL"; ?></td>
                                     <td data-label="Add limit">
                                         <button class="btn-box btn--add-limit"
                                             onclick="openAddLimitModal(<?= $expenseCategory['id']; ?>, <?= $expenseCategory['monthly_limit'] !== null ? e($expenseCategory['monthly_limit']) : 'null' ?>, 'expense')">

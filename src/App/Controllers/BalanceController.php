@@ -66,7 +66,8 @@ class   BalanceController
                 'type' => 'Expense',
                 'category' => $expense['name'],
                 'date' => $expense['formatted_date'],
-                'amount' => $expense['amount']
+                'amount' => $expense['amount'],
+                'monthly_limit' => $expense['monthly_limit']
             ];
         }
 

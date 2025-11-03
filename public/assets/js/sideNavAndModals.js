@@ -163,3 +163,27 @@ document.addEventListener("DOMContentLoaded", function () {
     modalAddExpenseCategory.style.display = "block";
   }
 });
+
+//expense category limit labels in modal
+$(document).ready(function () {
+  $("#expenseCategory").select2({
+    width: "100%",
+    placeholder: "Choose category",
+    allowClear: true,
+    templateResult: function (data) {
+      if (!data.id) return data.text;
+
+      const limit = $(data.element).data("limit");
+      const $container = $(`
+        <div class="select2-option">
+          <span class="category-name">${data.text}</span>
+          ${limit ? `<span class="limit-label">${limit}</span>` : ""}
+        </div>
+      `);
+      return $container;
+    },
+    templateSelection: function (data) {
+      return data.text;
+    },
+  });
+});

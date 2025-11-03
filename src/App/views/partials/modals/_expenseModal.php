@@ -77,6 +77,7 @@
                             <?php if (!empty($expenseCategories)): ?>
                                 <?php foreach ($expenseCategories as $expenseCategory): ?>
                                     <option value="<?php echo e($expenseCategory['id']); ?>"
+                                        data-limit="<?= ($expenseCategory['monthly_limit'] !== null && $expenseCategory['monthly_limit'] != 0) ? e((int)$expenseCategory['monthly_limit']) : '' ?>"
                                         <?php echo isset($oldFormData['expenseCategory']) && $oldFormData['expenseCategory'] == $expenseCategory['id'] ? 'selected' : ''; ?>>
                                         <?php echo e($expenseCategory['name']); ?>
                                     </option>
