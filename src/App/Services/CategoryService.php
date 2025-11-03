@@ -228,6 +228,42 @@ class CategoryService
         );
     }
 
+    public function getCategoryLimit(int $userId, int $categoryId, string $month): ?array
+    {
+        $result = $this->db->query(
+            "
+        SELECT
+        c.monthly_limit,
+        IFNULL(SUM(e.amount),0) AS spent
+        FROM expenses_category_assigned_to_users c
+        LEFT JOIN expenses e
+            ON e.expense_category_assigned_to_user_id = c.id
+            AND DATE_FORMAT(e.date_of_expense, '%Y-%m') = :month
+            AND e.user_id = :uid
+            WHERE c.id = :cid
+            AND c.user_id = :uid
+            GROUP BY c.monthly_limit",
+            [
+                'uid' => $userId,
+                'cid' => $categoryId,
+                'month' => $month
+            ]
+        )->find();
+
+        if (!$result) {
+            return null;
+        }
+
+        $limit = (int) $result['monthly_limit'];
+        $spent = (float) $result['spent'];
+
+        return [
+            'limit' => $limit,
+            'spent' => $spent,
+            'left'  => $limit > 0 ? $limit - $spent : null
+        ];
+    }
+
     private function normalizeCategoryName(string $name): string
     {
         $clean = preg_replace('/\s+/', ' ', trim($name));
