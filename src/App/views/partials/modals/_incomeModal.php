@@ -61,7 +61,7 @@
                     <div class="input-form-box flex-conteiner">
                         <label for="date">Date</label>
                         <input id="date" type="date" name="incomeDate"
-                            value="<?php echo e($oldFormData['incomeDate'] ?? ''); ?>" />
+                            value="<?php echo e($oldFormData['incomeDate'] ?? date('Y-m-d')); ?>" />
                         <?php if (($activeForm === 'income') && array_key_exists('incomeDate', $errors)) : ?>
                             <div>
                                 <p class="error-text"><?php echo e($errors['incomeDate'][0]); ?></p>
