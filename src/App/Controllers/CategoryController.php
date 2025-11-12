@@ -154,6 +154,71 @@ class CategoryController
         }
     }
 
+    public function checkCategoryLimit()
+    {
+        header('Content-Type: application/json');
+
+        $categoryId = isset($_GET['category_id']) ? (int)$_GET['category_id'] : 0;
+        $amount = isset($_GET['amount']) ? (int)$_GET['amount'] : 0;
+        $expenseId = isset($_GET['expense_id']) ? (int)$_GET['expense_id'] : null;
+        $userId = $_SESSION['user'] ?? 0;
+
+        if (!$categoryId || !$userId) {
+            echo json_encode(['error' => 'Invalid parameters']);
+            return;
+        }
+
+        $categoryLimit = $this->categoryService->getCategoryLimit($categoryId);
+
+        // If the category has no limit, return OK
+        if ($categoryLimit === null || $categoryLimit === 0.00) {
+            echo json_encode([
+                'hasLimit' => false,
+                'status' => 'ok'
+            ]);
+            return;
+        }
+
+        // Calculate the total expenses in the category (without the edited expense)
+        $currentTotalExpense = $this->categoryService->getMonthlyCategoryTotalExpense($userId, $categoryId, $expenseId);
+
+        $newTotalExpense = $currentTotalExpense + $amount;
+
+        $percentage = $categoryLimit > 0 ? ($newTotalExpense / $categoryLimit) * 100 : 0;
+
+        $status = 'ok';
+        $level = 'success';
+
+        if ($percentage >= 100) {
+            $status = 'exceeded';
+            $level = 'danger';
+        } elseif ($percentage >= 80) {
+            $status = 'warning';
+            $level = 'warning';
+        }
+
+        echo json_encode([
+            'hasLimit' => true,
+            'limit' => $categoryLimit,
+            'currentTotalExpense' => $currentTotalExpense,
+            'newTotalExpense' => $newTotalExpense,
+            'percentage' => $percentage,
+            'status' => $status,
+            'level' => $level,
+            'message' => $this->getLimitMessage($status, $newTotalExpense, $categoryLimit, $percentage)
+        ]);
+    }
+
+    private function getLimitMessage(string $status, float $newTotalExpense, float $categoryLimit, float $percentage): string
+    {
+        if ($status === 'exceeded') {
+            $over = $newTotalExpense - $categoryLimit;
+            return "⚠️ Warning! This expense will exceed your category limit by " . number_format($over, 2) . " PLN (" . round($percentage, 1) . "% of limit).";
+        } elseif ($status === 'warning') {
+            return "⚠️ Caution! You're approaching your category limit (" . round($percentage, 1) . "% used).";
+        }
+        return "✓ Within budget (" . round($percentage, 1) . "% of limit used).";
+    }
 
     public function deleteCategory(array $params)
     {

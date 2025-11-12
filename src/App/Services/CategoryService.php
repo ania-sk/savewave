@@ -228,41 +228,44 @@ class CategoryService
         );
     }
 
-    public function getCategoryLimit(int $userId, int $categoryId, string $month): ?array
+    public function getCategoryLimit(int $categoryId): ?float
     {
         $result = $this->db->query(
-            "
-        SELECT
-        c.monthly_limit,
-        IFNULL(SUM(e.amount),0) AS spent
-        FROM expenses_category_assigned_to_users c
-        LEFT JOIN expenses e
-            ON e.expense_category_assigned_to_user_id = c.id
-            AND DATE_FORMAT(e.date_of_expense, '%Y-%m') = :month
-            AND e.user_id = :uid
-            WHERE c.id = :cid
-            AND c.user_id = :uid
-            GROUP BY c.monthly_limit",
-            [
-                'uid' => $userId,
-                'cid' => $categoryId,
-                'month' => $month
-            ]
+            "SELECT monthly_limit FROM expenses_category_assigned_to_users WHERE id = :id",
+            ['id' => $categoryId]
         )->find();
 
-        if (!$result) {
-            return null;
+        return $result && $result['monthly_limit'] !== null ? (float)$result['monthly_limit'] : null;
+    }
+
+    public function getMonthlyCategoryTotalExpense(int $userId, int $categoryId, ?int $excludeExpenseId = null): float
+    {
+        $currentMonth = date('Y-m-01 00:00:00');
+        $nextMonth = date('Y-m-01 00:00:00', strtotime('+1 month'));
+
+        $query = "SELECT COALESCE(SUM(amount), 0) as total
+                FROM expenses
+                WHERE user_id = :user_id
+                 AND expense_category_assigned_to_user_id = :category_id
+                 AND date_of_expense >= :start_date
+                 AND date_of_expense < :end_date";
+
+        $params = [
+            'user_id' => $userId,
+            'category_id' => $categoryId,
+            'start_date' => $currentMonth,
+            'end_date' => $nextMonth
+        ];
+
+        if ($excludeExpenseId !== null) {
+            $query .= " AND id != :exclude_id";
+            $params['exclude_id'] = $excludeExpenseId;
         }
 
-        $limit = (int) $result['monthly_limit'];
-        $spent = (float) $result['spent'];
-
-        return [
-            'limit' => $limit,
-            'spent' => $spent,
-            'left'  => $limit > 0 ? $limit - $spent : null
-        ];
+        $result = $this->db->query($query, $params)->find();
+        return (float)($result['total'] ?? 0);
     }
+
 
     private function normalizeCategoryName(string $name): string
     {

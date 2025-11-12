@@ -59,4 +59,6 @@ function registerRoutes(App $app)
     $app->post('/settings/{category}', [CategoryController::class, 'updateCategory']);
     $app->post('/settings/{category}/limit', [CategoryController::class, 'addCategoryLimit'])->add(AuthRequiredMiddleware::class);
     $app->post('/settings/{category}/delete', [CategoryController::class, 'deleteCategory']);
+
+    $app->get('/api/checkCategoryLimit', [CategoryController::class, 'checkCategoryLimit'])->add(AuthRequiredMiddleware::class);
 }

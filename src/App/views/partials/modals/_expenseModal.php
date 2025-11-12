@@ -21,7 +21,7 @@
                     <div class="input-form-box flex-conteiner">
                         <label for="amount">Amount</label>
                         <input
-                            id="amount"
+                            id="expenseAmount"
                             type="number"
                             name="expenseAmount"
                             value="<?php echo e($oldFormData['expenseAmount'] ?? '0'); ?>" />
@@ -43,7 +43,7 @@
                         <input
                             type="text"
                             name="expenseComment"
-                            id="comment"
+                            id="expenseComment"
                             placeholder="About expense..."
                             value=" <?php echo e($oldFormData['expenseComment'] ?? ''); ?>" />
                         <ion-icon
@@ -63,7 +63,7 @@
 
                     <div class="input-form-box flex-conteiner">
                         <label for="date">Date</label>
-                        <input id="date" type="date" name="expenseDate" value="<?php echo e($oldFormData['expenseDate'] ?? date('Y-m-d')); ?>" />
+                        <input id="expenseDate" type="date" name="expenseDate" value="<?php echo e($oldFormData['expenseDate'] ?? date('Y-m-d')); ?>" />
                         <ion-icon id="date-icon" class="modal-icon" name="calendar-outline"></ion-icon>
                         <?php if (($activeForm === 'expense') && array_key_exists('expenseDate', $errors)) : ?>
                             <div>
@@ -109,17 +109,15 @@
                 <div class="category-limit-box flex-conteiner">
                     <div class="limit-box">
                         <h4>Category Limit Value</h4>
-                        <p>You set the limit (funkcja pobrania kwoty limitu z bazy danych) monthly for that category.</p>
+                        <p id="limitValue">No limit set</p>
                     </div>
                     <div class="limit-box">
                         <h4>Category Limit Spent</h4>
-                        <p>You spent on this category 456 this month</p>
+                        <p id="limitSpent">0</p>
                     </div>
                     <div class="limit-box">
-
                         <h4>Category Limit Left</h4>
-                        <p>Limit balance after operation: (funkcja pobiera sumę wydatków dla wybranej kategorii i daty i oblicza pozostałą wartość limitu)</p>
-
+                        <p id="limitLeft">NL</p>
                     </div>
                 </div>
                 <!-- ADD NEW Expense CATEGORY -->
