@@ -107,6 +107,9 @@
 
                 <!-- CATEGORY LIMIT INFO -->
                 <div class="category-limit-box flex-conteiner">
+                    <div class="limit-box hide-warning-box" id="alertLimitBox">
+                        <p id="limitMessage"></p>
+                    </div>
                     <div class="limit-box">
                         <h4>Category Limit Value</h4>
                         <p id="limitValue">No limit set</p>

@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const limitLeftEl = document.querySelector("#limitLeft");
   const categorySelect = document.querySelector("#expenseCategory");
   const amountInput = document.querySelector("#expenseAmount");
+  const alertLimitBoxEl = document.querySelector("#alertLimitBox");
+  const alertParagraphEl = document.querySelector("#alertLimitBox p");
 
   // box limits reset
   function resetLimitBox() {
@@ -12,6 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
     limitLeftEl.textContent = "NL";
     limitLeftEl.style.color = "";
     limitSpentEl.style.color = "";
+    if (alertLimitBoxEl) {
+      alertLimitBoxEl.classList.add("hide-warning-box");
+    }
   }
 
   // Updating the value of the limit box
@@ -25,10 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const spent = data.currentTotalExpense ?? 0;
     const newExpense = parseFloat(amountInput?.value) || 0;
     const left = Math.max(limit - spent - newExpense, 0);
+    const alertMessage = data.message || "";
 
     limitValueEl.textContent = `${limit.toFixed(2)} PLN`;
     limitSpentEl.textContent = `${(spent + newExpense).toFixed(2)} PLN`;
     limitLeftEl.textContent = `${left.toFixed(2)} PLN`;
+    alertLimitBoxEl.classList.remove("hide-warning-box");
+    alertParagraphEl.textContent = alertMessage;
 
     limitLeftEl.style.color =
       data.level === "danger"

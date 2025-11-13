@@ -377,7 +377,6 @@
 }
 .category-limit-box {
   flex-direction: column;
-  gap: 4rem;
   align-items: flex-start;
   justify-content: space-evenly;
 }
@@ -386,6 +385,10 @@
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 2rem;
+}
+
+.hide-warning-box {
+  display: none;
 }
 
 .limit-box h4 {
