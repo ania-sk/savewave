@@ -51,3 +51,13 @@ document.addEventListener("DOMContentLoaded", () => {
     "expenseChartData"
   );
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const balanceBoxEl = document.querySelector(".balance-box");
+  const thumbDownIconEl = balanceBoxEl.querySelector(
+    "ion-icon[name='thumbs-down-outline']"
+  );
+  if (thumbDownIconEl) {
+    balanceBoxEl.style.borderColor = "red";
+  }
+});
