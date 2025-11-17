@@ -22,8 +22,10 @@
                     <input
                         id="amount"
                         type="number"
+                        step="0.01"
+                        min="0"
                         name="incomeAmount"
-                        value="<?php echo e($oldFormData['incomeAmount'] ?? '0'); ?>" />
+                        value="<?php echo e((float)($oldFormData['incomeAmount'] ?? '0')); ?>" />
                     <ion-icon
                         id="cash-icon"
                         class="modal-icon"
