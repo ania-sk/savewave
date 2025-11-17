@@ -1,6 +1,6 @@
 <?php
 include $this->resolve("partials/_header.php");
-include $this->resolve("partials/modals/_editIncomeModal.php");
+
 ?>
 
 <body class="<?php echo ($activeForm === 'income') ? 'modal-income-open' : '';
@@ -101,6 +101,7 @@ include $this->resolve("partials/modals/_editIncomeModal.php");
     </main>
     <?php
     include $this->resolve("partials/_sideNavAndModals.php");
+    include $this->resolve("partials/modals/_editIncomeModal.php");
     include $this->resolve("partials/_scripts.php");
     ?>
 
