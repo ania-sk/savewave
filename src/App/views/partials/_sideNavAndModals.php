@@ -12,7 +12,7 @@
         <div class="side-nav-button-hide">
             <ion-icon class="hide-icon" name="chevron-back-outline"></ion-icon>
         </div>
-        <div class="side-nav-button-show">
+        <div class="side-nav-button-show" data-tooltip="Show navbar">
             <ion-icon class="hide-icon" name="chevron-forward-outline"></ion-icon>
         </div>
     </div>
@@ -27,13 +27,13 @@
     </div>
 
     <div class="btn-box flex-conteiner">
-        <button class="btn--icon">
+        <button class="btn--icon" data-tooltip="Add income">
             <ion-icon
                 id="icon-btn-modal-income"
                 class="header-icon"
                 name="add-circle"></ion-icon>
         </button>
-        <button class="btn--icon">
+        <button class="btn--icon" data-tooltip="Add expense">
             <ion-icon
                 id="icon-btn-modal-expense"
                 class="header-icon"
@@ -50,23 +50,23 @@
             <ion-icon class="nav-icon" name="cash-outline"></ion-icon>
             <span>Incomes</span>
         </a>
-        <a href="/expenses" class="link nav-box flex-conteiner">
+        <a href="/expenses" class="link nav-box flex-conteiner" data-tooltip="Expenses">
             <ion-icon class="nav-icon" name="file-tray-full-outline"></ion-icon>
             <span>Expenses</span>
         </a>
-        <a href="/balance" class="link nav-box flex-conteiner">
+        <a href="/balance" class="link nav-box flex-conteiner" data-tooltip="Balance">
             <ion-icon class="nav-icon" name="stats-chart-outline"></ion-icon>
             <span>Balance</span>
         </a>
-        <a href="#" class="link nav-box flex-conteiner">
+        <a href="#" class="link nav-box flex-conteiner" data-tooltip="Goals">
             <ion-icon class="nav-icon" name="heart-half-outline"></ion-icon>
             <span>Goals</span>
         </a>
-        <a href="/settings" class="link nav-box flex-conteiner">
+        <a href="/settings" class="link nav-box flex-conteiner" data-tooltip="Settings">
             <ion-icon class="nav-icon" name="settings-outline"></ion-icon>
             <span>Settings</span>
         </a>
-        <a href="/logout" class="link nav-box flex-conteiner">
+        <a href="/logout" class="link nav-box flex-conteiner" data-tooltip="Logout">
             <ion-icon class="nav-icon" name="log-out-outline"></ion-icon>
             <span>Logout</span>
         </a>

@@ -14,7 +14,7 @@ include $this->resolve("partials/modals/_editIncomeModal.php");
             <ion-icon class="nav-icon" name="cash-outline"></ion-icon>
             <p>Incomes</p>
 
-            <button class="header-btn--icon">
+            <button class="header-btn--icon" data-tooltip="Add income">
                 <ion-icon
                     id="header-icon-btn-modal-income"
                     class="header-icon-modal"

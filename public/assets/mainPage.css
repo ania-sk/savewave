@@ -100,28 +100,39 @@
   position: relative;
   z-index: 0;
 }
+.side-nav-button-show,
+.btn--icon {
+  position: relative;
+}
 
 /* tooltips */
-.nav-hide .nav-icon::after {
-  content: "aaaaaaa"; /* Pobiera tekst z data-tooltip */
+.side-nav-button-show:after,
+.btn--icon::after,
+.nav-hide .nav-box::after {
+  content: attr(data-tooltip); /* Pobiera tekst z data-tooltip */
   position: absolute;
   z-index: 10;
-  left: 70px;
-  top: 50%;
+  left: -1rem;
+  bottom: 75%;
   transform: translateY(-50%);
   background-color: #444;
   color: #fff;
   padding: 5px 10px;
   border-radius: 4px;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   opacity: 0;
-  visibility: none;
+  visibility: hidden;
   transition: opacity 0.2s ease;
   font-size: 14px;
   pointer-events: none;
 }
+.side-nav-button-show:after {
+  left: -2rem;
+}
 
-.nav-hide .nav-icon:hover::after {
+.side-nav-button-show:hover::after,
+.btn--icon:hover::after,
+.nav-hide .nav-box:hover::after {
   opacity: 1;
   visibility: visible;
 }

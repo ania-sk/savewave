@@ -32,6 +32,32 @@
   border-radius: 50%;
   background-color: transparent;
   cursor: pointer;
+  position: relative;
+}
+
+/* tooltip */
+.header-btn--icon::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  z-index: 10;
+  left: -1rem;
+  bottom: 75%;
+  transform: translateY(-50%);
+  background-color: #444;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+  font-size: 14px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.header-btn--icon:hover::after {
+  opacity: 1;
+  visibility: visible;
 }
 
 .header-icon-modal {

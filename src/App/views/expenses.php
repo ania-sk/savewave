@@ -14,7 +14,7 @@ include $this->resolve("partials/modals/_editExpenseModal.php");
             <ion-icon class="nav-icon" name="file-tray-full-outline"></ion-icon>
             <p>Expenses</p>
 
-            <button class="header-btn--icon">
+            <button class="header-btn--icon" data-tooltip="Add expense">
                 <ion-icon
                     id="header-icon-btn-modal-expense"
                     class="header-icon-modal"

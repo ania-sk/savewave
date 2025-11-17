@@ -25,30 +25,6 @@ const toggleSidebar = function () {
 
 toggleArrow.addEventListener("click", toggleSidebar);
 
-//TOOLTIPS
-// const icons = document.querySelectorAll(".nav-icon");
-
-// icons.forEach((icon) => {
-//   icon.addEventListener("mouseenter", function () {
-//     const tooltip = document.createElement("div");
-//     tooltip.className = "tooltip";
-//     tooltip.innerText = icon.getAttribute("data-tooltip");
-
-//     icon.appendChild(tooltip);
-
-//     const iconRect = icon.getBoundingClientRect();
-//     tooltip.style.left = `${iconRect.width + 10}px`;
-//     tooltip.style.top = `${iconRect.height / 2 - tooltip.offsetHeight / 2}px`;
-//   });
-
-//   icon.addEventListener("mouseleave", function () {
-//     const tooltip = icon.querySelector(".tooltip");
-//     if (tooltip) {
-//       tooltip.remove();
-//     }
-//   });
-// });
-
 // MODALS
 //get modals
 const modalIncome = document.querySelector("#modal-income");
