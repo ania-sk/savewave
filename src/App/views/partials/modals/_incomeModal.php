@@ -73,7 +73,7 @@
 
                     <div class="input-form-box flex-conteiner">
                         <label for="category">Category</label>
-                        <select name="incomeCategory" id="category">
+                        <select name="incomeCategory" id="incomeCategory">
                             <option value="">Choose category:</option>
                             <?php if (!empty($incomeCategories)): ?>
                                 <?php foreach ($incomeCategories as $incomeCategory): ?>

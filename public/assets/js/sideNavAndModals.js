@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //ADD CATEGORY MODALS
 
 //incomes
-var addCategorySelectedInForm = document.getElementById("category");
+var addCategorySelectedInForm = document.getElementById("incomeCategory");
 const modalAddIncomeCategory = document.getElementById(
   "modal-add-income-category"
 );
@@ -98,6 +98,37 @@ document.addEventListener("DOMContentLoaded", function () {
       modalAddIncomeCategory.style.display = "block";
       this.value = "";
     }
+  });
+});
+
+//AJAX INCOME CATEGORY
+$(document).on("submit", "#form-add-category", function (e) {
+  e.preventDefault();
+  // e.stopPropagation();
+
+  let form = $(this);
+
+  $.ajax({
+    url: "/api/addNewIncomeCategory",
+    method: "POST",
+    data: form.serialize(),
+    dataType: "json",
+    success: function (response) {
+      let newId = response.id;
+      let newName = response.name;
+
+      let select = $("#incomeCategory");
+
+      // Dodaj kategorię
+      select.append(new Option(newName, newId));
+
+      let newOption = new Option(newName, newId, true, true);
+      select.append(newOption).trigger("change");
+
+      // Zamknij modal dodawania kategorii
+      modalAddIncomeCategory.style.display = "none";
+      console.log("RESPONSE:", response);
+    },
   });
 });
 

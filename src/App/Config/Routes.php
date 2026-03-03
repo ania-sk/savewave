@@ -61,4 +61,5 @@ function registerRoutes(App $app)
     $app->post('/settings/{category}/delete', [CategoryController::class, 'deleteCategory']);
 
     $app->get('/api/checkCategoryLimit', [CategoryController::class, 'checkCategoryLimit'])->add(AuthRequiredMiddleware::class);
+    $app->post('/api/addNewIncomeCategory', [CategoryController::class, 'addNewIncomeCategoryAjax'])->add(AuthRequiredMiddleware::class);
 }

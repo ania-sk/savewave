@@ -40,6 +40,24 @@ class CategoryController
         }
     }
 
+    public function addNewIncomeCategoryAjax()
+    {
+        $newCategoryName = $_POST['newCategoryName'];
+
+        $this->validatorService->validateNewIncomeCategory($_POST);
+
+        // metoda powinna zwrócić ID nowo dodanej kategorii
+        $newCategoryId = $this->categoryService->createUserIncomeCategory($_POST);
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'id' => $newCategoryId,
+            'name' => $newCategoryName
+        ]);
+        exit;
+    }
+
+
     public function addNewExpenseCategory()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

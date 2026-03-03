@@ -11,11 +11,9 @@
             <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
 
             <!-- FORM -->
-            <form id="form-add-category" method="post" action="/mainPage/addIncomeCategory" class="modal-form-box flex-conteiner">
+            <form id="form-add-category" method="post" action="/api/addNewIncomeCategory" class="modal-form-box flex-conteiner">
 
                 <?php include $this->resolve("partials/_csrf.php"); ?>
-                <!-- Przekierowanie po dodaniu kategorii na stronę z formularzem dochodu -->
-                <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
 
                 <div class="input-form-box flex-conteiner">
                     <label for="newCategoryName">New category</label>

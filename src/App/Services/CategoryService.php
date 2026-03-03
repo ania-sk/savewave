@@ -96,7 +96,7 @@ class CategoryService
                         ]
                     );
                 }
-                return;
+                return $category['id'];
             }
         }
 
@@ -108,6 +108,8 @@ class CategoryService
                 'name' => $newCategoryName
             ]
         );
+
+        return $this->db->id();
     }
 
     public function createUserExpenseCategory(array $formData)
