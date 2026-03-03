@@ -11,7 +11,7 @@
             <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
 
             <!-- FORM -->
-            <form id="form-add-category" method="post" action="/api/addNewIncomeCategory" class="modal-form-box flex-conteiner">
+            <form id="form-add-income-category" method="post" action="/api/addNewIncomeCategory" class="modal-form-box flex-conteiner">
 
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 

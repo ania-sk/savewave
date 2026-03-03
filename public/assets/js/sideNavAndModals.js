@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //incomes
 var addCategorySelectedInForm = document.getElementById("incomeCategory");
 const modalAddIncomeCategory = document.getElementById(
-  "modal-add-income-category"
+  "modal-add-income-category",
 );
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //AJAX INCOME CATEGORY
-$(document).on("submit", "#form-add-category", function (e) {
+$(document).on("submit", "#form-add-income-category", function (e) {
   e.preventDefault();
   // e.stopPropagation();
 
@@ -119,9 +119,6 @@ $(document).on("submit", "#form-add-category", function (e) {
 
       let select = $("#incomeCategory");
 
-      // Dodaj kategorię
-      select.append(new Option(newName, newId));
-
       let newOption = new Option(newName, newId, true, true);
       select.append(newOption).trigger("change");
 
@@ -136,15 +133,46 @@ $(document).on("submit", "#form-add-category", function (e) {
 var addExpenseCategorySelectedInForm =
   document.getElementById("expenseCategory");
 const modalAddExpenseCategory = document.getElementById(
-  "modal-add-expense-category"
+  "modal-add-expense-category",
 );
 
-document.addEventListener("DOMContentLoaded", function () {
-  addExpenseCategorySelectedInForm.addEventListener("change", function () {
-    if (this.value === "add_new_expense_category") {
+$(document).ready(function () {
+  $("#expenseCategory").on("select2:select", function (e) {
+    let selectedValue = e.params.data.id;
+
+    if (selectedValue === "add_new_expense_category") {
+      $(this).val(null).trigger("change");
+
       modalAddExpenseCategory.style.display = "block";
       this.value = "";
     }
+  });
+});
+
+//AJAX EXPENSE CATEGORY
+$(document).on("submit", "#form-add-expense-category", function (e) {
+  e.preventDefault();
+
+  let form = $(this);
+
+  $.ajax({
+    url: "/api/addNewExpenseCategory",
+    method: "POST",
+    data: form.serialize(),
+    dataType: "json",
+    success: function (response) {
+      let newId = response.id;
+      let newName = response.name;
+
+      let select = $("#expenseCategory");
+
+      let newOption = new Option(newName, newId, true, true);
+      select.append(newOption).trigger("change");
+
+      // Zamknij modal dodawania kategorii
+      modalAddExpenseCategory.style.display = "none";
+      console.log("RESPONSE:", response);
+    },
   });
 });
 

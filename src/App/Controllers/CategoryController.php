@@ -57,6 +57,22 @@ class CategoryController
         exit;
     }
 
+    public function addNewExpenseCategoryAjax()
+    {
+        $newCategoryName = $_POST['newCategoryName'];
+
+        $this->validatorService->validateNewExpenseCategory($_POST);
+
+        $newCategoryId = $this->categoryService->createUserExpenseCategory($_POST);
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'id' => $newCategoryId,
+            'name' => $newCategoryName
+        ]);
+        exit;
+    }
+
 
     public function addNewExpenseCategory()
     {
