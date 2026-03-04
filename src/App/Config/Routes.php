@@ -15,7 +15,8 @@ use App\Controllers\{
     TransactionsController,
     CategoryController,
     SettingsController,
-    BalanceController
+    BalanceController,
+    GoalsController
 };
 use App\Middleware\{AuthRequiredMiddleware, GuestOnlyMiddleware};
 
@@ -27,6 +28,7 @@ function registerRoutes(App $app)
     $app->get('/expenses', [ExpensesController::class, 'expenses'])->add(AuthRequiredMiddleware::class);
     $app->get('/settings', [SettingsController::class, 'settings'])->add(AuthRequiredMiddleware::class);
     $app->get('/balance', [BalanceController::class, 'balance'])->add(AuthRequiredMiddleware::class);
+    $app->get('/goals', [GoalsController::class, 'goals'])->add(AuthRequiredMiddleware::class);
 
     $app->get('/register', [AuthController::class, 'registerView'])->add(GuestOnlyMiddleware::class);
     $app->post('/register', [AuthController::class, 'register'])->add(GuestOnlyMiddleware::class);

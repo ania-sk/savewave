@@ -58,7 +58,7 @@
             <ion-icon class="nav-icon" name="stats-chart-outline"></ion-icon>
             <span>Balance</span>
         </a>
-        <a href="#" class="link nav-box flex-conteiner" data-tooltip="Goals">
+        <a href="/goals" class="link nav-box flex-conteiner" data-tooltip="Goals">
             <ion-icon class="nav-icon" name="heart-half-outline"></ion-icon>
             <span>Goals</span>
         </a>

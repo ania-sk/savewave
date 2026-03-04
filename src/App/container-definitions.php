@@ -8,7 +8,8 @@ use App\Services\{
     ValidatorService,
     UserService,
     TransactionService,
-    CategoryService
+    CategoryService,
+    GoalService
 };
 
 return [
@@ -37,5 +38,10 @@ return [
         $db = $container->get(Database::class);
 
         return new CategoryService($db);
+    },
+    GoalService::class => function (Container $container) {
+        $db = $container->get(Database::class);
+
+        return new GoalService($db);
     }
 ];
