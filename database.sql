@@ -128,6 +128,33 @@ WHERE NOT EXISTS (
     SELECT 1 FROM expenses_category_default WHERE name = 'Other'
 );
 
+-- GOALS
+CREATE TABLE IF NOT EXISTS goals(
+    id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    user_id BIGINT(20) UNSIGNED NOT NULL,
+    goal_name VARCHAR(255) NOT NULL,
+    amount_needed DECIMAL(10,2) NOT NULL,
+    goal_description VARCHAR(255),
+    deadline DATE,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- contributions
+CREATE TABLE IF NOT EXISTS goal_contributions(
+    id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    user_id BIGINT(20) UNSIGNED NOT NULL,
+    goal_id BIGINT(20) UNSIGNED NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,    
+    contribution_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    contribution_comment VARCHAR(255),
+    PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY(goal_id) REFERENCES goals(id) ON DELETE CASCADE
+);
+
+
 -- is category active
 ALTER TABLE incomes_category_assigned_to_users
   ADD COLUMN is_active TINYINT(1) NOT NULL DEFAULT 1;
