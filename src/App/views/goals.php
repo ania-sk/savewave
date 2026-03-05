@@ -12,7 +12,16 @@ include $this->resolve("partials/_header.php");
             <div class="goals-heading flex-conteiner"><ion-icon class="nav-icon" name="heart-half-outline"></ion-icon>
                 <p>Goals</p>
             </div>
-            <p>Your savings</p>
+            <!--goal modal button -->
+            <div class="btn-box">
+                <button id="btn-modal-goal" class="btn btn--goal flex-conteiner">
+                    <ion-icon
+                        id="add-goal-icon"
+                        name="add-circle"></ion-icon>
+                    <p>Add goal</p>
+                </button>
+            </div>
+
         </div>
 
         <!-- GOALS TABLE -->
