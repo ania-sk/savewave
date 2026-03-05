@@ -29,10 +29,12 @@ toggleArrow.addEventListener("click", toggleSidebar);
 //get modals
 const modalIncome = document.querySelector("#modal-income");
 const modalExpense = document.querySelector("#modal-expense");
+const modalGoal = document.querySelector("#modal-goal");
 
 //get modal buttons
 const btnModalIncome = document.querySelector("#btn-modal-income");
 const btnModalExpense = document.querySelector("#btn-modal-expense");
+const btnModalGoal = document.querySelector("#btn-modal-goal");
 
 //get x  (income and expens modal)
 const xEls = document.querySelectorAll(".close");
@@ -43,11 +45,15 @@ btnModalIncome.onclick = function () {
 btnModalExpense.onclick = function () {
   modalExpense.style.display = "block";
 };
+btnModalGoal.onclick = function () {
+  modalGoal.style.display = "block";
+};
 
 for (let xEl of xEls) {
   xEl.onclick = function () {
     modalIncome.style.display = "none";
     modalExpense.style.display = "none";
+    modalGoal.style.display = "none";
   };
 }
 
@@ -57,6 +63,9 @@ window.onclick = function (event) {
   }
   if (event.target == modalExpense) {
     modalExpense.style.display = "none";
+  }
+  if (event.target == modalGoal) {
+    modalGoal.style.display = "none";
   }
 };
 

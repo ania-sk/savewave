@@ -210,7 +210,8 @@
 #modal-add-expense-category,
 #modal-add-income-category,
 #modal-income,
-#modal-expense {
+#modal-expense,
+#modal-goal {
   display: none;
 }
 
