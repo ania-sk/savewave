@@ -6,14 +6,27 @@ namespace App\Controllers;
 
 
 use Framework\TemplateEngine;
-use App\Services\GoalService;
+use App\Services\{GoalService, ValidatorService};
 
 class GoalsController
 {
     public function __construct(
         private TemplateEngine $view,
-        private GoalService $goalService
+        private GoalService $goalService,
+        private ValidatorService $validatorService
     ) {}
+
+    public function addGoal()
+    {
+        $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+
+        $this->validatorService->validateNewGoal($_POST);
+
+        $newGoalId = $this->goalService->createNewGoal($_POST);
+
+        header("Location: " . $redirectPath);
+        exit();
+    }
 
     public function goals()
     {
@@ -25,6 +38,7 @@ class GoalsController
             'cssLink' => 'mainPage.css',
             'cssLink2' => 'goals.css',
             'goals' => $goals
+
 
         ]);
     }

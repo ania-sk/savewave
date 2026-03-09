@@ -60,3 +60,36 @@
 /* GOALS TABLE */
 .goals-table-box {
 }
+
+.btn-box {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+.delete--icon {
+  color: #d62828;
+  font-size: 2.5rem;
+  transition: all 0.3s;
+}
+
+.edit--icon {
+  color: #003049;
+  font-size: 2.5rem;
+  transition: all 0.3s;
+}
+
+.contribution--icon {
+  color: #0d7c66;
+  font-size: 2.5rem;
+  transition: all 0.3s;
+}
+.contribution--icon:hover,
+.contribution--icon:active,
+.edit--icon:hover,
+.edit--icon:active,
+.delete--icon:hover,
+.delete--icon:active {
+  transform: scale(1.1);
+}

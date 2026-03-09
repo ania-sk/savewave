@@ -56,12 +56,19 @@ include $this->resolve("partials/_header.php");
                             <td data-label="Amount needed"><?php echo e($goal['amount_needed']); ?></td>
                             <td data-label="Amount saved"></td>
                             <td data-label="%"></td>
-                            <td data-label="Deadeline"><?php echo e($goal['deadline']); ?></td>
-                            <td data-label="Contribution"></td>
-                            <td data-label="Edit"></td>
-                            <td data-label="Delete"></td>
+                            <td data-label="Deadline"><?php echo e($goal['deadline']); ?></td>
+                            <td data-label="Contribution"><button class="btn-box">
+                                    <ion-icon class="contribution--icon" name="color-fill"></ion-icon>
+                                </button></td>
+                            <td data-label="Edit"> <button class="btn-box">
+                                    <ion-icon class="edit--icon" name="create-outline"></ion-icon>
+                                </button></td>
+                            <td data-label="Delete"> <button type="submit"
+                                    class="btn-box">
+                                    <ion-icon class="delete--icon" name="trash-outline"></ion-icon>
+                                </button></td>
                         </tr>
-                        </tr>
+                        <?php $i++; ?>
                     <?php endforeach; ?>
                 </tbody>
             </table>

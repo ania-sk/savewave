@@ -115,4 +115,15 @@ class ValidatorService
             'confirm-password' => ['required', 'match:password']
         ]);
     }
+
+    public function validateNewGoal(array $formData)
+    {
+        $this->validator->validate($formData, [
+            'goalName' => ['required'],
+            'goalAmount' => ['required', 'numeric'],
+            'goalDate' => ['required', 'dateFormat:Y-m-d'],
+            'goalDescription' => ['lengthMax:255'],
+
+        ]);
+    }
 }
