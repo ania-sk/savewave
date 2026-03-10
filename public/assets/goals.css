@@ -93,3 +93,7 @@
 .delete--icon:active {
   transform: scale(1.1);
 }
+
+#modal-edit-goal {
+  display: none;
+}

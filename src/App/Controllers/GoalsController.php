@@ -32,14 +32,53 @@ class GoalsController
     {
         $userId = (int)$_SESSION['user'];
         $goals = $this->goalService->getUserGoals($userId);
+        $goalToEdit = $_SESSION['goalToEdit'] ?? null;
 
         echo $this->view->render("/goals.php", [
             'title' => 'Goals',
             'cssLink' => 'mainPage.css',
             'cssLink2' => 'goals.css',
-            'goals' => $goals
-
-
+            'jsLink' => 'goals.js',
+            'goals' => $goals,
+            'goalToEdit' => $goalToEdit
         ]);
     }
+
+    public function getGoal($id)
+    {
+        $goal = $this->goalService->getGoalById($id);
+
+        header('Content-Type: application/json');
+        echo json_encode($goal);
+    }
+
+    // public function editGoal(array $params): void
+    // {
+    //     $goalToEdit = $this->goalService->getUserGoal($params['goal']);
+
+    //     if (!$goalToEdit) {
+    //         redirectTo('/goals');
+    //     }
+
+    //     $_SESSION['goalToEdit'] = $goalToEdit;
+
+    //     redirectTo('/goals');
+    // }
+
+    // public function updateGoal(array $params)
+    // {
+    //     $goalToEdit = $this->goalService->getUserGoal($params['goal']);
+
+    //     if (!$goalToEdit) {
+    //         redirectTo('/goals');
+    //     }
+
+    //     $errors = $this->validatorService->validateNewGoal($_POST);
+
+    //     $this->goalService->updateGoal($_POST, $goalToEdit['id']);
+
+    //     unset($_SESSION['goalToEdit']);
+
+    //     redirectTo($_SERVER['HTTP_REFERER']);
+    // }
 }

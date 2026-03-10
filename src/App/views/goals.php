@@ -47,10 +47,10 @@ include $this->resolve("partials/_header.php");
                 </thead>
 
                 <tbody>
-                    <?php $i = 1; ?>
+                    <?php $i = 0; ?>
                     <?php foreach ($goals as $goal): ?>
                         <tr>
-                            <td data-label="No."><?php echo e($i); ?>.</td>
+                            <td data-label="No." value="<?php $i++ ?>"><?php echo e($i); ?>.</td>
                             <td data-label="Goal"><?php echo e($goal['goal_name']); ?></td>
                             <td data-label="Description"><?php echo e($goal['goal_description']); ?></td>
                             <td data-label="Amount needed"><?php echo e($goal['amount_needed']); ?></td>
@@ -60,15 +60,20 @@ include $this->resolve("partials/_header.php");
                             <td data-label="Contribution"><button class="btn-box">
                                     <ion-icon class="contribution--icon" name="color-fill"></ion-icon>
                                 </button></td>
-                            <td data-label="Edit"> <button class="btn-box">
-                                    <ion-icon class="edit--icon" name="create-outline"></ion-icon>
+                            <td data-label="Edit"> <button class="btn-box btn--edit"
+                                    data-id="<?php echo e($goal['id']); ?>"
+                                    data-goal-name="<?php echo e($goal['goal_name']); ?>"
+                                    data-goal-description="<?php echo e($goal['goal_description']); ?>"
+                                    data-goal-amount="<?php echo number_format($goal['amount_needed'], 2, '.', ''); ?>"
+                                    data-deadline="<?php echo e(date('Y-m-d', strtotime($goal['deadline']))); ?>">
+                                    <ion-icon class="edit--icon " name="create-outline"></ion-icon>
                                 </button></td>
                             <td data-label="Delete"> <button type="submit"
                                     class="btn-box">
                                     <ion-icon class="delete--icon" name="trash-outline"></ion-icon>
                                 </button></td>
                         </tr>
-                        <?php $i++; ?>
+
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -78,6 +83,7 @@ include $this->resolve("partials/_header.php");
     <?php
     include $this->resolve("partials/_sideNavAndModals.php");
     include $this->resolve("partials/modals/_addGoalModal.php");
+    include $this->resolve("partials/modals/_editGoalModal.php");
     include $this->resolve("partials/_scripts.php");
 
     ?>
