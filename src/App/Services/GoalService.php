@@ -49,14 +49,19 @@ class GoalService
     {
         $goals = $this->db->query(
             "SELECT
-            id,
-            goal_name,
-            amount_needed,
-            goal_description,
-            deadline,
-            DATE_FORMAT(created_at, '%Y-%m-%d') as formatted_date
-            FROM goals
-            WHERE user_id = :user_id",
+            g.id,
+            g.goal_name,
+            g.amount_needed,
+            g.goal_description,
+            g.deadline,
+            COALESCE(SUM(c.amount),0) AS amount_saved,
+            ROUND(COALESCE(SUM(c.amount),0) / g.amount_needed * 100 , 2) AS progress         
+            FROM goals g
+            LEFT JOIN goal_contributions c
+            ON g.id = c.goal_id
+            WHERE g.user_id = :user_id
+            GROUP BY g.id",
+
             ['user_id' => $userId]
 
         )->fetchAll();

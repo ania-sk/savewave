@@ -47,15 +47,15 @@ include $this->resolve("partials/_header.php");
                 </thead>
 
                 <tbody>
-                    <?php $i = 0; ?>
+                    <?php $i = 1; ?>
                     <?php foreach ($goals as $goal): ?>
                         <tr>
-                            <td data-label="No." value="<?php $i++ ?>"><?php echo e($i); ?>.</td>
+                            <td data-label="No."><?php echo e($i); ?>.</td>
                             <td data-label="Goal"><?php echo e($goal['goal_name']); ?></td>
                             <td data-label="Description"><?php echo e($goal['goal_description']); ?></td>
                             <td data-label="Amount needed"><?php echo e($goal['amount_needed']); ?></td>
-                            <td data-label="Amount saved"></td>
-                            <td data-label="%"></td>
+                            <td data-label="Amount saved"><?php echo e($goal['amount_saved']); ?></td>
+                            <td data-label="%"><?php echo e($goal['progress']); ?></td>
                             <td data-label="Deadline"><?php echo e($goal['deadline']); ?></td>
                             <td data-label="Contribution"><button class="btn-box btn--contribution" data-goal-id="<?php echo e($goal['id']); ?>"
                                     data-goal-name="<?php echo e($goal['goal_name']); ?>">
@@ -100,7 +100,7 @@ include $this->resolve("partials/_header.php");
                     <?php $i = 1;
                     foreach ($contributions as $c): ?>
                         <tr>
-                            <td data-label="No."><?php echo $i++; ?></td>
+                            <td data-label="No."><?php echo $i++; ?>.</td>
                             <td data-label="Goal Name"><?php echo e($c['goal_name']); ?></td>
                             <td data-label="Amount"><?php echo e($c['amount']); ?></td>
                             <td data-label="Date"><?php echo e($c['contribution_date']); ?></td>
