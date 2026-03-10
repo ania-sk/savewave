@@ -38,7 +38,7 @@ include $this->resolve("partials/_header.php");
                         <th scope="col">Description</th>
                         <th scope="col">Amount needed</th>
                         <th scope="col">Amount saved</th>
-                        <th scope="col">%</th>
+                        <th scope="col">Progress</th>
                         <th scope="col">Deadline</th>
                         <th scope="col">Contribution</th>
                         <th scope="col">Edit</th>
@@ -50,12 +50,18 @@ include $this->resolve("partials/_header.php");
                     <?php $i = 1; ?>
                     <?php foreach ($goals as $goal): ?>
                         <tr>
-                            <td data-label="No."><?php echo e($i); ?>.</td>
+                            <td data-label="No."><?php echo e($i++); ?>.</td>
                             <td data-label="Goal"><?php echo e($goal['goal_name']); ?></td>
                             <td data-label="Description"><?php echo e($goal['goal_description']); ?></td>
                             <td data-label="Amount needed"><?php echo e($goal['amount_needed']); ?></td>
                             <td data-label="Amount saved"><?php echo e($goal['amount_saved']); ?></td>
-                            <td data-label="%"><?php echo e($goal['progress']); ?></td>
+                            <td data-label="Progress">
+                                <p class="progress-text flex-conteiner"><?php echo e(number_format($goal['progress']), 1); ?>%</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: <?php echo min(100, e($goal['progress'])); ?>%"></div>
+                                </div>
+
+                            </td>
                             <td data-label="Deadline"><?php echo e($goal['deadline']); ?></td>
                             <td data-label="Contribution"><button class="btn-box btn--contribution" data-goal-id="<?php echo e($goal['id']); ?>"
                                     data-goal-name="<?php echo e($goal['goal_name']); ?>">
