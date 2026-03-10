@@ -111,8 +111,11 @@ document.addEventListener("DOMContentLoaded", function () {
 document.querySelectorAll(".btn--contribution").forEach((button) => {
   button.addEventListener("click", function () {
     const goalId = this.dataset.goalId;
+    const goalName = this.dataset.goalName;
 
     document.getElementById("contribution-goal-id").value = goalId;
+
+    document.getElementById("contribution-goal-name").textContent = goalName;
 
     document.getElementById("modal-add-contribution").style.display = "block";
   });

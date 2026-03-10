@@ -3,7 +3,7 @@
         <div class="modal-header flex-conteiner">
             <span id="close-contribution-modal" class="close">&times;</span>
             <ion-icon class="contribution--icon" name="color-fill-outline"></ion-icon>
-            <p>Contribution</p>
+            <p>Contribution for <span id="contribution-goal-name"></span></p>
         </div>
 
         <div class="modal-body flex-conteiner">
@@ -23,11 +23,6 @@
                         id="cash-icon"
                         class="modal-icon"
                         name="cash-outline"></ion-icon>
-                </div>
-                <div class="input-form-box  flex-conteiner">
-                    <label>Date</label>
-                    <input type="date" name="dateOfContribution" required>
-                    <ion-icon id="date-icon" class="modal-icon" name="calendar-outline"></ion-icon>
                 </div>
 
                 <button id="goal-submit" type="submit" class="btn btn--modal">Save</button>

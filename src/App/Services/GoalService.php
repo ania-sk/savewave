@@ -97,6 +97,20 @@ class GoalService
         );
     }
 
+    public function store(array $formData)
+    {
+        $this->db->query(
+            "INSERT INTO goal_contributions
+            (user_id, goal_id, amount)
+            VALUES (:user_id, :goal_id, :amount)",
+            [
+                'user_id' => $_SESSION['user'],
+                'goal_id' => $formData['goalId'],
+                'amount' => $formData['amount']
+            ]
+        );
+    }
+
     // public function getUserGoal(string $id)
     // {
     //     return $this->db->query(

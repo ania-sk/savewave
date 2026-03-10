@@ -56,6 +56,7 @@ function registerRoutes(App $app)
 
     // $app->get('/api/goals/{goal}', [GoalsController::class, 'getGoal'])->add(AuthRequiredMiddleware::class);
     $app->post('/goals/update', [GoalsController::class, 'updateGoal'])->add(AuthRequiredMiddleware::class);
+    $app->post('/contributions/store', [GoalsController::class, 'store'])->add(AuthRequiredMiddleware::class);
 
     $app->post('/settings/email/update', [SettingsController::class, 'updateEmail']);
     $app->post('/settings/update/username', [SettingsController::class, 'updateUsername']);

@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS goal_contributions(
     goal_id BIGINT(20) UNSIGNED NOT NULL,
     amount DECIMAL(10,2) NOT NULL,    
     contribution_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    contribution_comment VARCHAR(255),
+    
     PRIMARY KEY(id),
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY(goal_id) REFERENCES goals(id) ON DELETE CASCADE

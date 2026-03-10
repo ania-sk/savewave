@@ -54,6 +54,16 @@ class GoalsController
         exit();
     }
 
+    public function store()
+    {
+        $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+        $formData = $_POST;
+        $this->goalService->store($formData);
+
+        header("Location: " . $redirectPath);
+        exit();
+    }
+
     // public function getGoal($id)
     // {
     //     $goal = $this->goalService->getGoalById($id);
