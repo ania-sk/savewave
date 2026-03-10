@@ -85,6 +85,10 @@
   font-size: 2.5rem;
   transition: all 0.3s;
 }
+
+.modal-header .contribution--icon {
+  color: #ebe1f8;
+}
 .contribution--icon:hover,
 .contribution--icon:active,
 .edit--icon:hover,
@@ -94,6 +98,7 @@
   transform: scale(1.1);
 }
 
+#modal-add-contribution,
 #modal-edit-goal {
   display: none;
 }

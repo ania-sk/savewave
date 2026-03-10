@@ -57,7 +57,7 @@ include $this->resolve("partials/_header.php");
                             <td data-label="Amount saved"></td>
                             <td data-label="%"></td>
                             <td data-label="Deadline"><?php echo e($goal['deadline']); ?></td>
-                            <td data-label="Contribution"><button class="btn-box">
+                            <td data-label="Contribution"><button class="btn-box btn--contribution" data-goal-id="<?php e($goal['id']); ?>">
                                     <ion-icon class="contribution--icon" name="color-fill"></ion-icon>
                                 </button></td>
                             <td data-label="Edit"> <button class="btn-box btn--edit"
@@ -84,6 +84,7 @@ include $this->resolve("partials/_header.php");
     include $this->resolve("partials/_sideNavAndModals.php");
     include $this->resolve("partials/modals/_addGoalModal.php");
     include $this->resolve("partials/modals/_editGoalModal.php");
+    include $this->resolve("partials/modals/_addContributionModal.php");
     include $this->resolve("partials/_scripts.php");
 
     ?>

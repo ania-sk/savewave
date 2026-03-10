@@ -77,3 +77,43 @@ document.querySelectorAll(".btn--edit").forEach((button) => {
     // });
   });
 });
+
+//CONTRIBUTIONS
+document.addEventListener("DOMContentLoaded", function () {
+  //get edit goal modal
+  const contributionModal = document.getElementById("modal-add-contribution");
+  //get X button
+  const closeButton = document.querySelector("#close-contribution-modal");
+  //get edit buttons
+  const contributionBtns = document.getElementsByClassName("btn--contribution");
+
+  if (contributionModal && contributionBtns.length > 0) {
+    Array.from(contributionBtns).forEach((button) => {
+      button.addEventListener("click", function () {
+        contributionModal.style.display = "block";
+      });
+    });
+  }
+
+  if (closeButton && contributionModal) {
+    closeButton.onclick = function () {
+      contributionModal.style.display = "none";
+    };
+  }
+
+  window.addEventListener("click", function (event) {
+    if (event.target === contributionModal) {
+      contributionModal.style.display = "none";
+    }
+  });
+});
+
+document.querySelectorAll(".btn--contribution").forEach((button) => {
+  button.addEventListener("click", function () {
+    const goalId = this.dataset.goalId;
+
+    document.getElementById("contribution-goal-id").value = goalId;
+
+    document.getElementById("modal-add-contribution").style.display = "block";
+  });
+});
