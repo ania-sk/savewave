@@ -58,7 +58,8 @@
   font-size: 3.8rem;
 }
 /* GOALS TABLE */
-.goals-table-box {
+.table-heading {
+  margin-bottom: 2rem;
 }
 
 .btn-box {

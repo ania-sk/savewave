@@ -34,13 +34,16 @@ class GoalsController
         $goals = $this->goalService->getUserGoals($userId);
         $goalToEdit = $_SESSION['goalToEdit'] ?? null;
 
+        $contributions = $this->goalService->getUserContributions($userId);
+
         echo $this->view->render("/goals.php", [
             'title' => 'Goals',
             'cssLink' => 'mainPage.css',
             'cssLink2' => 'goals.css',
             'jsLink' => 'goals.js',
             'goals' => $goals,
-            'goalToEdit' => $goalToEdit
+            'goalToEdit' => $goalToEdit,
+            'contributions' => $contributions
         ]);
     }
 

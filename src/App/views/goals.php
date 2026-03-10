@@ -27,7 +27,7 @@ include $this->resolve("partials/_header.php");
         <!-- GOALS TABLE -->
         <section class="goals-table-box">
             <div class="table-heading flex-conteiner">
-                <p></p>
+                <p>Your Current Goals</p>
             </div>
 
             <table class="table">
@@ -75,6 +75,38 @@ include $this->resolve("partials/_header.php");
                                 </button></td>
                         </tr>
 
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="contribution-table-box">
+            <div class="table-heading flex-conteiner">
+                <p>Your previous contributions</p>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Goal Name</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i = 1;
+                    foreach ($contributions as $c): ?>
+                        <tr>
+                            <td data-label="No."><?php echo $i++; ?></td>
+                            <td data-label="Goal Name"><?php echo e($c['goal_name']); ?></td>
+                            <td data-label="Amount"><?php echo e($c['amount']); ?></td>
+                            <td data-label="Date"><?php echo e($c['contribution_date']); ?></td>
+                            <td data-label="Edit"></td>
+                            <td data-label="Delete"></td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>

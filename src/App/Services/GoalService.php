@@ -97,6 +97,22 @@ class GoalService
         );
     }
 
+    public function getUserContributions(int $userId)
+    {
+        return $contributions = $this->db->query(
+            "SELECT gc.goal_id,
+                gc.amount,
+                gc.contribution_date,
+                g.goal_name
+         FROM goal_contributions gc
+         JOIN goals g ON g.id = gc.goal_id
+         WHERE gc.user_id = :userId",
+            [
+                "userId" => $userId
+            ]
+        )->fetchAll();
+    }
+
     public function store(array $formData)
     {
         $this->db->query(
