@@ -77,6 +77,26 @@ class GoalService
         )->find();
     }
 
+    public function updateGoal(array $formData)
+    {
+        $this->db->query(
+            "UPDATE goals
+            SET goal_name = :goal_name, 
+            goal_description = :goal_description,
+             amount_needed = :amount_needed, 
+             deadline = :deadline
+             WHERE id = :id AND user_id = :user_id",
+            [
+                'user_id' => $_SESSION['user'],
+                'goal_name' => $formData['goalName'],
+                'goal_description' => $formData['goalDescription'],
+                'amount_needed' => $formData['goalAmount'],
+                'deadline' => $formData['goalDate'],
+                'id' => $formData['goalId']
+            ]
+        );
+    }
+
     // public function getUserGoal(string $id)
     // {
     //     return $this->db->query(

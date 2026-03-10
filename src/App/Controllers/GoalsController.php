@@ -44,13 +44,23 @@ class GoalsController
         ]);
     }
 
-    public function getGoal($id)
+    public function updateGoal($goalId)
     {
-        $goal = $this->goalService->getGoalById($id);
 
-        header('Content-Type: application/json');
-        echo json_encode($goal);
+        $formData = $_POST;
+        $this->goalService->updateGoal($formData);
+
+        header("Location: /goals");
+        exit();
     }
+
+    // public function getGoal($id)
+    // {
+    //     $goal = $this->goalService->getGoalById($id);
+
+    //     header('Content-Type: application/json');
+    //     echo json_encode($goal);
+    // }
 
     // public function editGoal(array $params): void
     // {
