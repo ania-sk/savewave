@@ -74,6 +74,13 @@ class GoalsController
         exit();
     }
 
+    public function deleteContribution($params)
+    {
+        $this->goalService->deleteContribution((int)$params['contribution']);
+
+        redirectTo('/goals');
+    }
+
     // public function getGoal($id)
     // {
     //     $goal = $this->goalService->getGoalById($id);

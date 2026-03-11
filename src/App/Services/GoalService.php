@@ -116,7 +116,8 @@ class GoalService
     public function getUserContributions(int $userId)
     {
         return $contributions = $this->db->query(
-            "SELECT gc.goal_id,
+            "SELECT gc.id,
+            gc.goal_id,
                 gc.amount,
                 gc.contribution_date,
                 g.goal_name
@@ -139,6 +140,17 @@ class GoalService
                 'user_id' => $_SESSION['user'],
                 'goal_id' => $formData['goalId'],
                 'amount' => $formData['amount']
+            ]
+        );
+    }
+
+    public function deleteContribution(int $contributionId)
+    {
+        $this->db->query(
+            "DELETE FROM goal_contributions WHERE id = :id AND user_id = :user_id",
+            [
+                'id' => $contributionId,
+                'user_id' => $_SESSION['user']
             ]
         );
     }

@@ -120,10 +120,14 @@ include $this->resolve("partials/_header.php");
                                 </button></td>
 
                             </td>
-                            <td data-label="Delete"> <button type="submit"
-                                    class="btn-box">
-                                    <ion-icon class="delete--icon" name="trash-outline"></ion-icon>
-                                </button></td>
+                            <td data-label="Delete">
+                                <form action="/contributions/<?php echo e($c['id']); ?>" method="POST">
+                                    <input type="hidden" name="_METHOD" value="DELETE">
+                                    <?php include $this->resolve("partials/_csrf.php"); ?>
+                                    <button onclick="return confirm('Remove this contribution?')" class="btn-box"><ion-icon class="delete--icon" name="trash-outline"></ion-icon>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
