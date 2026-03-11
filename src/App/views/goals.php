@@ -36,8 +36,8 @@ include $this->resolve("partials/_header.php");
                         <th scope="col">No.</th>
                         <th scope="col">Goal</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Amount needed</th>
-                        <th scope="col">Amount saved</th>
+                        <th scope="col">Amount<br>needed</th>
+                        <th scope="col">Amount<br>saved</th>
                         <th scope="col">Progress</th>
                         <th scope="col">Deadline</th>
                         <th scope="col">Contribution</th>
@@ -75,10 +75,15 @@ include $this->resolve("partials/_header.php");
                                     data-deadline="<?php echo e(date('Y-m-d', strtotime($goal['deadline']))); ?>">
                                     <ion-icon class="edit--icon " name="create-outline"></ion-icon>
                                 </button></td>
-                            <td data-label="Delete"> <button type="submit"
-                                    class="btn-box">
-                                    <ion-icon class="delete--icon" name="trash-outline"></ion-icon>
-                                </button></td>
+
+                            <td data-label="Delete">
+                                <form action="/goals/<?php echo e($goal['id']); ?>" method="POST">
+                                    <input type="hidden" name="_METHOD" value="DELETE">
+                                    <?php include $this->resolve("partials/_csrf.php"); ?>
+                                    <button onclick="return confirm('Remove this goal?')" class="btn-box"><ion-icon class="delete--icon" name="trash-outline"></ion-icon>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
 
                     <?php endforeach; ?>
@@ -110,8 +115,15 @@ include $this->resolve("partials/_header.php");
                             <td data-label="Goal Name"><?php echo e($c['goal_name']); ?></td>
                             <td data-label="Amount"><?php echo e($c['amount']); ?></td>
                             <td data-label="Date"><?php echo e($c['contribution_date']); ?></td>
-                            <td data-label="Edit"></td>
-                            <td data-label="Delete"></td>
+                            <td data-label="Edit"><button class="btn-box">
+                                    <ion-icon class="edit--icon " name="create-outline"></ion-icon>
+                                </button></td>
+
+                            </td>
+                            <td data-label="Delete"> <button type="submit"
+                                    class="btn-box">
+                                    <ion-icon class="delete--icon" name="trash-outline"></ion-icon>
+                                </button></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

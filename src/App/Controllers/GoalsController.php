@@ -57,6 +57,13 @@ class GoalsController
         exit();
     }
 
+    public function deleteGoal($params)
+    {
+        $this->goalService->deleteGoal($params['goal']);
+
+        redirectTo('/goals');
+    }
+
     public function store()
     {
         $redirectPath = $_POST['redirect_to'] ?? '/mainPage';

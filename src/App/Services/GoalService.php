@@ -102,6 +102,17 @@ class GoalService
         );
     }
 
+    public function deleteGoal($goalId)
+    {
+        $this->db->query(
+            "DELETE FROM goals WHERE id = :id AND user_id = :user_id",
+            [
+                'id' => $goalId,
+                'user_id' => $_SESSION['user']
+            ]
+        );
+    }
+
     public function getUserContributions(int $userId)
     {
         return $contributions = $this->db->query(
