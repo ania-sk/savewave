@@ -74,6 +74,15 @@ class GoalsController
         exit();
     }
 
+    public function updateContribution()
+    {
+        $formData = $_POST;
+        $this->goalService->updateContribution($formData);
+
+        redirectTo('/goals');
+        exit();
+    }
+
     public function deleteContribution($params)
     {
         $this->goalService->deleteContribution((int)$params['contribution']);

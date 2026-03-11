@@ -144,6 +144,21 @@ class GoalService
         );
     }
 
+    public function updateContribution(array $formData)
+    {
+        $this->db->query(
+            "UPDATE goal_contributions
+            SET 
+             amount= :amount
+             WHERE id = :id AND user_id = :user_id",
+            [
+                'user_id' => $_SESSION['user'],
+                'amount' => $formData['amount'],
+                'id' => $formData['contributionId']
+            ]
+        );
+    }
+
     public function deleteContribution(int $contributionId)
     {
         $this->db->query(
