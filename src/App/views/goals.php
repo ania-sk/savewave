@@ -115,10 +115,12 @@ include $this->resolve("partials/_header.php");
                             <td data-label="Goal Name"><?php echo e($c['goal_name']); ?></td>
                             <td data-label="Amount"><?php echo e($c['amount']); ?></td>
                             <td data-label="Date"><?php echo e($c['contribution_date']); ?></td>
-                            <td data-label="Edit"><button class="btn-box">
+                            <td data-label="Edit"><button class="btn-box btn--edit-contribution"
+                                    data-contribution-id="<?php echo e($c['id']); ?>"
+                                    data-contribution-amount="<?php echo e($c['amount']); ?>"
+                                    data-contribution-goal-name="<?php echo e($c['goal_name']); ?>">
                                     <ion-icon class="edit--icon " name="create-outline"></ion-icon>
-                                </button></td>
-
+                                </button>
                             </td>
                             <td data-label="Delete">
                                 <form action="/contributions/<?php echo e($c['id']); ?>" method="POST">
@@ -140,6 +142,7 @@ include $this->resolve("partials/_header.php");
     include $this->resolve("partials/modals/_addGoalModal.php");
     include $this->resolve("partials/modals/_editGoalModal.php");
     include $this->resolve("partials/modals/_addContributionModal.php");
+    include $this->resolve("partials/modals/_editContributionModal.php");
     include $this->resolve("partials/_scripts.php");
 
     ?>

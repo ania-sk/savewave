@@ -119,6 +119,7 @@
   transform: scale(1.1);
 }
 
+#modal-edit-contribution,
 #modal-add-contribution,
 #modal-edit-goal {
   display: none;

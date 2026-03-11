@@ -80,7 +80,7 @@ document.querySelectorAll(".btn--edit").forEach((button) => {
 
 //CONTRIBUTIONS
 document.addEventListener("DOMContentLoaded", function () {
-  //get edit goal modal
+  //get add contribution modal
   const contributionModal = document.getElementById("modal-add-contribution");
   //get X button
   const closeButton = document.querySelector("#close-contribution-modal");
@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+//add contribution
 document.querySelectorAll(".btn--contribution").forEach((button) => {
   button.addEventListener("click", function () {
     const goalId = this.dataset.goalId;
@@ -119,4 +120,43 @@ document.querySelectorAll(".btn--contribution").forEach((button) => {
 
     document.getElementById("modal-add-contribution").style.display = "block";
   });
+});
+
+// --- EDIT CONTRIBUTION MODAL ---
+//get modal
+const editContributionModal = document.getElementById(
+  "modal-edit-contribution",
+);
+// get X button
+const closeEditContributionModal = document.getElementById(
+  "close-edit-contribution-modal",
+);
+
+// get edit buttons and open and fill modal
+document.querySelectorAll(".btn--edit-contribution").forEach((button) => {
+  button.addEventListener("click", function () {
+    const contributionId = this.dataset.contributionId;
+    const contributionAmount = this.dataset.contributionAmount;
+    const contributionGoalName = this.dataset.contributionGoalName;
+
+    document.getElementById("edit-contribution-id").value = contributionId;
+    document.getElementById("edit-contribution-amount").value =
+      contributionAmount;
+    document.getElementById("edit-contribution-goal-name").textContent =
+      contributionGoalName;
+
+    editContributionModal.style.display = "block";
+  });
+});
+
+// close modal with X
+closeEditContributionModal.addEventListener("click", () => {
+  editContributionModal.style.display = "none";
+});
+
+// close modal
+window.addEventListener("click", (event) => {
+  if (event.target === editContributionModal) {
+    editContributionModal.style.display = "none";
+  }
 });
