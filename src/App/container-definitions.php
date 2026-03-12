@@ -31,8 +31,9 @@ return [
     },
     TransactionService::class => function (Container $container) {
         $db = $container->get(Database::class);
+        $goalService = $container->get(GoalService::class);
 
-        return new TransactionService($db);
+        return new TransactionService($db, $goalService);
     },
     CategoryService::class => function (Container $container) {
         $db = $container->get(Database::class);

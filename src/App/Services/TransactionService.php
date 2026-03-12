@@ -8,7 +8,7 @@ use Framework\Database;
 
 class TransactionService
 {
-    public function __construct(private Database $db) {}
+    public function __construct(private Database $db, private GoalService $goalService) {}
 
     public function createIncome(array $formData)
     {
@@ -317,5 +317,86 @@ class TransactionService
                 'user_id' => $_SESSION['user']
             ]
         );
+    }
+
+    public function getBalance(int $userId, ?string $startDate = null, ?string $endDate = null): array
+    {
+        if (!empty($startDate) && !empty($endDate)) {
+
+            $dtStart = $startDate . ' 00:00:00';
+            $dtEnd   = $endDate   . ' 23:59:59';
+
+            $expenses = $this->getUserExpensesByDateRange($userId, $dtStart, $dtEnd);
+            $expensesSumsByCat = $this->getExpenseSumsByCategoryAndDateRange($userId, $dtStart, $dtEnd);
+
+            $incomes = $this->getUserIncomesByDateRange($userId, $dtStart, $dtEnd);
+            $incomesSumsByCat = $this->getIncomeSumsByCategoryAndDateRange($userId, $dtStart, $dtEnd);
+
+            $contributions = $this->goalService->getUserContributionsByDateRange($userId, $dtStart, $dtEnd);
+            // $contributonsSumsByGoal = $this->goalService->getContributionSumsByGoalAndDateRange($userId, $startDate, $endDate);           
+        } else {
+            $expenses = $this->getUserExpenses($userId);
+            $expensesSumsByCat = $this->getExpenseSumsByCategory($userId);
+
+            $incomes = $this->getUserIncomes($userId);
+            $incomesSumsByCat = $this->getIncomeSumsByCategory($userId);
+
+            $contributions = $this->goalService->getUserContributions($userId);
+        }
+
+        $totalExpense = array_sum(array_column($expenses, 'amount'));
+        $totalIncome = array_sum(array_column($incomes, 'amount'));
+        $totalContributions = array_sum(array_column($contributions, 'amount'));
+
+        $balance = $totalIncome - $totalExpense - $totalContributions;
+
+        return [
+            'expenses' => $expenses,
+            'incomes' => $incomes,
+            'contributions' => $contributions,
+            'totalExpense' => $totalExpense,
+            'totalIncome' => $totalIncome,
+            'totalContributions' => $totalContributions,
+            'expensesSumsByCat' => $expensesSumsByCat,
+            'incomesSumsByCat' => $incomesSumsByCat,
+            'balance' => $balance
+        ];
+    }
+
+    public function buildTransactionHistory(array $incomes, array $expenses, array $contributions): array
+    {
+        $transactions = [];
+
+        foreach ($incomes as $income) {
+            $transactions[] = [
+                'type' => 'Income',
+                'category' => $income['name'],
+                'date' => $income['formatted_date'],
+                'amount' => $income['amount']
+            ];
+        }
+
+        foreach ($expenses as $expense) {
+            $transactions[] = [
+                'type' => 'Expense',
+                'category' => $expense['name'],
+                'date' => $expense['formatted_date'],
+                'amount' => $expense['amount'],
+                'monthly_limit' => $expense['monthly_limit']
+            ];
+        }
+
+        foreach ($contributions as $contribution) {
+            $transactions[] = [
+                'type' => 'Contribution',
+                'category' => $contribution['goal_name'],
+                'date' => $contribution['formatted_date'],
+                'amount' => $contribution['amount']
+            ];
+        }
+
+        usort($transactions, fn($a, $b) => strtotime($b['date']) - strtotime($a['date']));
+
+        return $transactions;
     }
 }
