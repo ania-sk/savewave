@@ -75,7 +75,7 @@ include $this->resolve("partials/_header.php");
                                     <input type="hidden" name="_METHOD" value="DELETE">
 
                                     <?php include $this->resolve("partials/_csrf.php"); ?>
-                                    <button class="btn-box"><ion-icon class="delete--icon" name="trash-outline"></ion-icon></button>
+                                    <button onclick="return confirm('Remove this income?')" class="btn-box"><ion-icon class="delete--icon" name="trash-outline"></ion-icon></button>
 
                                 </form>
                             </td>
