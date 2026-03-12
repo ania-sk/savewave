@@ -118,8 +118,8 @@ class GoalService
         return $contributions = $this->db->query(
             "SELECT gc.id,
             gc.goal_id,
-                gc.amount,
-                gc.contribution_date,
+                gc.amount,                
+                DATE_FORMAT(gc.contribution_date, '%Y-%m-%d') as formatted_date,
                 g.goal_name
          FROM goal_contributions gc
          JOIN goals g ON g.id = gc.goal_id
@@ -129,6 +129,31 @@ class GoalService
             ]
         )->fetchAll();
     }
+
+    public function getUserContributionsByDateRange(int $userId, string $startDate, string $endDate): array
+    {
+        return $contributions = $this->db->query(
+            "SELECT
+            gc.id,
+            gc.goal_id,
+            gc.amount,
+            DATE_FORMAT(gc.contribution_date, '%Y-%m-%d') as formatted_date,
+            g.goal_name
+            FROM goal_contributions AS gc
+            JOIN goals AS g 
+            ON g.id = gc.goal_id
+            WHERE gc.user_id = :userId
+            AND gc.contribution_date BETWEEN :startDate AND :endDate
+            ORDER BY gc.contribution_date DESC",
+            [
+                'userId' => $userId,
+                'startDate' => $startDate,
+                'endDate' => $endDate
+            ]
+        )->fetchAll();
+    }
+
+    // public function getContributionSumsByGoalAndDateRange() {}
 
     public function store(array $formData)
     {

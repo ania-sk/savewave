@@ -115,7 +115,7 @@ include $this->resolve("partials/_header.php");
                             <td data-label="No."><?php echo $i++; ?>.</td>
                             <td data-label="Goal Name"><?php echo e($c['goal_name']); ?></td>
                             <td data-label="Amount"><?php echo e($c['amount']); ?></td>
-                            <td data-label="Date"><?php echo e($c['contribution_date']); ?></td>
+                            <td data-label="Date"><?php echo e($c['formatted_date']); ?></td>
                             <td data-label="Edit"><button class="btn-box btn--edit-contribution"
                                     data-contribution-id="<?php echo e($c['id']); ?>"
                                     data-contribution-amount="<?php echo e($c['amount']); ?>"

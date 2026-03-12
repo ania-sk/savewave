@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Services\{CategoryService, TransactionService};
+use App\Services\{CategoryService, GoalService, TransactionService};
 use Framework\TemplateEngine;
 
 class   BalanceController
@@ -12,7 +12,8 @@ class   BalanceController
     public function __construct(
         private TemplateEngine $view,
         private CategoryService $categoryService,
-        private TransactionService $transactionService
+        private TransactionService $transactionService,
+        private GoalService $goalService
     ) {}
 
     public function balance()
@@ -33,11 +34,15 @@ class   BalanceController
             $expensesSumsByCat = $this->transactionService->getExpenseSumsByCategoryAndDateRange($userId, $dtStart, $dtEnd);
             $totalExpense = array_sum(array_column($expenses, 'amount'));
 
-            $incomes = $this->transactionService->getUserIncomesByDateRange($userId, $startDate, $endDate);
-            $incomesSumsByCat = $this->transactionService->getIncomeSumsByCategoryAndDateRange($userId, $startDate, $endDate);
+            $incomes = $this->transactionService->getUserIncomesByDateRange($userId, $dtStart, $dtEnd);
+            $incomesSumsByCat = $this->transactionService->getIncomeSumsByCategoryAndDateRange($userId, $dtStart, $dtEnd);
             $totalIncome = array_sum(array_column($incomes, 'amount'));
 
-            $balance = $totalIncome - $totalExpense;
+            $contributions = $this->goalService->getUserContributionsByDateRange($userId, $dtStart, $dtEnd);
+            // $contributonsSumsByGoal = $this->goalService->getContributionSumsByGoalAndDateRange($userId, $startDate, $endDate);
+            $totalContributions = array_sum(array_column($contributions, 'amount'));
+
+            $balance = $totalIncome - $totalExpense - $totalContributions;
         } else {
             $expenses = $this->transactionService->getUserExpenses($userId);
             $expensesSumsByCat = $this->transactionService->getExpenseSumsByCategory($userId);
@@ -46,7 +51,11 @@ class   BalanceController
             $incomes = $this->transactionService->getUserIncomes($userId);
             $incomesSumsByCat = $this->transactionService->getIncomeSumsByCategory($userId);
             $totalIncome = array_sum(array_column($incomes, 'amount'));
-            $balance = $totalIncome - $totalExpense;
+
+            $contributions = $this->goalService->getUserContributions($userId);
+            $totalContributions = array_sum(array_column($contributions, 'amount'));
+
+            $balance = $totalIncome - $totalExpense - $totalContributions;
         }
 
         $transactions = [];
@@ -68,6 +77,15 @@ class   BalanceController
                 'date' => $expense['formatted_date'],
                 'amount' => $expense['amount'],
                 'monthly_limit' => $expense['monthly_limit']
+            ];
+        }
+
+        foreach ($contributions as $contribution) {
+            $transactions[] = [
+                'type' => 'Contribution',
+                'category' => $contribution['goal_name'],
+                'date' => $contribution['formatted_date'],
+                'amount' => $contribution['amount']
             ];
         }
 
