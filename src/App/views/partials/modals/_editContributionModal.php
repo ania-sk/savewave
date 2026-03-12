@@ -2,7 +2,7 @@
     <div class="modal-content">
         <div class="modal-header flex-conteiner">
             <span id="close-edit-contribution-modal" class="close">&times;</span>
-            <ion-icon class="contribution--icon" name="color-fill-outline"></ion-icon>
+            <i class="contribution--icon ph ph-hand-coins"></i>
             <p>Edit contribution for <span id="edit-contribution-goal-name"></span></p>
         </div>
 

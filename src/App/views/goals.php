@@ -65,7 +65,8 @@ include $this->resolve("partials/_header.php");
                             <td data-label="Deadline"><?php echo e($goal['deadline']); ?></td>
                             <td data-label="Contribution"><button class="btn-box btn--contribution" data-goal-id="<?php echo e($goal['id']); ?>"
                                     data-goal-name="<?php echo e($goal['goal_name']); ?>">
-                                    <ion-icon class="contribution--icon" name="color-fill"></ion-icon>
+                                    <!-- <ion-icon class="contribution--icon" name="color-fill"></ion-icon> -->
+                                    <i class="contribution--icon ph-fill ph-hand-coins"></i>
                                 </button></td>
                             <td data-label="Edit"> <button class="btn-box btn--edit"
                                     data-id="<?php echo e($goal['id']); ?>"
