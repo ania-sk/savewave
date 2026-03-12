@@ -160,3 +160,13 @@ window.addEventListener("click", (event) => {
     editContributionModal.style.display = "none";
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const balanceBoxEl = document.querySelector(".balance-box");
+  const thumbDownIconEl = balanceBoxEl.querySelector(
+    "ion-icon[name='thumbs-down-outline']",
+  );
+  if (thumbDownIconEl) {
+    balanceBoxEl.style.borderColor = "red";
+  }
+});

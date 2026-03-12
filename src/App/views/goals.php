@@ -8,7 +8,7 @@ include $this->resolve("partials/_header.php");
                 echo ($activeForm === 'addExpenseCategory') ? 'modal-add-expense-category-open modal-expense-open' : ''; ?>">
     <!-- MAIN SECTION -->
     <main class="section-main flex-conteiner">
-        <div class="heading-box">
+        <div class="heading-box grid-cols-2">
             <div class="goals-heading flex-conteiner"><ion-icon class="nav-icon" name="heart-half-outline"></ion-icon>
                 <p>Goals</p>
             </div>
@@ -21,8 +21,19 @@ include $this->resolve("partials/_header.php");
                     <p>Add goal</p>
                 </button>
             </div>
-
         </div>
+        <!-- BALANCE -->
+        <section class="section-balance flex-conteiner">
+            <div class="balance-box flex-conteiner">
+                <p>Your savings: <?php echo e($balance); ?></p>
+                <?php if ($balance > 0): ?>
+                    <ion-icon name="thumbs-up-outline"></ion-icon>
+                <?php else: ?>
+                    <ion-icon name="thumbs-down-outline"></ion-icon>
+                <?php endif; ?>
+            </div>
+
+        </section>
 
         <!-- GOALS TABLE -->
         <section class="goals-table-box">
@@ -64,7 +75,8 @@ include $this->resolve("partials/_header.php");
                             </td>
                             <td data-label="Deadline"><?php echo e($goal['deadline']); ?></td>
                             <td data-label="Contribution"><button class="btn-box btn--contribution" data-goal-id="<?php echo e($goal['id']); ?>"
-                                    data-goal-name="<?php echo e($goal['goal_name']); ?>">
+                                    data-goal-name="<?php echo e($goal['goal_name']); ?>"
+                                    <?php echo $balance <= 0 ? 'disabled' : ''; ?>>
                                     <!-- <ion-icon class="contribution--icon" name="color-fill"></ion-icon> -->
                                     <i class="contribution--icon ph-fill ph-hand-coins"></i>
                                 </button></td>

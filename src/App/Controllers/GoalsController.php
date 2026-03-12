@@ -6,14 +6,15 @@ namespace App\Controllers;
 
 
 use Framework\TemplateEngine;
-use App\Services\{GoalService, ValidatorService};
+use App\Services\{GoalService, ValidatorService, TransactionService};
 
 class GoalsController
 {
     public function __construct(
         private TemplateEngine $view,
         private GoalService $goalService,
-        private ValidatorService $validatorService
+        private ValidatorService $validatorService,
+        private TransactionService $transactionService
     ) {}
 
     public function addGoal()
@@ -36,6 +37,9 @@ class GoalsController
 
         $contributions = $this->goalService->getUserContributions($userId);
 
+        $balanceData = $this->transactionService->getBalance($userId);
+        $balance = $balanceData['balance'];
+
         echo $this->view->render("/goals.php", [
             'title' => 'Goals',
             'cssLink' => 'mainPage.css',
@@ -43,7 +47,8 @@ class GoalsController
             'jsLink' => 'goals.js',
             'goals' => $goals,
             'goalToEdit' => $goalToEdit,
-            'contributions' => $contributions
+            'contributions' => $contributions,
+            'balance' => $balance
         ]);
     }
 
