@@ -170,3 +170,29 @@ document.addEventListener("DOMContentLoaded", () => {
     balanceBoxEl.style.borderColor = "red";
   }
 });
+
+//errors in modals
+document.addEventListener("DOMContentLoaded", function () {
+  const modalGoal = document.querySelector("#modal-goal");
+  const modalEditGoal = document.querySelector("#modal-edit-goal");
+  const modalContribution = document.querySelector("#modal-add-contribution");
+  const modalEditContribution = document.querySelector(
+    "#modal-edit-contribution",
+  );
+
+  if (document.querySelector(".addGoalFormError")) {
+    modalGoal.style.display = "block";
+  }
+
+  if (document.querySelector(".editGoalFormError")) {
+    modalEditGoal.style.display = "block";
+  }
+
+  if (document.querySelector(".addContributionFormError")) {
+    modalContribution.style.display = "block";
+  }
+
+  if (document.querySelector(".editContributionFormError")) {
+    modalEditContribution.style.display = "block";
+  }
+});

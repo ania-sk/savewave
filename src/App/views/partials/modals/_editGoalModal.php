@@ -27,12 +27,17 @@
                                 id="edit-goal-name"
                                 type="text"
                                 name="goalName"
-                                required
                                 value="" />
                             <ion-icon
                                 id="cash-icon"
                                 class="modal-icon"
                                 name="heart-half-outline"></ion-icon>
+                            <?php if (array_key_exists('goalName', $errors)) : ?>
+                                <div class="editGoalFormError">
+                                    <p class="error-text"><?php echo e($errors['goalName'][0]); ?></p>
+                                    <ion-icon class="error-icon" name="alert"></ion-icon>
+                                </div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- GOAL DESCRIPTION -->
@@ -48,6 +53,12 @@
                                 id="text-icon"
                                 class="modal-icon"
                                 name="document-text-outline"></ion-icon>
+                            <?php if (array_key_exists('goalDescription', $errors)) : ?>
+                                <div class="editGoalFormError">
+                                    <p class="error-text"><?php echo e($errors['goalDescription'][0]); ?></p>
+                                    <ion-icon class="error-icon" name="alert"></ion-icon>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="grid-rows-2-gap">
@@ -62,12 +73,17 @@
                                 min="0"
                                 name="goalAmount"
                                 placeholder="0"
-                                required
                                 value="" />
                             <ion-icon
                                 id="cash-icon"
                                 class="modal-icon"
                                 name="cash-outline"></ion-icon>
+                            <?php if (array_key_exists('goalAmount', $errors)) : ?>
+                                <div class="editGoalFormError">
+                                    <p class="error-text"><?php echo e($errors['goalAmount'][0]); ?></p>
+                                    <ion-icon class="error-icon" name="alert"></ion-icon>
+                                </div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- DEADLINE -->
@@ -76,6 +92,12 @@
                             <input id="edit-goal-date" type="date" name="goalDate" required
                                 value="" />
                             <ion-icon id="date-icon" class="modal-icon" name="calendar-outline"></ion-icon>
+                            <?php if (array_key_exists('goalDate', $errors)) : ?>
+                                <div class="editGoalFormError">
+                                    <p class="error-text"><?php echo e($errors['goalDate'][0]); ?></p>
+                                    <ion-icon class="error-icon" name="alert"></ion-icon>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

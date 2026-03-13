@@ -126,4 +126,11 @@ class ValidatorService
 
         ]);
     }
+
+    public function validateContribution(array $formData)
+    {
+        $this->validator->validate($formData, [
+            'contributionAmount' => ['required', 'numeric']
+        ]);
+    }
 }

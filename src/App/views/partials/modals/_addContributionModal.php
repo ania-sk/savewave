@@ -18,11 +18,17 @@
                 <input type="hidden" name="goalId" id="contribution-goal-id">
                 <div class="input-form-box flex-conteiner">
                     <label>Amount</label>
-                    <input type="number" step="0.01" name="amount" placeholder="0" required>
+                    <input type="number" step="0.01" name="contributionAmount" placeholder="0">
                     <ion-icon
                         id="cash-icon"
                         class="modal-icon"
                         name="cash-outline"></ion-icon>
+                    <?php if (array_key_exists('contributionAmount', $errors)) : ?>
+                        <div class="addContributionFormError">
+                            <p class="error-text"><?php echo e($errors['contributionAmount'][0]); ?></p>
+                            <ion-icon class="error-icon" name="alert"></ion-icon>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
                 <button id="goal-submit" type="submit" class="btn btn--modal">Save</button>
