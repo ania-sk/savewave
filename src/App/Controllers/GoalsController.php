@@ -6,7 +6,7 @@ namespace App\Controllers;
 
 
 use Framework\TemplateEngine;
-use App\Services\{GoalService, ValidatorService, TransactionService};
+use App\Services\{GoalService, ValidatorService, TransactionService, CategoryService};
 
 class GoalsController
 {
@@ -14,7 +14,8 @@ class GoalsController
         private TemplateEngine $view,
         private GoalService $goalService,
         private ValidatorService $validatorService,
-        private TransactionService $transactionService
+        private TransactionService $transactionService,
+        private CategoryService $categoryService
     ) {}
 
     public function addGoal()
@@ -40,6 +41,9 @@ class GoalsController
         $balanceData = $this->transactionService->getBalance($userId);
         $balance = $balanceData['balance'];
 
+        $incomeCategories = $this->categoryService->getUserActiveIncomeCategories($userId);
+        $expenseCategories = $this->categoryService->getUserActiveExpenseCategories($userId);
+
         echo $this->view->render("/goals.php", [
             'title' => 'Goals',
             'cssLink' => 'mainPage.css',
@@ -48,7 +52,9 @@ class GoalsController
             'goals' => $goals,
             'goalToEdit' => $goalToEdit,
             'contributions' => $contributions,
-            'balance' => $balance
+            'balance' => $balance,
+            'incomeCategories' => $incomeCategories,
+            'expenseCategories' => $expenseCategories
         ]);
     }
 
