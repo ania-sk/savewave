@@ -164,7 +164,7 @@ class GoalService
             [
                 'user_id' => $_SESSION['user'],
                 'goal_id' => $formData['goalId'],
-                'amount' => $formData['amount']
+                'amount' => $formData['contributionAmount']
             ]
         );
     }
@@ -178,7 +178,7 @@ class GoalService
              WHERE id = :id AND user_id = :user_id",
             [
                 'user_id' => $_SESSION['user'],
-                'amount' => $formData['amount'],
+                'amount' => $formData['contributionAmount'],
                 'id' => $formData['contributionId']
             ]
         );

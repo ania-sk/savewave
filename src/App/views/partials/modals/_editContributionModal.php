@@ -18,7 +18,7 @@
                 <input type="hidden" name="contributionId" value="<?php echo e($contributionToEdit['id'] ?? ''); ?>" id="edit-contribution-id">
                 <div class="input-form-box flex-conteiner">
                     <label>Amount</label>
-                    <input id="edit-contribution-amount" type="number" step="0.01" name="amount" placeholder="0" value="">
+                    <input id="edit-contribution-amount" type="number" step="0.01" name="contributionAmount" placeholder="0" value="">
                     <ion-icon
                         id="cash-icon"
                         class="modal-icon"
