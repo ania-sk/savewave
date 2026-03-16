@@ -7,6 +7,7 @@ namespace App\Controllers;
 
 use Framework\TemplateEngine;
 use App\Services\{GoalService, ValidatorService, TransactionService, CategoryService};
+use Framework\Exceptions\ValidationException;
 
 class GoalsController
 {
@@ -22,21 +23,16 @@ class GoalsController
     {
         $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
 
-        $errors = $this->validatorService->validateNewGoal($_POST);
-
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
+        try {
+            $this->validatorService->validateNewGoal($_POST);
+            $this->goalService->createNewGoal($_POST);
+            redirectTo($redirectPath);
+        } catch (ValidationException $ex) {
+            $_SESSION['errors'] = $ex->errors;
             $_SESSION['oldFormData'] = $_POST;
+            $_SESSION['activeForm'] = $_POST['form_type'];
             redirectTo($redirectPath);
         }
-
-        $this->goalService->createNewGoal($_POST);
-
-        unset($_SESSION['errors']);
-        unset($_SESSION['oldFormData']);
-
-        redirectTo($redirectPath);
-        exit();
     }
 
     public function goals()
@@ -67,25 +63,21 @@ class GoalsController
         ]);
     }
 
-    public function updateGoal($goalId)
+    public function updateGoal()
     {
         $formData = $_POST;
         $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
 
-        $errors = $this->validatorService->validateNewGoal($formData);
-
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
-            $_SESSION['oldFormData'] = $_POST;
+        try {
+            $this->validatorService->validateNewGoal($formData);
+            $this->goalService->updateGoal($formData);
+            redirectTo($redirectPath);
+        } catch (ValidationException $ex) {
+            $_SESSION['errors'] = $ex->errors;
+            $_SESSION['oldFormData'] = $formData;
+            $_SESSION['activeForm'] = $formData['form_type'];
             redirectTo($redirectPath);
         }
-        $this->goalService->updateGoal($formData);
-
-        unset($_SESSION['errors']);
-        unset($_SESSION['oldFormData']);
-
-        redirectTo($redirectPath);
-        exit();
     }
 
     public function deleteGoal($params)
@@ -141,42 +133,4 @@ class GoalsController
 
         redirectTo('/goals');
     }
-
-    // public function getGoal($id)
-    // {
-    //     $goal = $this->goalService->getGoalById($id);
-
-    //     header('Content-Type: application/json');
-    //     echo json_encode($goal);
-    // }
-
-    // public function editGoal(array $params): void
-    // {
-    //     $goalToEdit = $this->goalService->getUserGoal($params['goal']);
-
-    //     if (!$goalToEdit) {
-    //         redirectTo('/goals');
-    //     }
-
-    //     $_SESSION['goalToEdit'] = $goalToEdit;
-
-    //     redirectTo('/goals');
-    // }
-
-    // public function updateGoal(array $params)
-    // {
-    //     $goalToEdit = $this->goalService->getUserGoal($params['goal']);
-
-    //     if (!$goalToEdit) {
-    //         redirectTo('/goals');
-    //     }
-
-    //     $errors = $this->validatorService->validateNewGoal($_POST);
-
-    //     $this->goalService->updateGoal($_POST, $goalToEdit['id']);
-
-    //     unset($_SESSION['goalToEdit']);
-
-    //     redirectTo($_SERVER['HTTP_REFERER']);
-    // }
 }

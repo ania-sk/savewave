@@ -5,7 +5,9 @@ include $this->resolve("partials/_header.php");
 <body class="<?php echo ($activeForm === 'income') ? 'modal-income-open' : '';
                 echo ($activeForm === 'expense') ? 'modal-expense-open' : '';
                 echo ($activeForm === 'addIncomeCategory') ? 'modal-add-income-category-open modal-income-open' : '';
-                echo ($activeForm === 'addExpenseCategory') ? 'modal-add-expense-category-open modal-expense-open' : ''; ?>">
+                echo ($activeForm === 'addExpenseCategory') ? 'modal-add-expense-category-open modal-expense-open' : '';
+                echo ($activeForm === 'addGoal') ? 'modal-add-goal-open' : '';
+                echo ($activeForm === 'editGoal') ? 'modal-edit-goal-open' : ''; ?>">
     <!-- MAIN SECTION -->
     <main class="section-main flex-conteiner">
         <div class="heading-box grid-cols-2">

@@ -15,7 +15,7 @@
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
                 <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
-                <!-- <input type="hidden" name="form_type" value="income"> -->
+                <input type="hidden" name="form_type" value="addGoal">
                 <div class="flex-conteiner">
                     <div class="grid-rows-2-gap">
                         <div class="input-form-box flex-conteiner">
@@ -30,7 +30,7 @@
                                 id="cash-icon"
                                 class="modal-icon"
                                 name="heart-half-outline"></ion-icon>
-                            <?php if (array_key_exists('goalName', $errors)) : ?>
+                            <?php if ($activeForm === 'addGoal' && array_key_exists('goalName', $errors)) : ?>
                                 <div class="addGoalFormError">
                                     <p class="error-text"><?php echo e($errors['goalName'][0]); ?></p>
                                     <ion-icon class="error-icon" name="alert"></ion-icon>
@@ -50,7 +50,7 @@
                                 id="text-icon"
                                 class="modal-icon"
                                 name="document-text-outline"></ion-icon>
-                            <?php if (array_key_exists('goalDescription', $errors)) : ?>
+                            <?php if ($activeForm === 'addGoal' && array_key_exists('goalDescription', $errors)) : ?>
                                 <div class="addGoalFormError">
                                     <p class="error-text"><?php echo e($errors['goalDescription'][0]); ?></p>
                                     <ion-icon class="error-icon" name="alert"></ion-icon>
@@ -73,7 +73,7 @@
                                 id="cash-icon"
                                 class="modal-icon"
                                 name="cash-outline"></ion-icon>
-                            <?php if (array_key_exists('goalAmount', $errors)) : ?>
+                            <?php if ($activeForm === 'addGoal' && array_key_exists('goalAmount', $errors)) : ?>
                                 <div class="addGoalFormError">
                                     <p class="error-text"><?php echo e($errors['goalAmount'][0]); ?></p>
                                     <ion-icon class="error-icon" name="alert"></ion-icon>
@@ -86,7 +86,7 @@
                             <input id="goal-date" type="date" name="goalDate"
                                 value="<?php echo e($oldFormData['goalDate'] ?? date('Y-m-d')); ?>" />
                             <ion-icon id="date-icon" class="modal-icon" name="calendar-outline"></ion-icon>
-                            <?php if (array_key_exists('goalDate', $errors)) : ?>
+                            <?php if ($activeForm === 'addGoal' && array_key_exists('goalDate', $errors)) : ?>
                                 <div class="addGoalFormError">
                                     <p class="error-text"><?php echo e($errors['goalDate'][0]); ?></p>
                                     <ion-icon class="error-icon" name="alert"></ion-icon>

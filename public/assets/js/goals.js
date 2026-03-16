@@ -171,28 +171,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-//errors in modals
+//errors in add goal form
+const modalGoal = document.querySelector("#modal-goal");
 document.addEventListener("DOMContentLoaded", function () {
-  const modalGoal = document.querySelector("#modal-goal");
-  const modalEditGoal = document.querySelector("#modal-edit-goal");
-  const modalContribution = document.querySelector("#modal-add-contribution");
-  const modalEditContribution = document.querySelector(
-    "#modal-edit-contribution",
-  );
-
-  if (document.querySelector(".addGoalFormError")) {
+  if (document.body.classList.contains("modal-add-goal-open")) {
     modalGoal.style.display = "block";
   }
-
-  if (document.querySelector(".editGoalFormError")) {
+});
+//errors in edit goal form
+const modalEditGoal = document.querySelector("#modal-edit-goal");
+document.addEventListener("DOMContentLoaded", function () {
+  if (document.body.classList.contains("modal-edit-goal-open")) {
     modalEditGoal.style.display = "block";
   }
-
-  if (document.querySelector(".addContributionFormError")) {
-    modalContribution.style.display = "block";
-  }
-
-  if (document.querySelector(".editContributionFormError")) {
-    modalEditContribution.style.display = "block";
-  }
 });
+//errors in add contribution form
+const modalContribution = document.querySelector("#modal-add-contribution");
+
+//errors in edit contribution form
+const modalEditContribution = document.querySelector(
+  "#modal-edit-contribution",
+);
