@@ -188,11 +188,30 @@ $(document).on("submit", "#form-add-expense-category", function (e) {
       let newOption = new Option(newName, newId, true, true);
       select.append(newOption).trigger("change");
 
-      // Zamknij modal dodawania kategorii
+      $("#expense-category-error").remove();
+
       modalAddExpenseCategory.style.display = "none";
-      console.log("RESPONSE:", response);
+    },
+
+    error: function (xhr) {
+      if (xhr.status === 422) {
+        let data = JSON.parse(xhr.responseText);
+
+        $("#expense-category-error").remove();
+
+        $("#newExpenseCategoryName").after(
+          `
+  <div id="expense-category-error" class="error-wrapper">
+      <p class="error-text">${data.errors.newCategoryName[0]}</p>
+      <ion-icon class="error-icon" name="alert"></ion-icon>
+  </div>
+`,
+        );
+      }
+      return false;
     },
   });
+  return false;
 });
 
 //get x  (add category)
