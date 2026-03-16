@@ -91,40 +91,38 @@ class GoalsController
     {
         $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
         $formData = $_POST;
-        $errors = $this->validatorService->validateContribution($formData);
 
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
-            $_SESSION['oldFormData'] = $_POST;
+        try {
+
+            $this->validatorService->validateContribution($formData);
+            $this->goalService->store($formData);
+            redirectTo($redirectPath);
+        } catch (ValidationException $ex) {
+
+            $_SESSION['errors'] = $ex->errors;
+            $_SESSION['oldFormData'] = $formData;
+            $_SESSION['activeForm'] = $formData['form_type'];
             redirectTo($redirectPath);
         }
-
-        $this->goalService->store($formData);
-
-        unset($_SESSION['errors']);
-        unset($_SESSION['oldFormData']);
-
-        redirectTo($redirectPath);
     }
 
     public function updateContribution()
     {
         $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
         $formData = $_POST;
-        $errors = $this->validatorService->validateContribution($formData);
 
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
-            $_SESSION['oldFormData'] = $_POST;
+
+        try {
+            $this->validatorService->validateContribution($formData);
+            $this->goalService->updateContribution($formData);
+            redirectTo($redirectPath);
+        } catch (ValidationException $ex) {
+
+            $_SESSION['errors'] = $ex->errors;
+            $_SESSION['oldFormData'] = $formData;
+            $_SESSION['activeForm'] = $formData['form_type'];
             redirectTo($redirectPath);
         }
-
-        $this->goalService->updateContribution($formData);
-
-        unset($_SESSION['errors']);
-        unset($_SESSION['oldFormData']);
-
-        redirectTo($redirectPath);
     }
 
     public function deleteContribution($params)

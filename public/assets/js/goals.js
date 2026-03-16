@@ -187,8 +187,18 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 //errors in add contribution form
 const modalContribution = document.querySelector("#modal-add-contribution");
+document.addEventListener("DOMContentLoaded", function () {
+  if (document.body.classList.contains("modal-add-contribution-open")) {
+    modalContribution.style.display = "block";
+  }
+});
 
 //errors in edit contribution form
 const modalEditContribution = document.querySelector(
   "#modal-edit-contribution",
 );
+document.addEventListener("DOMContentLoaded", function () {
+  if (document.body.classList.contains("modal-edit-contribution-open")) {
+    modalEditContribution.style.display = "block";
+  }
+});
