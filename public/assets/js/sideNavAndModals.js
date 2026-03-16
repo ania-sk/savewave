@@ -104,7 +104,6 @@ document.addEventListener("DOMContentLoaded", function () {
 //AJAX INCOME CATEGORY
 $(document).on("submit", "#form-add-income-category", function (e) {
   e.preventDefault();
-  // e.stopPropagation();
 
   let form = $(this);
 
@@ -113,20 +112,40 @@ $(document).on("submit", "#form-add-income-category", function (e) {
     method: "POST",
     data: form.serialize(),
     dataType: "json",
+
     success: function (response) {
       let newId = response.id;
       let newName = response.name;
 
       let select = $("#incomeCategory");
-
       let newOption = new Option(newName, newId, true, true);
       select.append(newOption).trigger("change");
 
-      // Zamknij modal dodawania kategorii
+      $("#income-category-error").remove();
       modalAddIncomeCategory.style.display = "none";
-      console.log("RESPONSE:", response);
+    },
+
+    error: function (xhr) {
+      console.log("AJAX ERROR:", xhr);
+
+      if (xhr.status === 422) {
+        let data = JSON.parse(xhr.responseText);
+
+        $("#income-category-error").remove();
+
+        $("#newCategoryName").after(`
+  <div id="income-category-error" class="error-wrapper">
+      <p class="error-text">${data.errors.newCategoryName[0]}</p>
+      <ion-icon class="error-icon" name="alert"></ion-icon>
+  </div>
+`);
+      }
+
+      return false;
     },
   });
+
+  return false;
 });
 
 //expenses

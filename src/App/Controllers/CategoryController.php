@@ -19,23 +19,23 @@ class CategoryController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+            $formData = $_POST;
 
             try {
-                $this->validatorService->validateNewIncomeCategory($_POST);
-
-                $this->categoryService->createUserIncomeCategory($_POST);
+                $this->validatorService->validateNewIncomeCategory($formData);
+                $this->categoryService->createUserIncomeCategory($formData);
 
                 $_SESSION['success'] = 'Category has been added successfully!';
 
                 redirectTo($redirectPath);
             } catch (ValidationException $ex) {
+
                 $_SESSION['activeForm'] = 'addIncomeCategory';
                 $_SESSION['errors'] = $ex->errors;
-                $_SESSION['oldFormData'] = $_POST;
-                $_SESSION['newCategoryName'] = $_POST;
+                $_SESSION['oldFormData'] = $formData;
+                $_SESSION['newCategoryName'] = $formData['newCategoryName'];
 
-                header("Location: " . $redirectPath);
-                exit();
+                redirectTo($redirectPath);
             }
         }
     }
@@ -43,18 +43,26 @@ class CategoryController
     public function addNewIncomeCategoryAjax()
     {
         $newCategoryName = $_POST['newCategoryName'];
+        $formData = $_POST;
 
-        $this->validatorService->validateNewIncomeCategory($_POST);
+        try {
+            $this->validatorService->validateNewIncomeCategory($formData);
+            $newCategoryId = $this->categoryService->createUserIncomeCategory($_POST);
+            header('Content-Type: application/json');
+            echo json_encode([
+                'id' => $newCategoryId,
+                'name' => $newCategoryName
+            ]);
+            exit;
+        } catch (ValidationException $ex) {
 
-        // metoda powinna zwrócić ID nowo dodanej kategorii
-        $newCategoryId = $this->categoryService->createUserIncomeCategory($_POST);
-
-        header('Content-Type: application/json');
-        echo json_encode([
-            'id' => $newCategoryId,
-            'name' => $newCategoryName
-        ]);
-        exit;
+            header('Content-Type: application/json');
+            http_response_code(422);
+            echo json_encode([
+                'errors' => $ex->errors
+            ]);
+            exit;
+        }
     }
 
     public function addNewExpenseCategoryAjax()

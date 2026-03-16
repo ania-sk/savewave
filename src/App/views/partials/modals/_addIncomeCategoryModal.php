@@ -23,14 +23,10 @@
                         class="modal-icon"
                         name="bulb-outline"></ion-icon>
                 </div>
-                <?php if (($activeForm === 'addIncomeCategory') && array_key_exists('newCategoryName', $errors)) : ?>
-                    <div>
-                        <p class="error-text"><?php echo e($errors['newCategoryName'][0]); ?></p>
-                        <ion-icon class="error-icon" name="alert"></ion-icon>
-                    </div>
-                <?php endif; ?>
+
                 <button id="income-submit" type="submit" class="btn btn--modal">Save</button>
             </form>
         </div>
     </div>
+
 </section>
