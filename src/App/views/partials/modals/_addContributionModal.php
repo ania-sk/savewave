@@ -15,7 +15,7 @@
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
                 <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
-                <input type="hidden" name="goalId" id="contribution-goal-id">
+                <input type="hidden" name="goalId" id="contribution-goal-id" value="<?= e($oldFormData['goalId'] ?? '') ?>">
                 <input type="hidden" name="form_type" value="addContribution">
                 <input type="hidden" name="contributionGoalName" id="contribution-goal-name-input">
 
