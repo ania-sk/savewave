@@ -7,6 +7,7 @@ namespace App\Services;
 use DateTime;
 use Framework\Validator;
 use Framework\Rules\{
+    ChangeContributionAmountRule,
     RequiredRule,
     EmailRule,
     MatchRule,
@@ -35,6 +36,7 @@ class ValidatorService
         $this->validator->add('numeric', new NumericRule());
         $this->validator->add('dateFormat', new DateFormatRule());
         $this->validator->add('lessThanBalance', new LessThanBalanceRule());
+        $this->validator->add('changeContribution', new ChangeContributionAmountRule());
     }
 
     public function validateRegister(array $formData)
@@ -133,6 +135,13 @@ class ValidatorService
     {
         $this->validator->validate($formData, [
             'contributionAmount' => ['required', 'numeric', 'lessThanBalance:' . $balance]
+        ]);
+    }
+
+    public function validateChangeContribution(array $formData, float $balance)
+    {
+        $this->validator->validate($formData, [
+            'contributionAmount' => ['required', 'numeric', 'changeContribution:' . $balance]
         ]);
     }
 }

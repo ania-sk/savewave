@@ -145,6 +145,10 @@ document.querySelectorAll(".btn--edit-contribution").forEach((button) => {
       contributionAmount;
     document.getElementById("edit-contribution-goal-name").textContent =
       contributionGoalName;
+    document.getElementById("edit-contribution-goal-name-input").value =
+      contributionGoalName;
+    document.getElementById("old-contribution-amount").value =
+      contributionAmount;
 
     editContributionModal.style.display = "block";
   });

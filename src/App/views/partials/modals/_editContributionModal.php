@@ -3,7 +3,7 @@
         <div class="modal-header flex-conteiner">
             <span id="close-edit-contribution-modal" class="close">&times;</span>
             <i class="contribution--icon ph ph-hand-coins"></i>
-            <p>Edit contribution for <span id="edit-contribution-goal-name"></span></p>
+            <p>Edit contribution for <span id="edit-contribution-goal-name"><?= e($oldFormData['contributionGoalName'] ?? '') ?></span></p>
         </div>
 
         <div class="modal-body flex-conteiner">
@@ -17,6 +17,8 @@
                 <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                 <input type="hidden" name="contributionId" value="<?php echo e($contributionToEdit['id'] ?? ''); ?>" id="edit-contribution-id">
                 <input type="hidden" name="form_type" value="editContribution">
+                <input type="hidden" name="contributionGoalName" id="edit-contribution-goal-name-input">
+                <input type="hidden" name="oldContributionAmount" id="old-contribution-amount">
 
                 <div class="input-form-box flex-conteiner">
                     <label>Amount</label>

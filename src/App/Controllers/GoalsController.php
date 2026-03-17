@@ -116,7 +116,7 @@ class GoalsController
         $balance = $this->transactionService->getBalance($userId)['balance'];
 
         try {
-            $this->validatorService->validateContribution($formData, $balance);
+            $this->validatorService->validateChangeContribution($formData, $balance);
             $this->goalService->updateContribution($formData);
             redirectTo($redirectPath);
         } catch (ValidationException $ex) {
