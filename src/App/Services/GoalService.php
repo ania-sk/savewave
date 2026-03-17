@@ -123,7 +123,8 @@ class GoalService
                 g.goal_name
          FROM goal_contributions gc
          JOIN goals g ON g.id = gc.goal_id
-         WHERE gc.user_id = :userId",
+         WHERE gc.user_id = :userId
+         ORDER BY gc.contribution_date DESC",
             [
                 "userId" => $userId
             ]
