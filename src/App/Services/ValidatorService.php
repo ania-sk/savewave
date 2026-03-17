@@ -13,6 +13,7 @@ use Framework\Rules\{
     LengthMaxRule,
     NumericRule,
     DateFormatRule,
+    LessThanBalanceRule,
     UniqueCategoryRule
 };
 use App\Services\CategoryService;
@@ -33,6 +34,7 @@ class ValidatorService
         $this->validator->add('lengthMax', new LengthMaxRule());
         $this->validator->add('numeric', new NumericRule());
         $this->validator->add('dateFormat', new DateFormatRule());
+        $this->validator->add('lessThanBalance', new LessThanBalanceRule());
     }
 
     public function validateRegister(array $formData)
@@ -127,10 +129,10 @@ class ValidatorService
         ]);
     }
 
-    public function validateContribution(array $formData)
+    public function validateContribution(array $formData, float $balance)
     {
         $this->validator->validate($formData, [
-            'contributionAmount' => ['required', 'numeric']
+            'contributionAmount' => ['required', 'numeric', 'lessThanBalance:' . $balance]
         ]);
     }
 }

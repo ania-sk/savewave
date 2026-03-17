@@ -117,6 +117,7 @@ document.querySelectorAll(".btn--contribution").forEach((button) => {
     document.getElementById("contribution-goal-id").value = goalId;
 
     document.getElementById("contribution-goal-name").textContent = goalName;
+    document.getElementById("contribution-goal-name-input").value = goalName;
 
     document.getElementById("modal-add-contribution").style.display = "block";
   });

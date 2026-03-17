@@ -428,6 +428,7 @@
 .error-text {
   color: #0d7c66;
   font-size: 1.6rem;
+  white-space: pre-line;
 }
 
 /* ////////////////////////////// */

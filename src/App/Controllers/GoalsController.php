@@ -91,10 +91,12 @@ class GoalsController
     {
         $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
         $formData = $_POST;
+        $userId = $_SESSION['user'];
+        $balance = $this->transactionService->getBalance($userId)['balance'];
 
         try {
 
-            $this->validatorService->validateContribution($formData);
+            $this->validatorService->validateContribution($formData, $balance);
             $this->goalService->store($formData);
             redirectTo($redirectPath);
         } catch (ValidationException $ex) {
@@ -110,10 +112,11 @@ class GoalsController
     {
         $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
         $formData = $_POST;
-
+        $userId = $_SESSION['user'];
+        $balance = $this->transactionService->getBalance($userId)['balance'];
 
         try {
-            $this->validatorService->validateContribution($formData);
+            $this->validatorService->validateContribution($formData, $balance);
             $this->goalService->updateContribution($formData);
             redirectTo($redirectPath);
         } catch (ValidationException $ex) {

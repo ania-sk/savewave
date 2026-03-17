@@ -3,7 +3,7 @@
         <div class="modal-header flex-conteiner">
             <span id="close-contribution-modal" class="close">&times;</span>
             <i class="contribution--icon ph ph-hand-coins"></i>
-            <p>Contribution for <span id="contribution-goal-name"></span></p>
+            <p>Contribution for <span id="contribution-goal-name"><?= e($oldFormData['contributionGoalName'] ?? '') ?></span></p>
         </div>
 
         <div class="modal-body flex-conteiner">
@@ -17,6 +17,7 @@
                 <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                 <input type="hidden" name="goalId" id="contribution-goal-id">
                 <input type="hidden" name="form_type" value="addContribution">
+                <input type="hidden" name="contributionGoalName" id="contribution-goal-name-input">
 
                 <div class="input-form-box flex-conteiner">
                     <label>Amount</label>
