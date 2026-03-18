@@ -207,3 +207,82 @@ document.addEventListener("DOMContentLoaded", function () {
     modalEditContribution.style.display = "block";
   }
 });
+// /////////////////
+// GOAL CARDS /////
+// ///////////////
+const panel = document.querySelector(".side-panel");
+const overlay = document.querySelector(".overlay");
+
+const els = {
+  name: document.querySelector(".goal-name"),
+  desc: document.querySelector(".goal-description"),
+  saved: document.querySelector(".goal-saved"),
+  target: document.querySelector(".goal-target"),
+  deadline: document.querySelector(".goal-deadline"),
+  progress: document.querySelector(".panel-progress"),
+  list: document.querySelector(".goal-contributions"),
+  addContribution: document.querySelector(".btn-panel-contribution"),
+};
+
+// Open / close panel
+const openPanel = () =>
+  panel.classList.add("active", overlay.classList.add("active"));
+const closePanel = () =>
+  panel.classList.remove("active", overlay.classList.remove("active"));
+
+overlay.addEventListener("click", closePanel);
+document.querySelector(".close-btn").addEventListener("click", closePanel);
+
+// cards
+document.querySelectorAll(".goal-card").forEach((card) => {
+  card.addEventListener("click", (e) => {
+    if (e.target.closest("button")) return;
+
+    const d = card.dataset;
+
+    els.name.textContent = d.name;
+    els.desc.textContent = d.description;
+    els.saved.textContent = `${d.saved} zł`;
+    els.target.textContent = `${d.target} zł`;
+    els.deadline.textContent = d.deadline;
+    els.progress.style.width = `${d.progress}%`;
+
+    // ŁADOWANIE SKŁADEK
+    els.list.innerHTML = "Loading...";
+    fetch(`/goals/${d.id}/contributions`)
+      .then((r) => r.json())
+      .then((items) => {
+        els.list.innerHTML = items?.length
+          ? items.map((c) => `<li>${c.amount} zł — ${c.date}</li>`).join("")
+          : "<li>No contributions yet</li>";
+      });
+
+    // Add contribution
+    els.addContribution.onclick = () => {
+      closePanel();
+      document.querySelector(`[data-goal-id="${d.id}"]`)?.click();
+    };
+
+    openPanel();
+  });
+});
+
+// MENU ⋯
+document.querySelectorAll(".menu-trigger").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const menu = btn.nextElementSibling;
+
+    document.querySelectorAll(".menu-dropdown").forEach((m) => {
+      m.style.display =
+        m === menu && m.style.display !== "flex" ? "flex" : "none";
+    });
+  });
+});
+
+// ZAMYKANIE MENU POZA
+document.addEventListener("click", () => {
+  document
+    .querySelectorAll(".menu-dropdown")
+    .forEach((m) => (m.style.display = "none"));
+});

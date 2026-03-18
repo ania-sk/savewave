@@ -27,7 +27,7 @@ include $this->resolve("partials/_header.php");
             </div>
         </div>
         <!-- BALANCE -->
-        <section class="section-balance flex-conteiner">
+        <section class="section-balance flex-conteiner mrg-bottom ">
             <div class="balance-box flex-conteiner">
                 <p>Your savings: <?php echo e($balance); ?></p>
                 <?php if ($balance > 0): ?>
@@ -39,74 +39,132 @@ include $this->resolve("partials/_header.php");
 
         </section>
 
-        <!-- GOALS TABLE -->
-        <section class="goals-table-box">
-            <div class="table-heading flex-conteiner">
+        <section class="goals-section">
+            <div class="heading-tertiary">
                 <p>Your Current Goals</p>
             </div>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">No.</th>
-                        <th scope="col">Goal</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Amount<br>needed</th>
-                        <th scope="col">Amount<br>saved</th>
-                        <th scope="col">Progress</th>
-                        <th scope="col">Deadline</th>
-                        <th scope="col">Contribution</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
-                    </tr>
-                </thead>
+            <!-- GRID -->
+            <div class="goal-cards-box grid-cols-3">
+                <?php foreach ($goals as $goal): ?>
+                    <div class="goal-card"
+                        data-id="<?php echo e($goal['id']); ?>"
+                        data-name="<?php echo e($goal['goal_name']); ?>"
+                        data-description="<?php echo e($goal['goal_description']); ?>"
+                        data-saved="<?php echo e($goal['amount_saved']); ?>"
+                        data-target="<?php echo e($goal['amount_needed']); ?>"
+                        data-deadline="<?php echo e($goal['deadline']); ?>"
+                        data-progress="<?php echo e($goal['progress']); ?>">
 
-                <tbody>
-                    <?php $i = 1; ?>
-                    <?php foreach ($goals as $goal): ?>
-                        <tr>
-                            <td data-label="No."><?php echo e($i++); ?>.</td>
-                            <td data-label="Goal"><?php echo e($goal['goal_name']); ?></td>
-                            <td data-label="Description"><?php echo e($goal['goal_description']); ?></td>
-                            <td data-label="Amount needed"><?php echo e($goal['amount_needed']); ?></td>
-                            <td data-label="Amount saved"><?php echo e($goal['amount_saved']); ?></td>
-                            <td data-label="Progress">
-                                <p class="progress-text flex-conteiner"><?php echo e(number_format($goal['progress']), 1); ?>%</p>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: <?php echo min(100, e($goal['progress'])); ?>%"></div>
-                                </div>
+                        <div class="goal-card-header">
+                            <h3 class="goal-title"><?php echo e($goal['goal_name']); ?></h3>
 
-                            </td>
-                            <td data-label="Deadline"><?php echo e($goal['deadline']); ?></td>
-                            <td data-label="Contribution"><button class="btn-box btn--contribution" data-goal-id="<?php echo e($goal['id']); ?>"
-                                    data-goal-name="<?php echo e($goal['goal_name']); ?>"
-                                    <?php echo $balance <= 0 ? 'disabled' : ''; ?>>
-                                    <!-- <ion-icon class="contribution--icon" name="color-fill"></ion-icon> -->
-                                    <i class="contribution--icon ph-fill ph-hand-coins"></i>
-                                </button></td>
-                            <td data-label="Edit"> <button class="btn-box btn--edit"
-                                    data-id="<?php echo e($goal['id']); ?>"
-                                    data-goal-name="<?php echo e($goal['goal_name']); ?>"
-                                    data-goal-description="<?php echo e($goal['goal_description']); ?>"
-                                    data-goal-amount="<?php echo number_format($goal['amount_needed'], 2, '.', ''); ?>"
-                                    data-deadline="<?php echo e(date('Y-m-d', strtotime($goal['deadline']))); ?>">
-                                    <ion-icon class="edit--icon " name="create-outline"></ion-icon>
-                                </button></td>
+                            <div class="goal-menu">
+                                <button class="menu-trigger">⋯</button>
 
-                            <td data-label="Delete">
-                                <form action="/goals/<?php echo e($goal['id']); ?>" method="POST">
-                                    <input type="hidden" name="_METHOD" value="DELETE">
-                                    <?php include $this->resolve("partials/_csrf.php"); ?>
-                                    <button onclick="return confirm('Remove this goal?')" class="btn-box"><ion-icon class="delete--icon" name="trash-outline"></ion-icon>
+                                <div class="menu-dropdown">
+                                    <button class="btn-box btn--edit"
+                                        data-id="<?php echo e($goal['id']); ?>"
+                                        data-goal-name="<?php echo e($goal['goal_name']); ?>"
+                                        data-goal-description="<?php echo e($goal['goal_description']); ?>"
+                                        data-goal-amount="<?php echo number_format($goal['amount_needed'], 2, '.', ''); ?>"
+                                        data-deadline="<?php echo e(date('Y-m-d', strtotime($goal['deadline']))); ?>">
+                                        <ion-icon class="edit--icon " name="create-outline"></ion-icon>
+                                        <span>Edit</span>
                                     </button>
-                                </form>
-                            </td>
-                        </tr>
 
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                                    <form action="/goals/<?php echo e($goal['id']); ?>" method="POST">
+                                        <input type="hidden" name="_METHOD" value="DELETE">
+                                        <?php include $this->resolve("partials/_csrf.php"); ?>
+                                        <button onclick="return confirm('Remove this goal?')" class="btn-box">
+                                            <ion-icon class="delete--icon" name="trash-outline"></ion-icon>
+                                            <span>Delete</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="flex-conteiner gap-1 progress-box">
+                            <div class="progress-bar">
+                                <div class="progress-fill"
+                                    style="width: <?php echo min(100, $goal['progress']); ?>%">
+                                </div>
+                            </div>
+                            <p class="progress-text">
+                                <?php echo number_format($goal['progress'], 1); ?>%
+                            </p>
+                        </div>
+                        <div class="grid-rows-2 goal-data-box">
+
+                            <p class="amount">
+                                💰 <?php echo e($goal['amount_saved']); ?> /
+                                <?php echo e($goal['amount_needed']); ?> zł
+                            </p>
+
+                            <p class="deadline">
+                                ⏳ <?php echo e($goal['deadline']); ?>
+                            </p>
+                        </div>
+                        <button class="btn-primary  btn--contribution" data-goal-id="<?php echo e($goal['id']); ?>"
+                            data-goal-name="<?php echo e($goal['goal_name']); ?>"
+                            <?php echo $balance <= 0 ? 'disabled' : ''; ?>>
+                            <i class="contribution--icon ph-fill ph-hand-coins"></i>
+                            <span>Add contribution</span>
+                        </button>
+
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </section>
+
+
+        <!-- SIDE PANEL -->
+        <section class="overlay"></section>
+
+        <section class="side-panel">
+
+
+            <div class="flex-conteiner panel-header">
+                <h2 class="goal-name"></h2>
+                <button class="btn btn-box close-btn">✖</button>
+            </div>
+            <div class="panel-content">
+
+                <div class="panel-section">
+                    <p class="goal-description"></p>
+                </div>
+
+                <div class="panel-section">
+                    <p><strong>Saved:</strong> <span class="goal-saved"></span></p>
+                    <p><strong>Target:</strong> <span class="goal-target"></span></p>
+                    <p><strong>Deadline:</strong> <span class="goal-deadline"></span></p>
+                </div>
+
+                <div class="panel-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill panel-progress"></div>
+                    </div>
+                </div>
+
+                <!-- CONTRIBUTIONS -->
+                <div class="panel-section">
+                    <h4>Recent contributions</h4>
+                    <ul class="goal-contributions"></ul>
+                </div>
+
+                <div class="panel-actions">
+                    <button class="btn-primary btn-panel-contribution">
+                        <i class="contribution--icon ph-fill ph-hand-coins"></i>
+                        <span>Add contribution</span>
+                    </button>
+
+                </div>
+
+            </div>
+        </section>
+
 
         <section class="contribution-table-box">
             <div class="table-heading flex-conteiner">

@@ -33,6 +33,10 @@ body {
   gap: 2.4rem;
 }
 
+.gap-1 {
+  gap: 1rem;
+}
+
 .grid-cols-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -159,6 +163,18 @@ body {
   border-radius: 11px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   transition: all 0.3s;
+}
+
+/* BUTTON */
+.btn-primary {
+  margin-top: 24px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #0d7c66;
+  color: #e7f2f0;
+  cursor: pointer;
 }
 
 .mrg-bottom {
