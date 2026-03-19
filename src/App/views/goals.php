@@ -53,6 +53,7 @@ include $this->resolve("partials/_header.php");
                         data-description="<?php echo e($goal['goal_description']); ?>"
                         data-saved="<?php echo e($goal['amount_saved']); ?>"
                         data-target="<?php echo e($goal['amount_needed']); ?>"
+                        data-remaind="<?php echo e($goal['amount_remaind']); ?>"
                         data-deadline="<?php echo e($goal['deadline']); ?>"
                         data-progress="<?php echo e($goal['progress']); ?>">
 
@@ -99,12 +100,14 @@ include $this->resolve("partials/_header.php");
                         <div class="grid-rows-2 goal-data-box">
 
                             <p class="amount">
-                                💰 <?php echo e($goal['amount_saved']); ?> /
+                                <ion-icon name="ribbon-outline"></ion-icon>
+                                <?php echo e($goal['amount_saved']); ?> /
                                 <?php echo e($goal['amount_needed']); ?> zł
                             </p>
 
                             <p class="deadline">
-                                ⏳ <?php echo e($goal['deadline']); ?>
+                                <ion-icon name="hourglass-outline"></ion-icon>
+                                <?php echo e($goal['deadline']); ?>
                             </p>
                         </div>
                         <button class="btn-primary  btn--contribution" data-goal-id="<?php echo e($goal['id']); ?>"
@@ -136,22 +139,34 @@ include $this->resolve("partials/_header.php");
                     <p class="goal-description"></p>
                 </div>
 
-                <div class="panel-section">
-                    <p><strong>Saved:</strong> <span class="goal-saved"></span></p>
-                    <p><strong>Target:</strong> <span class="goal-target"></span></p>
-                    <p><strong>Deadline:</strong> <span class="goal-deadline"></span></p>
+                <div class="panel-section stats">
+                    <div class="flex-conteiner stats-box">
+                        <ion-icon name="ribbon-outline"></ion-icon>
+                        <p>Saved:</p>
+                        <span class="goal-saved"></span>
+                    </div>
+                    <div class="flex-conteiner stats-box">
+                        <ion-icon name="golf-outline"></ion-icon>
+                        <p>Target:</p>
+                        <span class="goal-target stats-box"></span>
+                    </div>
+                    <div class="flex-conteiner stats-box">
+                        <ion-icon name="color-fill-outline"></ion-icon>
+                        <p>Remaind:</p>
+                        <span class="goal-remaind"></span>
+                    </div>
+                    <div class="flex-conteiner stats-box">
+                        <ion-icon name="hourglass-outline"></ion-icon>
+                        <p>Deadline:</p>
+                        <span class="goal-deadline"></span>
+                    </div>
                 </div>
 
                 <div class="panel-section">
                     <div class="progress-bar">
                         <div class="progress-fill panel-progress"></div>
                     </div>
-                </div>
-
-                <!-- CONTRIBUTIONS -->
-                <div class="panel-section">
-                    <h4>Recent contributions</h4>
-                    <ul class="goal-contributions"></ul>
+                    <p class="number-progress"></p>
                 </div>
 
                 <div class="panel-actions">
@@ -159,7 +174,22 @@ include $this->resolve("partials/_header.php");
                         <i class="contribution--icon ph-fill ph-hand-coins"></i>
                         <span>Add contribution</span>
                     </button>
+                </div>
 
+                <!-- CONTRIBUTIONS -->
+                <div class="panel-section">
+                    <h4>Recent contributions</h4>
+                    <template id="contribution-template">
+                        <li class="contribution-item">
+                            <i class="ph ph-hand-coins"></i>
+                            <span class="contribution-text"></span>
+                        </li>
+                    </template>
+
+
+                    <ul class="goal-contributions">
+
+                    </ul>
                 </div>
 
             </div>

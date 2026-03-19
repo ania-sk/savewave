@@ -292,6 +292,7 @@
   padding: 32px;
   transition: 0.3s;
   z-index: 1000;
+  overflow-y: scroll;
 }
 
 .side-panel.active {
@@ -311,9 +312,32 @@
   margin-bottom: 24px;
 }
 
+.panel-section.stats {
+  margin: 48px 0;
+}
+
+.stats-box {
+  gap: 1.2rem;
+  justify-content: flex-start;
+  margin-bottom: 6px;
+}
+.stats-box p {
+  font-weight: bold;
+}
+
+.number-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+}
 .panel-actions button {
   width: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 48px;
+}
+
+.panel-section h4 {
+  margin-bottom: 12px;
 }
 
 /* CONTRIBUTIONS */

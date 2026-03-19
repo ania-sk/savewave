@@ -218,17 +218,24 @@ const els = {
   desc: document.querySelector(".goal-description"),
   saved: document.querySelector(".goal-saved"),
   target: document.querySelector(".goal-target"),
+  remaind: document.querySelector(".goal-remaind"),
   deadline: document.querySelector(".goal-deadline"),
   progress: document.querySelector(".panel-progress"),
+  percent: document.querySelector(".number-progress"),
   list: document.querySelector(".goal-contributions"),
   addContribution: document.querySelector(".btn-panel-contribution"),
 };
 
 // Open / close panel
-const openPanel = () =>
-  panel.classList.add("active", overlay.classList.add("active"));
-const closePanel = () =>
-  panel.classList.remove("active", overlay.classList.remove("active"));
+const openPanel = () => {
+  panel.classList.add("active");
+  overlay.classList.add("active");
+};
+
+const closePanel = () => {
+  panel.classList.remove("active");
+  overlay.classList.remove("active");
+};
 
 overlay.addEventListener("click", closePanel);
 document.querySelector(".close-btn").addEventListener("click", closePanel);
@@ -244,17 +251,30 @@ document.querySelectorAll(".goal-card").forEach((card) => {
     els.desc.textContent = d.description;
     els.saved.textContent = `${d.saved} zł`;
     els.target.textContent = `${d.target} zł`;
+    els.remaind.textContent = `${d.remaind} zł`;
     els.deadline.textContent = d.deadline;
     els.progress.style.width = `${d.progress}%`;
+    els.percent.textContent = `${d.progress}%`;
 
     // ŁADOWANIE SKŁADEK
     els.list.innerHTML = "Loading...";
     fetch(`/goals/${d.id}/contributions`)
       .then((r) => r.json())
       .then((items) => {
-        els.list.innerHTML = items?.length
-          ? items.map((c) => `<li>${c.amount} zł — ${c.date}</li>`).join("")
-          : "<li>No contributions yet</li>";
+        els.list.innerHTML = "";
+
+        if (!items || items.length === 0) {
+          els.list.innerHTML = "<li>No contributions yet</li>";
+        } else {
+          const tpl = document.querySelector("#contribution-template");
+
+          items.forEach((c) => {
+            const li = tpl.content.cloneNode(true);
+            li.querySelector(".contribution-text").textContent =
+              `${c.amount} zł — ${c.date}`;
+            els.list.appendChild(li);
+          });
+        }
       });
 
     // Add contribution
