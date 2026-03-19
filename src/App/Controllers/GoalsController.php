@@ -63,6 +63,15 @@ class GoalsController
         ]);
     }
 
+    public function getGoalContributions($params)
+    {
+        $goalId = (int)$params['goal'];
+        $contributions = $this->goalService->getGoalContributions($goalId);
+
+        header('Content-Type: application/json');
+        echo json_encode($contributions);
+    }
+
     public function updateGoal()
     {
         $formData = $_POST;

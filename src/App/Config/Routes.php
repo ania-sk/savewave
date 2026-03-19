@@ -55,6 +55,7 @@ function registerRoutes(App $app)
     $app->delete('/expenses/{expense}', [ExpensesController::class, 'deleteExpense']);
 
     // $app->get('/api/goals/{goal}', [GoalsController::class, 'getGoal'])->add(AuthRequiredMiddleware::class);
+    $app->get('/goals/{goal}/contributions', [GoalsController::class, 'getGoalContributions'])->add(AuthRequiredMiddleware::class);
     $app->post('/goals/update', [GoalsController::class, 'updateGoal'])->add(AuthRequiredMiddleware::class);
     $app->delete('/goals/{goal}', [GoalsController::class, 'deleteGoal'])->add(AuthRequiredMiddleware::class);
 

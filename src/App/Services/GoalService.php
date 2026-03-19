@@ -154,6 +154,23 @@ class GoalService
         )->fetchAll();
     }
 
+    public function getGoalContributions(int $goalId)
+    {
+        return $this->db->query(
+            "SELECT 
+            gc.id,
+            gc.amount,
+            DATE_FORMAT(gc.contribution_date, '%Y-%m-%d') AS date
+         FROM goal_contributions gc
+         WHERE gc.goal_id = :goalId
+         ORDER BY gc.contribution_date DESC",
+            [
+                "goalId" => $goalId
+            ]
+        )->fetchAll();
+    }
+
+
     // public function getContributionSumsByGoalAndDateRange() {}
 
     public function store(array $formData)
