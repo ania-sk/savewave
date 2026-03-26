@@ -53,7 +53,7 @@ include $this->resolve("partials/_header.php");
                         data-description="<?php echo e($goal['goal_description']); ?>"
                         data-saved="<?php echo e($goal['amount_saved']); ?>"
                         data-target="<?php echo e($goal['amount_needed']); ?>"
-                        data-remaind="<?php echo e($goal['amount_remaind']); ?>"
+                        data-remaind="<?php echo max(0, $goal['amount_remaind']); ?>"
                         data-deadline="<?php echo e($goal['deadline']); ?>"
                         data-progress="<?php echo e($goal['progress']); ?>">
 
