@@ -1,6 +1,6 @@
 //get modal btn-icons
 const btnIconModalExpenseHeader = document.querySelector(
-  "#header-icon-btn-modal-expense"
+  "#header-icon-btn-modal-expense",
 );
 
 btnIconModalExpenseHeader.onclick = function () {
@@ -34,11 +34,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //chart
 document.addEventListener("DOMContentLoaded", () => {
-  const canvas = document.getElementById("incomePieChart");
+  const canvas = document.getElementById("expensePieChart");
   if (!canvas) return;
 
-  const labels = JSON.parse(canvas.dataset.chartLabels);
-  const data = JSON.parse(canvas.dataset.chartData);
+  const labels = JSON.parse(canvas.dataset.expenseChartLabels);
+  const data = JSON.parse(canvas.dataset.expenseChartData);
 
   new Chart(canvas, {
     type: "doughnut",

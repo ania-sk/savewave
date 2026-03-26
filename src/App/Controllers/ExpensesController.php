@@ -25,6 +25,8 @@ class ExpensesController
         $startDate = trim($_GET['start_date'] ?? '');
         $endDate  = trim($_GET['end_date']   ?? '');
 
+        $totalExpense = $this->transactionService->getBalance($userId, $startDate, $endDate)['totalExpense'];
+
         if ($startDate !== '' && $endDate !== '') {
 
             $dtStart = $startDate . ' 00:00:00';
@@ -50,8 +52,9 @@ class ExpensesController
             'expenseToEdit' => $expenseToEdit,
             'start_date' => $startDate,
             'end_date' => $endDate,
-            'chartLabels' => array_column($sumsByCat, 'category'),
-            'chartData' => array_map(fn($r) => (float)$r['total'], $sumsByCat)
+            'expenseChartLabels' => array_column($sumsByCat, 'category'),
+            'expenseChartData' => array_map(fn($r) => (float)$r['total'], $sumsByCat),
+            'totalExpense' => $totalExpense
         ]);
     }
 

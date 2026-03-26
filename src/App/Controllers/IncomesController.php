@@ -25,7 +25,7 @@ class IncomesController
         $startDate = trim($_GET['start_date'] ?? '');
         $endDate  = trim($_GET['end_date']   ?? '');
 
-        $totalIncome = $this->transactionService->getBalance($userId)['totalIncome'];
+        $totalIncome = $this->transactionService->getBalance($userId, $startDate, $endDate)['totalIncome'];
 
         if ($startDate !== '' && $endDate !== '') {
 

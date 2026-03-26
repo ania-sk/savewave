@@ -37,6 +37,26 @@ include $this->resolve("partials/_header.php");
                 <a href="/expenses" class="btn btn--link btn--clean">Clean filter</a>
             </form>
         </div>
+
+        <!-- EXPENSES CHART -->
+        <section class="section-chart">
+            <div class="expense-chart ">
+                <div class="total-box flex-conteiner">
+                    <p>Total: <?php echo e($totalExpense); ?></p>
+                    <ion-icon name="trending-down-outline"></ion-icon>
+
+                </div>
+                <div class="chart-container" style="max-width: 500px; margin: 2rem auto;">
+                    <canvas
+                        id="expensePieChart"
+                        data-expense-chart-labels='<?php echo (json_encode($expenseChartLabels, JSON_UNESCAPED_UNICODE)); ?>'
+                        data-expense-chart-data='<?php echo (json_encode($expenseChartData)); ?>'
+                        style="max-width:500px; margin:2rem auto;"></canvas>
+
+                </div>
+            </div>
+        </section>
+
         <!-- TABLE EXPENSE -->
         <div class="table-income-box">
             <table class="table table-income">
@@ -91,15 +111,6 @@ include $this->resolve("partials/_header.php");
 
                 </tbody>
             </table>
-        </div>
-
-        <div class="chart-container" style="max-width: 500px; margin: 2rem auto;">
-            <canvas
-                id="incomePieChart"
-                data-chart-labels='<?php echo e(json_encode($chartLabels, JSON_UNESCAPED_UNICODE)); ?>'
-                data-chart-data='<?php echo e(json_encode($chartData)); ?>'
-                style="max-width:500px; margin:2rem auto;"></canvas>
-
         </div>
     </main>
 
