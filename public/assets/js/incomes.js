@@ -1,6 +1,6 @@
 //get modal btn-icon
 const btnIconModalIncomeHeader = document.querySelector(
-  "#header-icon-btn-modal-income"
+  "#header-icon-btn-modal-income",
 );
 
 btnIconModalIncomeHeader.onclick = function () {
@@ -37,8 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("incomePieChart");
   if (!canvas) return;
 
-  const labels = JSON.parse(canvas.dataset.chartLabels);
-  const data = JSON.parse(canvas.dataset.chartData);
+  const labels = JSON.parse(canvas.dataset.incomeChartLabels);
+  const data = JSON.parse(canvas.dataset.incomeChartData);
 
   new Chart(canvas, {
     type: "doughnut",
