@@ -55,7 +55,8 @@ include $this->resolve("partials/_header.php");
                         data-target="<?php echo e($goal['amount_needed']); ?>"
                         data-remaind="<?php echo max(0, $goal['amount_remaind']); ?>"
                         data-deadline="<?php echo e($goal['deadline']); ?>"
-                        data-progress="<?php echo e($goal['progress']); ?>">
+                        data-progress="<?php echo e($goal['progress']); ?>"
+                        data-achieved="<?php echo $goal['amount_saved'] >= $goal['amount_needed'] ? '1' : '0' ?>">
 
                         <div class="goal-card-header">
                             <h3 class="goal-title"><?php echo e($goal['goal_name']); ?></h3>
@@ -110,13 +111,19 @@ include $this->resolve("partials/_header.php");
                                 <?php echo e($goal['deadline']); ?>
                             </p>
                         </div>
-                        <button class="btn-primary  btn--contribution" data-goal-id="<?php echo e($goal['id']); ?>"
-                            data-goal-name="<?php echo e($goal['goal_name']); ?>"
-                            <?php echo $balance <= 0 ? 'disabled' : ''; ?>>
-                            <i class="contribution--icon ph-fill ph-hand-coins"></i>
-                            <span>Add contribution</span>
-                        </button>
-
+                        <?php if ($goal['amount_saved'] < $goal['amount_needed']):  ?>
+                            <button class="btn-primary  btn--contribution" data-goal-id="<?php echo e($goal['id']); ?>"
+                                data-goal-name="<?php echo e($goal['goal_name']); ?>"
+                                <?php echo $balance <= 0 ? 'disabled' : ''; ?>>
+                                <i class="contribution--icon ph-fill ph-hand-coins"></i>
+                                <span>Add contribution</span>
+                            </button>
+                        <?php else: ?>
+                            <div class="flex-conteiner goal-achieved-box gap-1">
+                                <ion-icon name="trophy-outline" class="achieved--icon"></ion-icon>
+                                <span>Goal achieved!</span>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -124,15 +131,21 @@ include $this->resolve("partials/_header.php");
 
 
         <!-- SIDE PANEL -->
-        <section class="overlay"></section>
+        <section class=" overlay">
+        </section>
 
         <section class="side-panel">
-
+            <div id="panel-goal-achieved-box" class="flex-conteiner">
+                <ion-icon name="trophy-outline" class="achieved--icon"></ion-icon>
+                <span>Goal achieved!</span>
+            </div>
 
             <div class="flex-conteiner panel-header">
                 <h2 class="goal-name"></h2>
                 <button class="btn btn-box close-btn">✖</button>
             </div>
+
+
             <div class="panel-content">
 
                 <div class="panel-section">
@@ -177,7 +190,7 @@ include $this->resolve("partials/_header.php");
                 </div>
 
                 <!-- CONTRIBUTIONS -->
-                <div class="panel-section">
+                <div class=" panel-section">
                     <h4>Recent contributions</h4>
                     <template id="contribution-template">
                         <li class="contribution-item">

@@ -126,14 +126,28 @@
   background: #f7f3fc;
   padding: 32px 18px;
   border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: 0.2s;
   width: 27rem;
+  height: 35rem;
+  position: relative;
 }
 
 .goal-card:hover {
   transform: translateY(-4px);
+}
+
+.goal-achieved-box {
+  color: #f7f3fc;
+  background: #6c6279;
+  padding: 8px;
+  width: 100%;
+  font-weight: 500;
+  margin-top: 24px;
+  position: absolute;
+  left: -1px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* ===========================
@@ -233,6 +247,10 @@
   transition: all 0.3s;
 }
 
+.achieved--icon {
+  font-size: 2.5rem;
+}
+
 /* PROGRESS */
 .progress-box {
   flex-direction: column;
@@ -293,6 +311,18 @@
   transition: 0.3s;
   z-index: 1000;
   overflow-y: scroll;
+}
+
+#panel-goal-achieved-box {
+  display: none;
+  color: #f7f3fc;
+  background: #6c6279;
+  padding: 8px;
+  width: 100%;
+  font-weight: 500;
+  margin-top: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .side-panel.active {

@@ -224,6 +224,7 @@ const els = {
   percent: document.querySelector(".number-progress"),
   list: document.querySelector(".goal-contributions"),
   addContribution: document.querySelector(".btn-panel-contribution"),
+  achivedBox: document.querySelector("#panel-goal-achieved-box"),
 };
 
 // Open / close panel
@@ -246,6 +247,7 @@ document.querySelectorAll(".goal-card").forEach((card) => {
     if (e.target.closest("button")) return;
 
     const d = card.dataset;
+    const goalAchieved = d.achieved === "1";
 
     els.name.textContent = d.name;
     els.desc.textContent = d.description;
@@ -255,6 +257,14 @@ document.querySelectorAll(".goal-card").forEach((card) => {
     els.deadline.textContent = d.deadline;
     els.progress.style.width = `${d.progress}%`;
     els.percent.textContent = `${d.progress}%`;
+
+    if (goalAchieved) {
+      els.addContribution.style.display = "none";
+      els.achivedBox.style.display = "flex";
+    } else {
+      els.addContribution.style.display = "flex";
+      els.achivedBox.style.display = "none";
+    }
 
     // ŁADOWANIE SKŁADEK
     els.list.innerHTML = "Loading...";
