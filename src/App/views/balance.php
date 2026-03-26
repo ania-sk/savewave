@@ -40,8 +40,8 @@ include $this->resolve("partials/_header.php");
                 <?php endif; ?>
             </div>
         </section>
-        <!-- INCOMES/EXPENSES CHARTS -->
-        <section class="section-charts grid-cols-2">
+        <!-- INCOMES/EXPENSES/CONTRIBUTIONS CHARTS -->
+        <section class="section-charts grid-cols-3">
             <div class="incomes-chart ">
                 <div class="chart-heading flex-conteiner">
                     <ion-icon class="nav-icon" name="cash-outline"></ion-icon>
@@ -76,6 +76,26 @@ include $this->resolve("partials/_header.php");
                         id="expensePieChart"
                         data-expense-chart-labels='<?php echo e(json_encode($expenseChartLabels, JSON_UNESCAPED_UNICODE)); ?>'
                         data-expense-chart-data='<?php echo e(json_encode($expenseChartData)); ?>'
+                        style="max-width:500px; margin:2rem auto;"></canvas>
+
+                </div>
+            </div>
+
+            <div class="contributions-chart">
+                <div class="chart-heading flex-conteiner">
+                    <ion-icon class="nav-icon" name="file-tray-full-outline"></ion-icon>
+                    <p>Contributions</p>
+                </div>
+                <div class="total-box flex-conteiner">
+                    <p>Total: <?php echo e($totalContributions); ?></p>
+                    <i class="ph-fill ph-hand-coins"></i>
+
+                </div>
+                <div class="chart-container" style="max-width: 500px; margin: 2rem auto;">
+                    <canvas
+                        id="goalPieChart"
+                        data-goal-chart-labels='<?php echo e(json_encode($goalChartLabels, JSON_UNESCAPED_UNICODE)); ?>'
+                        data-goal-chart-data='<?php echo e(json_encode($goalChartData)); ?>'
                         style="max-width:500px; margin:2rem auto;"></canvas>
 
                 </div>

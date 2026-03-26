@@ -41,6 +41,9 @@ class   BalanceController
         $incomeChartLabels = array_column($balanceData['incomesSumsByCat'], 'category');
         $incomeChartData = array_map(fn($r) => (float)$r['total'], $balanceData['incomesSumsByCat']);
 
+        $goalChartLabels = array_column($balanceData['contributionsSumsByGoal'], 'goal');
+        $goalChartData = array_map(fn($r) => (float)$r['total'], $balanceData['contributionsSumsByGoal']);
+
         echo $this->view->render("/balance.php", [
             'title' => 'Balance',
             'cssLink' => 'mainPage.css',
@@ -54,8 +57,11 @@ class   BalanceController
             'expenseChartData' => $expenseChartData,
             'incomeChartLabels' => $incomeChartLabels,
             'incomeChartData' => $incomeChartData,
+            'goalChartLabels' => $goalChartLabels,
+            'goalChartData' => $goalChartData,
             'totalIncome' => $balanceData['totalIncome'],
             'totalExpense' => $balanceData['totalExpense'],
+            'totalContributions' => $balanceData['totalContributions'],
             'balance' => $balanceData['balance'],
             'transactions' => $transactions
 

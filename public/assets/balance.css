@@ -113,7 +113,8 @@
 }
 
 .incomes-chart,
-.expenses-chart {
+.expenses-chart,
+.contributions-chart {
   border: solid 1px #f4f0fa;
   border-radius: 1.2rem;
   padding: 1.6rem;

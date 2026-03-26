@@ -171,8 +171,39 @@ class GoalService
         )->fetchAll();
     }
 
+    public function getContributionSumsByGoal(int $userId): array
+    {
+        return $this->db->query(
+            "SELECT g.goal_name AS goal,
+            SUM(gc.amount) AS total
+            FROM goals AS g
+            JOIN goal_contributions AS gc
+            ON gc.goal_id = g.id
+            WHERE g.user_id = :uid
+            GROUP BY gc.goal_id",
+            ['uid' => $userId]
+        )->fetchAll();
+    }
 
-    // public function getContributionSumsByGoalAndDateRange() {}
+
+    public function getContributionSumsByGoalAndDateRange(int $userId, string $startDate, string $endDate): array
+    {
+        return $this->db->query(
+            "SELECT g.goal_name AS goal,
+            SUM(gc.amount) AS total
+            FROM goals AS g
+            JOIN goal_contributions AS gc
+            ON gc.goal_id = g.id
+            WHERE g.user_id = :uid
+            AND gc.contribution_date BETWEEN :start AND :end
+            GROUP BY g.goal_name",
+            [
+                'uid' => $userId,
+                'start' => $startDate,
+                'end' => $endDate,
+            ]
+        )->fetchAll();
+    }
 
     public function store(array $formData)
     {

@@ -333,7 +333,7 @@ class TransactionService
             $incomesSumsByCat = $this->getIncomeSumsByCategoryAndDateRange($userId, $dtStart, $dtEnd);
 
             $contributions = $this->goalService->getUserContributionsByDateRange($userId, $dtStart, $dtEnd);
-            // $contributonsSumsByGoal = $this->goalService->getContributionSumsByGoalAndDateRange($userId, $startDate, $endDate);           
+            $contributonsSumsByGoal = $this->goalService->getContributionSumsByGoalAndDateRange($userId, $startDate, $endDate);
         } else {
             $expenses = $this->getUserExpenses($userId);
             $expensesSumsByCat = $this->getExpenseSumsByCategory($userId);
@@ -342,6 +342,7 @@ class TransactionService
             $incomesSumsByCat = $this->getIncomeSumsByCategory($userId);
 
             $contributions = $this->goalService->getUserContributions($userId);
+            $contributonsSumsByGoal = $this->goalService->getContributionSumsByGoal($userId);
         }
 
         $totalExpense = array_sum(array_column($expenses, 'amount'));
@@ -359,6 +360,7 @@ class TransactionService
             'totalContributions' => $totalContributions,
             'expensesSumsByCat' => $expensesSumsByCat,
             'incomesSumsByCat' => $incomesSumsByCat,
+            'contributionsSumsByGoal' => $contributonsSumsByGoal,
             'balance' => $balance
         ];
     }

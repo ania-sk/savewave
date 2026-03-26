@@ -45,17 +45,20 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   createDoughnutChart("incomePieChart", "incomeChartLabels", "incomeChartData");
+
   createDoughnutChart(
     "expensePieChart",
     "expenseChartLabels",
-    "expenseChartData"
+    "expenseChartData",
   );
+
+  createDoughnutChart("goalPieChart", "goalChartLabels", "goalChartData");
 });
 
 document.addEventListener("DOMContentLoaded", () => {
   const balanceBoxEl = document.querySelector(".balance-box");
   const thumbDownIconEl = balanceBoxEl.querySelector(
-    "ion-icon[name='thumbs-down-outline']"
+    "ion-icon[name='thumbs-down-outline']",
   );
   if (thumbDownIconEl) {
     balanceBoxEl.style.borderColor = "red";
