@@ -84,8 +84,23 @@ document.addEventListener("DOMContentLoaded", function () {
   const contributionModal = document.getElementById("modal-add-contribution");
   //get X button
   const closeButton = document.querySelector("#close-contribution-modal");
-  //get edit buttons
-  const contributionBtns = document.getElementsByClassName("btn--contribution");
+  //get contribution buttons
+  const contributionBtns = document.querySelectorAll(".btn--contribution");
+
+  contributionBtns.forEach((btn) => {
+    const spanAdd = btn.querySelector(".btn-contribution-span");
+    const spanLack = btn.querySelector(".btn-contribution-span-lack");
+    const icon = btn.querySelector(".contribution--icon");
+    const lackIcon = btn.querySelector(".lack-of-funds--icon");
+
+    const isDisabled = btn.disabled;
+
+    btn.classList.toggle("disabled", isDisabled);
+    spanAdd.style.display = isDisabled ? "none" : "block";
+    spanLack.style.display = isDisabled ? "block" : "none";
+    icon.style.display = isDisabled ? "none" : "block";
+    lackIcon.style.display = isDisabled ? "block" : "none";
+  });
 
   if (contributionModal && contributionBtns.length > 0) {
     Array.from(contributionBtns).forEach((button) => {

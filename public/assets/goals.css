@@ -298,7 +298,18 @@
 .btn--contribution:hover {
   transform: scale(1.02);
 }
-
+.btn--contribution.disabled {
+  background: #ac9cc1;
+}
+.btn--contribution.disabled:hover {
+  transform: scale(100%);
+}
+.btn-contribution-span {
+  display: none;
+}
+.btn-contribution-span.active {
+  display: block;
+}
 /* SIADE PANEL */
 .side-panel {
   position: fixed;

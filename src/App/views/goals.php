@@ -111,12 +111,15 @@ include $this->resolve("partials/_header.php");
                                 <?php echo e($goal['deadline']); ?>
                             </p>
                         </div>
+                        <!-- CONTRIBUTION BUTTON -->
                         <?php if ($goal['amount_saved'] < $goal['amount_needed']):  ?>
                             <button class="btn-primary  btn--contribution" data-goal-id="<?php echo e($goal['id']); ?>"
                                 data-goal-name="<?php echo e($goal['goal_name']); ?>"
                                 <?php echo $balance <= 0 ? 'disabled' : ''; ?>>
                                 <i class="contribution--icon ph-fill ph-hand-coins"></i>
-                                <span>Add contribution</span>
+                                <i class="contribution--icon ph ph-empty lack-of-funds--icon" style="display: none;"></i>
+                                <span class="btn-contribution-span">Add contribution</span>
+                                <span class="btn-contribution-span-lack" style="display: none;">Lack of funds</span>
                             </button>
                         <?php else: ?>
                             <div class="flex-conteiner goal-achieved-box gap-1">
