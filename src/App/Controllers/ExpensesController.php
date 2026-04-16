@@ -32,13 +32,22 @@ class ExpensesController
             $dtStart = $startDate . ' 00:00:00';
             $dtEnd   = $endDate   . ' 23:59:59';
 
-            $expenses = $this->transactionService->getUserExpensesByDateRange($userId, $dtStart, $dtEnd);
+            $allExpenses = $this->transactionService->getUserExpensesByDateRange($userId, $dtStart, $dtEnd);
             $sumsByCat = $this->transactionService->getExpenseSumsByCategoryAndDateRange($userId, $dtStart, $dtEnd);
         } else {
-            $expenses = $this->transactionService->getUserExpenses($userId);
+            $allExpenses = $this->transactionService->getUserExpenses($userId);
             $sumsByCat = $this->transactionService->getExpenseSumsByCategory($userId);
         }
 
+        //pagination for the transaction table
+        $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+        $limit = 15;
+        $offset = ($page - 1) * $limit;
+
+        $totalRecords = count($allExpenses);
+        $totalPages = (int)ceil($totalRecords / $limit);
+
+        $expenses = array_slice($allExpenses, $offset, $limit);
         $expenseToEdit = $_SESSION['expenseToEdit'] ?? null;
 
         echo $this->view->render("/expenses.php", [
@@ -54,7 +63,10 @@ class ExpensesController
             'end_date' => $endDate,
             'expenseChartLabels' => array_column($sumsByCat, 'category'),
             'expenseChartData' => array_map(fn($r) => (float)$r['total'], $sumsByCat),
-            'totalExpense' => $totalExpense
+            'totalExpense' => $totalExpense,
+            'totalPages' => $totalPages,
+            'currentPage' => $page,
+            'offset' => $offset
         ]);
     }
 

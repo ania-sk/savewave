@@ -58,8 +58,8 @@ include $this->resolve("partials/_header.php");
         </section>
 
         <!-- TABLE EXPENSE -->
-        <div class="table-income-box">
-            <table class="table table-income">
+        <section class="table-income-box">
+            <table class="table table-income" id="expensesTableBody">
                 <thead>
                     <tr>
                         <th scope="col">No.</th>
@@ -72,7 +72,7 @@ include $this->resolve("partials/_header.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1;
+                    <?php $i = $offset + 1;
                     $sum = 0; ?>
                     <?php foreach ($expenses as $expense): ?>
                         <tr>
@@ -111,6 +111,31 @@ include $this->resolve("partials/_header.php");
 
                 </tbody>
             </table>
+        </section>
+
+        <!-- pagination for the table -->
+        <div class="pagination--box" id="expensesTablePagination">
+            <!-- PREV -->
+            <button
+                onclick="loadPage(<?= $currentPage - 1 ?>)"
+                class="btn--page"
+                <?= $currentPage <= 1 ? 'disabled' : '' ?>>
+                &lt;
+            </button>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <button onclick="loadPage(<?php echo $i; ?>)" class="<?php echo $i === $currentPage ? 'active' : ''; ?> btn--page">
+                    <?php echo $i; ?>
+                </button>
+            <?php endfor; ?>
+
+            <!-- NEXT -->
+            <button
+                onclick="loadPage(<?= $currentPage + 1 ?>)"
+                class="btn--page"
+                <?= $currentPage >= $totalPages ? 'disabled' : '' ?>>
+                &gt;
+            </button>
         </div>
     </main>
 
