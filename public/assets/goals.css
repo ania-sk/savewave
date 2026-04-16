@@ -112,6 +112,14 @@
 #modal-edit-goal {
   display: none;
 }
+
+#modal-goal *:focus,
+#modal-edit-contribution *:focus,
+#modal-add-contribution *:focus,
+#modal-edit-goal *:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(61, 150, 134, 0.5);
+}
 /* ===========================
    GRID SECTION WITH CARDS
 =========================== */

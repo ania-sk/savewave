@@ -5,6 +5,9 @@ const btnIconModalIncomeHeader = document.querySelector(
 
 btnIconModalIncomeHeader.onclick = function () {
   modalIncome.style.display = "block";
+  setTimeout(() => {
+    modalIncome.querySelector("#amount").focus();
+  }, 10);
 };
 
 //EDIT INCOME MODAL
@@ -21,6 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
     Array.from(editButtons).forEach((button) => {
       button.addEventListener("click", function () {
         editIncomeModal.style.display = "block";
+
+        setTimeout(() => {
+          document.querySelector("#edit-amount").focus();
+        }, 10);
       });
     });
   }

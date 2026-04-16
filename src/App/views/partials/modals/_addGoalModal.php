@@ -68,7 +68,7 @@
                                 min="0"
                                 name="goalAmount"
                                 placeholder="0"
-                                value="<?php echo e((float)($oldFormData['goalAmount'] ?? '')); ?>" />
+                                value="<?php echo e(($oldFormData['goalAmount'] ?? '')); ?>" />
                             <ion-icon
                                 id="cash-icon"
                                 class="modal-icon"

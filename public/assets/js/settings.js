@@ -10,6 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.openEditCategoryModal = function (id, name, type) {
     editCategoryModal.style.display = "block";
+
+    setTimeout(() => {
+      document.querySelector("#edit-category-name").focus();
+    }, 10);
+
     editCategoryModal.querySelector("input[name='categoryId']").value = id;
     editCategoryModal.querySelector("input[name='newCategoryName']").value =
       name;
@@ -26,11 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
       editCategoryModal.style.display = "none";
     }
   });
-});
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.activeForm === "editCategory") {
-    document.getElementById("modal-edit-category").style.display = "block";
-  }
 });
 
 //FLASH DIV

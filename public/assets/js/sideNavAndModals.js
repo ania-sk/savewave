@@ -39,9 +39,17 @@ const xEls = document.querySelectorAll(".close");
 
 btnModalIncome.onclick = function () {
   modalIncome.style.display = "block";
+
+  setTimeout(() => {
+    modalIncome.querySelector("#amount").focus();
+  }, 10);
 };
 btnModalExpense.onclick = function () {
   modalExpense.style.display = "block";
+
+  setTimeout(() => {
+    modalExpense.querySelector("#expenseAmount").focus();
+  }, 10);
 };
 
 for (let xEl of xEls) {
@@ -66,9 +74,15 @@ const btnIconModalExpense = document.querySelector("#icon-btn-modal-expense");
 
 btnIconModalIncome.onclick = function () {
   modalIncome.style.display = "block";
+  setTimeout(() => {
+    modalIncome.querySelector("#amount").focus();
+  }, 10);
 };
 btnIconModalExpense.onclick = function () {
   modalExpense.style.display = "block";
+  setTimeout(() => {
+    modalExpense.querySelector("#expenseAmount").focus();
+  }, 10);
 };
 
 //errors in income form
@@ -96,6 +110,9 @@ document.addEventListener("DOMContentLoaded", function () {
   addCategorySelectedInForm.addEventListener("change", function () {
     if (this.value === "add_new") {
       modalAddIncomeCategory.style.display = "block";
+      setTimeout(() => {
+        document.querySelector("#newCategoryName").focus();
+      }, 10);
       this.value = "";
     }
   });
@@ -163,6 +180,9 @@ $(document).ready(function () {
       $(this).val(null).trigger("change");
 
       modalAddExpenseCategory.style.display = "block";
+      setTimeout(() => {
+        document.querySelector("#newExpenseCategoryName").focus();
+      }, 10);
       this.value = "";
     }
   });

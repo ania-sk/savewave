@@ -25,8 +25,9 @@
                             type="number"
                             step="0.01"
                             min="0"
+                            placeholder="0"
                             name="expenseAmount"
-                            value="<?php echo e((float)($oldFormData['expenseAmount'] ?? '0')); ?>" />
+                            value="<?php echo e(($oldFormData['expenseAmount'] ?? '')); ?>" />
                         <ion-icon
                             id="cash-icon"
                             class="modal-icon"

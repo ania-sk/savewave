@@ -21,7 +21,7 @@
 
                 <div class="input-form-box flex-conteiner">
                     <label>Amount</label>
-                    <input type="number" step="0.01" name="contributionAmount" placeholder="0">
+                    <input id="contributionAmount" type="number" step="0.01" name="contributionAmount" placeholder="0">
                     <ion-icon
                         id="cash-icon"
                         class="modal-icon"

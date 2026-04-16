@@ -6,6 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   btnModalGoal.onclick = function () {
     modalGoal.style.display = "block";
+
+    setTimeout(() => {
+      document.querySelector("#goal-name").focus();
+    }, 10);
   };
 
   if (xButton && modalGoal) {
@@ -33,6 +37,10 @@ document.addEventListener("DOMContentLoaded", function () {
     Array.from(editButtons).forEach((button) => {
       button.addEventListener("click", function () {
         editGoalModal.style.display = "block";
+
+        setTimeout(() => {
+          document.querySelector("#edit-goal-name").focus();
+        }, 10);
       });
     });
   }
@@ -106,6 +114,10 @@ document.addEventListener("DOMContentLoaded", function () {
     Array.from(contributionBtns).forEach((button) => {
       button.addEventListener("click", function () {
         contributionModal.style.display = "block";
+
+        setTimeout(() => {
+          document.querySelector("#contributionAmount").focus();
+        }, 10);
       });
     });
   }
@@ -166,6 +178,10 @@ document.querySelectorAll(".btn--edit-contribution").forEach((button) => {
       contributionAmount;
 
     editContributionModal.style.display = "block";
+
+    setTimeout(() => {
+      document.querySelector("#edit-contribution-amount").focus();
+    }, 10);
   });
 });
 

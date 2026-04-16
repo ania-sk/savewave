@@ -218,7 +218,7 @@
 #modal-income *:focus,
 #modal-expense *:focus {
   outline: none;
-  box-shadow: 0 0 0 0.5rem rgba(61, 150, 134, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(61, 150, 134, 0.5);
 }
 
 .modal-box {

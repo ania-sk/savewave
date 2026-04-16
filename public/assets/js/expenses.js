@@ -5,6 +5,10 @@ const btnIconModalExpenseHeader = document.querySelector(
 
 btnIconModalExpenseHeader.onclick = function () {
   modalExpense.style.display = "block";
+  setTimeout(() => {
+    const input = modalExpense.querySelector("#expenseAmount");
+    if (input) input.focus();
+  }, 10);
 };
 
 //EDIT EXPENSE MODAL
@@ -21,6 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
     Array.from(editButtons).forEach((button) => {
       button.addEventListener("click", function () {
         editExpenseModal.style.display = "block";
+
+        setTimeout(() => {
+          document.querySelector("#edit-amount").focus();
+        }, 10);
       });
     });
   }
