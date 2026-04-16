@@ -217,7 +217,7 @@ include $this->resolve("partials/_header.php");
                 <p>Your previous contributions</p>
             </div>
 
-            <table class="table">
+            <table class="table" id="contributionsTableBody">
                 <thead>
                     <tr>
                         <th scope="col">No.</th>
@@ -229,7 +229,7 @@ include $this->resolve("partials/_header.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1;
+                    <?php $i = $offset + 1;
                     foreach ($contributions as $c): ?>
                         <tr>
                             <td data-label="No."><?php echo $i++; ?>.</td>
@@ -256,6 +256,31 @@ include $this->resolve("partials/_header.php");
                 </tbody>
             </table>
         </section>
+
+        <!-- pagination for the table -->
+        <div class="pagination--box" id="contributionsTablePagination">
+            <!-- PREV -->
+            <button
+                onclick="loadPage(<?= $currentPage - 1 ?>)"
+                class="btn--page"
+                <?= $currentPage <= 1 ? 'disabled' : '' ?>>
+                &lt;
+            </button>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <button onclick="loadPage(<?php echo $i; ?>)" class="<?php echo $i === $currentPage ? 'active' : ''; ?> btn--page">
+                    <?php echo $i; ?>
+                </button>
+            <?php endfor; ?>
+
+            <!-- NEXT -->
+            <button
+                onclick="loadPage(<?= $currentPage + 1 ?>)"
+                class="btn--page"
+                <?= $currentPage >= $totalPages ? 'disabled' : '' ?>>
+                &gt;
+            </button>
+        </div>
 
     </main>
     <?php

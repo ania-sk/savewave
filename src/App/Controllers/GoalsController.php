@@ -41,13 +41,23 @@ class GoalsController
         $goals = $this->goalService->getUserGoals($userId);
         $goalToEdit = $_SESSION['goalToEdit'] ?? null;
 
-        $contributions = $this->goalService->getUserContributions($userId);
+        $allContributions = $this->goalService->getUserContributions($userId);
 
         $balanceData = $this->transactionService->getBalance($userId);
         $balance = $balanceData['balance'];
 
         $incomeCategories = $this->categoryService->getUserActiveIncomeCategories($userId);
         $expenseCategories = $this->categoryService->getUserActiveExpenseCategories($userId);
+
+        //pagination for the contributions table
+        $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+        $limit = 15;
+        $offset = ($page - 1) * $limit;
+
+        $totalRecords = count($allContributions);
+        $totalPages = (int)ceil($totalRecords / $limit);
+
+        $contributions = array_slice($allContributions, $offset, $limit);
 
         echo $this->view->render("/goals.php", [
             'title' => 'Goals',
@@ -59,7 +69,10 @@ class GoalsController
             'contributions' => $contributions,
             'balance' => $balance,
             'incomeCategories' => $incomeCategories,
-            'expenseCategories' => $expenseCategories
+            'expenseCategories' => $expenseCategories,
+            'totalPages' => $totalPages,
+            'currentPage' => $page,
+            'offset' => $offset
         ]);
     }
 

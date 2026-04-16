@@ -135,6 +135,32 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// pagination for the contributions table
+function loadPage(pageNumber) {
+  const params = new URLSearchParams(window.location.search);
+  params.set("page", pageNumber);
+
+  fetch("/goals?" + params.toString())
+    .then((res) => res.text())
+    .then((html) => {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+
+      document.getElementById("contributionsTableBody").innerHTML =
+        doc.getElementById("contributionsTableBody").innerHTML;
+
+      document.getElementById("contributionsTablePagination").innerHTML =
+        doc.getElementById("contributionsTablePagination").innerHTML;
+
+      // scroll in the table
+      document
+        .querySelector(".transacrions-table-box")
+        .scrollIntoView({ behavior: "smooth" });
+    })
+    .catch((err) => {
+      console.error("Pagination error:", err);
+    });
+}
+
 //add contribution
 document.querySelectorAll(".btn--contribution").forEach((button) => {
   button.addEventListener("click", function () {
