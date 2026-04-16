@@ -183,7 +183,7 @@ body {
 
 *:focus {
   outline: none;
-  box-shadow: 0 0 0 0.5rem rgba(61, 150, 134, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(61, 150, 134, 0.5);
 }
 /* TABLE */
 .table {
@@ -211,6 +211,42 @@ td {
 
 .table tbody tr:nth-child(even) td {
   background-color: #f7f3fc;
+}
+
+/* table pagination */
+.pagination--box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn--page {
+  border: 1px solid transparent;
+  background-color: transparent;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn--page.active {
+  background-color: #3d9685;
+  color: white;
+  font-weight: bold;
+}
+
+.btn--page:hover:not(:disabled) {
+  color: #3d9685;
+  border-color: #3d9685;
+  transform: translateY(-1px);
+}
+
+.btn--page:disabled {
+  opacity: 0.4;
+  cursor: auto;
 }
 /*
 --- 01 TYPOGRAPHY SYSTEM

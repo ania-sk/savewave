@@ -107,7 +107,7 @@ include $this->resolve("partials/_header.php");
                 <ion-icon name="repeat-outline"></ion-icon>
                 <p>Transactions</p>
             </div>
-            <table class="table">
+            <table class="table" id="transactionsTableBody">
                 <thead>
                     <tr>
                         <th scope="col">No.</th>
@@ -119,7 +119,7 @@ include $this->resolve("partials/_header.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1; ?>
+                    <?php $i = $offset + 1; ?>
                     <?php foreach ($transactions as $transaction): ?>
                         <tr>
                             <td data-label="No."><?php echo e($i); ?>.</td>
@@ -135,6 +135,31 @@ include $this->resolve("partials/_header.php");
                     <?php endforeach; ?>
                 </tbody>
             </table>
+
+            <!-- pagination for the table -->
+            <div class="pagination--box" id="balanceTablePagination">
+                <!-- PREV -->
+                <button
+                    onclick="loadPage(<?= $currentPage - 1 ?>)"
+                    class="btn--page"
+                    <?= $currentPage <= 1 ? 'disabled' : '' ?>>
+                    &lt;
+                </button>
+
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <button onclick="loadPage(<?php echo $i; ?>)" class="<?php echo $i === $currentPage ? 'active' : ''; ?> btn--page">
+                        <?php echo $i; ?>
+                    </button>
+                <?php endfor; ?>
+
+                <!-- NEXT -->
+                <button
+                    onclick="loadPage(<?= $currentPage + 1 ?>)"
+                    class="btn--page"
+                    <?= $currentPage >= $totalPages ? 'disabled' : '' ?>>
+                    &gt;
+                </button>
+            </div>
         </section>
     </main>
     <?php

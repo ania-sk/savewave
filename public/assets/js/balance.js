@@ -64,3 +64,29 @@ document.addEventListener("DOMContentLoaded", () => {
     balanceBoxEl.style.borderColor = "red";
   }
 });
+
+// pagination for the table
+function loadPage(pageNumber) {
+  const params = new URLSearchParams(window.location.search);
+  params.set("page", pageNumber);
+
+  fetch("/balance?" + params.toString())
+    .then((res) => res.text())
+    .then((html) => {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+
+      document.getElementById("transactionsTableBody").innerHTML =
+        doc.getElementById("transactionsTableBody").innerHTML;
+
+      document.getElementById("balanceTablePagination").innerHTML =
+        doc.getElementById("balanceTablePagination").innerHTML;
+
+      // scroll in the table
+      document
+        .querySelector(".transacrions-table-box")
+        .scrollIntoView({ behavior: "smooth" });
+    })
+    .catch((err) => {
+      console.error("Pagination error:", err);
+    });
+}

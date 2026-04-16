@@ -28,11 +28,21 @@ class   BalanceController
 
         $balanceData = $this->transactionService->getBalance($userId, $startDate, $endDate);
 
-        $transactions = $this->transactionService->buildTransactionHistory(
+        $allTransactions = $this->transactionService->buildTransactionHistory(
             $balanceData['incomes'],
             $balanceData['expenses'],
             $balanceData['contributions']
         );
+
+        //pagination for the transaction table
+        $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+        $limit = 15;
+        $offset = ($page - 1) * $limit;
+
+        $totalRecords = count($allTransactions);
+        $totalPages = (int)ceil($totalRecords / $limit);
+
+        $transactions = $allTransactions = array_slice($allTransactions, $offset, $limit);
 
         // data for charts
         $expenseChartLabels = array_column($balanceData['expensesSumsByCat'], 'category');
@@ -63,7 +73,10 @@ class   BalanceController
             'totalExpense' => $balanceData['totalExpense'],
             'totalContributions' => $balanceData['totalContributions'],
             'balance' => $balanceData['balance'],
-            'transactions' => $transactions
+            'transactions' => $transactions,
+            'totalPages' => $totalPages,
+            'currentPage' => $page,
+            'offset' => $offset
 
         ]);
     }
