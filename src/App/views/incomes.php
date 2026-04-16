@@ -59,9 +59,9 @@ include $this->resolve("partials/_header.php");
             </div>
         </section>
 
-
-        <div class="table-income-box">
-            <table class="table table-income">
+        <!-- incomes table -->
+        <section class="table-income-box">
+            <table class="table table-income" id="incomesTableBody">
                 <thead>
                     <tr>
                         <th scope="col">No.</th>
@@ -74,7 +74,7 @@ include $this->resolve("partials/_header.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1;
+                    <?php $i = $offset + 1;
                     $sum = 0; ?>
                     <?php foreach ($incomes as $income): ?>
                         <tr>
@@ -108,7 +108,32 @@ include $this->resolve("partials/_header.php");
                     </tr>
                 </tbody>
             </table>
-        </div>
+
+            <!-- pagination for the table -->
+            <div class="pagination--box" id="incomeTablePagination">
+                <!-- PREV -->
+                <button
+                    onclick="loadPage(<?= $currentPage - 1 ?>)"
+                    class="btn--page"
+                    <?= $currentPage <= 1 ? 'disabled' : '' ?>>
+                    &lt;
+                </button>
+
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <button onclick="loadPage(<?php echo $i; ?>)" class="<?php echo $i === $currentPage ? 'active' : ''; ?> btn--page">
+                        <?php echo $i; ?>
+                    </button>
+                <?php endfor; ?>
+
+                <!-- NEXT -->
+                <button
+                    onclick="loadPage(<?= $currentPage + 1 ?>)"
+                    class="btn--page"
+                    <?= $currentPage >= $totalPages ? 'disabled' : '' ?>>
+                    &gt;
+                </button>
+            </div>
+        </section>
     </main>
     <?php
     include $this->resolve("partials/_sideNavAndModals.php");

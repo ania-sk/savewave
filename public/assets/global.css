@@ -241,6 +241,7 @@ td {
 .btn--page:hover:not(:disabled) {
   color: #3d9685;
   border-color: #3d9685;
+  background-color: white;
   transform: translateY(-1px);
 }
 

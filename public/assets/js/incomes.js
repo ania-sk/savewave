@@ -81,3 +81,29 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   });
 });
+
+// pagination for the table
+function loadPage(pageNumber) {
+  const params = new URLSearchParams(window.location.search);
+  params.set("page", pageNumber);
+
+  fetch("/incomes?" + params.toString())
+    .then((res) => res.text())
+    .then((html) => {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+
+      document.getElementById("incomesTableBody").innerHTML =
+        doc.getElementById("incomesTableBody").innerHTML;
+
+      document.getElementById("incomeTablePagination").innerHTML =
+        doc.getElementById("incomeTablePagination").innerHTML;
+
+      // scroll in the table
+      document
+        .querySelector(".transacrions-table-box")
+        .scrollIntoView({ behavior: "smooth" });
+    })
+    .catch((err) => {
+      console.error("Pagination error:", err);
+    });
+}
