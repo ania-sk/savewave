@@ -187,11 +187,15 @@ const closeEditContributionModal = document.getElementById(
 );
 
 // get edit buttons and open and fill modal
-document.querySelectorAll(".btn--edit-contribution").forEach((button) => {
-  button.addEventListener("click", function () {
-    const contributionId = this.dataset.contributionId;
-    const contributionAmount = this.dataset.contributionAmount;
-    const contributionGoalName = this.dataset.contributionGoalName;
+document
+  .querySelector("#contributionsTableBody")
+  .addEventListener("click", function (event) {
+    const editButton = event.target.closest(".btn--edit-contribution");
+    if (!editButton) return;
+
+    const contributionId = editButton.dataset.contributionId;
+    const contributionAmount = editButton.dataset.contributionAmount;
+    const contributionGoalName = editButton.dataset.contributionGoalName;
 
     document.getElementById("edit-contribution-id").value = contributionId;
     document.getElementById("edit-contribution-amount").value =
@@ -209,7 +213,6 @@ document.querySelectorAll(".btn--edit-contribution").forEach((button) => {
       document.querySelector("#edit-contribution-amount").focus();
     }, 10);
   });
-});
 
 // close modal with X
 closeEditContributionModal.addEventListener("click", () => {
