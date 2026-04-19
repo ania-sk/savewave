@@ -84,10 +84,17 @@ include $this->resolve("partials/_header.php");
                             <td data-label="Comment"><?php echo e($income['income_comment']); ?></td>
                             <td data-label="Date"><?php echo e($income['formatted_date']); ?></td>
                             <td data-label="Edit" class="td-edit">
-                                <a href="/incomes/<?php echo e($income['id']); ?>" class=" btn-box btn--edit">
+                                <button
+                                    class="btn-box btn--edit-income"
+                                    data-income-id="<?php echo e($income['id']); ?>"
+                                    data-income-amount="<?php echo e($income['amount']); ?>"
+                                    data-income-category-id="<?php echo e($income['categoryId']); ?>"
+                                    data-income-category-name="<?php echo e($income['name']); ?>"
+                                    data-income-category-active="<?php echo e($income['active']); ?>"
+                                    data-income-comment="<?php echo e($income['income_comment']); ?>"
+                                    data-income-date="<?php echo e($income['formatted_date']); ?>">
                                     <ion-icon class="edit--icon" name="create-outline"></ion-icon>
-
-                                </a>
+                                </button>
                             </td>
                             <td data-label="Delete" class="td-delete">
                                 <form action="/incomes/<?php echo e($income['id']); ?>" method="POST">
@@ -108,7 +115,6 @@ include $this->resolve("partials/_header.php");
                     </tr>
                 </tbody>
             </table>
-
             <!-- pagination for the table -->
             <div class="pagination--box" id="incomeTablePagination">
                 <!-- PREV -->

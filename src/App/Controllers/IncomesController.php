@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use Framework\TemplateEngine;
 use App\Services\{TransactionService, CategoryService, ValidatorService};
+use Framework\Exceptions\ValidationException;
 
 class IncomesController
 {
@@ -50,7 +51,7 @@ class IncomesController
         $incomes = array_slice($allIncomes, $offset, $limit);
 
 
-        $incomeToEdit = $_SESSION['incomeToEdit'] ?? null;
+        // $incomeToEdit = $_SESSION['incomeToEdit'] ?? null;
 
         echo $this->view->render("/incomes.php", [
             'title' => 'Incomes',
@@ -60,7 +61,7 @@ class IncomesController
             'incomes' => $incomes,
             'incomeCategories' => $incomeCategories,
             'expenseCategories' => $expenseCategories,
-            'incomeToEdit' => $incomeToEdit,
+            // 'incomeToEdit' => $incomeToEdit,
             'start_date' => $startDate,
             'end_date' => $endDate,
             'incomeChartLabels' => array_column($sumsByCat, 'category'),
@@ -72,44 +73,22 @@ class IncomesController
         ]);
     }
 
-    public function editIncome(array $params): void
+    public function updateIncome()
     {
-        $incomeToEdit = $this->transactionService->getUserIncome($params['income']);
+        $formData = $_POST;
+        $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+        $incomeId = (int)$formData['incomeId'];
 
-        if (!$incomeToEdit) {
-            redirectTo('/incomes');
+        try {
+            $this->validatorService->validateIncome($formData);
+            $this->transactionService->updateIncome($formData, $incomeId);
+            redirectTo($redirectPath);
+        } catch (ValidationException $ex) {
+            $_SESSION['errors'] = $ex->errors;
+            $_SESSION['oldFormData'] = $formData;
+            $_SESSION['activeForm'] = $formData['form_type'];
+            redirectTo($redirectPath);
         }
-
-        $_SESSION['activeForm'] = 'editIncome';
-        $_SESSION['incomeToEdit'] = $incomeToEdit;
-
-        redirectTo('/incomes');
-    }
-
-    public function updateIncome(array $params)
-    {
-        $incomeToEdit = $this->transactionService->getUserIncome($params['income']);
-        $_SESSION['activeForm'] = 'editIncome';
-
-        if (!$incomeToEdit) {
-            redirectTo('/incomes');
-        }
-
-        $errors = $this->validatorService->validateIncome($_POST);
-
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
-            $_SESSION['oldFormData'] = $_POST;
-            $_SESSION['activeForm'] = 'editIncome';
-            redirectTo($_SERVER['HTTP_REFERER']);
-        }
-
-        $this->transactionService->updateIncome($_POST, $incomeToEdit['id']);
-
-        unset($_SESSION['activeForm']);
-        unset($_SESSION['incomeToEdit']);
-
-        redirectTo($_SERVER['HTTP_REFERER']);
     }
 
 

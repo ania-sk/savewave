@@ -11,31 +11,61 @@ btnIconModalIncomeHeader.onclick = function () {
 };
 
 //EDIT INCOME MODAL
+//get edit income modal
+const editIncomeModal = document.getElementById("modal-edit-income");
+//get X button
+const closeButton = document.querySelector("#close-edit-income-modal");
 
-document.addEventListener("DOMContentLoaded", function () {
-  //get edit income modal
-  const editIncomeModal = document.getElementById("modal-edit-income");
-  //get X button
-  const closeButton = document.querySelector("#close-edit-income-modal");
-  //get edit buttons
-  const editButtons = document.getElementsByClassName("btn--edit");
+//get edit buttons
+document
+  .querySelector("#incomesTableBody")
+  .addEventListener("click", function (event) {
+    const editButton = event.target.closest(".btn--edit-income");
+    if (!editButton) return;
 
-  if (editIncomeModal && editButtons.length > 0) {
-    Array.from(editButtons).forEach((button) => {
-      button.addEventListener("click", function () {
-        editIncomeModal.style.display = "block";
+    const incomeId = editButton.dataset.incomeId;
+    const incomeAmount = editButton.dataset.incomeAmount;
+    const incomeCategoryId = editButton.dataset.incomeCategoryId;
+    const incomeCategoryName = editButton.dataset.incomeCategoryName;
+    const incomeCategoryActive = editButton.dataset.incomeCategoryActive;
+    const incomeComment = editButton.dataset.incomeComment;
+    const incomeDate = editButton.dataset.incomeDate;
 
-        setTimeout(() => {
-          document.querySelector("#edit-amount").focus();
-        }, 10);
-      });
-    });
-  }
+    editIncomeModal.querySelector("#edit-income-id").value = incomeId;
+    editIncomeModal.querySelector("#edit-income-amount").value = incomeAmount;
+    editIncomeModal.querySelector("#edit-income-comment").value = incomeComment;
+    editIncomeModal.querySelector("#edit-income-date").value = incomeDate;
+    editIncomeModal.querySelector("#edit-income-category").value =
+      incomeCategoryId;
 
-  if (closeButton && editIncomeModal) {
-    closeButton.onclick = function () {
-      editIncomeModal.style.display = "none";
-    };
+    if (incomeCategoryActive === "0") {
+      const select = editIncomeModal.querySelector("#edit-income-category");
+
+      const option = document.createElement("option");
+      option.value = incomeCategoryId;
+      option.textContent = `(deleted) ${incomeCategoryName}`;
+      option.selected = true;
+
+      select.prepend(option);
+    }
+
+    editIncomeModal.style.display = "block";
+
+    setTimeout(() => {
+      editIncomeModal.querySelector("#edit-income-amount").focus();
+    }, 10);
+    console.log(incomeCategoryId);
+  });
+
+if (closeButton && editIncomeModal) {
+  closeButton.onclick = function () {
+    editIncomeModal.style.display = "none";
+  };
+}
+// close modal
+window.addEventListener("click", (event) => {
+  if (event.target === editIncomeModal) {
+    editIncomeModal.style.display = "none";
   }
 });
 

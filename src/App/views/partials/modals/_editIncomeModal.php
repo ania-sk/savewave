@@ -9,18 +9,18 @@
 
         <div class="modal-body flex-conteiner">
             <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
-            <form method="post" action="/incomes/<?php echo e($incomeToEdit['id']); ?>" class="modal-form-box flex-conteiner">
+            <form method="post" action="/incomes/update" class="modal-form-box flex-conteiner">
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
                 <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                 <input type="hidden" name="form_type" value="editIncome">
-                <input type="hidden" name="incomeId" value="<?php echo e($incomeToEdit['id'] ?? ''); ?>">
+                <input type="hidden" name="incomeId" id="edit-income-id">
 
                 <!-- "Amount" -->
                 <div class="input-form-box flex-conteiner">
-                    <label for="edit-amount">Amount</label>
-                    <input id="edit-amount" type="number" name="incomeAmount"
-                        value="<?php echo e($oldFormData['incomeAmount'] ?? ($incomeToEdit['amount'] ?? '0')); ?>" />
+                    <label for="edit-income-amount">Amount</label>
+                    <input id="edit-income-amount" type="number" name="incomeAmount"
+                        value="<?php echo e($oldFormData['incomeAmount'] ?? '0'); ?>" />
                     <ion-icon id="cash-icon" class="modal-icon" name="cash-outline"></ion-icon>
                     <?php if ($activeForm === 'editIncome' && isset($errors['incomeAmount'])): ?>
                         <div>
@@ -33,9 +33,9 @@
                 <!-- "Comment" -->
                 <div class="input-form-box flex-conteiner">
                     <label for="edit-comment">Comment</label>
-                    <input id="edit-comment" type="text" name="incomeComment"
+                    <input id="edit-income-comment" type="text" name="incomeComment"
                         placeholder="About income..."
-                        value="<?php echo e($oldFormData['incomeComment'] ?? ($incomeToEdit['income_comment'] ?? '')); ?>" />
+                        value="<?php echo e($oldFormData['incomeComment'] ??  ''); ?>" />
                     <ion-icon id="text-icon" class="modal-icon" name="document-text-outline"></ion-icon>
                     <?php if ($activeForm === 'editIncome' && isset($errors['incomeComment'])): ?>
                         <div>
@@ -49,8 +49,8 @@
                 <div class="flex-conteiner date-category-box">
                     <div class="input-form-box flex-conteiner">
                         <label for="edit-date">Date</label>
-                        <input id="edit-date" type="date" name="incomeDate"
-                            value="<?php echo e($oldFormData['incomeDate'] ?? ($incomeToEdit['formatted_date'] ?? '')); ?>" />
+                        <input id="edit-income-date" type="date" name="incomeDate"
+                            value="<?php echo e($oldFormData['incomeDate'] ??  ''); ?>" />
                         <?php if ($activeForm === 'editIncome' && isset($errors['incomeDate'])): ?>
                             <div>
                                 <p class="error-text"><?php echo e($errors['incomeDate'][0]); ?></p>
@@ -60,13 +60,13 @@
                     <!-- "Category" -->
                     <div class="input-form-box flex-conteiner">
                         <label for="edit-category">Category</label>
-                        <select name="incomeCategory" id="edit-category">
+                        <select name="incomeCategory" id="edit-income-category">
                             <option value="">Choose category:</option>
                             <?php if (!empty($incomeCategories)): ?>
                                 <?php foreach ($incomeCategories as $incomeCategory): ?>
                                     <option value="<?php echo e($incomeCategory['id']); ?>"
                                         <?php echo ((isset($oldFormData['incomeCategory']) && $oldFormData['incomeCategory'] == $incomeCategory['id'])
-                                            || (isset($incomeToEdit['income_category_assigned_to_user_id']) && $incomeToEdit['income_category_assigned_to_user_id'] == $incomeCategory['id'])) ? 'selected' : ''; ?>>
+                                        ) ? 'selected' : ''; ?>>
                                         <?php echo e($incomeCategory['name']); ?>
                                     </option>
                                 <?php endforeach; ?>

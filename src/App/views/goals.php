@@ -113,7 +113,8 @@ include $this->resolve("partials/_header.php");
                         </div>
                         <!-- CONTRIBUTION BUTTON -->
                         <?php if ($goal['amount_saved'] < $goal['amount_needed']):  ?>
-                            <button class="btn-primary  btn--contribution" data-goal-id="<?php echo e($goal['id']); ?>"
+                            <button class="btn-primary  btn--contribution"
+                                data-goal-id="<?php echo e($goal['id']); ?>"
                                 data-goal-name="<?php echo e($goal['goal_name']); ?>"
                                 <?php echo $balance <= 0 ? 'disabled' : ''; ?>>
                                 <i class="contribution--icon ph-fill ph-hand-coins"></i>

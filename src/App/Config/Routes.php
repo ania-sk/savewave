@@ -46,9 +46,8 @@ function registerRoutes(App $app)
     $app->post('/settings/addIncomeCategory', [CategoryController::class, 'addNewIncomeCategory'])->add(AuthRequiredMiddleware::class);
     $app->post('/settings/addExpenseCategory', [CategoryController::class, 'addNewExpenseCategory'])->add(AuthRequiredMiddleware::class);
 
-    $app->get('/incomes/{income}', [IncomesController::class, 'editIncome']);
-    $app->post('/incomes/{income}', [IncomesController::class, 'updateIncome']);
-    $app->delete('/incomes/{income}', [IncomesController::class, 'deleteIncome']);
+    $app->post('/incomes/update', [IncomesController::class, 'updateIncome'])->add(AuthRequiredMiddleware::class);;
+    $app->delete('/incomes/{income}', [IncomesController::class, 'deleteIncome'])->add(AuthRequiredMiddleware::class);;
 
     $app->get('/expenses/{expense}', [ExpensesController::class, 'editExpense']);
     $app->post('/expenses/{expense}', [ExpensesController::class, 'updateExpense']);

@@ -72,7 +72,9 @@ class TransactionService
                 i.amount, 
                 i.income_comment, 
                 DATE_FORMAT(i.date_of_income, '%Y-%m-%d') as formatted_date,
-                c.name
+                c.name,
+                c.id as categoryId,
+                c.is_active as active
             FROM incomes AS i
             JOIN incomes_category_assigned_to_users AS c 
             ON i.income_category_assigned_to_user_id = c.id
