@@ -123,6 +123,10 @@
   font-size: 1.4rem;
 }
 
+#modal-edit-expense *:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(61, 150, 134, 0.5);
+}
 /* -------------------------------
      Przyciski: Filtr i Wyczyść
      ------------------------------- */

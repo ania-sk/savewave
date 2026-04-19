@@ -12,31 +12,62 @@ btnIconModalExpenseHeader.onclick = function () {
 };
 
 //EDIT EXPENSE MODAL
+//get edit expense modal
+const editExpenseModal = document.getElementById("modal-edit-expense");
+//get X button
+const closeButton = document.querySelector("#close-edit-expense-modal");
 
-document.addEventListener("DOMContentLoaded", function () {
-  //get edit expense modal
-  const editExpenseModal = document.getElementById("modal-edit-expense");
-  //get X button
-  const closeButton = document.querySelector("#close-edit-expense-modal");
-  //get edit buttons
-  const editButtons = document.getElementsByClassName("btn--edit");
+//get edit buttons
+document
+  .querySelector("#expensesTableBody")
+  .addEventListener("click", function (event) {
+    const editButton = event.target.closest(".btn--edit-expense");
+    if (!editButton) return;
 
-  if (editExpenseModal && editButtons.length > 0) {
-    Array.from(editButtons).forEach((button) => {
-      button.addEventListener("click", function () {
-        editExpenseModal.style.display = "block";
+    const expenseId = editButton.dataset.expenseId;
+    const expenseAmount = editButton.dataset.expenseAmount;
+    const expenseCategoryId = editButton.dataset.expenseCategoryId;
+    const expenseCategoryName = editButton.dataset.expenseCategoryName;
+    const expenseCategoryActive = editButton.dataset.expenseCategoryActive;
+    const expenseComment = editButton.dataset.expenseComment;
+    const expenseDate = editButton.dataset.expenseDate;
 
-        setTimeout(() => {
-          document.querySelector("#edit-amount").focus();
-        }, 10);
-      });
-    });
-  }
+    editExpenseModal.querySelector("#edit-expense-id").value = expenseId;
+    editExpenseModal.querySelector("#edit-expense-amount").value =
+      expenseAmount;
+    editExpenseModal.querySelector("#edit-expense-comment").value =
+      expenseComment;
+    editExpenseModal.querySelector("#edit-expense-date").value = expenseDate;
+    editExpenseModal.querySelector("#edit-expense-category").value =
+      expenseCategoryId;
 
-  if (closeButton && editExpenseModal) {
-    closeButton.onclick = function () {
-      editExpenseModal.style.display = "none";
-    };
+    if (expenseCategoryActive === "0") {
+      const select = editExpenseModal.querySelector("#edit-expense-category");
+
+      const option = document.createElement("option");
+      option.value = expenseCategoryId;
+      option.textContent = `(deleted) ${expenseCategoryName}`;
+      option.selected = true;
+
+      select.prepend(option);
+    }
+
+    editExpenseModal.style.display = "block";
+
+    setTimeout(() => {
+      editExpenseModal.querySelector("#edit-expense-amount").focus();
+    }, 10);
+  });
+
+if (closeButton && editExpenseModal) {
+  closeButton.onclick = function () {
+    editExpenseModal.style.display = "none";
+  };
+}
+// close modal
+window.addEventListener("click", (event) => {
+  if (event.target === editExpenseModal) {
+    editExpenseModal.style.display = "none";
   }
 });
 

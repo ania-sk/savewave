@@ -50,9 +50,6 @@ class IncomesController
 
         $incomes = array_slice($allIncomes, $offset, $limit);
 
-
-        // $incomeToEdit = $_SESSION['incomeToEdit'] ?? null;
-
         echo $this->view->render("/incomes.php", [
             'title' => 'Incomes',
             'cssLink' => 'incomes.css',
@@ -61,7 +58,6 @@ class IncomesController
             'incomes' => $incomes,
             'incomeCategories' => $incomeCategories,
             'expenseCategories' => $expenseCategories,
-            // 'incomeToEdit' => $incomeToEdit,
             'start_date' => $startDate,
             'end_date' => $endDate,
             'incomeChartLabels' => array_column($sumsByCat, 'category'),

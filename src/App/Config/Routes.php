@@ -46,12 +46,12 @@ function registerRoutes(App $app)
     $app->post('/settings/addIncomeCategory', [CategoryController::class, 'addNewIncomeCategory'])->add(AuthRequiredMiddleware::class);
     $app->post('/settings/addExpenseCategory', [CategoryController::class, 'addNewExpenseCategory'])->add(AuthRequiredMiddleware::class);
 
-    $app->post('/incomes/update', [IncomesController::class, 'updateIncome'])->add(AuthRequiredMiddleware::class);;
-    $app->delete('/incomes/{income}', [IncomesController::class, 'deleteIncome'])->add(AuthRequiredMiddleware::class);;
+    $app->post('/incomes/update', [IncomesController::class, 'updateIncome'])->add(AuthRequiredMiddleware::class);
+    $app->delete('/incomes/{income}', [IncomesController::class, 'deleteIncome'])->add(AuthRequiredMiddleware::class);
 
-    $app->get('/expenses/{expense}', [ExpensesController::class, 'editExpense']);
-    $app->post('/expenses/{expense}', [ExpensesController::class, 'updateExpense']);
-    $app->delete('/expenses/{expense}', [ExpensesController::class, 'deleteExpense']);
+    // $app->get('/expenses/{expense}', [ExpensesController::class, 'editExpense']);
+    $app->post('/expenses/update', [ExpensesController::class, 'updateExpense'])->add(AuthRequiredMiddleware::class);
+    $app->delete('/expenses/{expense}', [ExpensesController::class, 'deleteExpense'])->add(AuthRequiredMiddleware::class);
 
     // $app->get('/api/goals/{goal}', [GoalsController::class, 'getGoal'])->add(AuthRequiredMiddleware::class);
     $app->get('/goals/{goal}/contributions', [GoalsController::class, 'getGoalContributions'])->add(AuthRequiredMiddleware::class);

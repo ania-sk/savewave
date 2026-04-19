@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use Framework\TemplateEngine;
 use App\Services\{TransactionService, CategoryService, ValidatorService};
+use Framework\Exceptions\ValidationException;
 
 class ExpensesController
 {
@@ -48,7 +49,6 @@ class ExpensesController
         $totalPages = (int)ceil($totalRecords / $limit);
 
         $expenses = array_slice($allExpenses, $offset, $limit);
-        $expenseToEdit = $_SESSION['expenseToEdit'] ?? null;
 
         echo $this->view->render("/expenses.php", [
             'title' => 'Expenses',
@@ -58,7 +58,6 @@ class ExpensesController
             'expenses' => $expenses,
             'incomeCategories' => $incomeCategories,
             'expenseCategories' => $expenseCategories,
-            'expenseToEdit' => $expenseToEdit,
             'start_date' => $startDate,
             'end_date' => $endDate,
             'expenseChartLabels' => array_column($sumsByCat, 'category'),
@@ -70,44 +69,22 @@ class ExpensesController
         ]);
     }
 
-    public function editExpense(array $params): void
+    public function updateExpense()
     {
-        $expenseToEdit = $this->transactionService->getUserExpense($params['expense']);
+        $formData = $_POST;
+        $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+        $expenseId = (int)$formData['expenseId'];
 
-        if (!$expenseToEdit) {
-            redirectTo('/expenses');
+        try {
+            $this->validatorService->validateExpense($formData);
+            $this->transactionService->updateExpense($formData, $expenseId);
+            redirectTo($redirectPath);
+        } catch (ValidationException $ex) {
+            $_SESSION['errors'] = $ex->errors;
+            $_SESSION['oldFormData'] = $formData;
+            $_SESSION['activeForm'] = $formData['form_type'];
+            redirectTo($redirectPath);
         }
-
-        $_SESSION['activeForm'] = 'editExpense';
-        $_SESSION['expenseToEdit'] = $expenseToEdit;
-
-        redirectTo('/expenses');
-    }
-
-    public function updateExpense(array $params)
-    {
-        $expenseToEdit = $this->transactionService->getUserExpense($params['expense']);
-        $_SESSION['activeForm'] = 'editExpense';
-
-        if (!$expenseToEdit) {
-            redirectTo('/expenses');
-        }
-
-        $errors = $this->validatorService->validateExpense($_POST);
-
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
-            $_SESSION['oldFormData'] = $_POST;
-            $_SESSION['activeForm'] = 'editExpense';
-            redirectTo($_SERVER['HTTP_REFERER']);
-        }
-
-        $this->transactionService->updateExpense($_POST, $expenseToEdit['id']);
-
-        unset($_SESSION['activeForm']);
-        unset($_SESSION['expenseToEdit']);
-
-        redirectTo($_SERVER['HTTP_REFERER']);
     }
 
 

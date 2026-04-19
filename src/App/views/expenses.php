@@ -86,10 +86,21 @@ include $this->resolve("partials/_header.php");
                             <td data-label="Comment"><?php echo e($expense['expense_comment']); ?></td>
                             <td data-label="Date"><?php echo e($expense['formatted_date']); ?></td>
                             <td data-label="Edit" class="td-edit">
-                                <a href="/expenses/<?php echo e($expense['id']); ?>" class="btn-box btn--edit">
+                                <!-- <a href="/expenses/<?php echo e($expense['id']); ?>" class="btn-box btn--edit"> -->
+                                <button
+                                    class="btn-box btn--edit-expense"
+                                    data-expense-id="<?php echo e($expense['id']); ?>"
+                                    data-expense-amount="<?php echo e($expense['amount']); ?>"
+                                    data-expense-category-id="<?php echo e($expense['categoryId']); ?>"
+                                    data-expense-category-name="<?php echo e($expense['name']); ?>"
+                                    data-expense-category-active="<?php echo e($expense['active']); ?>"
+                                    data-expense-comment="<?php echo e($expense['expense_comment']); ?>"
+                                    data-expense-date="<?php echo e($expense['formatted_date']); ?>">
                                     <ion-icon class="edit--icon" name="create-outline"></ion-icon>
+                                </button>
 
-                                </a>
+
+                                <!-- </a> -->
                             </td>
                             <td data-label="Delete" class="td-delete">
                                 <form action="/expenses/<?php echo e($expense['id']); ?>" method="POST">

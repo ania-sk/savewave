@@ -9,18 +9,18 @@
 
         <div class="modal-body flex-conteiner">
             <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
-            <form method="post" action="/expenses/<?php echo e($expenseToEdit['id']); ?>" class="modal-form-box flex-conteiner">
+            <form method="post" action="/expenses/update" class="modal-form-box flex-conteiner">
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
                 <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                 <input type="hidden" name="form_type" value="editExpense">
-                <input type="hidden" name="expenseId" value="<?php echo e($expenseToEdit['id'] ?? ''); ?>">
+                <input type="hidden" name="expenseId" id="edit-expense-id">
 
                 <!-- "Amount" -->
                 <div class="input-form-box flex-conteiner">
                     <label for="edit-amount">Amount</label>
-                    <input id="edit-amount" type="number" name="expenseAmount"
-                        value="<?php echo e($oldFormData['expenseAmount'] ?? ($expenseToEdit['amount'] ?? '0')); ?>" />
+                    <input id="edit-expense-amount" type="number" name="expenseAmount"
+                        value="<?php echo e($oldFormData['expenseAmount'] ??  '0'); ?>" />
                     <ion-icon id="cash-icon" class="modal-icon" name="cash-outline"></ion-icon>
                     <?php if ($activeForm === 'editExpense' && isset($errors['expenseAmount'])): ?>
                         <div>
@@ -33,9 +33,9 @@
                 <!-- "Comment" -->
                 <div class="input-form-box flex-conteiner">
                     <label for="edit-comment">Comment</label>
-                    <input id="edit-comment" type="text" name="expenseComment"
+                    <input id="edit-expense-comment" type="text" name="expenseComment"
                         placeholder="About expense..."
-                        value="<?php echo e($oldFormData['expenseComment'] ?? ($expenseToEdit['expense_comment'] ?? '')); ?>" />
+                        value="<?php echo e($oldFormData['expenseComment'] ?? ''); ?>" />
                     <ion-icon id="text-icon" class="modal-icon" name="document-text-outline"></ion-icon>
                     <?php if ($activeForm === 'editExpense' && isset($errors['expenseComment'])): ?>
                         <div>
@@ -48,9 +48,9 @@
                 <!-- "Date"   -->
                 <div class="flex-conteiner date-category-box">
                     <div class="input-form-box flex-conteiner">
-                        <label for="edit-date">Date</label>
-                        <input id="edit-date" type="date" name="expenseDate"
-                            value="<?php echo e($oldFormData['expenseDate'] ?? ($expenseToEdit['formatted_date'] ?? '')); ?>" />
+                        <label for="edit-expense-date">Date</label>
+                        <input id="edit-expense-date" type="date" name="expenseDate"
+                            value="<?php echo e($oldFormData['expenseDate'] ??  ''); ?>" />
                         <?php if ($activeForm === 'editExpense' && isset($errors['expenseDate'])): ?>
                             <div>
                                 <p class="error-text"><?php echo e($errors['expenseDate'][0]); ?></p>
@@ -60,7 +60,7 @@
                     <!-- "Category" -->
                     <div class="input-form-box flex-conteiner">
                         <label for="edit-category">Category</label>
-                        <select name="expenseCategory" id="edit-category">
+                        <select name="expenseCategory" id="edit-expense-category">
                             <option value="">Choose category:</option>
                             <?php if (!empty($expenseCategories)): ?>
                                 <?php foreach ($expenseCategories as $expenseCategory): ?>

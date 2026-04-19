@@ -54,7 +54,6 @@ document
     setTimeout(() => {
       editIncomeModal.querySelector("#edit-income-amount").focus();
     }, 10);
-    console.log(incomeCategoryId);
   });
 
 if (closeButton && editIncomeModal) {
