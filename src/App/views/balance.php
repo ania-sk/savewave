@@ -164,6 +164,7 @@ include $this->resolve("partials/_header.php");
     </main>
     <?php
     include $this->resolve("partials/_sideNavAndModals.php");
+    include $this->resolve("partials/modals/_addIncomeCategoryModal.php");
     include $this->resolve("partials/_scripts.php");
     ?>
 </body>

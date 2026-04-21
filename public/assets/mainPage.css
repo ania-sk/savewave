@@ -216,7 +216,9 @@
 }
 
 #modal-income *:focus,
-#modal-expense *:focus {
+#modal-expense *:focus,
+#modal-add-expense-category *:focus,
+#modal-add-income-category *:focus {
   outline: none;
   box-shadow: 0 0 0 0.2rem rgba(61, 150, 134, 0.5);
 }

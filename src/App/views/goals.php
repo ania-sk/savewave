@@ -290,6 +290,7 @@ include $this->resolve("partials/_header.php");
     include $this->resolve("partials/modals/_editGoalModal.php");
     include $this->resolve("partials/modals/_addContributionModal.php");
     include $this->resolve("partials/modals/_editContributionModal.php");
+    include $this->resolve("partials/modals/_addIncomeCategoryModal.php");
     include $this->resolve("partials/_scripts.php");
 
     ?>

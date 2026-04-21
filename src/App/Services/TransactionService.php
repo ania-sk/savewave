@@ -78,7 +78,8 @@ class TransactionService
             FROM incomes AS i
             JOIN incomes_category_assigned_to_users AS c 
             ON i.income_category_assigned_to_user_id = c.id
-            WHERE i.user_id = :user_id",
+            WHERE i.user_id = :user_id
+            ORDER BY i.date_of_income DESC",
             ['user_id' => $userId]
         )->fetchAll();
 
@@ -164,7 +165,8 @@ class TransactionService
             FROM expenses AS e
             JOIN expenses_category_assigned_to_users AS c 
             ON e.expense_category_assigned_to_user_id = c.id
-            WHERE e.user_id = :user_id",
+            WHERE e.user_id = :user_id
+            ORDER BY e.date_of_expense DESC",
             ['user_id' => $_SESSION['user']]
         )->fetchAll();
 

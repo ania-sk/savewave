@@ -59,15 +59,6 @@ for (let xEl of xEls) {
   };
 }
 
-window.onclick = function (event) {
-  if (event.target == modalIncome) {
-    modalIncome.style.display = "none";
-  }
-  if (event.target == modalExpense) {
-    modalExpense.style.display = "none";
-  }
-};
-
 //get modal btn-icons
 const btnIconModalIncome = document.querySelector("#icon-btn-modal-income");
 const btnIconModalExpense = document.querySelector("#icon-btn-modal-expense");
@@ -99,26 +90,43 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //ADD CATEGORY MODALS
-
 //incomes
-var addCategorySelectedInForm = document.getElementById("incomeCategory");
 const modalAddIncomeCategory = document.getElementById(
   "modal-add-income-category",
 );
 
 document.addEventListener("DOMContentLoaded", function () {
-  addCategorySelectedInForm.addEventListener("change", function () {
-    if (this.value === "add_new") {
+  const selects = [
+    document.getElementById("incomeCategory"),
+    document.getElementById("edit-income-category"),
+  ];
+
+  selects.forEach(function (select) {
+    if (!select) return;
+
+    if (select.value === "add_new") {
+      openAddCategoryModal(select);
+    }
+
+    select.addEventListener("change", handleCategoryChange);
+
+    function handleCategoryChange(e) {
+      if (e.target.value === "add_new") {
+        openAddCategoryModal(e.target);
+      }
+    }
+
+    function openAddCategoryModal() {
       modalAddIncomeCategory.style.display = "block";
       setTimeout(() => {
-        document.querySelector("#newCategoryName").focus();
+        modalAddIncomeCategory.querySelector("#newCategoryName").focus();
       }, 10);
-      this.value = "";
+      select.value = "";
     }
   });
 });
 
-//AJAX INCOME CATEGORY
+// AJAX INCOME CATEGORY
 $(document).on("submit", "#form-add-income-category", function (e) {
   e.preventDefault();
 
@@ -134,11 +142,20 @@ $(document).on("submit", "#form-add-income-category", function (e) {
       let newId = response.id;
       let newName = response.name;
 
-      let select = $("#incomeCategory");
+      let select;
+
+      if ($("#modal-edit-income").css("display") === "block") {
+        select = $("#edit-income-category");
+      } else {
+        select = $("#incomeCategory");
+      }
+
       let newOption = new Option(newName, newId, true, true);
-      select.append(newOption).trigger("change");
+      select.append(newOption);
+      select.val(newId);
 
       $("#income-category-error").remove();
+
       modalAddIncomeCategory.style.display = "none";
     },
 
@@ -151,11 +168,11 @@ $(document).on("submit", "#form-add-income-category", function (e) {
         $("#income-category-error").remove();
 
         $("#newCategoryName").after(`
-  <div id="income-category-error" class="error-wrapper">
-      <p class="error-text">${data.errors.newCategoryName[0]}</p>
-      <ion-icon class="error-icon" name="alert"></ion-icon>
-  </div>
-`);
+          <div id="income-category-error" class="error-wrapper">
+              <p class="error-text">${data.errors.newCategoryName[0]}</p>
+              <ion-icon class="error-icon" name="alert"></ion-icon>
+          </div>
+        `);
       }
 
       return false;
@@ -280,3 +297,15 @@ $(document).ready(function () {
     },
   });
 });
+
+window.onclick = function (event) {
+  if (event.target == modalIncome) {
+    modalIncome.style.display = "none";
+  }
+  if (event.target == modalExpense) {
+    modalExpense.style.display = "none";
+  }
+  if (event.target == modalAddIncomeCategory) {
+    modalAddIncomeCategory.style.display = "none";
+  }
+};

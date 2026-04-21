@@ -47,7 +47,7 @@ class CategoryController
 
         try {
             $this->validatorService->validateNewIncomeCategory($formData);
-            $newCategoryId = $this->categoryService->createUserIncomeCategory($_POST);
+            $newCategoryId = $this->categoryService->createUserIncomeCategory($formData);
             header('Content-Type: application/json');
             echo json_encode([
                 'id' => $newCategoryId,

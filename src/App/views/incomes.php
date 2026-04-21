@@ -144,6 +144,7 @@ include $this->resolve("partials/_header.php");
     <?php
     include $this->resolve("partials/_sideNavAndModals.php");
     include $this->resolve("partials/modals/_editIncomeModal.php");
+    include $this->resolve("partials/modals/_addIncomeCategoryModal.php");
     include $this->resolve("partials/_scripts.php");
     ?>
 
