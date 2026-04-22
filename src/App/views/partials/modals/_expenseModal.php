@@ -126,8 +126,6 @@
                         <p id="limitLeft">NL</p>
                     </div>
                 </div>
-                <!-- ADD NEW Expense CATEGORY -->
-                <?php include $this->resolve("partials/modals/_addExpenseCategoryModal.php"); ?>
 
             </div>
         </div>

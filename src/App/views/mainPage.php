@@ -19,6 +19,8 @@ include $this->resolve("partials/_sideNavAndModals.php");
 
     <?php
     include $this->resolve("partials/_scripts.php");
+    include $this->resolve("partials/modals/_addIncomeCategoryModal.php");
+    include $this->resolve("partials/modals/_addExpenseCategoryModal.php");
     ?>
 
 </body>

@@ -64,18 +64,21 @@
                             <option value="">Choose category:</option>
                             <?php if (!empty($expenseCategories)): ?>
                                 <?php foreach ($expenseCategories as $expenseCategory): ?>
-                                    <option value="<?php echo e($expenseCategory['id']); ?>"
+                                    <option
+                                        value="<?php echo e($expenseCategory['id']); ?>"
+                                        data-limit="<?= ($expenseCategory['monthly_limit'] !== null && $expenseCategory['monthly_limit'] != 0) ? e((int)$expenseCategory['monthly_limit']) : '' ?>"
                                         <?php echo ((isset($oldFormData['expenseCategory']) && $oldFormData['expenseCategory'] == $expenseCategory['id'])
                                             || (isset($expenseToEdit['expense_category_assigned_to_user_id']) && $expenseToEdit['expense_category_assigned_to_user_id'] == $expenseCategory['id'])) ? 'selected' : ''; ?>>
                                         <?php echo e($expenseCategory['name']); ?>
                                     </option>
                                 <?php endforeach; ?>
                             <?php endif; ?>
-                            <option value="add_new"
-                                <?php echo (isset($oldFormData['expenseCategory']) && $oldFormData['expenseCategory'] === 'add_new') ? 'selected' : ''; ?>>
+                            <option value="add_new_expense_category"
+                                <?php echo (isset($oldFormData['expenseCategory']) && $oldFormData['expenseCategory'] === 'add_new_expense_category') ? 'selected' : ''; ?>>
                                 + Add new category
                             </option>
                         </select>
+                        <ion-icon id="cash-icon" class="modal-icon" name="medal-outline"></ion-icon>
                         <?php if ($activeForm === 'editExpense' && isset($errors['expenseCategory'])): ?>
                             <div>
                                 <p class="error-text"><?php echo e($errors['expenseCategory'][0]); ?></p>
@@ -87,7 +90,6 @@
                 <button id="edit-expense-submit" type="submit" class="btn btn--modal">Save Changes</button>
             </form>
 
-            <?php include $this->resolve("partials/modals/_addExpenseCategoryModal.php"); ?>
         </div>
     </div>
 

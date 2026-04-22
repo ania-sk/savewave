@@ -183,27 +183,26 @@ $(document).on("submit", "#form-add-income-category", function (e) {
 });
 
 //expenses
-var addExpenseCategorySelectedInForm =
-  document.getElementById("expenseCategory");
 const modalAddExpenseCategory = document.getElementById(
   "modal-add-expense-category",
 );
 
-$(document).ready(function () {
-  $("#expenseCategory").on("select2:select", function (e) {
-    let selectedValue = e.params.data.id;
+$("#expenseCategory, #edit-expense-category").on(
+  "select2:select",
+  function (e) {
+    const selectedValue = e.params.data.id;
 
     if (selectedValue === "add_new_expense_category") {
       $(this).val(null).trigger("change");
 
       modalAddExpenseCategory.style.display = "block";
+
       setTimeout(() => {
         document.querySelector("#newExpenseCategoryName").focus();
       }, 10);
-      this.value = "";
     }
-  });
-});
+  },
+);
 
 //AJAX EXPENSE CATEGORY
 $(document).on("submit", "#form-add-expense-category", function (e) {
@@ -220,7 +219,13 @@ $(document).on("submit", "#form-add-expense-category", function (e) {
       let newId = response.id;
       let newName = response.name;
 
-      let select = $("#expenseCategory");
+      let select;
+
+      if ($("#modal-edit-expense").css("display") === "block") {
+        select = $("#edit-expense-category");
+      } else {
+        select = $("#expenseCategory");
+      }
 
       let newOption = new Option(newName, newId, true, true);
       select.append(newOption).trigger("change");
@@ -275,8 +280,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //expense category limit labels in modal
-$(document).ready(function () {
-  $("#expenseCategory").select2({
+function initExpenseSelect2(selector) {
+  $(selector).select2({
     width: "100%",
     placeholder: "Choose category",
     allowClear: true,
@@ -284,18 +289,22 @@ $(document).ready(function () {
       if (!data.id) return data.text;
 
       const limit = $(data.element).data("limit");
-      const $container = $(`
+      return $(`
         <div class="select2-option">
           <span class="category-name">${data.text}</span>
           ${limit ? `<span class="limit-label">${limit}</span>` : ""}
         </div>
       `);
-      return $container;
     },
     templateSelection: function (data) {
       return data.text;
     },
   });
+}
+
+$(document).ready(function () {
+  initExpenseSelect2("#expenseCategory");
+  initExpenseSelect2("#edit-expense-category");
 });
 
 window.onclick = function (event) {
@@ -307,5 +316,8 @@ window.onclick = function (event) {
   }
   if (event.target == modalAddIncomeCategory) {
     modalAddIncomeCategory.style.display = "none";
+  }
+  if (event.target == modalAddExpenseCategory) {
+    modalAddExpenseCategory.style.display = "none";
   }
 };
