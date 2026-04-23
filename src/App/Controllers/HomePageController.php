@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use Framework\TemplateEngine;
-use App\Services\{CategoryService, UserService, GoalService};
+use App\Services\{CategoryService, UserService, GoalService, TransactionService};
 use App\Config\Paths;
 
 class HomePageController
 {
 
-    public function __construct(private TemplateEngine $view, private CategoryService $categoryService, private UserService $userService, private GoalService $goalService) {}
+    public function __construct(private TemplateEngine $view, private CategoryService $categoryService, private UserService $userService, private GoalService $goalService, private TransactionService $transactionService) {}
 
     public function homePage()
     {
@@ -47,6 +47,10 @@ class HomePageController
             $goalsToDisplay = array_slice($achievedGoals, 0, 4);
         }
 
+        $latestIncomes = array_slice($this->transactionService->getUserIncomes($userId), 0, 5);
+        $latestExpenses = array_slice($this->transactionService->getUserExpenses(), 0, 5);
+        $latestCotributions = array_slice($this->goalService->getUserContributions($userId), 0, 5);
+
         echo $this->view->render("/homePage.php", [
             'title' => 'Budget Application',
             'cssLink' => 'homePage.css',
@@ -56,6 +60,9 @@ class HomePageController
             'expenseCategories' => $expenseCategories,
             'username' => $username,
             'goals' => $goalsToDisplay,
+            'incomes' => $latestIncomes,
+            'expenses' => $latestExpenses,
+            'contributions' => $latestCotributions
         ]);
     }
 }

@@ -80,15 +80,90 @@ include $this->resolve("partials/_header.php");
 
         <!-- LAST TRANSACTION SECTION -->
         <section class="transaction-section ">
-            <div class="heading-tertiary">Last transactions</div>
+            <div class="flex-conteiner">
+                <div class="heading-tertiary">Last transactions</div>
+                <a href="/balance" class="btn--link">View all →</a>
+            </div>
 
-            <!-- incomes -->
-            <div class="grid-cols-3">
-                <div class="incomes-box"></div>
+            <div class="grid-cols-3 gap-4">
+                <!-- incomes -->
+                <div class="incomes-box">
+                    <div class="flex-conteiner">
+                        <h4>Incomes</h4>
+                        <a href="/incomes" class="btn--link">View all →</a>
+                    </div>
+
+                    <?php foreach ($incomes as $income): ?>
+                        <div class="transaction-item flex-conteiner income-item">
+                            <div class="transaction-left">
+                                <p class="transaction-category">
+                                    <?php echo e($income['name']); ?>
+                                </p>
+                                <p class="transaction-date">
+                                    <?php echo e($income['formatted_date']); ?>
+                                </p>
+                            </div>
+
+                            <div class="transaction-right">
+                                <p class="transaction-amount positive">
+                                    +<?php echo e($income['amount']); ?> zł
+                                </p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
                 <!-- expenses -->
-                <div class="expenses-box"></div>
+                <div class="expenses-box">
+                    <div class="flex-conteiner">
+                        <h4>Expenses</h4>
+                        <a href="/incomes" class="btn--link">View all →</a>
+                    </div>
+
+                    <?php foreach ($expenses as $expense): ?>
+                        <div class="transaction-item flex-conteiner expense-item">
+                            <div class="transaction-left">
+                                <p class="transaction-category">
+                                    <?php echo e($expense['name']); ?>
+                                </p>
+                                <p class="transaction-date">
+                                    <?php echo e($expense['formatted_date']); ?>
+                                </p>
+                            </div>
+
+                            <div class="transaction-right">
+                                <p class="transaction-amount negative">
+                                    -<?php echo e($expense['amount']); ?> zł
+                                </p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
                 <!-- contributions -->
-                <div class="contributions-box"></div>
+                <div class="contributions-box">
+                    <div class="flex-conteiner">
+                        <h4>Contributions</h4>
+                        <a href="/goals" class="btn--link">View all →</a>
+                    </div>
+
+                    <?php foreach ($contributions as $contribution): ?>
+                        <div class="transaction-item flex-conteiner expense-item">
+                            <div class="transaction-left">
+                                <p class="transaction-category">
+                                    <?php echo e($contribution['goal_name']); ?>
+                                </p>
+                                <p class="transaction-date">
+                                    <?php echo e($contribution['formatted_date']); ?>
+                                </p>
+                            </div>
+
+                            <div class="transaction-right">
+                                <p class="transaction-amount">
+                                    <?php echo e($contribution['amount']); ?> zł
+                                </p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </section>
 
