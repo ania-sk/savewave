@@ -8,7 +8,7 @@ use Framework\App;
 
 use App\Controllers\{
     HomeController,
-    MainPageController,
+    HomePageController,
     IncomesController,
     ExpensesController,
     AuthController,
@@ -23,7 +23,7 @@ use App\Middleware\{AuthRequiredMiddleware, GuestOnlyMiddleware};
 function registerRoutes(App $app)
 {
     $app->get('/', [HomeController::class, 'home']);
-    $app->get('/mainPage', [MainPageController::class, 'mainPage'])->add(AuthRequiredMiddleware::class);
+    $app->get('/homePage', [HomePageController::class, 'homePage'])->add(AuthRequiredMiddleware::class);
     $app->get('/incomes', [IncomesController::class, 'incomes'])->add(AuthRequiredMiddleware::class);
     $app->get('/expenses', [ExpensesController::class, 'expenses'])->add(AuthRequiredMiddleware::class);
     $app->get('/settings', [SettingsController::class, 'settings'])->add(AuthRequiredMiddleware::class);

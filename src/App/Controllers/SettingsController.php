@@ -28,7 +28,6 @@ class SettingsController
         echo $this->view->render("/settings.php", [
             'title' => 'Settings',
             'cssLink' => 'settings.css',
-            'cssLink2' => 'mainPage.css',
             'jsLink' => 'settings.js',
             'incomeCategories' => $incomeCategories,
             'expenseCategories' => $expenseCategories,

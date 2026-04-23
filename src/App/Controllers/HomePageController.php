@@ -8,12 +8,12 @@ use Framework\TemplateEngine;
 use App\Services\{CategoryService, UserService};
 use App\Config\Paths;
 
-class MainPageController
+class HomePageController
 {
 
     public function __construct(private TemplateEngine $view, private CategoryService $categoryService, private UserService $userService) {}
 
-    public function mainPage()
+    public function homePage()
     {
         $userId = (int)$_SESSION['user'];
         $incomeCategories = $this->categoryService->getUserActiveIncomeCategories($userId);
@@ -21,9 +21,9 @@ class MainPageController
 
         $username =  $this->userService->getUsername($userId);
 
-        echo $this->view->render("/mainPage.php", [
+        echo $this->view->render("/homePage.php", [
             'title' => 'Budget Application',
-            'cssLink' => 'mainPage.css',
+            'cssLink' => 'homePage.css',
             'cssLink2' => '',
             'jsLink' => '',
             'incomeCategories' => $incomeCategories,

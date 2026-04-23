@@ -44,6 +44,16 @@
     <!-- sidenav -->
     <nav class="side-nav-box flex-conteiner">
         <a
+            href="/homePage"
+            class="link nav-box flex-conteiner"
+            data-tooltip="Home">
+            <img
+                class="logo-sw"
+                src="/assets/imgs/save-wave-circle.png"
+                alt="Save Wave logo" />
+            <span>Home</span>
+        </a>
+        <a
             href="/incomes"
             class="link nav-box flex-conteiner"
             data-tooltip="Incomes">

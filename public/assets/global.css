@@ -55,6 +55,7 @@ body {
 .grid-rows-3 {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
+  height: 90vh;
 }
 
 .grid-rows-2 {

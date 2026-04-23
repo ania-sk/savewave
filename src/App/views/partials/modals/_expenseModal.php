@@ -126,7 +126,7 @@
                         <p id="limitLeft">NL</p>
                     </div>
                 </div>
-
             </div>
         </div>
+    </div>
 </section>

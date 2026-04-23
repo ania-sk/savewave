@@ -53,7 +53,6 @@ class IncomesController
         echo $this->view->render("/incomes.php", [
             'title' => 'Incomes',
             'cssLink' => 'incomes.css',
-            'cssLink2' => 'mainPage.css',
             'jsLink' => 'incomes.js',
             'incomes' => $incomes,
             'incomeCategories' => $incomeCategories,

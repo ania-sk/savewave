@@ -61,8 +61,7 @@ class GoalsController
 
         echo $this->view->render("/goals.php", [
             'title' => 'Goals',
-            'cssLink' => 'mainPage.css',
-            'cssLink2' => 'goals.css',
+            'cssLink' => 'goals.css',
             'jsLink' => 'goals.js',
             'goals' => $goals,
             'goalToEdit' => $goalToEdit,

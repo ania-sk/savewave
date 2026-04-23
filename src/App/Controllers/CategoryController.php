@@ -220,7 +220,7 @@ class CategoryController
             return;
         }
 
-        $categoryLimit = $this->categoryService->getCategoryLimit($categoryId);
+        $categoryLimit = $this->categoryService->getCategoryLimit($categoryId, $userId);
 
         // If the category has no limit, return OK
         if ($categoryLimit === null || $categoryLimit === 0.00) {

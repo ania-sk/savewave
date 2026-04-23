@@ -232,11 +232,14 @@ class CategoryService
         );
     }
 
-    public function getCategoryLimit(int $categoryId): ?float
+    public function getCategoryLimit(int $categoryId, int $userId): ?float
     {
         $result = $this->db->query(
-            "SELECT monthly_limit FROM expenses_category_assigned_to_users WHERE id = :id",
-            ['id' => $categoryId]
+            "SELECT monthly_limit FROM expenses_category_assigned_to_users WHERE id = :id AND user_id = :user_id",
+            [
+                'id' => $categoryId,
+                'user_id' => $userId
+            ]
         )->find();
 
         return $result && $result['monthly_limit'] !== null ? (float)$result['monthly_limit'] : null;

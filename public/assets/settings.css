@@ -1,4 +1,4 @@
-.side-nav-box > a:nth-child(5) {
+.side-nav-box > a:nth-child(6) {
   background-color: #0d7c66;
   color: #ebe1f8;
   width: 100%;
@@ -6,11 +6,11 @@
   padding: 0.4rem;
 }
 
-.side-nav-box > a:nth-child(5):hover {
+.side-nav-box > a:nth-child(6):hover {
   color: #ebe1f8;
 }
 
-.nav-hide .side-nav-box > a:nth-child(5) {
+.nav-hide .side-nav-box > a:nth-child(6) {
   width: auto;
 }
 /* SECTION MAIN */
@@ -188,7 +188,9 @@
   padding: 0.8rem 1.6rem;
   border-radius: 11px;
   cursor: pointer;
-  transition: transform 0.3s, background-color 0.3s;
+  transition:
+    transform 0.3s,
+    background-color 0.3s;
 }
 
 .btn--delete:hover,
