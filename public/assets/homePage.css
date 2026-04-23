@@ -13,6 +13,132 @@
 .nav-hide .nav-box:first-child {
   width: auto;
 }
+
+/* ===========================
+  GOALS SECTION
+=========================== */
+.goals-section {
+  padding: 10rem 5rem;
+}
+
+.goal-cards-box.grid-cols-4 {
+  gap: 1rem;
+}
+
+/* ===========================
+  GOAL CARD
+=========================== */
+.goal-card {
+  background: #f7f3fc;
+  padding: 32px 18px;
+  border-radius: 16px;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: 0.2s;
+  width: 27rem;
+  height: 35rem;
+  position: relative;
+}
+
+.goal-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.goal-title,
+.goal-card h3 {
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.stats-box {
+  gap: 1.2rem;
+  justify-content: flex-start;
+  margin-top: 24px;
+  padding: 8px;
+}
+.stats-box p {
+  font-weight: bold;
+}
+
+.goal-achieved-box {
+  color: #f7f3fc;
+  background: #6c6279;
+  padding: 8px;
+  width: 100%;
+  font-weight: 500;
+  margin-top: 24px;
+  position: absolute;
+  left: -1px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+  width: 10rem;
+  height: 2rem;
+  background-color: #e7f2f0;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: #0d7c66;
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+/* PROGRESS */
+.progress-box {
+  flex-direction: column;
+}
+.progress-bar {
+  height: 32px;
+  background: #e7f2f0;
+  border-radius: 999px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #0d7c66;
+}
+
+/* TEXT */
+.progress-text {
+  font-size: 14px;
+  margin: 0px 8px;
+}
+
+.goal-data-box {
+  gap: 12px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.amount,
+.deadline {
+  font-size: 14px;
+  color: #6c6279;
+}
+
+/* ===========================
+  TRANSACTION SECTION
+=========================== */
+.transaction-section {
+  padding: 10rem 5rem;
+}
 /* --- 01 TYPOGRAPHY SYSTEM
 - Font size system (px)
 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98

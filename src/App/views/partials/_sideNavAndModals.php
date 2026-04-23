@@ -1,6 +1,6 @@
 <section class="section-side-nav">
     <div class="logo-box mrg-bottom">
-        <a class="link flex-conteiner" href="mainPage">
+        <a class="link flex-conteiner" href="homePage">
             <img
                 class="logo-sw"
                 src="/assets/imgs/save-wave-circle.png"
