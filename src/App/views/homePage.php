@@ -16,6 +16,22 @@ include $this->resolve("partials/_header.php");
             <p>Welcome to savings, <?php echo e($username['username']); ?>!</p>
         </header>
 
+        <!-- CURRENT BALANCE SECTION -->
+        <section class="section-balance flex-conteiner">
+            <div class="balance-box">
+                <div class=" flex-conteiner">
+                    <p>Your savings: <?php echo e($balance); ?></p>
+                    <?php if ($balance > 0): ?>
+                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                    <?php else: ?>
+                        <ion-icon name="thumbs-down-outline"></ion-icon>
+                    <?php endif; ?>
+                </div>
+                <div class="mini-stats">
+                    <p>+<?php echo e($incomeSum); ?> zł / -<?php echo e($expenseSum); ?> zł</p>
+                </div>
+            </div>
+        </section>
 
         <!-- GOALS SECTION -->
         <section class="goals-section ">
@@ -166,9 +182,6 @@ include $this->resolve("partials/_header.php");
                 </div>
             </div>
         </section>
-
-        <!-- CURRENT BALANCE SECTION -->
-        <section></section>
 
     </main>
 

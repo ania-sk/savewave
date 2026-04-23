@@ -13,6 +13,25 @@
 .nav-hide .nav-box:first-child {
   width: auto;
 }
+/* ===========================
+  BALANCE SECTION
+=========================== */
+
+.balance-box {
+  font-size: 2.4rem;
+  border: solid 1px #0d7c66;
+  padding: 1.6rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin-top: 10rem;
+}
+
+.mini-stats {
+  font-size: 14px;
+  color: #6c6279;
+  margin-top: 1rem;
+}
 
 /* ===========================
   GOALS SECTION

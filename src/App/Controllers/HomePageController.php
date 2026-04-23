@@ -50,19 +50,26 @@ class HomePageController
         $latestIncomes = array_slice($this->transactionService->getUserIncomes($userId), 0, 5);
         $latestExpenses = array_slice($this->transactionService->getUserExpenses(), 0, 5);
         $latestCotributions = array_slice($this->goalService->getUserContributions($userId), 0, 5);
+        $allBalance = $this->transactionService->getBalance($userId);
+        $balance = $allBalance['balance'];
+        $totalIncomes = $allBalance['totalIncome'];
+        $totalExpenses = $allBalance['totalExpense'];
 
         echo $this->view->render("/homePage.php", [
             'title' => 'Budget Application',
             'cssLink' => 'homePage.css',
             'cssLink2' => '',
-            'jsLink' => '',
+            'jsLink' => 'balance.js',
             'incomeCategories' => $incomeCategories,
             'expenseCategories' => $expenseCategories,
             'username' => $username,
             'goals' => $goalsToDisplay,
             'incomes' => $latestIncomes,
             'expenses' => $latestExpenses,
-            'contributions' => $latestCotributions
+            'contributions' => $latestCotributions,
+            'balance' => $balance,
+            'incomeSum' => $totalIncomes,
+            'expenseSum' => $totalExpenses
         ]);
     }
 }
