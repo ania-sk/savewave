@@ -104,5 +104,8 @@ include $this->resolve("partials/_header.php");
     ?>
 
 </body>
+<?php
+include $this->resolve("partials/_footer.php");
+?>
 
 </html>

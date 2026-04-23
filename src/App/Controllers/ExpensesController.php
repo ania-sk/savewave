@@ -53,6 +53,7 @@ class ExpensesController
         echo $this->view->render("/expenses.php", [
             'title' => 'Expenses',
             'cssLink' => 'expenses.css',
+            'cssLink2' => 'main.css',
             'jsLink' => 'expenses.js',
             'expenses' => $expenses,
             'incomeCategories' => $incomeCategories,

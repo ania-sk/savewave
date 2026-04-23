@@ -57,6 +57,7 @@ class   BalanceController
         echo $this->view->render("/balance.php", [
             'title' => 'Balance',
             'cssLink' => 'balance.css',
+            'cssLink2' => 'main.css',
             'jsLink' => 'balance.js',
             'incomeCategories' => $incomeCategories,
             'expenseCategories' => $expenseCategories,

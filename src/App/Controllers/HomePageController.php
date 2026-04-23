@@ -58,7 +58,7 @@ class HomePageController
         echo $this->view->render("/homePage.php", [
             'title' => 'Budget Application',
             'cssLink' => 'homePage.css',
-            'cssLink2' => '',
+            'cssLink2' => 'main.css',
             'jsLink' => 'balance.js',
             'incomeCategories' => $incomeCategories,
             'expenseCategories' => $expenseCategories,
