@@ -201,10 +201,16 @@
   .incomes-heading {
     width: 100%;
     justify-content: space-between;
-    margin-bottom: 8rem;
+    padding: 2rem 3rem;
+    background-color: #f4f0fa;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
   }
   .date-form-box {
     margin-bottom: 8rem;
+    margin-top: 8rem;
   }
   .incomes-chart {
     margin-bottom: 8rem;
