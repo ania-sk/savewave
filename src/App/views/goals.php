@@ -12,8 +12,10 @@ include $this->resolve("partials/_header.php");
                 echo ($activeForm === 'editContribution') ? 'modal-edit-contribution-open' : ''; ?>">
     <!-- MAIN SECTION -->
     <main class="section-main flex-conteiner">
-        <div class="heading-box grid-cols-2">
-            <div class="goals-heading flex-conteiner"><ion-icon class="nav-icon" name="heart-half-outline"></ion-icon>
+        <div class="heading-box flex-conteiner">
+            <ion-icon class="hamburger-menu" name="menu-outline"></ion-icon>
+            <div class="goals-heading flex-conteiner">
+                <ion-icon class="nav-icon" name="heart-half-outline"></ion-icon>
                 <p>Goals</p>
             </div>
             <!--goal modal button -->
@@ -22,7 +24,7 @@ include $this->resolve("partials/_header.php");
                     <ion-icon
                         id="add-goal-icon"
                         name="add-circle"></ion-icon>
-                    <p>Add goal</p>
+                    <p>Add <span>goal</span></p>
                 </button>
             </div>
         </div>

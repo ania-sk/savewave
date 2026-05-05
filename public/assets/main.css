@@ -508,6 +508,7 @@
   }
   .hamburger-menu {
     display: block;
+    flex-shrink: 0;
   }
   .nav-hide .section-side-nav {
     display: none;
