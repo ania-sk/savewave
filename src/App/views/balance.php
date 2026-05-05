@@ -9,8 +9,12 @@ include $this->resolve("partials/_header.php");
     <!-- MAIN SECTION -->
     <main class="section-main flex-conteiner">
         <div class="balance-heading flex-conteiner">
-            <ion-icon class="nav-icon" name="stats-chart-outline"></ion-icon>
-            <p>Balance</p>
+            <ion-icon class="hamburger-menu" name="menu-outline"></ion-icon>
+            <div class="flex-conteiner">
+                <ion-icon class=" nav-icon" name="stats-chart-outline"></ion-icon>
+                <p>Balance</p>
+            </div>
+            <div></div>
         </div>
         <!-- DATE FILTER -->
         <section class="flex-conteiner">
