@@ -16,7 +16,7 @@
 /* SECTION MAIN */
 /* ************* */
 .section-main {
-  padding: 4.8rem;
+  padding: 5rem 5rem 20rem 5rem;
   flex-direction: column;
 }
 
@@ -189,4 +189,60 @@
 
 #modal-edit-expense {
   display: none;
+}
+
+/* ===========================
+  MEDIA
+=========================== */
+
+@media (max-width: 1024px) {
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 430px) {
+  .expense-heading {
+    width: 100%;
+    justify-content: space-between;
+    padding: 2rem 3rem;
+    background-color: #f4f0fa;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  .date-form-box {
+    margin-bottom: 8rem;
+    margin-top: 8rem;
+  }
+  .expense-chart {
+    margin-bottom: 8rem;
+  }
+  .table-expense {
+    width: 100%;
+    table-layout: fixed;
+  }
+  .table-expense th,
+  .table-expense td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .table-expense th:nth-child(1),
+  .table-expense td:nth-child(1) {
+    width: 12%;
+  }
+
+  .table-expense th:nth-child(4),
+  .table-expense th:nth-child(5),
+  .table-expense td:nth-child(4),
+  .table-expense td:nth-child(5) {
+    display: none;
+  }
+
+  .table-expense th:nth-child(6),
+  .table-expense td:nth-child(6),
+  .table-expense th:nth-child(7),
+  .table-expense td:nth-child(7) {
+    width: 15%;
+  }
 }

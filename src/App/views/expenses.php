@@ -10,9 +10,11 @@ include $this->resolve("partials/_header.php");
 
     <main class="section-main flex-conteiner">
         <div class="expense-heading flex-conteiner">
-            <ion-icon class="nav-icon" name="file-tray-full-outline"></ion-icon>
-            <p>Expenses</p>
-
+            <ion-icon class="hamburger-menu" name="menu-outline"></ion-icon>
+            <div class=" flex-conteiner">
+                <ion-icon class="nav-icon" name="file-tray-full-outline"></ion-icon>
+                <p>Expenses</p>
+            </div>
             <button class="header-btn--icon" data-tooltip="Add expense">
                 <ion-icon
                     id="header-icon-btn-modal-expense"
@@ -58,8 +60,8 @@ include $this->resolve("partials/_header.php");
         </section>
 
         <!-- TABLE EXPENSE -->
-        <section class="table-income-box">
-            <table class="table table-income" id="expensesTableBody">
+        <section class="table-expense-box">
+            <table class="table table-expense" id="expensesTableBody">
                 <thead>
                     <tr>
                         <th scope="col">No.</th>
