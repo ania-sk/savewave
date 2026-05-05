@@ -79,14 +79,11 @@
             </div>
         </section>
     </main>
-    <!-- FOOTER -->
-    <footer class="section-footer flex-conteiner">
-        <img class="logo-sw" src="/assets/imgs/save-wave-circle.png" alt="" />
-        <p class="copy">
-            Copyright &copy; <span class="year">yyyy</span> by Ania-Ska
-        </p>
-    </footer>
+
 
 </body>
+<?php
+include $this->resolve("partials/_footer.php");
+?>
 
 </html>

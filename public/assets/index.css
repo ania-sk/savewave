@@ -103,3 +103,87 @@
 .section-footer .logo-sw {
   opacity: 60%;
 }
+
+/* MEDIA */
+@media (max-width: 1024px) {
+  .section-hero.grid-cols-2{
+    padding: 14rem 8rem;
+  }
+  .heading {
+    font-size: 3.6rem;
+  } 
+  .heading-secondary{
+    font-size: 3rem;
+  }
+  .feature-text{
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 768px) {
+  .btn:link {
+    font-size: 1.4rem;
+    padding: 0.8rem 1rem;
+  }
+  .section-hero.grid-cols-2{
+    padding: 14rem 8rem;
+  }
+  .heading {
+    font-size: 3rem;
+  } 
+  .section-features{
+    padding: 0 2rem;
+  }
+  .heading-secondary{
+    font-size: 3rem;
+  }
+  .feature-text{
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .header.flex-conteiner {
+    padding: 2rem 1rem;
+  }
+  .header-save {
+    font-size: 2rem;
+  }
+  .btn-box.flex-conteiner {
+    margin-right: 0;
+    gap: 1rem;
+  }
+  .btn:link {
+    font-size: 1.4rem;
+    padding: 0.8rem 1rem;
+  }
+  .section-hero.grid-cols-2{
+    padding: 14rem 2.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4.4rem;
+  }
+  .hero-img{
+    width: 60%;
+    margin-top: 6rem;
+  }
+  .heading {
+    font-size: 3rem;
+  } 
+  .section-features{
+    padding: 0 2rem;
+  }
+  .heading-secondary{
+    font-size: 3rem;
+  }
+  .feature-text{
+    font-size: 1.8rem;
+  }
+}
+/*
+--- 01 TYPOGRAPHY SYSTEM
+- Font size system (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+--- 02 Whitespace
+- Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
