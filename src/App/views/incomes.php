@@ -11,8 +11,12 @@ include $this->resolve("partials/_header.php");
     <!-- TABLE INCOME -->
     <main class="section-main flex-conteiner">
         <div class="incomes-heading flex-conteiner">
-            <ion-icon class="nav-icon" name="cash-outline"></ion-icon>
-            <p>Incomes</p>
+            <ion-icon class="hamburger-menu" name="menu-outline"></ion-icon>
+            <div class=" flex-conteiner">
+                <ion-icon class="nav-icon" name="cash-outline"></ion-icon>
+                <p>Incomes</p>
+            </div>
+
 
             <button class="header-btn--icon" data-tooltip="Add income">
                 <ion-icon
