@@ -49,8 +49,8 @@
 =========================== */
 .goal-card {
   background: #f7f3fc;
-  padding: 32px 18px;
-  border-radius: 16px;
+  padding: 3.2rem 1.8rem;
+  border-radius: 1.6rem;
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: 0.2s;
@@ -63,7 +63,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 3.2rem;
 }
 
 .goal-title,
@@ -71,15 +71,15 @@
   margin: 0;
   padding: 0;
   line-height: 1.2;
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 700;
 }
 
 .stats-box {
   gap: 1.2rem;
   justify-content: flex-start;
-  margin-top: 24px;
-  padding: 8px;
+  margin-top: 2.4rem;
+  padding: 0.8rem;
 }
 .stats-box p {
   font-weight: bold;
@@ -88,22 +88,28 @@
 .goal-achieved-box {
   color: #f7f3fc;
   background: #6c6279;
-  padding: 8px;
+  padding: 0.8rem;
   width: 100%;
   font-weight: 500;
-  margin-top: 24px;
+  margin-top: 2.4rem;
   position: absolute;
-  left: -1px;
+  left: -0.1rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* PROGRESS */
+.progress-box {
+  flex-direction: column;
 }
 
 .progress-bar {
   width: 10rem;
-  height: 2rem;
+  height: 3.2rem;
   background-color: #e7f2f0;
-  border-radius: 0.8rem;
+  border-radius: 99rem;
   overflow: hidden;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .progress-fill {
@@ -117,31 +123,14 @@
   margin-bottom: 0.8rem;
 }
 
-/* PROGRESS */
-.progress-box {
-  flex-direction: column;
-}
-.progress-bar {
-  height: 32px;
-  background: #e7f2f0;
-  border-radius: 999px;
-  overflow: hidden;
-  width: 100%;
-}
-
-.progress-fill {
-  height: 100%;
-  background: #0d7c66;
-}
-
 /* TEXT */
 .progress-text {
-  font-size: 14px;
-  margin: 0px 8px;
+  font-size: 1.4rem;
+  margin: 0px 0.8rem;
 }
 
 .goal-data-box {
-  gap: 12px;
+  gap: 1.2rem;
   padding-top: 24px;
   padding-bottom: 24px;
 }
@@ -156,7 +145,7 @@
   TRANSACTION SECTION
 =========================== */
 .transaction-section {
-  padding: 10rem 5rem;
+  padding: 10rem 5rem 20rem 5rem;
   background: #f7f3fc;
 }
 
@@ -199,6 +188,38 @@
 .transaction-amount.positive {
   color: green;
   font-weight: 600;
+}
+
+/* ===========================
+  MEDIA
+=========================== */
+
+@media (max-width: 1024px) {
+  .goal-cards-box.grid-cols-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .goal-card {
+    margin-top: 2.4rem;
+  }
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 430px) {
+  .goal-cards-box.grid-cols-4 {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    align-items: center;
+  }
+  .goal-card {
+    width: 34rem;
+    height: 40rem;
+  }
+
+  .transactions-cards {
+    display: flex;
+    flex-direction: column;
+  }
 }
 /* --- 01 TYPOGRAPHY SYSTEM
 - Font size system (px)

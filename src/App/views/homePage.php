@@ -12,7 +12,8 @@ include $this->resolve("partials/_header.php");
 
     <!-- MAIN SECTION -->
     <main class="section-main">
-        <header class="main-header">
+        <header class="main-header flex-conteiner">
+            <ion-icon class="hamburger-menu" name="menu-outline"></ion-icon>
             <p>Welcome to savings, <?php echo e($username['username']); ?>!</p>
         </header>
 
@@ -101,7 +102,7 @@ include $this->resolve("partials/_header.php");
                 <a href="/balance" class="btn--link">View all →</a>
             </div>
 
-            <div class="grid-cols-3 gap-4">
+            <div class="grid-cols-3 gap-4 transactions-cards">
                 <!-- incomes -->
                 <div class="incomes-box">
                     <div class="flex-conteiner">

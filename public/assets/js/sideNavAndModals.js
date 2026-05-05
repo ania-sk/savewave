@@ -321,3 +321,8 @@ window.onclick = function (event) {
     modalAddExpenseCategory.style.display = "none";
   }
 };
+
+// HAMBURGER TOGGLE MENU FOR MOBILE
+document.querySelector(".hamburger-menu").addEventListener("click", () => {
+  document.querySelector("body").classList.toggle("nav-hide");
+});
