@@ -20,8 +20,13 @@ include $this->resolve("partials/modals/_limitModal.php");
         <?php endif; ?>
 
         <div class="settings-heading flex-conteiner">
-            <ion-icon class="nav-icon" name="settings-outline"></ion-icon>
-            <p>Settings</p>
+            <ion-icon class="hamburger-menu" name="menu-outline"></ion-icon>
+            <div class="flex-conteiner">
+                <ion-icon class="nav-icon" name="settings-outline"></ion-icon>
+                <p>Settings</p>
+            </div>
+            <div></div>
+
         </div>
 
         <!-- INCOME/EXPENSE CATEGORIES -->
