@@ -17,7 +17,7 @@ class TransactionsController
     public function addIncome()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+            $redirectPath = $_POST['redirect_to'] ?? '/homePage';
             try {
                 // Próba walidacji danych dla formularza income
                 $this->validatorService->validateIncome($_POST);
@@ -39,7 +39,7 @@ class TransactionsController
 
     public function addExpense()
     {
-        $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+        $redirectPath = $_POST['redirect_to'] ?? '/homePage';
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 // Próba walidacji danych dla formularza income

@@ -18,7 +18,7 @@ class CategoryController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+            $redirectPath = $_POST['redirect_to'] ?? '/homePage';
             $formData = $_POST;
 
             try {
@@ -96,7 +96,7 @@ class CategoryController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+            $redirectPath = $_POST['redirect_to'] ?? '/homePage';
 
             try {
                 $this->validatorService->validateNewExpenseCategory($_POST);

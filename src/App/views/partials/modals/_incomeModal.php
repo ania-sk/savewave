@@ -10,7 +10,7 @@
 
             <!-- FORM -->
             <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
-            <form method="post" action="/mainPage/income" class="modal-form-box flex-conteiner">
+            <form method="post" action="/homePage/income" class="modal-form-box flex-conteiner">
 
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 

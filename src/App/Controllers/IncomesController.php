@@ -72,7 +72,7 @@ class IncomesController
     public function updateIncome()
     {
         $formData = $_POST;
-        $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+        $redirectPath = $_POST['redirect_to'] ?? '/homePage';
         $incomeId = (int)$formData['incomeId'];
 
         try {

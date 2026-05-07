@@ -21,7 +21,7 @@ class GoalsController
 
     public function addGoal()
     {
-        $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+        $redirectPath = $_POST['redirect_to'] ?? '/homePage';
 
         try {
             $this->validatorService->validateNewGoal($_POST);
@@ -88,7 +88,7 @@ class GoalsController
     public function updateGoal()
     {
         $formData = $_POST;
-        $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+        $redirectPath = $_POST['redirect_to'] ?? '/homePage';
 
         try {
             $this->validatorService->validateNewGoal($formData);
@@ -111,7 +111,7 @@ class GoalsController
 
     public function store()
     {
-        $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+        $redirectPath = $_POST['redirect_to'] ?? '/homePage';
         $formData = $_POST;
         $userId = $_SESSION['user'];
         $balance = $this->transactionService->getBalance($userId)['balance'];
@@ -132,7 +132,7 @@ class GoalsController
 
     public function updateContribution()
     {
-        $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+        $redirectPath = $_POST['redirect_to'] ?? '/homePage';
         $formData = $_POST;
         $userId = $_SESSION['user'];
         $balance = $this->transactionService->getBalance($userId)['balance'];

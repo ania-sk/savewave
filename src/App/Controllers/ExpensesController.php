@@ -72,7 +72,7 @@ class ExpensesController
     public function updateExpense()
     {
         $formData = $_POST;
-        $redirectPath = $_POST['redirect_to'] ?? '/mainPage';
+        $redirectPath = $_POST['redirect_to'] ?? '/homePage';
         $expenseId = (int)$formData['expenseId'];
 
         try {

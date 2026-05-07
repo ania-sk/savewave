@@ -36,13 +36,13 @@ function registerRoutes(App $app)
     $app->post('/login', [AuthController::class, 'login'])->add(GuestOnlyMiddleware::class);
 
     $app->get('/logout', [AuthController::class, 'logout'])->add(AuthRequiredMiddleware::class);
-    $app->post('/mainPage/income', [TransactionsController::class, 'addIncome'])->add(AuthRequiredMiddleware::class);
-    $app->post('/mainPage/expense', [TransactionsController::class, 'addExpense'])->add(AuthRequiredMiddleware::class);
+    $app->post('/homePage/income', [TransactionsController::class, 'addIncome'])->add(AuthRequiredMiddleware::class);
+    $app->post('/homePage/expense', [TransactionsController::class, 'addExpense'])->add(AuthRequiredMiddleware::class);
     $app->post('/goals/addGoal', [GoalsController::class, 'addGoal'])->add(AuthRequiredMiddleware::class);
 
 
-    $app->post('/mainPage/addIncomeCategory', [CategoryController::class, 'addNewIncomeCategory'])->add(AuthRequiredMiddleware::class);
-    $app->post('/mainPage/addExpenseCategory', [CategoryController::class, 'addNewExpenseCategory'])->add(AuthRequiredMiddleware::class);
+    $app->post('/homePage/addIncomeCategory', [CategoryController::class, 'addNewIncomeCategory'])->add(AuthRequiredMiddleware::class);
+    $app->post('/homePage/addExpenseCategory', [CategoryController::class, 'addNewExpenseCategory'])->add(AuthRequiredMiddleware::class);
     $app->post('/settings/addIncomeCategory', [CategoryController::class, 'addNewIncomeCategory'])->add(AuthRequiredMiddleware::class);
     $app->post('/settings/addExpenseCategory', [CategoryController::class, 'addNewExpenseCategory'])->add(AuthRequiredMiddleware::class);
 
