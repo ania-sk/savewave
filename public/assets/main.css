@@ -424,11 +424,11 @@
   position: absolute;
   top: 4rem;
   right: 1rem;
-  color: #0d7c66;
+  color: #cf0b01;
 }
 
 .error-text {
-  color: #0d7c66;
+  color: #cf0b01;
   font-size: 1.6rem;
   white-space: pre-line;
 }

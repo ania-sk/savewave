@@ -99,6 +99,11 @@ body {
   position: absolute;
   top: 5rem;
   right: 1rem;
+  color: #cf0b01;
+}
+
+.error-text {
+  color: #cf0b01;
 }
 
 .session-error,
