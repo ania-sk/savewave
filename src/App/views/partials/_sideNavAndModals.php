@@ -81,12 +81,13 @@
             <span>Logout</span>
         </a>
     </nav>
-    <!-- MODALS -->
 
-    <!-- INCOME -->
-    <?php include $this->resolve("partials/modals/_incomeModal.php"); ?>
-
-    <!-- EXPENSE -->
-    <?php include $this->resolve("partials/modals/_expenseModal.php"); ?>
-    <!-- END MODALS -->
 </section>
+<!-- MODALS -->
+
+<!-- INCOME -->
+<?php include $this->resolve("partials/modals/_incomeModal.php"); ?>
+
+<!-- EXPENSE -->
+<?php include $this->resolve("partials/modals/_expenseModal.php"); ?>
+<!-- END MODALS -->

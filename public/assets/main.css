@@ -225,7 +225,7 @@
 
 .modal-box {
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   padding-top: 12.8rem;
   left: 0;
   top: 0;
