@@ -110,6 +110,7 @@ class CategoryController
                 $_SESSION['activeForm'] = 'addExpenseCategory';
                 $_SESSION['errors'] = $ex->errors;
                 $_SESSION['oldFormData'] = $_POST;
+                // FIXME - AI CR - [C7 CRITICAL][Błąd logiczny] Zapisuje całą tablicę $_POST zamiast nazwy kategorii. Powinno być: $_SESSION['newCategoryName'] = $_POST['newCategoryName'] ?? '';
                 $_SESSION['newCategoryName'] = $_POST;
 
                 header("Location: " . $redirectPath);
@@ -280,6 +281,7 @@ class CategoryController
 
         $_SESSION['success'] = 'Category has been deleted successfully!';
 
+        // FIXME - AI CR - [C6 CRITICAL][Błąd logiczny] Undefined variable $redirectTo — zmienna nigdy nie jest zdefiniowana. Dodaj: $redirectTo = $_POST['redirect_to'] ?? '/settings';
         redirectTo($redirectTo ?? '/settings');
     }
 }

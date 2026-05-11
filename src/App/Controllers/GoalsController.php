@@ -76,6 +76,7 @@ class GoalsController
         ]);
     }
 
+    // FIXME - AI CR - [C3 CRITICAL][Bezpieczeństwo] IDOR — brak sprawdzenia czy goal należy do zalogowanego użytkownika. Dowolny user może pobrać wpłaty cudzego celu znając goalId. Dodaj WHERE user_id = :userId w query lub weryfikację w kontrolerze.
     public function getGoalContributions($params)
     {
         $goalId = (int)$params['goal'];

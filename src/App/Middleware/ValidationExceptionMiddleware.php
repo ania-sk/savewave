@@ -25,6 +25,7 @@ class ValidationExceptionMiddleware implements MiddlewareInterface
             $_SESSION['errors'] = $e->errors;
             $_SESSION['oldFormData'] = $formattedFormData;
 
+            // FIXME - AI CR - [C4 CRITICAL][Bezpieczeństwo] Open Redirect — HTTP_REFERER jest nagłówkiem kontrolowanym przez klienta. Atakujący może przekierować na złośliwą stronę. Waliduj referer (np. sprawdź czy host się zgadza) lub użyj stałej ścieżki fallback.
             $referer = $_SERVER['HTTP_REFERER'];
             redirectTo($referer);
         }

@@ -12,6 +12,7 @@ class TemplateEngine
 
     public function render(string $template, array $data = [])
     {
+        // FIXME - AI CR - [W13 WARNING][Bezpieczeństwo] extract() wypłaszcza tablice do zmiennych lokalnych. Klucze kontrolowane przez użytkownika mogą nadpisać zmienne (np. 'this', 'basePath'). EXTR_SKIP pomaga, ale rozważ jawne przekazywanie lub blacklistę kluczy.
         extract($data, EXTR_SKIP);
         extract($this->globalTemplateData, EXTR_SKIP);
 

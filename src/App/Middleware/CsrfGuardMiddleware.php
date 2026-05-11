@@ -19,6 +19,7 @@ class CsrfGuardMiddleware implements MiddlewareInterface
             return;
         }
 
+        // FIXME - AI CR - [W1 WARNING][Bezpieczeństwo] Porównanie CSRF tokena nie jest timing-safe (użyj hash_equals()), brak sprawdzenia istnienia $_SESSION['token'] i $_POST['token']. Rozważ rotację tokena (odkomentuj unset poniżej).
         if ($_SESSION['token'] !== $_POST['token']) {
             redirectTo('/');
         }

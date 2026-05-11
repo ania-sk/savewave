@@ -1,5 +1,6 @@
 <?php
 
+// FIXME - AI CR - [W9 WARNING][Jakość kodu] Brak declare(strict_types=1) — niespójne z resztą projektu.
 namespace Framework\Rules;
 
 use Framework\Contracts\RuleInterface;

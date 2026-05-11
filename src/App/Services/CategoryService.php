@@ -75,6 +75,7 @@ class CategoryService
         return $this->db->fetchAll();
     }
 
+    // FIXME - AI CR - [W5 WARNING][Wydajność] Pobiera WSZYSTKIE kategorie użytkownika i iteruje w PHP żeby sprawdzić duplikaty. Użyj WHERE LOWER(name) = LOWER(:name) w SQL lub dodaj UNIQUE constraint na (user_id, name). Dotyczy też createUserExpenseCategory().
     public function createUserIncomeCategory(array $formData)
     {
         $newCategoryName = $this->normalizeCategoryName($formData['newCategoryName'] ?? '');
@@ -194,6 +195,7 @@ class CategoryService
         );
     }
 
+    // FIXME - AI CR - [C9 CRITICAL][Bezpieczeństwo] Brak walidacji $type — pochodzi z $_POST['categoryType']. Jeśli $type nie jest 'income', wszystko trafi do tabeli expenses niezależnie od wartości. Dodaj: if (!in_array($type, ['income', 'expense'])) throw new \InvalidArgumentException(...). Dotyczy też updateCategoryLimit() poniżej.
     public function deactivateCategory(int $id, string $type): void
     {
         $table = $type === 'income'

@@ -44,6 +44,7 @@ class ValidatorService
         $this->validator->validate($formData, [
             'email' => ['required', 'email'],
             'username' => ['required'],
+            // FIXME - AI CR - [W18 WARNING][Bezpieczeństwo] Brak walidacji siły hasła — tylko 'required'. Dodaj minimalną długość (np. 'lengthMin:8') i/lub regułę passwordStrength. Dotyczy też validateNewPassword().
             'password' => ['required'],
             'confirm-password' => ['required', 'match:password']
 

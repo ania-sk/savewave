@@ -83,6 +83,7 @@ class GoalService
         )->find();
     }
 
+    // FIXME - AI CR - [W10 WARNING][Błąd logiczny] $formData['goalDate'] może być pustym stringiem (deadline jest opcjonalny). W createNewGoal() jest warunek if (!empty(...)), ale tutaj brakuje — spowoduje błąd SQL przy pustym deadline.
     public function updateGoal(array $formData)
     {
         $this->db->query(

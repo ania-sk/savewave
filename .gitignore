@@ -6,3 +6,5 @@ composer.phar
 # composer.lock
 cli.php
 .env
+.claude
+/.claude/settings.local.json

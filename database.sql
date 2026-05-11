@@ -155,6 +155,8 @@ CREATE TABLE IF NOT EXISTS goal_contributions(
 );
 
 
+-- FIXME - AI CR - [W15 WARNING][Architektura] ALTER TABLE poniżej failuje przy ponownym uruchomieniu (Duplicate column). Przenieś kolumny do CREATE TABLE lub użyj ADD COLUMN IF NOT EXISTS (MySQL 8+).
+
 -- is category active
 ALTER TABLE incomes_category_assigned_to_users
   ADD COLUMN is_active TINYINT(1) NOT NULL DEFAULT 1;
