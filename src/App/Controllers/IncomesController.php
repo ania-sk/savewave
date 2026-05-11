@@ -74,10 +74,11 @@ class IncomesController
         $formData = $_POST;
         $redirectPath = $_POST['redirect_to'] ?? '/homePage';
         $incomeId = (int)$formData['incomeId'];
+        $userId = (int)$_SESSION['user'];
 
         try {
             $this->validatorService->validateIncome($formData);
-            $this->transactionService->updateIncome($formData, $incomeId);
+            $this->transactionService->updateIncome($formData, $incomeId, $userId);
             redirectTo($redirectPath);
         } catch (ValidationException $ex) {
             $_SESSION['errors'] = $ex->errors;
@@ -90,7 +91,9 @@ class IncomesController
 
     public function deleteIncome(array $params)
     {
-        $this->transactionService->deleteIncome((int) $params['income']);
+        $userId = $_SESSION['user'];
+        $incomeId = (int) $params['income'];
+        $this->transactionService->deleteIncome($incomeId, $userId);
 
         redirectTo('/incomes');
     }

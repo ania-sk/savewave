@@ -74,10 +74,11 @@ class ExpensesController
         $formData = $_POST;
         $redirectPath = $_POST['redirect_to'] ?? '/homePage';
         $expenseId = (int)$formData['expenseId'];
+        $userId = $_SESSION['user'];
 
         try {
             $this->validatorService->validateExpense($formData);
-            $this->transactionService->updateExpense($formData, $expenseId);
+            $this->transactionService->updateExpense($formData, $expenseId, $userId);
             redirectTo($redirectPath);
         } catch (ValidationException $ex) {
             $_SESSION['errors'] = $ex->errors;
@@ -90,7 +91,9 @@ class ExpensesController
 
     public function deleteExpense(array $params)
     {
-        $this->transactionService->deleteExpense((int) $params['expense']);
+        $userId = $_SESSION['user'];
+        $expenseId = (int) $params['expense'];
+        $this->transactionService->deleteExpense($expenseId, $userId);
 
         redirectTo('/expenses');
     }

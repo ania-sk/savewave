@@ -10,7 +10,7 @@ class TransactionService
 {
     public function __construct(private Database $db, private GoalService $goalService) {}
 
-    public function createIncome(array $formData)
+    public function createIncome(array $formData, int $userId)
     {
         $formattedDate = "{$formData['incomeDate']} 00:00:00";
         $this->db->query(
@@ -28,7 +28,7 @@ class TransactionService
                 :income_comment
             )",
             [
-                'user_id' => $_SESSION['user'],
+                'user_id' => $userId,
                 'income_category_assigned_to_user_id' => $formData['incomeCategory'],
                 'amount' => $formData['incomeAmount'],
                 'date_of_income' => $formattedDate,
@@ -37,7 +37,7 @@ class TransactionService
         );
     }
 
-    public function createExpense(array $formData)
+    public function createExpense(array $formData, int $userId)
     {
         $formattedDate = "{$formData['expenseDate']} 00:00:00";
         $this->db->query(
@@ -55,7 +55,7 @@ class TransactionService
                 :expense_comment
             )",
             [
-                'user_id' => $_SESSION['user'],
+                'user_id' => $userId,
                 'expense_category_assigned_to_user_id' => $formData['expenseCategory'],
                 'amount' => $formData['expenseAmount'],
                 'date_of_expense' => $formattedDate,
@@ -64,7 +64,7 @@ class TransactionService
         );
     }
 
-    public function getUserIncomes($userId)
+    public function getUserIncomes(int $userId)
     {
         $incomes = $this->db->query(
             "SELECT 
@@ -239,7 +239,7 @@ class TransactionService
     }
 
 
-    public function getUserIncome(string $id)
+    public function getUserIncome(string $id, int $userId)
     {
         return $this->db->query(
             "SELECT *,  DATE_FORMAT(date_of_income, '%Y-%m-%d') as formatted_date
@@ -247,12 +247,12 @@ class TransactionService
             WHERE id = :id AND user_id = :user_id",
             [
                 'id' => $id,
-                'user_id' => $_SESSION['user']
+                'user_id' => $userId
             ]
         )->find();
     }
 
-    public function getUserExpense(string $id)
+    public function getUserExpense(string $id, int $userId)
     {
         return $this->db->query(
             "SELECT *,  DATE_FORMAT(date_of_expense, '%Y-%m-%d') as formatted_date
@@ -260,12 +260,12 @@ class TransactionService
             WHERE id = :id AND user_id = :user_id",
             [
                 'id' => $id,
-                'user_id' => $_SESSION['user']
+                'user_id' => $userId
             ]
         )->find();
     }
 
-    public function updateIncome(array $formData, int $id)
+    public function updateIncome(array $formData, int $id, int $userId)
     {
         $formattedDate = "{$formData['incomeDate']} 00:00:00";
 
@@ -277,7 +277,7 @@ class TransactionService
                  income_comment = :income_comment 
              WHERE id = :id AND user_id = :user_id",
             [
-                'user_id' => $_SESSION['user'],
+                'user_id' => $userId,
                 'income_category_assigned_to_user_id' => $formData['incomeCategory'],
                 'amount' => $formData['incomeAmount'],
                 'date_of_income' => $formattedDate,
@@ -286,18 +286,18 @@ class TransactionService
             ]
         );
     }
-    public function deleteIncome(int $id)
+    public function deleteIncome(int $id, int $userId)
     {
         $this->db->query(
             "DELETE FROM incomes WHERE id = :id AND user_id = :user_id",
             [
                 'id' => $id,
-                'user_id' => $_SESSION['user']
+                'user_id' => $userId
             ]
         );
     }
 
-    public function updateExpense(array $formData, int $id)
+    public function updateExpense(array $formData, int $id, int $userId)
     {
         $formattedDate = "{$formData['expenseDate']} 00:00:00";
 
@@ -309,7 +309,7 @@ class TransactionService
                  expense_comment = :expense_comment 
              WHERE id = :id AND user_id = :user_id",
             [
-                'user_id' => $_SESSION['user'],
+                'user_id' => $userId,
                 'expense_category_assigned_to_user_id' => $formData['expenseCategory'],
                 'amount' => $formData['expenseAmount'],
                 'date_of_expense' => $formattedDate,
@@ -318,13 +318,13 @@ class TransactionService
             ]
         );
     }
-    public function deleteExpense(int $id)
+    public function deleteExpense(int $id, int $userId)
     {
         $this->db->query(
             "DELETE FROM expenses WHERE id = :id AND user_id = :user_id",
             [
                 'id' => $id,
-                'user_id' => $_SESSION['user']
+                'user_id' => $userId
             ]
         );
     }

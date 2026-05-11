@@ -18,44 +18,49 @@ class TransactionsController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $redirectPath = $_POST['redirect_to'] ?? '/homePage';
+            $formData = $_POST;
+            $userId = $_SESSION['user'];
+
             try {
                 // Próba walidacji danych dla formularza income
-                $this->validatorService->validateIncome($_POST);
+                $this->validatorService->validateIncome($formData);
 
                 // Jeśli walidacja się powiodła – wykonaj dalsze operacje np. zapis do bazy
                 // ...
-                $this->transactionService->createIncome($_POST);
+                $this->transactionService->createIncome($formData, $userId);
                 redirectTo($redirectPath);
             } catch (ValidationException $ex) {
                 $_SESSION['activeForm'] = $_POST['form_type'] ?? 'income';
                 $_SESSION['errors'] = $ex->errors;
                 $_SESSION['oldFormData'] = $_POST;
 
-                header("Location: " . $redirectPath);
-                exit();
+                redirectTo($redirectPath);
             }
         }
     }
 
     public function addExpense()
     {
-        $redirectPath = $_POST['redirect_to'] ?? '/homePage';
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $redirectPath = $_POST['redirect_to'] ?? '/homePage';
+            $formData = $_POST;
+            $userId = $_SESSION['user'];
+
             try {
                 // Próba walidacji danych dla formularza income
-                $this->validatorService->validateExpense($_POST);
+                $this->validatorService->validateExpense($formData);
 
                 // Jeśli walidacja się powiodła – wykonaj dalsze operacje np. zapis do bazy
                 // ...
-                $this->transactionService->createExpense($_POST);
+                $this->transactionService->createExpense($formData, $userId);
                 redirectTo($redirectPath);
             } catch (ValidationException $ex) {
                 $_SESSION['activeForm'] = $_POST['form_type'] ?? 'expense';
                 $_SESSION['errors'] = $ex->errors;
                 $_SESSION['oldFormData'] = $_POST;
 
-                header("Location: " . $redirectPath);
-                exit();
+                redirectTo($redirectPath);
             }
         }
     }
