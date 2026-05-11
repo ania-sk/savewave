@@ -22,15 +22,17 @@ class GoalsController
     public function addGoal()
     {
         $redirectPath = $_POST['redirect_to'] ?? '/homePage';
+        $formData = $_POST;
+        $userId = $_SESSION['user'];
 
         try {
-            $this->validatorService->validateNewGoal($_POST);
-            $this->goalService->createNewGoal($_POST);
+            $this->validatorService->validateNewGoal($formData);
+            $this->goalService->createNewGoal($formData, $userId);
             redirectTo($redirectPath);
         } catch (ValidationException $ex) {
             $_SESSION['errors'] = $ex->errors;
-            $_SESSION['oldFormData'] = $_POST;
-            $_SESSION['activeForm'] = $_POST['form_type'];
+            $_SESSION['oldFormData'] = $formData;
+            $_SESSION['activeForm'] = $formData['form_type'];
             redirectTo($redirectPath);
         }
     }
@@ -76,7 +78,7 @@ class GoalsController
         ]);
     }
 
-    public function getGoalContributions($params)
+    public function getGoalContributions(array $params)
     {
         $userId = (int)$_SESSION['user'];
         $goalId = (int)$params['goal'];
@@ -90,10 +92,11 @@ class GoalsController
     {
         $formData = $_POST;
         $redirectPath = $_POST['redirect_to'] ?? '/homePage';
+        $userId = $_SESSION['user'];
 
         try {
             $this->validatorService->validateNewGoal($formData);
-            $this->goalService->updateGoal($formData);
+            $this->goalService->updateGoal($formData, $userId);
             redirectTo($redirectPath);
         } catch (ValidationException $ex) {
             $_SESSION['errors'] = $ex->errors;
@@ -103,9 +106,12 @@ class GoalsController
         }
     }
 
-    public function deleteGoal($params)
+    public function deleteGoal(array $params)
     {
-        $this->goalService->deleteGoal($params['goal']);
+        $goalId = (int)$params['goal'];
+        $userId = $_SESSION['user'];
+
+        $this->goalService->deleteGoal($goalId, $userId);
 
         redirectTo('/goals');
     }
@@ -120,7 +126,7 @@ class GoalsController
         try {
 
             $this->validatorService->validateContribution($formData, $balance);
-            $this->goalService->store($formData);
+            $this->goalService->store($formData, $userId);
             redirectTo($redirectPath);
         } catch (ValidationException $ex) {
 
@@ -140,7 +146,7 @@ class GoalsController
 
         try {
             $this->validatorService->validateChangeContribution($formData, $balance);
-            $this->goalService->updateContribution($formData);
+            $this->goalService->updateContribution($formData, $userId);
             redirectTo($redirectPath);
         } catch (ValidationException $ex) {
 
@@ -151,9 +157,12 @@ class GoalsController
         }
     }
 
-    public function deleteContribution($params)
+    public function deleteContribution(array $params)
     {
-        $this->goalService->deleteContribution((int)$params['contribution']);
+        $contributionId = (int)$params['contribution'];
+        $userId = $_SESSION['user'];
+
+        $this->goalService->deleteContribution($contributionId, $userId);
 
         redirectTo('/goals');
     }

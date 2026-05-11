@@ -10,10 +10,9 @@ class GoalService
 {
     public function __construct(private Database $db) {}
 
-    public function createNewGoal(array $formData): void
+    public function createNewGoal(array $formData, int $userId): void
     {
         $goalName = $this->normalizeGoalName($formData['goalName']);
-        $userId = $_SESSION['user'];
 
         $deadline = null;
 
@@ -70,7 +69,7 @@ class GoalService
         return $goals;
     }
 
-    public function getGoalById($goalId)
+    public function getGoalById(int $goalId, int $userId)
     {
         return $this->db->query(
             "SELECT id, goal_name, goal_description, amount_needed, deadline
@@ -78,12 +77,12 @@ class GoalService
          WHERE id = :goalId AND user_id = :userId",
             [
                 "goalId" => $goalId,
-                "userId" => $_SESSION['user']
+                "userId" => $userId
             ]
         )->find();
     }
 
-    public function updateGoal(array $formData)
+    public function updateGoal(array $formData, int $userId)
     {
         $this->db->query(
             "UPDATE goals
@@ -93,7 +92,7 @@ class GoalService
              deadline = :deadline
              WHERE id = :id AND user_id = :user_id",
             [
-                'user_id' => $_SESSION['user'],
+                'user_id' => $userId,
                 'goal_name' => $formData['goalName'],
                 'goal_description' => $formData['goalDescription'],
                 'amount_needed' => $formData['goalAmount'],
@@ -103,13 +102,13 @@ class GoalService
         );
     }
 
-    public function deleteGoal($goalId)
+    public function deleteGoal(int $goalId, int $userId)
     {
         $this->db->query(
             "DELETE FROM goals WHERE id = :id AND user_id = :user_id",
             [
                 'id' => $goalId,
-                'user_id' => $_SESSION['user']
+                'user_id' => $userId
             ]
         );
     }
@@ -207,21 +206,21 @@ class GoalService
         )->fetchAll();
     }
 
-    public function store(array $formData)
+    public function store(array $formData, int $userId)
     {
         $this->db->query(
             "INSERT INTO goal_contributions
             (user_id, goal_id, amount)
             VALUES (:user_id, :goal_id, :amount)",
             [
-                'user_id' => $_SESSION['user'],
+                'user_id' => $userId,
                 'goal_id' => $formData['goalId'],
                 'amount' => $formData['contributionAmount']
             ]
         );
     }
 
-    public function updateContribution(array $formData)
+    public function updateContribution(array $formData, int $userId)
     {
         $this->db->query(
             "UPDATE goal_contributions
@@ -229,20 +228,20 @@ class GoalService
              amount= :amount
              WHERE id = :id AND user_id = :user_id",
             [
-                'user_id' => $_SESSION['user'],
+                'user_id' => $userId,
                 'amount' => $formData['contributionAmount'],
                 'id' => $formData['contributionId']
             ]
         );
     }
 
-    public function deleteContribution(int $contributionId)
+    public function deleteContribution(int $contributionId, int $userId)
     {
         $this->db->query(
             "DELETE FROM goal_contributions WHERE id = :id AND user_id = :user_id",
             [
                 'id' => $contributionId,
-                'user_id' => $_SESSION['user']
+                'user_id' => $userId
             ]
         );
     }
