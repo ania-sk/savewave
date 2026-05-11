@@ -20,10 +20,11 @@ class CategoryController
 
             $redirectPath = $_POST['redirect_to'] ?? '/homePage';
             $formData = $_POST;
+            $userId = $_SESSION['user'];
 
             try {
                 $this->validatorService->validateNewIncomeCategory($formData);
-                $this->categoryService->createUserIncomeCategory($formData);
+                $this->categoryService->createUserIncomeCategory($formData, $userId);
 
                 $_SESSION['success'] = 'Category has been added successfully!';
 
@@ -44,10 +45,11 @@ class CategoryController
     {
         $newCategoryName = $_POST['newCategoryName'];
         $formData = $_POST;
+        $userId = $_SESSION['user'];
 
         try {
             $this->validatorService->validateNewIncomeCategory($formData);
-            $newCategoryId = $this->categoryService->createUserIncomeCategory($formData);
+            $newCategoryId = $this->categoryService->createUserIncomeCategory($formData, $userId);
             header('Content-Type: application/json');
             echo json_encode([
                 'id' => $newCategoryId,
@@ -69,10 +71,11 @@ class CategoryController
     {
         $newCategoryName = $_POST['newCategoryName'];
         $formData = $_POST;
+        $userId = $_SESSION['user'];
 
         try {
             $this->validatorService->validateNewExpenseCategory($formData);
-            $newCategoryId = $this->categoryService->createUserExpenseCategory($formData);
+            $newCategoryId = $this->categoryService->createUserExpenseCategory($formData, $userId);
 
             header('Content-Type: application/json');
             echo json_encode([
@@ -98,11 +101,12 @@ class CategoryController
 
             $redirectPath = $_POST['redirect_to'] ?? '/homePage';
             $formData = $_POST;
+            $userId = $_SESSION['user'];
 
             try {
-                $this->validatorService->validateNewExpenseCategory($_POST);
+                $this->validatorService->validateNewExpenseCategory($formData);
 
-                $this->categoryService->createUserExpenseCategory($_POST);
+                $this->categoryService->createUserExpenseCategory($formData, $userId);
 
                 $_SESSION['success'] = 'Category has been added successfully!';
 
@@ -120,8 +124,9 @@ class CategoryController
 
     public function editCategory(array $params)
     {
+        $userId = $_SESSION['user'];
         $categoryId = (int)$params['category'];
-        $categoryToEdit = $this->categoryService->getUserCategoryById($categoryId);
+        $categoryToEdit = $this->categoryService->getUserCategoryById($categoryId, $userId);
 
         if (!$categoryToEdit) {
             redirectTo('/settings');
@@ -138,8 +143,9 @@ class CategoryController
         $categoryId = (int) $params['category'];
         $categoryType = $_POST['categoryType'] ?? null;
         $redirectTo = $_POST['redirect_to'] ?? '/settings';
+        $userId = $_SESSION['user'];
 
-        $categoryToEdit = $this->categoryService->getUserCategoryById($categoryId);
+        $categoryToEdit = $this->categoryService->getUserCategoryById($categoryId, $userId);
         $_SESSION['activeForm'] = 'editCategory';
         $_SESSION['categoryToEdit'] = $categoryToEdit;
 
@@ -164,9 +170,9 @@ class CategoryController
         $newName = trim($_POST['newCategoryName']);
 
         if ($categoryType === 'income') {
-            $this->categoryService->updateUserIncomeCategory($categoryId, $newName);
+            $this->categoryService->updateUserIncomeCategory($categoryId, $newName, $userId);
         } else {
-            $this->categoryService->updateUserExpenseCategory($categoryId, $newName);
+            $this->categoryService->updateUserExpenseCategory($categoryId, $newName, $userId);
         }
 
         $_SESSION['success'] = 'Category has been updated successfully!';
@@ -182,9 +188,10 @@ class CategoryController
             $categoryType = $_POST['categoryType'] ?? null;
             $redirectTo = $_POST['redirect_to'] ?? '/settings';
             $limitRaw = $_POST['monthly_limit'] ?? null;
+            $userId = $_SESSION['user'];
 
             $_SESSION['activeForm'] = 'limitModal';
-            $_SESSION['categoryToEdit'] = $this->categoryService->getUserCategoryById($categoryId);
+            $_SESSION['categoryToEdit'] = $this->categoryService->getUserCategoryById($categoryId, $userId);
 
             if (!is_numeric($limitRaw) || $limitRaw < 0) {
                 $_SESSION['errors']['monthly_limit'][] = 'Limit must be a non-negative number.';
@@ -277,7 +284,8 @@ class CategoryController
         $id   = (int) $params['category'];
         $type = $_POST['categoryType'] ?? null;
         $redirectTo = $_POST['redirect_to'] ?? '/settings';
-        $this->categoryService->deactivateCategory($id, $type);
+        $userId = $_SESSION['user'];
+        $this->categoryService->deactivateCategory($id, $type, $userId);
 
         $_SESSION['success'] = 'Category has been deleted successfully!';
 

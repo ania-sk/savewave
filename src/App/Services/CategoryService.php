@@ -75,10 +75,9 @@ class CategoryService
         return $this->db->fetchAll();
     }
 
-    public function createUserIncomeCategory(array $formData)
+    public function createUserIncomeCategory(array $formData, int $userId)
     {
         $newCategoryName = $this->normalizeCategoryName($formData['newCategoryName'] ?? '');
-        $userId =  $_SESSION['user'];
 
         $categoriesAssignedToUser = $this->getUserAllIncomeCategories($userId);
 
@@ -112,10 +111,10 @@ class CategoryService
         return $this->db->id();
     }
 
-    public function createUserExpenseCategory(array $formData)
+    public function createUserExpenseCategory(array $formData, int $userId)
     {
         $newCategoryName = $this->normalizeCategoryName($formData['newCategoryName'] ?? '');
-        $userId =  $_SESSION['user'];
+
 
         $categoriesAssignedToUser = $this->getUserAllExpenseCategories($userId);
 
@@ -149,9 +148,8 @@ class CategoryService
         return $this->db->id();
     }
 
-    public function getUserCategoryById(int $id): ?array
+    public function getUserCategoryById(int $id, int $userId): ?array
     {
-        $userId = $_SESSION['user'] ?? null;
 
         $category = $this->db->query(
             "SELECT * FROM incomes_category_assigned_to_users WHERE id = :id AND user_id = :uid",
@@ -176,25 +174,25 @@ class CategoryService
         return null;
     }
 
-    public function updateUserIncomeCategory(int $id, string $name): void
+    public function updateUserIncomeCategory(int $id, string $name, int $userId): void
     {
         $name = $this->normalizeCategoryName($name);
         $this->db->query(
             "UPDATE incomes_category_assigned_to_users SET name = :name WHERE id = :id AND user_id = :uid",
-            ['name' => $name, 'id' => $id, 'uid' => $_SESSION['user']]
+            ['name' => $name, 'id' => $id, 'uid' => $userId]
         );
     }
 
-    public function updateUserExpenseCategory(int $id, string $name): void
+    public function updateUserExpenseCategory(int $id, string $name, int $userId): void
     {
         $name = $this->normalizeCategoryName($name);
         $this->db->query(
             "UPDATE expenses_category_assigned_to_users SET name = :name WHERE id = :id AND user_id = :uid",
-            ['name' => $name, 'id' => $id, 'uid' => $_SESSION['user']]
+            ['name' => $name, 'id' => $id, 'uid' => $userId]
         );
     }
 
-    public function deactivateCategory(int $id, string $type): void
+    public function deactivateCategory(int $id, string $type, $userId): void
     {
         $table = $type === 'income'
             ? 'incomes_category_assigned_to_users'
@@ -207,7 +205,7 @@ class CategoryService
           AND user_id = :uid",
             [
                 'id'  => $id,
-                'uid' => $_SESSION['user']
+                'uid' => $userId
             ]
         );
     }
