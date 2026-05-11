@@ -55,8 +55,8 @@ include $this->resolve("partials/_header.php");
                 <div class="chart-container" style="max-width: 500px; margin: 2rem auto;">
                     <canvas
                         id="incomePieChart"
-                        data-income-chart-labels='<?php echo (json_encode($incomeChartLabels, JSON_UNESCAPED_UNICODE)); ?>'
-                        data-income-chart-data='<?php echo (json_encode($incomeChartData)); ?>'
+                        data-income-chart-labels='<?php echo e(json_encode($incomeChartLabels, JSON_UNESCAPED_UNICODE)); ?>'
+                        data-income-chart-data='<?php echo e(json_encode($incomeChartData)); ?>'
                         style="max-width:500px; margin:2rem auto;"></canvas>
 
                 </div>

@@ -51,8 +51,8 @@ include $this->resolve("partials/_header.php");
                 <div class="chart-container" style="max-width: 500px; margin: 2rem auto;">
                     <canvas
                         id="expensePieChart"
-                        data-expense-chart-labels='<?php echo (json_encode($expenseChartLabels, JSON_UNESCAPED_UNICODE)); ?>'
-                        data-expense-chart-data='<?php echo (json_encode($expenseChartData)); ?>'
+                        data-expense-chart-labels='<?php echo e(json_encode($expenseChartLabels, JSON_UNESCAPED_UNICODE)); ?>'
+                        data-expense-chart-data='<?php echo e(json_encode($expenseChartData)); ?>'
                         style="max-width:500px; margin:2rem auto;"></canvas>
 
                 </div>
