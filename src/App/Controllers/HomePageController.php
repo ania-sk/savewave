@@ -48,7 +48,7 @@ class HomePageController
         }
 
         $latestIncomes = array_slice($this->transactionService->getUserIncomes($userId), 0, 5);
-        $latestExpenses = array_slice($this->transactionService->getUserExpenses(), 0, 5);
+        $latestExpenses = array_slice($this->transactionService->getUserExpenses($userId), 0, 5);
         $latestCotributions = array_slice($this->goalService->getUserContributions($userId), 0, 5);
         $allBalance = $this->transactionService->getBalance($userId);
         $balance = $allBalance['balance'];
