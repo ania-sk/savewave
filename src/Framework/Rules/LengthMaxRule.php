@@ -7,6 +7,7 @@ use InvalidArgumentException;
 
 class LengthMaxRule implements RuleInterface
 {
+    // FIXME - AI CR - [W8 WARNING][Błąd logiczny] 1) Brak declare(strict_types=1). 2) Użyj <= zamiast < (off-by-one). 3) Użyj mb_strlen() zamiast strlen() — polskie znaki UTF-8 liczą się jako 2+ bajtów.
     public function validate(array $data, string $field, array $params): bool
     {
         if (empty($params[0])) {

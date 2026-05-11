@@ -62,6 +62,7 @@ function registerRoutes(App $app)
     $app->post('/contributions/update', [GoalsController::class, 'updateContribution'])->add(AuthRequiredMiddleware::class);
     $app->delete('/contributions/{contribution}', [GoalsController::class, 'deleteContribution'])->add(AuthRequiredMiddleware::class);
 
+    // FIXME - AI CR - [C2 CRITICAL][Bezpieczeństwo] Brak AuthRequiredMiddleware na endpointach zarządzania kontem (linie 65-68, 70-71, 73). Niezalogowany użytkownik może zmienić email/hasło/usunąć konto. Dodaj ->add(AuthRequiredMiddleware::class) do każdego.
     $app->post('/settings/email/update', [SettingsController::class, 'updateEmail']);
     $app->post('/settings/update/username', [SettingsController::class, 'updateUsername']);
     $app->post('/settings/update/password', [SettingsController::class, 'updatePassword']);

@@ -44,6 +44,7 @@ class SettingsController
 
         $_SESSION['activeForm'] = 'updateEmail';
 
+        // FIXME - AI CR - [W6 WARNING][Błąd logiczny] try-catch nie obejmuje dalszego kodu — po catch kod kontynuuje (redirectTo wywołuje exit, ale to kruchy design). Użyj try-catch obejmującego cały blok lub dodaj return po redirectTo().
         try {
             $this->validatorService->validateUpdateEmail($_POST);
         } catch (ValidationException $e) {
@@ -65,6 +66,7 @@ class SettingsController
         redirectTo($redirectTo);
     }
 
+    // FIXME - AI CR - [W7 WARNING][Błąd logiczny] Brak try-catch dla ValidationException — wyjątek leci do ValidationExceptionMiddleware, ale bez ustawienia $_SESSION['activeForm'] formularz nie otworzy się w odpowiednim kontekście. Dodaj try-catch jak w updateEmail().
     public function updateUsername()
     {
         $redirectTo = '/settings';

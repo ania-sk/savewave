@@ -16,6 +16,7 @@ class TransactionsController
 
     public function addIncome()
     {
+        // FIXME - AI CR - [W11 WARNING][Jakość kodu] Zbędne sprawdzanie REQUEST_METHOD — router już gwarantuje POST. Dotyczy też addExpense().
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $redirectPath = $_POST['redirect_to'] ?? '/homePage';
             try {
@@ -31,6 +32,7 @@ class TransactionsController
                 $_SESSION['errors'] = $ex->errors;
                 $_SESSION['oldFormData'] = $_POST;
 
+                // FIXME - AI CR - [W12 WARNING][Jakość kodu] Użyj redirectTo($redirectPath) zamiast ręcznego header()+exit(). Niespójne z resztą kodu. Dotyczy też addExpense() i addNewExpenseCategory().
                 header("Location: " . $redirectPath);
                 exit();
             }

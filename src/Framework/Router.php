@@ -36,6 +36,7 @@ class Router
     public function dispatch(string $path, string $method, Container $container = null)
     {
         $path = $this->normalizePath($path);
+        // FIXME - AI CR - [W17 WARNING][Bezpieczeństwo] HTTP Method Override bez ograniczeń — klient może ustawić dowolną metodę via _METHOD. Ogranicz do dozwolonych: in_array($override, ['DELETE', 'PUT', 'PATCH']).
         $method = strtoupper($_POST['_METHOD'] ?? $method);
 
         foreach ($this->routes as $route) {
@@ -75,6 +76,8 @@ class Router
 
             return;
         }
+
+        // FIXME - AI CR - [W16 WARNING][Architektura] Brak obsługi 404 — jeśli żaden route nie pasuje, użytkownik widzi pustą stronę. Dodaj: http_response_code(404); echo "404 Not Found";
     }
 
     public function addMiddleware(string $middleware)

@@ -88,6 +88,7 @@ class UserService
         $_SESSION['user'] = $user['id'];
     }
 
+    // FIXME - AI CR - [W14 WARNING][Bezpieczeństwo] logout() nie niszczy sesji — tylko usuwa klucz 'user'. Inne dane sesji (CSRF, flash) pozostają. Użyj session_destroy() + session_start() z nowym ID, lub $_SESSION = [].
     public function logout()
     {
         unset($_SESSION['user']);

@@ -51,6 +51,7 @@ include $this->resolve("partials/_header.php");
                 <div class="chart-container" style="max-width: 500px; margin: 2rem auto;">
                     <canvas
                         id="expensePieChart"
+                        <?php // FIXME - AI CR - [C5 CRITICAL][Bezpieczeństwo] XSS — dane JSON nie są escapowane (jak w incomes.php). Użyj e(json_encode(...)) lub JSON_HEX_APOS | JSON_HEX_QUOT. ?>
                         data-expense-chart-labels='<?php echo (json_encode($expenseChartLabels, JSON_UNESCAPED_UNICODE)); ?>'
                         data-expense-chart-data='<?php echo (json_encode($expenseChartData)); ?>'
                         style="max-width:500px; margin:2rem auto;"></canvas>

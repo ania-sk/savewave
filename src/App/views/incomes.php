@@ -55,6 +55,7 @@ include $this->resolve("partials/_header.php");
                 <div class="chart-container" style="max-width: 500px; margin: 2rem auto;">
                     <canvas
                         id="incomePieChart"
+                        <?php // FIXME - AI CR - [C5 CRITICAL][Bezpieczeństwo] XSS — dane JSON nie są escapowane. Nazwy kategorii mogą zawierać apostrof i zamknąć atrybut HTML. Użyj e(json_encode(...)) lub flag JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG. ?>
                         data-income-chart-labels='<?php echo (json_encode($incomeChartLabels, JSON_UNESCAPED_UNICODE)); ?>'
                         data-income-chart-data='<?php echo (json_encode($incomeChartData)); ?>'
                         style="max-width:500px; margin:2rem auto;"></canvas>

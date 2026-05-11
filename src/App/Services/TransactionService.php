@@ -10,6 +10,7 @@ class TransactionService
 {
     public function __construct(private Database $db, private GoalService $goalService) {}
 
+    // FIXME - AI CR - [W2 WARNING][Bezpieczeństwo/Architektura] Serwis czyta $_SESSION['user'] bezpośrednio (linia 31,59,170 i inne). Przekazuj $userId jako parametr z kontrolera — to umożliwi testowanie i uniknie ukrytych zależności. Dotyczy również CategoryService i GoalService.
     public function createIncome(array $formData)
     {
         $formattedDate = "{$formData['incomeDate']} 00:00:00";
@@ -150,6 +151,7 @@ class TransactionService
         return $incomes;
     }
 
+    // FIXME - AI CR - [C8 CRITICAL][Błąd logiczny] Metoda nie przyjmuje $userId jako parametr, czyta bezpośrednio z $_SESSION['user']. Inne metody (getUserIncomes, getUserExpensesByDateRange) przyjmują $userId. Callers przekazują $userId ale jest on ignorowany. Dodaj parametr int $userId i użyj go w query.
     public function getUserExpenses()
     {
         $expenses = $this->db->query(
@@ -329,6 +331,7 @@ class TransactionService
         );
     }
 
+    // FIXME - AI CR - [W4 WARNING][Wydajność] getBalance() wykonuje 6-8 osobnych zapytań SQL i pobiera WSZYSTKIE transakcje, żeby policzyć sumy w PHP (array_sum). Użyj SELECT SUM(amount) w SQL. Metoda jest wywoływana wielokrotnie na jednej stronie.
     public function getBalance(int $userId, ?string $startDate = null, ?string $endDate = null): array
     {
         if (!empty($startDate) && !empty($endDate)) {

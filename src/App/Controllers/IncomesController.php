@@ -36,6 +36,7 @@ class IncomesController
             $allIncomes = $this->transactionService->getUserIncomesByDateRange($userId, $dtStart, $dtEnd);
             $sumsByCat = $this->transactionService->getIncomeSumsByCategoryAndDateRange($userId, $dtStart, $dtEnd);
         } else {
+            // FIXME - AI CR - [W3 WARNING][Wydajność] Paginacja w PHP zamiast SQL — pobiera WSZYSTKIE rekordy, potem przycina array_slice(). Przy tysiącach rekordów to ogromne zużycie pamięci. Użyj LIMIT/OFFSET w SQL i osobnego SELECT COUNT(*).
             $allIncomes = $this->transactionService->getUserIncomes($userId);
             $sumsByCat = $this->transactionService->getIncomeSumsByCategory($userId);
         }
