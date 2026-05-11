@@ -97,6 +97,7 @@ class CategoryController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $redirectPath = $_POST['redirect_to'] ?? '/homePage';
+            $formData = $_POST;
 
             try {
                 $this->validatorService->validateNewExpenseCategory($_POST);
@@ -110,10 +111,9 @@ class CategoryController
                 $_SESSION['activeForm'] = 'addExpenseCategory';
                 $_SESSION['errors'] = $ex->errors;
                 $_SESSION['oldFormData'] = $_POST;
-                $_SESSION['newCategoryName'] = $_POST;
+                $_SESSION['newCategoryName'] = $formData['newCategoryName'];
 
-                header("Location: " . $redirectPath);
-                exit();
+                redirectTo($redirectPath);
             }
         }
     }
