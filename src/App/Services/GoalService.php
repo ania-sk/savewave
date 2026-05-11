@@ -155,7 +155,7 @@ class GoalService
         )->fetchAll();
     }
 
-    public function getGoalContributions(int $goalId)
+    public function getGoalContributions(int $goalId, int $userId)
     {
         return $this->db->query(
             "SELECT 
@@ -164,9 +164,11 @@ class GoalService
             DATE_FORMAT(gc.contribution_date, '%Y-%m-%d') AS date
          FROM goal_contributions gc
          WHERE gc.goal_id = :goalId
+         AND gc.user_id = :userId
          ORDER BY gc.contribution_date DESC",
             [
-                "goalId" => $goalId
+                "goalId" => $goalId,
+                "userId" => $userId
             ]
         )->fetchAll();
     }

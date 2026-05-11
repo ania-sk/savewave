@@ -78,8 +78,9 @@ class GoalsController
 
     public function getGoalContributions($params)
     {
+        $userId = (int)$_SESSION['user'];
         $goalId = (int)$params['goal'];
-        $contributions = $this->goalService->getGoalContributions($goalId);
+        $contributions = $this->goalService->getGoalContributions($goalId, $userId);
 
         header('Content-Type: application/json');
         echo json_encode($contributions);
