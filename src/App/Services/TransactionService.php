@@ -302,6 +302,58 @@ class TransactionService
         );
     }
 
+    public function getTotalIncome(int $userId, ?string $startDate = null, ?string $endDate = null): float
+    {
+        if (!empty($startDate) && !empty($endDate)) {
+            $result = $this->db->query(
+                "SELECT COALESCE(SUM(i.amount), 0) AS total
+                 FROM incomes AS i
+                 WHERE i.user_id = :user_id
+                   AND i.date_of_income BETWEEN :start AND :end",
+                [
+                    'user_id' => $userId,
+                    'start' => $startDate . ' 00:00:00',
+                    'end' => $endDate . ' 23:59:59'
+                ]
+            )->find();
+        } else {
+            $result = $this->db->query(
+                "SELECT COALESCE(SUM(i.amount), 0) AS total
+                 FROM incomes AS i
+                 WHERE i.user_id = :user_id",
+                ['user_id' => $userId]
+            )->find();
+        }
+
+        return (float) ($result['total'] ?? 0);
+    }
+
+    public function getTotalExpense(int $userId, ?string $startDate = null, ?string $endDate = null): float
+    {
+        if (!empty($startDate) && !empty($endDate)) {
+            $result = $this->db->query(
+                "SELECT COALESCE(SUM(e.amount), 0) AS total
+                 FROM expenses AS e
+                 WHERE e.user_id = :user_id
+                   AND e.date_of_expense BETWEEN :start AND :end",
+                [
+                    'user_id' => $userId,
+                    'start' => $startDate . ' 00:00:00',
+                    'end' => $endDate . ' 23:59:59'
+                ]
+            )->find();
+        } else {
+            $result = $this->db->query(
+                "SELECT COALESCE(SUM(e.amount), 0) AS total
+                 FROM expenses AS e
+                 WHERE e.user_id = :user_id",
+                ['user_id' => $userId]
+            )->find();
+        }
+
+        return (float) ($result['total'] ?? 0);
+    }
+
     public function getBalance(int $userId, ?string $startDate = null, ?string $endDate = null): array
     {
         if (!empty($startDate) && !empty($endDate)) {
@@ -317,6 +369,9 @@ class TransactionService
 
             $contributions = $this->goalService->getUserContributionsByDateRange($userId, $dtStart, $dtEnd);
             $contributonsSumsByGoal = $this->goalService->getContributionSumsByGoalAndDateRange($userId, $startDate, $endDate);
+
+            $totalExpense = $this->getTotalExpense($userId, $startDate, $endDate);
+            $totalIncome = $this->getTotalIncome($userId, $startDate, $endDate);
         } else {
             $expenses = $this->getUserExpenses($userId);
             $expensesSumsByCat = $this->getExpenseSumsByCategory($userId);
@@ -326,12 +381,12 @@ class TransactionService
 
             $contributions = $this->goalService->getUserContributions($userId);
             $contributonsSumsByGoal = $this->goalService->getContributionSumsByGoal($userId);
+
+            $totalExpense = $this->getTotalExpense($userId);
+            $totalIncome = $this->getTotalIncome($userId);
         }
 
-        $totalExpense = array_sum(array_column($expenses, 'amount'));
-        $totalIncome = array_sum(array_column($incomes, 'amount'));
         $totalContributions = array_sum(array_column($contributions, 'amount'));
-
         $balance = $totalIncome - $totalExpense - $totalContributions;
 
         return [
