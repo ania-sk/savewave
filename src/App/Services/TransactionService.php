@@ -238,33 +238,6 @@ class TransactionService
         return $expenses;
     }
 
-
-    public function getUserIncome(string $id, int $userId)
-    {
-        return $this->db->query(
-            "SELECT *,  DATE_FORMAT(date_of_income, '%Y-%m-%d') as formatted_date
-            FROM incomes
-            WHERE id = :id AND user_id = :user_id",
-            [
-                'id' => $id,
-                'user_id' => $userId
-            ]
-        )->find();
-    }
-
-    public function getUserExpense(string $id, int $userId)
-    {
-        return $this->db->query(
-            "SELECT *,  DATE_FORMAT(date_of_expense, '%Y-%m-%d') as formatted_date
-            FROM expenses
-            WHERE id = :id AND user_id = :user_id",
-            [
-                'id' => $id,
-                'user_id' => $userId
-            ]
-        )->find();
-    }
-
     public function updateIncome(array $formData, int $id, int $userId)
     {
         $formattedDate = "{$formData['incomeDate']} 00:00:00";
@@ -373,6 +346,164 @@ class TransactionService
             'contributionsSumsByGoal' => $contributonsSumsByGoal,
             'balance' => $balance
         ];
+    }
+
+    public function getUserIncomesPage(int $userId, int $limit, int $offset): array
+    {
+        return $this->db->query(
+            "SELECT
+                i.id,
+                i.amount,
+                i.income_comment,
+                DATE_FORMAT(i.date_of_income, '%Y-%m-%d') AS formatted_date,
+                c.name,
+                c.id AS categoryId,
+                c.is_active AS active
+             FROM incomes AS i
+             JOIN incomes_category_assigned_to_users AS c
+               ON i.income_category_assigned_to_user_id = c.id
+             WHERE i.user_id = :user_id
+             ORDER BY i.date_of_income DESC
+             LIMIT {$limit} OFFSET {$offset}",
+            [
+                'user_id' => $userId
+            ]
+        )->fetchAll();
+    }
+
+    public function countUserIncomes(int $userId): int
+    {
+        $result = $this->db->query(
+            "SELECT COUNT(*) AS total
+             FROM incomes
+             WHERE user_id = :user_id",
+            ['user_id' => $userId]
+        )->find();
+
+        return (int) ($result['total'] ?? 0);
+    }
+
+    public function getUserIncomesPageByDateRange(int $userId, string $startDate, string $endDate, int $limit, int $offset): array
+    {
+        return $this->db->query(
+            "SELECT
+                i.id,
+                i.amount,
+                i.income_comment,
+                DATE_FORMAT(i.date_of_income, '%Y-%m-%d') AS formatted_date,
+                c.name,
+                c.id AS categoryId,
+                c.is_active AS active
+             FROM incomes AS i
+             JOIN incomes_category_assigned_to_users AS c
+               ON i.income_category_assigned_to_user_id = c.id
+             WHERE i.user_id = :user_id
+               AND i.date_of_income BETWEEN :start AND :end
+             ORDER BY i.date_of_income DESC
+             LIMIT {$limit} OFFSET {$offset}",
+            [
+                'user_id' => $userId,
+                'start' => $startDate,
+                'end' => $endDate
+            ]
+        )->fetchAll();
+    }
+
+    public function countUserIncomesByDateRange(int $userId, string $startDate, string $endDate): int
+    {
+        $result = $this->db->query(
+            "SELECT COUNT(*) AS total
+             FROM incomes
+             WHERE user_id = :user_id
+               AND date_of_income BETWEEN :start AND :end",
+            [
+                'user_id' => $userId,
+                'start' => $startDate,
+                'end' => $endDate
+            ]
+        )->find();
+
+        return (int) ($result['total'] ?? 0);
+    }
+
+    public function getUserExpensesPage(int $userId, int $limit, int $offset): array
+    {
+        return $this->db->query(
+            "SELECT
+                e.id,
+                e.amount,
+                e.expense_comment,
+                DATE_FORMAT(e.date_of_expense, '%Y-%m-%d') AS formatted_date,
+                c.name,
+                c.monthly_limit,
+                c.id AS categoryId,
+                c.is_active AS active
+             FROM expenses AS e
+             JOIN expenses_category_assigned_to_users AS c
+               ON e.expense_category_assigned_to_user_id = c.id
+             WHERE e.user_id = :user_id
+             ORDER BY e.date_of_expense DESC
+             LIMIT {$limit} OFFSET {$offset}",
+            [
+                'user_id' => $userId
+            ]
+        )->fetchAll();
+    }
+
+    public function countUserExpenses(int $userId): int
+    {
+        $result = $this->db->query(
+            "SELECT COUNT(*) AS total
+             FROM expenses
+             WHERE user_id = :user_id",
+            ['user_id' => $userId]
+        )->find();
+
+        return (int) ($result['total'] ?? 0);
+    }
+
+    public function getUserExpensesPageByDateRange(int $userId, string $startDate, string $endDate, int $limit, int $offset): array
+    {
+        return $this->db->query(
+            "SELECT
+                e.id,
+                e.amount,
+                e.expense_comment,
+                DATE_FORMAT(e.date_of_expense, '%Y-%m-%d') AS formatted_date,
+                c.name,
+                c.monthly_limit,
+                c.id AS categoryId,
+                c.is_active AS active
+             FROM expenses AS e
+             JOIN expenses_category_assigned_to_users AS c
+               ON e.expense_category_assigned_to_user_id = c.id
+             WHERE e.user_id = :user_id
+               AND e.date_of_expense BETWEEN :start AND :end
+             ORDER BY e.date_of_expense DESC
+             LIMIT {$limit} OFFSET {$offset}",
+            [
+                'user_id' => $userId,
+                'start' => $startDate,
+                'end' => $endDate
+            ]
+        )->fetchAll();
+    }
+
+    public function countUserExpensesByDateRange(int $userId, string $startDate, string $endDate): int
+    {
+        $result = $this->db->query(
+            "SELECT COUNT(*) AS total
+             FROM expenses
+             WHERE user_id = :user_id
+               AND date_of_expense BETWEEN :start AND :end",
+            [
+                'user_id' => $userId,
+                'start' => $startDate,
+                'end' => $endDate
+            ]
+        )->find();
+
+        return (int) ($result['total'] ?? 0);
     }
 
     public function buildTransactionHistory(array $incomes, array $expenses, array $contributions): array

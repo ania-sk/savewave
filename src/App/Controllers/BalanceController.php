@@ -28,21 +28,23 @@ class   BalanceController
 
         $balanceData = $this->transactionService->getBalance($userId, $startDate, $endDate);
 
+        //pagination for the transaction table
+        $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+        $limit = 15;
+        $offset = ($page - 1) * $limit;
+
+        // For balance view, we still need to build full history for proper aggregation across types
+        // but we'll paginate the final result carefully
         $allTransactions = $this->transactionService->buildTransactionHistory(
             $balanceData['incomes'],
             $balanceData['expenses'],
             $balanceData['contributions']
         );
 
-        //pagination for the transaction table
-        $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
-        $limit = 15;
-        $offset = ($page - 1) * $limit;
-
         $totalRecords = count($allTransactions);
         $totalPages = (int)ceil($totalRecords / $limit);
 
-        $transactions = $allTransactions = array_slice($allTransactions, $offset, $limit);
+        $transactions = array_slice($allTransactions, $offset, $limit);
 
         // data for charts
         $expenseChartLabels = array_column($balanceData['expensesSumsByCat'], 'category');

@@ -28,27 +28,26 @@ class IncomesController
 
         $totalIncome = $this->transactionService->getBalance($userId, $startDate, $endDate)['totalIncome'];
 
-        if ($startDate !== '' && $endDate !== '') {
-
-            $dtStart = $startDate . ' 00:00:00';
-            $dtEnd   = $endDate   . ' 23:59:59';
-
-            $allIncomes = $this->transactionService->getUserIncomesByDateRange($userId, $dtStart, $dtEnd);
-            $sumsByCat = $this->transactionService->getIncomeSumsByCategoryAndDateRange($userId, $dtStart, $dtEnd);
-        } else {
-            $allIncomes = $this->transactionService->getUserIncomes($userId);
-            $sumsByCat = $this->transactionService->getIncomeSumsByCategory($userId);
-        }
-
         //pagination for the transaction table
         $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
         $limit = 15;
         $offset = ($page - 1) * $limit;
 
-        $totalRecords = count($allIncomes);
-        $totalPages = (int)ceil($totalRecords / $limit);
+        if ($startDate !== '' && $endDate !== '') {
 
-        $incomes = array_slice($allIncomes, $offset, $limit);
+            $dtStart = $startDate . ' 00:00:00';
+            $dtEnd   = $endDate   . ' 23:59:59';
+
+            $incomes = $this->transactionService->getUserIncomesPageByDateRange($userId, $dtStart, $dtEnd, $limit, $offset);
+            $totalRecords = $this->transactionService->countUserIncomesByDateRange($userId, $dtStart, $dtEnd);
+            $sumsByCat = $this->transactionService->getIncomeSumsByCategoryAndDateRange($userId, $dtStart, $dtEnd);
+        } else {
+            $incomes = $this->transactionService->getUserIncomesPage($userId, $limit, $offset);
+            $totalRecords = $this->transactionService->countUserIncomes($userId);
+            $sumsByCat = $this->transactionService->getIncomeSumsByCategory($userId);
+        }
+
+        $totalPages = (int)ceil($totalRecords / $limit);
 
         echo $this->view->render("/incomes.php", [
             'title' => 'Incomes',

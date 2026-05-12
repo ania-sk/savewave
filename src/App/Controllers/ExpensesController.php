@@ -28,27 +28,26 @@ class ExpensesController
 
         $totalExpense = $this->transactionService->getBalance($userId, $startDate, $endDate)['totalExpense'];
 
-        if ($startDate !== '' && $endDate !== '') {
-
-            $dtStart = $startDate . ' 00:00:00';
-            $dtEnd   = $endDate   . ' 23:59:59';
-
-            $allExpenses = $this->transactionService->getUserExpensesByDateRange($userId, $dtStart, $dtEnd);
-            $sumsByCat = $this->transactionService->getExpenseSumsByCategoryAndDateRange($userId, $dtStart, $dtEnd);
-        } else {
-            $allExpenses = $this->transactionService->getUserExpenses($userId);
-            $sumsByCat = $this->transactionService->getExpenseSumsByCategory($userId);
-        }
-
         //pagination for the transaction table
         $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
         $limit = 15;
         $offset = ($page - 1) * $limit;
 
-        $totalRecords = count($allExpenses);
-        $totalPages = (int)ceil($totalRecords / $limit);
+        if ($startDate !== '' && $endDate !== '') {
 
-        $expenses = array_slice($allExpenses, $offset, $limit);
+            $dtStart = $startDate . ' 00:00:00';
+            $dtEnd   = $endDate   . ' 23:59:59';
+
+            $expenses = $this->transactionService->getUserExpensesPageByDateRange($userId, $dtStart, $dtEnd, $limit, $offset);
+            $totalRecords = $this->transactionService->countUserExpensesByDateRange($userId, $dtStart, $dtEnd);
+            $sumsByCat = $this->transactionService->getExpenseSumsByCategoryAndDateRange($userId, $dtStart, $dtEnd);
+        } else {
+            $expenses = $this->transactionService->getUserExpensesPage($userId, $limit, $offset);
+            $totalRecords = $this->transactionService->countUserExpenses($userId);
+            $sumsByCat = $this->transactionService->getExpenseSumsByCategory($userId);
+        }
+
+        $totalPages = (int)ceil($totalRecords / $limit);
 
         echo $this->view->render("/expenses.php", [
             'title' => 'Expenses',
