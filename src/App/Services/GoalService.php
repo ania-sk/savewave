@@ -82,8 +82,14 @@ class GoalService
         )->find();
     }
 
-    public function updateGoal(array $formData, int $userId)
+    public function updateGoal(array $formData, int $userId): void
     {
+        $deadline = null;
+
+        if (!empty($formData['goalDate'])) {
+            $deadline = "{$formData['goalDate']} 00:00:00";
+        }
+
         $this->db->query(
             "UPDATE goals
             SET goal_name = :goal_name, 
@@ -96,7 +102,7 @@ class GoalService
                 'goal_name' => $formData['goalName'],
                 'goal_description' => $formData['goalDescription'],
                 'amount_needed' => $formData['goalAmount'],
-                'deadline' => $formData['goalDate'],
+                'deadline' => $deadline,
                 'id' => $formData['goalId']
             ]
         );
