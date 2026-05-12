@@ -188,7 +188,7 @@ class CategoryController
             $categoryType = $_POST['categoryType'] ?? null;
             $redirectTo = $_POST['redirect_to'] ?? '/settings';
             $limitRaw = $_POST['monthly_limit'] ?? null;
-            $userId = $_SESSION['user'];
+            $userId = (int) $_SESSION['user'];
 
             $_SESSION['activeForm'] = 'limitModal';
             $_SESSION['categoryToEdit'] = $this->categoryService->getUserCategoryById($categoryId, $userId);
@@ -202,7 +202,7 @@ class CategoryController
             $limit = (float) $limitRaw;
 
             try {
-                $this->categoryService->updateCategoryLimit($categoryId, $categoryType, $limit);
+                $this->categoryService->updateCategoryLimit($categoryId, $limit, $userId);
                 $_SESSION['success'] = 'Monthly limit has been updated successfully!';
                 unset($_SESSION['activeForm'], $_SESSION['categoryToEdit'], $_SESSION['oldFormData']);
             } catch (\Throwable $e) {

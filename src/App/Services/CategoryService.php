@@ -192,11 +192,9 @@ class CategoryService
         );
     }
 
-    public function deactivateCategory(int $id, string $type, $userId): void
+    public function deactivateCategory(int $id, string $type, int $userId): void
     {
-        $table = $type === 'income'
-            ? 'incomes_category_assigned_to_users'
-            : 'expenses_category_assigned_to_users';
+        $table = $this->resolveCategoryTable($type);
 
         $this->db->query(
             "UPDATE {$table} 
@@ -210,24 +208,29 @@ class CategoryService
         );
     }
 
-    public function updateCategoryLimit(int $id, string $type, float $limit): void
+    public function updateCategoryLimit(int $id, float $limit, int $userId): void
     {
-        $table = $type === 'income'
-            ? 'incomes_category_assigned_to_users'
-            : 'expenses_category_assigned_to_users';
-
         $this->db->query(
-            "UPDATE {$table}
+            "UPDATE expenses_category_assigned_to_users
             SET monthly_limit = :limit 
             WHERE id = :id
             AND user_id = :uid",
             [
                 'limit' => $limit,
                 'id' => $id,
-                'uid' => $_SESSION['user']
+                'uid' => $userId
             ]
 
         );
+    }
+
+    private function resolveCategoryTable(string $type): string
+    {
+        return match ($type) {
+            'income' => 'incomes_category_assigned_to_users',
+            'expense' => 'expenses_category_assigned_to_users',
+            default => throw new \InvalidArgumentException("Invalid category type: {$type}"),
+        };
     }
 
     public function getCategoryLimit(int $categoryId, int $userId): ?float
