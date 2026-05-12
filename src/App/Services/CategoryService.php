@@ -79,24 +79,32 @@ class CategoryService
     {
         $newCategoryName = $this->normalizeCategoryName($formData['newCategoryName'] ?? '');
 
-        $categoriesAssignedToUser = $this->getUserAllIncomeCategories($userId);
+        // Check if category already exists (case-insensitive)
+        $existingCategory = $this->db->query(
+            "SELECT id, is_active
+             FROM incomes_category_assigned_to_users
+             WHERE user_id = :user_id
+               AND LOWER(name) = LOWER(:name)",
+            [
+                'user_id' => $userId,
+                'name' => $newCategoryName
+            ]
+        )->find();
 
-        foreach ($categoriesAssignedToUser as $category) {
-            if (isset($category['name']) && strcasecmp($newCategoryName, $category['name']) === 0) {
-                if ((int) $category['is_active'] === 0) {
-                    $this->db->query(
-                        "UPDATE incomes_category_assigned_to_users
-                        SET is_active = 1
-                        WHERE id = :id 
-                        AND user_id = :uid",
-                        [
-                            'id' => $category['id'],
-                            'uid' => $userId
-                        ]
-                    );
-                }
-                return $category['id'];
+        if ($existingCategory) {
+            if ((int) $existingCategory['is_active'] === 0) {
+                $this->db->query(
+                    "UPDATE incomes_category_assigned_to_users
+                    SET is_active = 1
+                    WHERE id = :id
+                    AND user_id = :uid",
+                    [
+                        'id' => $existingCategory['id'],
+                        'uid' => $userId
+                    ]
+                );
             }
+            return $existingCategory['id'];
         }
 
         $this->db->query(
@@ -115,25 +123,32 @@ class CategoryService
     {
         $newCategoryName = $this->normalizeCategoryName($formData['newCategoryName'] ?? '');
 
+        // Check if category already exists (case-insensitive)
+        $existingCategory = $this->db->query(
+            "SELECT id, is_active
+             FROM expenses_category_assigned_to_users
+             WHERE user_id = :user_id
+               AND LOWER(name) = LOWER(:name)",
+            [
+                'user_id' => $userId,
+                'name' => $newCategoryName
+            ]
+        )->find();
 
-        $categoriesAssignedToUser = $this->getUserAllExpenseCategories($userId);
-
-        foreach ($categoriesAssignedToUser as $category) {
-            if (isset($category['name']) && strcasecmp($newCategoryName, $category['name']) === 0) {
-                if ((int) $category['is_active'] === 0) {
-                    $this->db->query(
-                        "UPDATE expenses_category_assigned_to_users
-                        SET is_active = 1
-                        WHERE id = :id 
-                        AND user_id = :uid",
-                        [
-                            'id' => $category['id'],
-                            'uid' => $userId
-                        ]
-                    );
-                }
-                return $category['id'];
+        if ($existingCategory) {
+            if ((int) $existingCategory['is_active'] === 0) {
+                $this->db->query(
+                    "UPDATE expenses_category_assigned_to_users
+                    SET is_active = 1
+                    WHERE id = :id
+                    AND user_id = :uid",
+                    [
+                        'id' => $existingCategory['id'],
+                        'uid' => $userId
+                    ]
+                );
             }
+            return $existingCategory['id'];
         }
 
         $this->db->query(
