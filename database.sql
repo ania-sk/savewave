@@ -157,14 +157,14 @@ CREATE TABLE IF NOT EXISTS goal_contributions(
 
 -- is category active
 ALTER TABLE incomes_category_assigned_to_users
-  ADD COLUMN is_active TINYINT(1) NOT NULL DEFAULT 1;
+  ADD COLUMN IF NOT EXISTS is_active TINYINT(1) NOT NULL DEFAULT 1;
 
 ALTER TABLE expenses_category_assigned_to_users
-  ADD COLUMN is_active TINYINT(1) NOT NULL DEFAULT 1;
+  ADD COLUMN IF NOT EXISTS is_active TINYINT(1) NOT NULL DEFAULT 1;
 
 -- MONTHLY LIMITS
 ALTER TABLE incomes_category_assigned_to_users
-  ADD COLUMN monthly_limit DECIMAL(10,2) DEFAULT NULL;
+  ADD COLUMN IF NOT EXISTS monthly_limit DECIMAL(10,2) DEFAULT NULL;
 
 ALTER TABLE expenses_category_assigned_to_users
-  ADD COLUMN monthly_limit DECIMAL(10,2) DEFAULT NULL;
+  ADD COLUMN IF NOT EXISTS monthly_limit DECIMAL(10,2) DEFAULT NULL;
