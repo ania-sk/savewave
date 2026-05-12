@@ -46,61 +46,66 @@ class SettingsController
 
         try {
             $this->validatorService->validateUpdateEmail($_POST);
-        } catch (ValidationException $e) {
+            $email = trim($_POST['email']);
 
+            $this->userService->isEmailTaken($email);
+            $this->userService->updateEmail($email, $userId);
+
+            $_SESSION['success'] = 'Your email has been updated successfully!';
+            unset($_SESSION['activeForm']);
+        } catch (ValidationException $e) {
             $_SESSION['errors'] = $e->errors;
             $_SESSION['oldFormData'] = $_POST;
             redirectTo($redirectTo);
         }
-
-        $email = trim($_POST['email']);
-
-        $this->userService->isEmailTaken($email);
-        $this->userService->updateEmail($email, $userId);
-
-        $_SESSION['success'] = 'Your email has been updated successfully!';
-
-        unset($_SESSION['activeForm']);
 
         redirectTo($redirectTo);
     }
 
     public function updateUsername()
     {
-        $redirectTo = '/settings';
-
+        $redirectTo = $_POST['redirect_to'] ?? '/settings';
         $userId = $_SESSION['user'] ?? null;
-        $_SESSION['activeForm'] = $_POST['form_type'] ?? null;
 
-        $newUsername = trim($_POST['username']);
+        $_SESSION['activeForm'] = $_POST['form_type'] ?? 'updateUsername';
 
-        $this->validatorService->validateUsername($_POST);
+        try {
+            $this->validatorService->validateUsername($_POST);
+            $newUsername = trim($_POST['username']);
 
-        $this->userService->updateUsername($userId, $newUsername);
+            $this->userService->updateUsername($userId, $newUsername);
 
-        $_SESSION['success'] = 'Your Username has been updated successfully!';
-
-        unset($_SESSION['activeForm']);
+            $_SESSION['success'] = 'Your Username has been updated successfully!';
+            unset($_SESSION['activeForm']);
+        } catch (ValidationException $e) {
+            $_SESSION['errors'] = $e->errors;
+            $_SESSION['oldFormData'] = $_POST;
+            redirectTo($redirectTo);
+        }
 
         redirectTo($redirectTo);
     }
 
     public function updatePassword()
     {
-        $redirectTo = '/settings';
-
+        $redirectTo = $_POST['redirect_to'] ?? '/settings';
         $userId = $_SESSION['user'] ?? null;
-        $_SESSION['activeForm'] = $_POST['form_type'] ?? null;
 
-        $newPassword = $_POST['password'];
+        $_SESSION['activeForm'] = $_POST['form_type'] ?? 'updatePassword';
 
-        $this->validatorService->validateNewPassword($_POST);
+        try {
+            $this->validatorService->validateNewPassword($_POST);
+            $newPassword = $_POST['password'];
 
-        $this->userService->updatePassword($userId, $newPassword);
+            $this->userService->updatePassword($userId, $newPassword);
 
-        $_SESSION['success'] = 'Your password has been updated successfully!';
-
-        unset($_SESSION['activeForm']);
+            $_SESSION['success'] = 'Your password has been updated successfully!';
+            unset($_SESSION['activeForm']);
+        } catch (ValidationException $e) {
+            $_SESSION['errors'] = $e->errors;
+            $_SESSION['oldFormData'] = $_POST;
+            redirectTo($redirectTo);
+        }
 
         redirectTo($redirectTo);
     }
