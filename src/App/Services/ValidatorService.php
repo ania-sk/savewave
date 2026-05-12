@@ -12,6 +12,8 @@ use Framework\Rules\{
     EmailRule,
     MatchRule,
     LengthMaxRule,
+    LengthMinRule,
+    PasswordStrengthRule,
     NumericRule,
     DateFormatRule,
     LessThanBalanceRule,
@@ -33,6 +35,8 @@ class ValidatorService
         $this->validator->add('email', new EmailRule());
         $this->validator->add('match', new MatchRule());
         $this->validator->add('lengthMax', new LengthMaxRule());
+        $this->validator->add('lengthMin', new LengthMinRule());
+        $this->validator->add('passwordStrength', new PasswordStrengthRule());
         $this->validator->add('numeric', new NumericRule());
         $this->validator->add('dateFormat', new DateFormatRule());
         $this->validator->add('lessThanBalance', new LessThanBalanceRule());
@@ -44,7 +48,7 @@ class ValidatorService
         $this->validator->validate($formData, [
             'email' => ['required', 'email'],
             'username' => ['required'],
-            'password' => ['required'],
+            'password' => ['required', 'lengthMin:8', 'passwordStrength'],
             'confirm-password' => ['required', 'match:password']
 
         ]);
@@ -115,7 +119,7 @@ class ValidatorService
     public function validateNewPassword(array $formData)
     {
         $this->validator->validate($formData, [
-            'password' => ['required'],
+            'password' => ['required', 'lengthMin:8', 'passwordStrength'],
             'confirm-password' => ['required', 'match:password']
         ]);
     }
