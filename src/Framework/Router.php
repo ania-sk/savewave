@@ -36,7 +36,18 @@ class Router
     public function dispatch(string $path, string $method, Container $container = null)
     {
         $path = $this->normalizePath($path);
-        $method = strtoupper($_POST['_METHOD'] ?? $method);
+
+        $methodOverride = $_POST['_METHOD'] ?? null;
+        $allowedOverrides = ['DELETE', 'PUT', 'PATCH'];
+        $method = strtoupper($method);
+
+        if (
+            strtoupper((string) $methodOverride) !== '' &&
+            $method === 'POST' &&
+            in_array(strtoupper($methodOverride), $allowedOverrides, true)
+        ) {
+            $method = strtoupper($methodOverride);
+        }
 
         foreach ($this->routes as $route) {
             if (
