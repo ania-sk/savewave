@@ -75,6 +75,17 @@ class Router
 
             return;
         }
+
+        http_response_code(404);
+
+        $viewPath = __DIR__ . '/../App/views/partials/_404.php';
+
+        if (is_file($viewPath)) {
+            require $viewPath;
+            return;
+        }
+
+        echo '404 Not Found';
     }
 
     public function addMiddleware(string $middleware)
