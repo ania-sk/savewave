@@ -14,8 +14,10 @@ include $this->resolve("partials/_header.php");
             </a>
         </div>
 
+        <?php $currentUrl = e($_SERVER['REQUEST_URI']); ?>
         <form method="post" class="singup-form-box flex-conteiner">
             <?php include $this->resolve('partials/_csrf.php'); ?>
+            <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
             <div class="input-box flex-conteiner">
                 <label for="email">Email</label>
                 <input

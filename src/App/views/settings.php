@@ -2,6 +2,7 @@
 include $this->resolve("partials/_header.php");
 include $this->resolve("partials/modals/_editCategoryModal.php");
 include $this->resolve("partials/modals/_limitModal.php");
+$currentUrl = e($_SERVER['REQUEST_URI']);
 ?>
 
 <body class="<?php echo ($activeForm === 'income') ? 'modal-income-open' : '';
@@ -186,6 +187,7 @@ include $this->resolve("partials/modals/_limitModal.php");
                 <div class="account-edit-section">
                     <form class="account-form" action="/settings/email/update" method="post">
                         <?php include $this->resolve("partials/_csrf.php"); ?>
+                        <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                         <div class="account-field">
                             <label for="email">Email: <?php echo e($email['email']); ?></label>
                             <input type="email"
@@ -207,7 +209,7 @@ include $this->resolve("partials/modals/_limitModal.php");
                 <div class="account-edit-section">
                     <form class="account-form" action="/settings/update/username" method="post">
                         <?php include $this->resolve("partials/_csrf.php"); ?>
-
+                        <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                         <input type="hidden" name="form_type" value="editUsername">
 
                         <div class="account-field">
@@ -229,7 +231,7 @@ include $this->resolve("partials/modals/_limitModal.php");
                 <div class="account-edit-section">
                     <form class="account-form" action="/settings/update/password" method="post">
                         <?php include $this->resolve("partials/_csrf.php"); ?>
-
+                        <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                         <input type="hidden" name="form_type" value="editPassword">
 
                         <div class="account-field">

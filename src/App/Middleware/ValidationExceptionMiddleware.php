@@ -25,8 +25,23 @@ class ValidationExceptionMiddleware implements MiddlewareInterface
             $_SESSION['errors'] = $e->errors;
             $_SESSION['oldFormData'] = $formattedFormData;
 
-            $referer = $_SERVER['HTTP_REFERER'];
-            redirectTo($referer);
+            redirectTo($this->getRedirectPath());
         }
+    }
+
+    private function getRedirectPath(): string
+    {
+        $redirectTo = $_POST['redirect_to'] ?? '/';
+
+        if (!is_string($redirectTo) || $redirectTo === '') {
+            return '/';
+        }
+
+        // Only allow internal paths to prevent open redirects.
+        if (str_starts_with($redirectTo, '/')) {
+            return $redirectTo;
+        }
+
+        return '/';
     }
 }
