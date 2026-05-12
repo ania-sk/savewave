@@ -14,16 +14,21 @@ class CsrfGuardMiddleware implements MiddlewareInterface
 
         $validMethods = ['POST', 'PATCH', 'DELETE'];
 
-        if (!in_array($requestMethod, $validMethods)) {
+        if (!in_array($requestMethod, $validMethods, true)) {
             $next();
             return;
         }
 
-        if ($_SESSION['token'] !== $_POST['token']) {
+        if (
+            !isset($_SESSION['token'], $_POST['token']) ||
+            !is_string($_POST['token']) ||
+            !hash_equals($_SESSION['token'], $_POST['token'])
+        ) {
+            http_response_code(403);
             redirectTo('/');
         }
 
-        // unset($_SESSION['token']);
+        unset($_SESSION['token']);
 
         $next();
     }
