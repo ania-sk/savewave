@@ -90,9 +90,8 @@ class UserService
 
     public function logout()
     {
-        unset($_SESSION['user']);
-
-        session_regenerate_id();
+        $_SESSION = [];
+        session_destroy();
     }
 
     public function getUsername(int $userId)
