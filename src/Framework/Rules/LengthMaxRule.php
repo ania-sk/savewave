@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Framework\Rules;
 
 use Framework\Contracts\RuleInterface;
@@ -15,7 +17,7 @@ class LengthMaxRule implements RuleInterface
 
         $length = (int) $params[0];
 
-        return strlen($data[$field]) < $length;
+        return mb_strlen($data[$field], 'UTF-8') <= $length;
     }
 
     public function getMessage(array $data, string $field, array $params): string
