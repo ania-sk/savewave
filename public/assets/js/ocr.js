@@ -34,13 +34,48 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("OCR RESULT:", response.text);
 
       console.log("EXTRACTED DATA:", response.extracted);
-      // here
-      // open modal
-      // parse categories
-      // autofill expense form
+      // w ocr.js po otrzymaniu odpowiedzi z serwera
+      console.log(
+        "Debug image link: ",
+        window.location.origin + "/debug_ocr.jpg",
+      );
+      const btnIconModalExpense = document.querySelector(
+        "#header-icon-btn-modal-expense",
+      );
+      if (btnIconModalExpense) {
+        btnIconModalExpense.click();
+      }
+      setTimeout(() => {
+        // amount
+        const amountInput = document.getElementById("expenseAmount");
+        if (amountInput && response.extracted.amount > 0) {
+          amountInput.value = response.extracted.amount;
+          // Wywołujemy input, żeby systemy walidacji zauważyły zmianę
+          amountInput.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+
+        // date
+        const dateInput = document.getElementById("expenseDate");
+        if (dateInput && response.extracted.date) {
+          dateInput.value = response.extracted.date;
+        }
+
+        // category
+        const $categorySelect = $("#expenseCategory");
+
+        if ($categorySelect.length && response.extracted.categoryId) {
+          $categorySelect.val(response.extracted.categoryId).trigger("change");
+        }
+
+        // comment - optionally
+        const commentInput = document.getElementById("expenseComment");
+        if (commentInput) {
+          commentInput.value = "OCR: Verify receipt data.";
+        }
+      }, 150);
     } catch (error) {
       console.error(error);
-      showError(error.message || "An OCR error occurred.");
+      showError("Unable to analyze the receipt.");
     } finally {
       hideLoader();
       elements.input.value = "";
