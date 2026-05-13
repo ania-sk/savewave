@@ -1,16 +1,16 @@
 <section id="modal-edit-goal" class="modal-box">
     <div class="modal-content">
-        <div class="modal-header flex-conteiner">
+        <div class="modal-header flex-container">
             <span id="close-edit-goal-modal" class="close">&times;</span>
             <ion-icon class="header-icon" name="create-outline"></ion-icon>
             <p>Edit Your Goal</p>
         </div>
 
-        <div class="modal-body flex-conteiner">
+        <div class="modal-body flex-container">
 
             <!-- FORM -->
             <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
-            <form method="post" action="/goals/update" class="modal-form-box flex-conteiner">
+            <form method="post" action="/goals/update" class="modal-form-box flex-container">
 
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
@@ -18,11 +18,11 @@
                 <input type="hidden" name="goalId" value="<?php echo e($goalToEdit['id'] ?? ''); ?>">
                 <input type="hidden" name="form_type" value="editGoal">
 
-                <div class="flex-conteiner">
+                <div class="flex-container">
                     <div class="grid-rows-2-gap">
 
                         <!-- GOAL NAME -->
-                        <div class="input-form-box flex-conteiner">
+                        <div class="input-form-box flex-container">
                             <label for="edit-goal-name">Goal Name</label>
                             <input
                                 id="edit-goal-name"
@@ -42,7 +42,7 @@
                         </div>
 
                         <!-- GOAL DESCRIPTION -->
-                        <div class="input-form-box flex-conteiner">
+                        <div class="input-form-box flex-container">
                             <label for="edit-goal-description">Description</label>
                             <input
                                 type="text"
@@ -65,7 +65,7 @@
                     <div class="grid-rows-2-gap">
 
                         <!-- AMOUNT NEEDED-->
-                        <div class="input-form-box flex-conteiner">
+                        <div class="input-form-box flex-container">
                             <label for="goal-amount">Amount needed</label>
                             <input
                                 id="edit-goal-amount"
@@ -88,7 +88,7 @@
                         </div>
 
                         <!-- DEADLINE -->
-                        <div class="input-form-box flex-conteiner">
+                        <div class="input-form-box flex-container">
                             <label for="date">Deadline</label>
                             <input id="edit-goal-date" type="date" name="goalDate" required
                                 value="" />

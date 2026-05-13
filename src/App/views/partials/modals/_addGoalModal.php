@@ -1,24 +1,24 @@
 <section id="modal-goal" class="modal-box">
     <div class="modal-content">
-        <div class="modal-header flex-conteiner">
+        <div class="modal-header flex-container">
             <span id="close-goal-modal" class="close">&times;</span>
             <ion-icon class="header-icon" name="add-circle"></ion-icon>
             <p>Add new goal</p>
         </div>
 
-        <div class="modal-body flex-conteiner">
+        <div class="modal-body flex-container">
 
             <!-- FORM -->
             <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
-            <form method="post" action="/goals/addGoal" class="modal-form-box flex-conteiner">
+            <form method="post" action="/goals/addGoal" class="modal-form-box flex-container">
 
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
                 <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                 <input type="hidden" name="form_type" value="addGoal">
-                <div class="flex-conteiner">
+                <div class="flex-container">
                     <div class="grid-rows-2-gap">
-                        <div class="input-form-box flex-conteiner">
+                        <div class="input-form-box flex-container">
                             <label for="goal-name">Goal Name</label>
                             <input
                                 id="goal-name"
@@ -38,7 +38,7 @@
                             <?php endif; ?>
                         </div>
 
-                        <div class="input-form-box flex-conteiner">
+                        <div class="input-form-box flex-container">
                             <label for="goal-description">Description</label>
                             <input
                                 type="text"
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="grid-rows-2-gap">
-                        <div class="input-form-box flex-conteiner">
+                        <div class="input-form-box flex-container">
                             <label for="goal-amount">Amount needed</label>
                             <input
                                 id="goal-amount"
@@ -81,7 +81,7 @@
                             <?php endif; ?>
 
                         </div>
-                        <div class="input-form-box flex-conteiner">
+                        <div class="input-form-box flex-container">
                             <label for="date">Deadline</label>
                             <input id="goal-date" type="date" name="goalDate"
                                 value="<?php echo e($oldFormData['goalDate'] ?? date('Y-m-d')); ?>" />

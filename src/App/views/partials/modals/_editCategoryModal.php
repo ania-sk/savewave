@@ -1,16 +1,16 @@
 <section id="modal-edit-category" class="modal-box">
     <div class="modal-content">
-        <div class="modal-header flex-conteiner">
+        <div class="modal-header flex-container">
             <span id="close-edit-category-modal" class="close">&times;</span>
             <ion-icon class="header-icon" name="create-outline"></ion-icon>
             <p>Edit Category Name</p>
         </div>
 
-        <div class="modal-body flex-conteiner">
+        <div class="modal-body flex-container">
             <?php $currentUrl = e($_SERVER['REQUEST_URI']); ?>
 
             <!-- FORM -->
-            <form method="post" action="/settings/<?php echo e($categoryToEdit['id']); ?>" class="modal-form-box flex-conteiner">
+            <form method="post" action="/settings/<?php echo e($categoryToEdit['id']); ?>" class="modal-form-box flex-container">
 
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
@@ -20,7 +20,7 @@
                 <input type="hidden" name="categoryId" value="<?php echo e($categoryToEdit['id'] ?? ''); ?>">
                 <input type="hidden" name="categoryType" value="<?php echo e($categoryToEdit['type'] ?? '');                                                                         ?>">
 
-                <div class="input-form-box flex-conteiner">
+                <div class="input-form-box flex-container">
                     <label for="edit-category-name">Category Name</label>
                     <input id="edit-category-name" type="text" name="newCategoryName"
                         value="<?php echo e($oldFormData['newCategoryName'] ?? ($categoryToEdit['name'] ?? '')); ?>"

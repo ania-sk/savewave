@@ -3,9 +3,9 @@ include $this->resolve("partials/_header.php");
 ?>
 
 <body>
-    <section class="section-login flex-conteiner">
+    <section class="section-login flex-container">
         <div class="logo-box">
-            <a class="link flex-conteiner" href="/">
+            <a class="link flex-container" href="/">
                 <img
                     class="logo-sw"
                     src="/assets/imgs/save-wave-circle.png"
@@ -15,11 +15,11 @@ include $this->resolve("partials/_header.php");
         </div>
 
         <?php $currentUrl = e($_SERVER['REQUEST_URI']); ?>
-        <form method="post" class="login-form-box flex-conteiner">
+        <form method="post" class="login-form-box flex-container">
             <?php include $this->resolve('partials/_csrf.php'); ?>
             <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
 
-            <div class="input-box flex-conteiner">
+            <div class="input-box flex-container">
                 <label for="username">Email</label>
                 <input
                     id="email"
@@ -37,7 +37,7 @@ include $this->resolve("partials/_header.php");
 
             </div>
 
-            <div class="input-box flex-conteiner">
+            <div class="input-box flex-container">
                 <label for="password">Password</label>
                 <input
                     id="password"
@@ -56,9 +56,9 @@ include $this->resolve("partials/_header.php");
             <button type="submit" class="btn btn--full btn--form">Login</button>
 
         </form>
-        <div class="question-box flex-conteiner">
+        <div class="question-box flex-container">
             <p>Don't have an account?</p>
-            <a class="link" href="/register">Sing up</a>
+            <a class="link" href="/register">Sign-up</a>
         </div>
     </section>
 

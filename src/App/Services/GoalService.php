@@ -55,7 +55,7 @@ class GoalService
             g.deadline,
             COALESCE(SUM(c.amount),0) AS amount_saved,
             ROUND(COALESCE(SUM(c.amount),0) / g.amount_needed * 100 , 2) AS progress,
-            g.amount_needed - COALESCE(SUM(c.amount), 0) AS amount_remaind
+            g.amount_needed - COALESCE(SUM(c.amount), 0) AS amount_remaining
             FROM goals g
             LEFT JOIN goal_contributions c
             ON g.id = c.goal_id

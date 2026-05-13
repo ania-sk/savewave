@@ -8,10 +8,10 @@ include $this->resolve("partials/_header.php");
                 echo ($activeForm === 'addExpenseCategory') ? 'modal-add-expense-category-open modal-expense-open' : ''; ?>">
     <!-- MAIN SECTION -->
 
-    <main class="section-main flex-conteiner">
-        <div class="expense-heading flex-conteiner">
+    <main class="section-main flex-container">
+        <div class="expense-heading flex-container">
             <ion-icon class="hamburger-menu" name="menu-outline"></ion-icon>
-            <div class=" flex-conteiner">
+            <div class=" flex-container">
                 <ion-icon class="nav-icon" name="file-tray-full-outline"></ion-icon>
                 <p>Expenses</p>
             </div>
@@ -23,7 +23,7 @@ include $this->resolve("partials/_header.php");
             </button>
         </div>
         <!-- DATE FILTER -->
-        <div class="flex-conteiner">
+        <div class="flex-container">
             <form method="get" action="/expenses" class="date-filter date-form-box">
                 <div class="">
                     <label for="start_date">From</label>
@@ -43,7 +43,7 @@ include $this->resolve("partials/_header.php");
         <!-- EXPENSES CHART -->
         <section class="section-chart">
             <div class="expense-chart ">
-                <div class="total-box flex-conteiner">
+                <div class="total-box flex-container">
                     <p>Total: <?php echo e($totalExpense); ?></p>
                     <ion-icon name="trending-down-outline"></ion-icon>
 

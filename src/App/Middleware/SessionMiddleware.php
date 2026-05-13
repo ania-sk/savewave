@@ -12,7 +12,7 @@ class SessionMiddleware implements MiddlewareInterface
     public function process(callable $next)
     {
         if (session_status() === PHP_SESSION_ACTIVE) {
-            throw new SessionException("Session alredy active.");
+            throw new SessionException("Session already active.");
         }
 
         if (headers_sent($filename, $line)) {

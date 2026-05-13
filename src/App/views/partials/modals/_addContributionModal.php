@@ -1,16 +1,16 @@
 <section id="modal-add-contribution" class="modal-box">
     <div class="modal-content">
-        <div class="modal-header flex-conteiner">
+        <div class="modal-header flex-container">
             <span id="close-contribution-modal" class="close">&times;</span>
             <i class="contribution--icon ph ph-hand-coins"></i>
             <p>Contribution for <span id="contribution-goal-name"><?= e($oldFormData['contributionGoalName'] ?? '') ?></span></p>
         </div>
 
-        <div class="modal-body flex-conteiner">
+        <div class="modal-body flex-container">
 
             <!-- FORM -->
             <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
-            <form method="post" action="/contributions/store" class="modal-form-box flex-conteiner">
+            <form method="post" action="/contributions/store" class="modal-form-box flex-container">
 
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
@@ -19,7 +19,7 @@
                 <input type="hidden" name="form_type" value="addContribution">
                 <input type="hidden" name="contributionGoalName" id="contribution-goal-name-input">
 
-                <div class="input-form-box flex-conteiner">
+                <div class="input-form-box flex-container">
                     <label>Amount</label>
                     <input id="contributionAmount" type="number" step="0.01" name="contributionAmount" placeholder="0">
                     <ion-icon

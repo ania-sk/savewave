@@ -11,16 +11,16 @@ include $this->resolve("partials/_header.php");
                 echo ($activeForm === 'addContribution') ? 'modal-add-contribution-open' : '';
                 echo ($activeForm === 'editContribution') ? 'modal-edit-contribution-open' : ''; ?>">
     <!-- MAIN SECTION -->
-    <main class="section-main flex-conteiner">
-        <div class="heading-box flex-conteiner">
+    <main class="section-main flex-container">
+        <div class="heading-box flex-container">
             <ion-icon class="hamburger-menu" name="menu-outline"></ion-icon>
-            <div class="goals-heading flex-conteiner">
+            <div class="goals-heading flex-container">
                 <ion-icon class="nav-icon" name="heart-half-outline"></ion-icon>
                 <p>Goals</p>
             </div>
             <!--goal modal button -->
             <div class="btn-box">
-                <button id="btn-modal-goal" class="btn btn--goal flex-conteiner">
+                <button id="btn-modal-goal" class="btn btn--goal flex-container">
                     <ion-icon
                         id="add-goal-icon"
                         name="add-circle"></ion-icon>
@@ -29,8 +29,8 @@ include $this->resolve("partials/_header.php");
             </div>
         </div>
         <!-- BALANCE -->
-        <section class="section-balance flex-conteiner mrg-bottom ">
-            <div class="balance-box flex-conteiner">
+        <section class="section-balance flex-container mrg-bottom ">
+            <div class="balance-box flex-container">
                 <p>Your savings: <?php echo e($balance); ?></p>
                 <?php if ($balance > 0): ?>
                     <ion-icon name="thumbs-up-outline"></ion-icon>
@@ -55,7 +55,7 @@ include $this->resolve("partials/_header.php");
                         data-description="<?php echo e($goal['goal_description']); ?>"
                         data-saved="<?php echo e($goal['amount_saved']); ?>"
                         data-target="<?php echo e($goal['amount_needed']); ?>"
-                        data-remaind="<?php echo max(0, $goal['amount_remaind']); ?>"
+                        data-remaining="<?php echo max(0, $goal['amount_remaining']); ?>"
                         data-deadline="<?php echo e($goal['deadline']); ?>"
                         data-progress="<?php echo e($goal['progress']); ?>"
                         data-achieved="<?php echo $goal['amount_saved'] >= $goal['amount_needed'] ? '1' : '0' ?>">
@@ -90,7 +90,7 @@ include $this->resolve("partials/_header.php");
                         </div>
 
 
-                        <div class="flex-conteiner gap-1 progress-box">
+                        <div class="flex-container gap-1 progress-box">
                             <div class="progress-bar">
                                 <div class="progress-fill"
                                     style="width: <?php echo min(100, $goal['progress']); ?>%">
@@ -125,7 +125,7 @@ include $this->resolve("partials/_header.php");
                                 <span class="btn-contribution-span-lack" style="display: none;">Lack of funds</span>
                             </button>
                         <?php else: ?>
-                            <div class="flex-conteiner goal-achieved-box gap-1">
+                            <div class="flex-container goal-achieved-box gap-1">
                                 <ion-icon name="trophy-outline" class="achieved--icon"></ion-icon>
                                 <span>Goal achieved!</span>
                             </div>
@@ -141,12 +141,12 @@ include $this->resolve("partials/_header.php");
         </section>
 
         <section class="side-panel">
-            <div id="panel-goal-achieved-box" class="flex-conteiner">
+            <div id="panel-goal-achieved-box" class="flex-container">
                 <ion-icon name="trophy-outline" class="achieved--icon"></ion-icon>
                 <span>Goal achieved!</span>
             </div>
 
-            <div class="flex-conteiner panel-header">
+            <div class="flex-container panel-header">
                 <h2 class="goal-name"></h2>
                 <button class="btn btn-box close-btn">✖</button>
             </div>
@@ -159,22 +159,22 @@ include $this->resolve("partials/_header.php");
                 </div>
 
                 <div class="panel-section stats">
-                    <div class="flex-conteiner stats-box">
+                    <div class="flex-container stats-box">
                         <ion-icon name="ribbon-outline"></ion-icon>
                         <p>Saved:</p>
                         <span class="goal-saved"></span>
                     </div>
-                    <div class="flex-conteiner stats-box">
+                    <div class="flex-container stats-box">
                         <ion-icon name="golf-outline"></ion-icon>
                         <p>Target:</p>
                         <span class="goal-target stats-box"></span>
                     </div>
-                    <div class="flex-conteiner stats-box">
+                    <div class="flex-container stats-box">
                         <ion-icon name="color-fill-outline"></ion-icon>
-                        <p>Remaind:</p>
-                        <span class="goal-remaind"></span>
+                        <p>Remaining:</p>
+                        <span class="goal-remaining"></span>
                     </div>
-                    <div class="flex-conteiner stats-box">
+                    <div class="flex-container stats-box">
                         <ion-icon name="hourglass-outline"></ion-icon>
                         <p>Deadline:</p>
                         <span class="goal-deadline"></span>
@@ -216,7 +216,7 @@ include $this->resolve("partials/_header.php");
 
 
         <section class="contribution-table-box">
-            <div class="table-heading flex-conteiner">
+            <div class="table-heading flex-container">
                 <p>Your previous contributions</p>
             </div>
 

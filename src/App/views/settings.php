@@ -10,19 +10,19 @@ $currentUrl = e($_SERVER['REQUEST_URI']);
                 echo ($activeForm === 'editCategory') ? 'modal-edit-category-open' : ''; ?>">
 
     <!-- MAIN SECTION -->
-    <main class="section-main flex-conteiner">
+    <main class="section-main flex-container">
         <!-- FLASH INFORMATION -->
         <?php if (!empty($success)): ?>
-            <div class="modal-header flex-conteiner flash flash--success">
+            <div class="modal-header flex-container flash flash--success">
                 <span id="close-flash" class="close">&times;</span>
                 <ion-icon class="header-icon" name="flash-outline"></ion-icon>
                 <p><?php echo e($success) ?></p>
             </div>
         <?php endif; ?>
 
-        <div class="settings-heading flex-conteiner">
+        <div class="settings-heading flex-container">
             <ion-icon class="hamburger-menu" name="menu-outline"></ion-icon>
-            <div class="flex-conteiner">
+            <div class="flex-container">
                 <ion-icon class="nav-icon" name="settings-outline"></ion-icon>
                 <p>Settings</p>
             </div>
@@ -94,7 +94,7 @@ $currentUrl = e($_SERVER['REQUEST_URI']);
                                 <p class="error-text"><?php echo e($errors['newCategoryName'][0]); ?></p>
                             </div>
                         <?php endif; ?>
-                        <button id="add-income-category-btn" class="btn btn--modal">Add new categorie</button>
+                        <button id="add-income-category-btn" class="btn btn--modal">Add new category</button>
                     </form>
                 </div>
 
@@ -170,14 +170,14 @@ $currentUrl = e($_SERVER['REQUEST_URI']);
                             </div>
                         <?php endif; ?>
 
-                        <button id="add-expense-category-btn" class="btn btn--modal" type="submit">Add new categorie</button>
+                        <button id="add-expense-category-btn" class="btn btn--modal" type="submit">Add new category</button>
                     </form>
                 </div>
             </div>
         </section>
 
         <!-- ACCOUNT DETAILS -->
-        <section class="account-sec flex-conteiner">
+        <section class="account-sec flex-container">
             <div class="account-details-container">
                 <div class="heading-tertiary">
                     <p>Account Details</p>
@@ -217,7 +217,7 @@ $currentUrl = e($_SERVER['REQUEST_URI']);
                             <input type="text"
                                 id="username"
                                 name="username"
-                                placeholder="Enetr new Username"
+                                placeholder="Enter new Username"
                                 value="<?= e($oldFormData['username'] ?? '') ?>">
                             <?php if ($activeForm === 'editUsername' && isset($errors['username'])): ?>
                                 <p class="error-text"><?= e($errors['username'][0]) ?></p>
@@ -245,7 +245,7 @@ $currentUrl = e($_SERVER['REQUEST_URI']);
                                 </div>
                             <?php endif; ?>
 
-                            <input type="password" id="passwordConfirm" name="confirm-password" placeholder="Confrirm new password">
+                            <input type="password" id="passwordConfirm" name="confirm-password" placeholder="Confirm new password">
 
                             <?php if ($activeForm === 'editPassword' && isset($errors['confirm-password'])): ?>
                                 <div>

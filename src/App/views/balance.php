@@ -7,17 +7,17 @@ include $this->resolve("partials/_header.php");
                 echo ($activeForm === 'addIncomeCategory') ? 'modal-add-income-category-open modal-income-open' : '';
                 echo ($activeForm === 'addExpenseCategory') ? 'modal-add-expense-category-open modal-expense-open' : ''; ?>">
     <!-- MAIN SECTION -->
-    <main class="section-main flex-conteiner">
-        <div class="balance-heading flex-conteiner">
+    <main class="section-main flex-container">
+        <div class="balance-heading flex-container">
             <ion-icon class="hamburger-menu" name="menu-outline"></ion-icon>
-            <div class="flex-conteiner">
+            <div class="flex-container">
                 <ion-icon class=" nav-icon" name="stats-chart-outline"></ion-icon>
                 <p>Balance</p>
             </div>
             <div></div>
         </div>
         <!-- DATE FILTER -->
-        <section class="flex-conteiner">
+        <section class="flex-container">
             <form method="get" action="/balance" class="date-filter date-form-box">
                 <div class="">
                     <label for="start_date">From</label>
@@ -35,7 +35,7 @@ include $this->resolve("partials/_header.php");
         </section>
         <!-- BALANCE -->
         <section class="section-balance">
-            <div class="balance-box flex-conteiner">
+            <div class="balance-box flex-container">
                 <p>Your savings: <?php echo e($balance); ?></p>
                 <?php if ($balance > 0): ?>
                     <ion-icon name="thumbs-up-outline"></ion-icon>
@@ -47,11 +47,11 @@ include $this->resolve("partials/_header.php");
         <!-- INCOMES/EXPENSES/CONTRIBUTIONS CHARTS -->
         <section class="section-charts grid-cols-3">
             <div class="incomes-chart ">
-                <div class="chart-heading flex-conteiner">
+                <div class="chart-heading flex-container">
                     <ion-icon class="nav-icon" name="cash-outline"></ion-icon>
                     <p>Incomes</p>
                 </div>
-                <div class="total-box flex-conteiner">
+                <div class="total-box flex-container">
                     <p>Total: <?php echo e($totalIncome); ?></p>
                     <ion-icon name="trending-up-outline"></ion-icon>
 
@@ -66,11 +66,11 @@ include $this->resolve("partials/_header.php");
                 </div>
             </div>
             <div class="expenses-chart">
-                <div class="chart-heading flex-conteiner">
+                <div class="chart-heading flex-container">
                     <ion-icon class="nav-icon" name="file-tray-full-outline"></ion-icon>
                     <p>Expenses</p>
                 </div>
-                <div class="total-box flex-conteiner">
+                <div class="total-box flex-container">
                     <p>Total: <?php echo e($totalExpense); ?></p>
                     <ion-icon name="trending-down-outline"></ion-icon>
 
@@ -86,11 +86,11 @@ include $this->resolve("partials/_header.php");
             </div>
 
             <div class="contributions-chart">
-                <div class="chart-heading flex-conteiner">
+                <div class="chart-heading flex-container">
                     <ion-icon class="nav-icon" name="file-tray-full-outline"></ion-icon>
                     <p>Contributions</p>
                 </div>
-                <div class="total-box flex-conteiner">
+                <div class="total-box flex-container">
                     <p>Total: <?php echo e($totalContributions); ?></p>
                     <i class="ph-fill ph-hand-coins"></i>
 
@@ -107,7 +107,7 @@ include $this->resolve("partials/_header.php");
         </section>
         <!-- TRANSACTIONS TABLE -->
         <section class="transacrions-table-box">
-            <div class="table-heading flex-conteiner">
+            <div class="table-heading flex-container">
                 <ion-icon name="repeat-outline"></ion-icon>
                 <p>Transactions</p>
             </div>

@@ -1,24 +1,24 @@
 <section id="modal-add-limit" class="modal-box">
     <div class="modal-content">
         <div class="modal-content">
-            <div class="modal-header flex-conteiner">
+            <div class="modal-header flex-container">
                 <span id="close-add-limit-modal" class="close">&times;</span>
                 <ion-icon class="header-icon" name="hand-right-outline"></ion-icon>
                 <p>Add Monthly Limit</p>
             </div>
 
-            <div class="modal-body flex-conteiner">
+            <div class="modal-body flex-container">
                 <?php $currentUrl = e($_SERVER['REQUEST_URI']); ?>
 
                 <!-- FORM -->
-                <form method="post" action="" class="modal-form-box flex-conteiner">
+                <form method="post" action="" class="modal-form-box flex-container">
 
                     <?php include $this->resolve("partials/_csrf.php"); ?>
 
                     <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                     <input type="hidden" name="categoryType" value="<?php echo e($categoryToEdit['type'] ?? ''); ?>">
 
-                    <div class="input-form-box flex-conteiner">
+                    <div class="input-form-box flex-container">
                         <label for="monthly-limit">Monthly Limit</label>
                         <input id="monthly-limit" type="number" step="1" min="0" name="monthly_limit"
                             value="<?php echo e($oldFormData['monthly_limit'] ?? ($categoryToEdit['monthly_limit'] ?? '')); ?>"

@@ -1,15 +1,15 @@
 <section id="modal-edit-expense" class="modal-box" style="<?= (isset($activeForm) && $activeForm === 'editExpense') ? 'display: block;' : ''; ?>">
 
     <div class="modal-content">
-        <div class="modal-header flex-conteiner">
+        <div class="modal-header flex-container">
             <span id="close-edit-expense-modal" class="close">&times;</span>
             <ion-icon class="header-icon" name="create-outline"></ion-icon>
             <p>Edit expense</p>
         </div>
 
-        <div class="modal-body flex-conteiner">
+        <div class="modal-body flex-container">
             <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
-            <form method="post" action="/expenses/update" class="modal-form-box flex-conteiner">
+            <form method="post" action="/expenses/update" class="modal-form-box flex-container">
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
                 <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
@@ -17,7 +17,7 @@
                 <input type="hidden" name="expenseId" id="edit-expense-id">
 
                 <!-- "Amount" -->
-                <div class="input-form-box flex-conteiner">
+                <div class="input-form-box flex-container">
                     <label for="edit-amount">Amount</label>
                     <input id="edit-expense-amount" type="number" name="expenseAmount"
                         value="<?php echo e($oldFormData['expenseAmount'] ??  '0'); ?>" />
@@ -31,7 +31,7 @@
                 </div>
 
                 <!-- "Comment" -->
-                <div class="input-form-box flex-conteiner">
+                <div class="input-form-box flex-container">
                     <label for="edit-comment">Comment</label>
                     <input id="edit-expense-comment" type="text" name="expenseComment"
                         placeholder="About expense..."
@@ -46,8 +46,8 @@
                 </div>
 
                 <!-- "Date"   -->
-                <div class="flex-conteiner date-category-box">
-                    <div class="input-form-box flex-conteiner">
+                <div class="flex-container date-category-box">
+                    <div class="input-form-box flex-container">
                         <label for="edit-expense-date">Date</label>
                         <input id="edit-expense-date" type="date" name="expenseDate"
                             value="<?php echo e($oldFormData['expenseDate'] ??  ''); ?>" />
@@ -58,7 +58,7 @@
                         <?php endif; ?>
                     </div>
                     <!-- "Category" -->
-                    <div class="input-form-box flex-conteiner">
+                    <div class="input-form-box flex-container">
                         <label for="edit-category">Category</label>
                         <select name="expenseCategory" id="edit-expense-category">
                             <option value="">Choose category:</option>

@@ -12,15 +12,15 @@ include $this->resolve("partials/_header.php");
 
     <!-- MAIN SECTION -->
     <main class="section-main">
-        <header class="main-header flex-conteiner">
+        <header class="main-header flex-container">
             <ion-icon class="hamburger-menu" name="menu-outline"></ion-icon>
             <p>Welcome to savings, <?php echo e($username['username']); ?>!</p>
         </header>
 
         <!-- CURRENT BALANCE SECTION -->
-        <section class="section-balance flex-conteiner">
+        <section class="section-balance flex-container">
             <div class="balance-box">
-                <div class=" flex-conteiner">
+                <div class=" flex-container">
                     <p>Your savings: <?php echo e($balance); ?></p>
                     <?php if ($balance > 0): ?>
                         <ion-icon name="thumbs-up-outline"></ion-icon>
@@ -36,7 +36,7 @@ include $this->resolve("partials/_header.php");
 
         <!-- GOALS SECTION -->
         <section class="goals-section ">
-            <div class="flex-conteiner">
+            <div class="flex-container">
                 <div class="heading-tertiary">Your goals</div>
                 <a href="/goals" class="btn--link">
                     View all →
@@ -49,7 +49,7 @@ include $this->resolve("partials/_header.php");
                             <h3 class="goal-title"><?php echo e($goal['goal_name']); ?></h3>
                         </div>
 
-                        <div class="flex-conteiner gap-1 progress-box">
+                        <div class="flex-container gap-1 progress-box">
                             <div class="progress-bar">
                                 <div class="progress-fill"
                                     style="width: <?php echo min(100, $goal['progress']); ?>%">
@@ -74,17 +74,17 @@ include $this->resolve("partials/_header.php");
                         </div>
 
                         <?php if ($goal['amount_saved'] >= $goal['amount_needed']): ?>
-                            <div class="flex-conteiner goal-achieved-box gap-1">
+                            <div class="flex-container goal-achieved-box gap-1">
                                 <ion-icon name="trophy-outline"></ion-icon>
                                 <span>Goal achieved!</span>
                             </div>
                         <?php endif; ?>
 
-                        <?php if ($goal['amount_remaind'] > 0): ?>
-                            <div class="flex-conteiner stats-box">
+                        <?php if ($goal['amount_remaining'] > 0): ?>
+                            <div class="flex-container stats-box">
                                 <ion-icon name="color-fill-outline"></ion-icon>
 
-                                <span class="goal-remaind"><?php echo e($goal['amount_remaind']); ?> zł left</span>
+                                <span class="goal-remaining"><?php echo e($goal['amount_remaining']); ?> zł left</span>
                             </div>
 
                         <?php endif; ?>
@@ -97,7 +97,7 @@ include $this->resolve("partials/_header.php");
 
         <!-- LAST TRANSACTION SECTION -->
         <section class="transaction-section ">
-            <div class="flex-conteiner">
+            <div class="flex-container">
                 <div class="heading-tertiary">Last transactions</div>
                 <a href="/balance" class="btn--link">View all →</a>
             </div>
@@ -105,13 +105,13 @@ include $this->resolve("partials/_header.php");
             <div class="grid-cols-3 gap-4 transactions-cards">
                 <!-- incomes -->
                 <div class="incomes-box">
-                    <div class="flex-conteiner">
+                    <div class="flex-container">
                         <h4>Incomes</h4>
                         <a href="/incomes" class="btn--link">View all →</a>
                     </div>
 
                     <?php foreach ($incomes as $income): ?>
-                        <div class="transaction-item flex-conteiner income-item">
+                        <div class="transaction-item flex-container income-item">
                             <div class="transaction-left">
                                 <p class="transaction-category">
                                     <?php echo e($income['name']); ?>
@@ -131,13 +131,13 @@ include $this->resolve("partials/_header.php");
                 </div>
                 <!-- expenses -->
                 <div class="expenses-box">
-                    <div class="flex-conteiner">
+                    <div class="flex-container">
                         <h4>Expenses</h4>
                         <a href="/incomes" class="btn--link">View all →</a>
                     </div>
 
                     <?php foreach ($expenses as $expense): ?>
-                        <div class="transaction-item flex-conteiner expense-item">
+                        <div class="transaction-item flex-container expense-item">
                             <div class="transaction-left">
                                 <p class="transaction-category">
                                     <?php echo e($expense['name']); ?>
@@ -157,13 +157,13 @@ include $this->resolve("partials/_header.php");
                 </div>
                 <!-- contributions -->
                 <div class="contributions-box">
-                    <div class="flex-conteiner">
+                    <div class="flex-container">
                         <h4>Contributions</h4>
                         <a href="/goals" class="btn--link">View all →</a>
                     </div>
 
                     <?php foreach ($contributions as $contribution): ?>
-                        <div class="transaction-item flex-conteiner expense-item">
+                        <div class="transaction-item flex-container expense-item">
                             <div class="transaction-left">
                                 <p class="transaction-category">
                                     <?php echo e($contribution['goal_name']); ?>

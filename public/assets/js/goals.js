@@ -278,7 +278,7 @@ const els = {
   desc: document.querySelector(".goal-description"),
   saved: document.querySelector(".goal-saved"),
   target: document.querySelector(".goal-target"),
-  remaind: document.querySelector(".goal-remaind"),
+  remaining: document.querySelector(".goal-remaining"),
   deadline: document.querySelector(".goal-deadline"),
   progress: document.querySelector(".panel-progress"),
   percent: document.querySelector(".number-progress"),
@@ -313,7 +313,7 @@ document.querySelectorAll(".goal-card").forEach((card) => {
     els.desc.textContent = d.description;
     els.saved.textContent = `${d.saved} zł`;
     els.target.textContent = `${d.target} zł`;
-    els.remaind.textContent = `${d.remaind} zł`;
+    els.remaining.textContent = `${d.remaining} zł`;
     els.deadline.textContent = d.deadline;
     els.progress.style.width = `${d.progress}%`;
     els.percent.textContent = `${d.progress}%`;

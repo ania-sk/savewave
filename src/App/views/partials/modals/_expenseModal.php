@@ -1,24 +1,24 @@
 <section id="modal-expense" class="modal-box">
     <div class="modal-content">
-        <div class="modal-header flex-conteiner">
+        <div class="modal-header flex-container">
             <span class="close">&times;</span>
             <ion-icon class="header-icon" name="remove-circle"></ion-icon>
             <p>Add expense</p>
         </div>
-        <div class="modal-body flex-conteiner">
+        <div class="modal-body flex-container">
 
             <div class="modal-expense grid-cols-2">
 
                 <!-- FORM -->
                 <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
-                <form method="post" action="/homePage/expense" class="modal-form-box flex-conteiner">
+                <form method="post" action="/homePage/expense" class="modal-form-box flex-container">
 
                     <?php include $this->resolve("partials/_csrf.php"); ?>
 
                     <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                     <input type="hidden" name="form_type" value="expense">
 
-                    <div class="input-form-box flex-conteiner">
+                    <div class="input-form-box flex-container">
                         <label for="amount">Amount</label>
                         <input
                             id="expenseAmount"
@@ -41,7 +41,7 @@
 
                     </div>
 
-                    <div class="input-form-box flex-conteiner">
+                    <div class="input-form-box flex-container">
                         <label for="comment">Comment</label>
                         <input
                             type="text"
@@ -64,7 +64,7 @@
                     </div>
 
 
-                    <div class="input-form-box flex-conteiner">
+                    <div class="input-form-box flex-container">
                         <label for="date">Date</label>
                         <input id="expenseDate" type="date" name="expenseDate" value="<?php echo e($oldFormData['expenseDate'] ?? date('Y-m-d')); ?>" />
                         <ion-icon id="date-icon" class="modal-icon" name="calendar-outline"></ion-icon>
@@ -76,7 +76,7 @@
 
                     </div>
 
-                    <div class="input-form-box flex-conteiner">
+                    <div class="input-form-box flex-container">
                         <label for="category">Category</label>
                         <select name="expenseCategory" id="expenseCategory">
                             <option value="">Choose category:</option>
@@ -109,7 +109,7 @@
                 </form>
 
                 <!-- CATEGORY LIMIT INFO -->
-                <div class="category-limit-box flex-conteiner">
+                <div class="category-limit-box flex-container">
                     <div class="limit-box hide-warning-box" id="alertLimitBox">
                         <p id="limitMessage"></p>
                     </div>

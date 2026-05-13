@@ -1,23 +1,23 @@
 <section id="modal-income" class="modal-box">
     <div class="modal-content">
-        <div class="modal-header flex-conteiner">
+        <div class="modal-header flex-container">
             <span class="close">&times;</span>
             <ion-icon class="header-icon" name="add-circle"></ion-icon>
             <p>Add income</p>
         </div>
 
-        <div class="modal-body flex-conteiner">
+        <div class="modal-body flex-container">
 
             <!-- FORM -->
             <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
-            <form method="post" action="/homePage/income" class="modal-form-box flex-conteiner">
+            <form method="post" action="/homePage/income" class="modal-form-box flex-container">
 
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
                 <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
                 <input type="hidden" name="form_type" value="income">
 
-                <div class="input-form-box flex-conteiner">
+                <div class="input-form-box flex-container">
                     <label for="amount">Amount</label>
                     <input
                         id="amount"
@@ -40,7 +40,7 @@
 
                 </div>
 
-                <div class="input-form-box flex-conteiner">
+                <div class="input-form-box flex-container">
                     <label for="comment">Comment</label>
                     <input
                         type="text"
@@ -60,8 +60,8 @@
                     <?php endif; ?>
                 </div>
 
-                <div class="flex-conteiner date-category-box">
-                    <div class="input-form-box flex-conteiner">
+                <div class="flex-container date-category-box">
+                    <div class="input-form-box flex-container">
                         <label for="date">Date</label>
                         <input id="date" type="date" name="incomeDate"
                             value="<?php echo e($oldFormData['incomeDate'] ?? date('Y-m-d')); ?>" />
@@ -72,7 +72,7 @@
                         <?php endif; ?>
                     </div>
 
-                    <div class="input-form-box flex-conteiner">
+                    <div class="input-form-box flex-container">
                         <label for="category">Category</label>
                         <select name="incomeCategory" id="incomeCategory">
                             <option value="">Choose category:</option>

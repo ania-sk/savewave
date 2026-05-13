@@ -3,9 +3,9 @@ include $this->resolve("partials/_header.php");
 ?>
 
 <body>
-    <section class="section-singup flex-conteiner">
+    <section class="section-signup flex-container">
         <div class="logo-box">
-            <a class="link flex-conteiner" href="/">
+            <a class="link flex-container" href="/">
                 <img
                     class="logo-sw"
                     src="/assets/imgs/save-wave-circle.png"
@@ -15,10 +15,10 @@ include $this->resolve("partials/_header.php");
         </div>
 
         <?php $currentUrl = e($_SERVER['REQUEST_URI']); ?>
-        <form method="post" class="singup-form-box flex-conteiner">
+        <form method="post" class="signup-form-box flex-container">
             <?php include $this->resolve('partials/_csrf.php'); ?>
             <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
-            <div class="input-box flex-conteiner">
+            <div class="input-box flex-container">
                 <label for="email">Email</label>
                 <input
                     id="email"
@@ -39,7 +39,7 @@ include $this->resolve("partials/_header.php");
             </div>
 
 
-            <div class="input-box flex-conteiner">
+            <div class="input-box flex-container">
                 <label for="username">Username</label>
                 <input
                     id="username"
@@ -57,7 +57,7 @@ include $this->resolve("partials/_header.php");
                 <?php endif; ?>
             </div>
 
-            <div class="input-box flex-conteiner">
+            <div class="input-box flex-container">
                 <label for="password">Password</label>
                 <input
                     id="password"
@@ -75,7 +75,7 @@ include $this->resolve("partials/_header.php");
                 <?php endif; ?>
             </div>
 
-            <div class="input-box flex-conteiner">
+            <div class="input-box flex-container">
                 <label for="confirm-password">Password confirmation</label>
                 <input
                     id="confirm-password"
@@ -91,11 +91,11 @@ include $this->resolve("partials/_header.php");
                         <ion-icon class="error-icon" name="alert"></ion-icon>
                     </div>
                 <?php endif; ?>
-                <button type="submit" class="btn btn--full btn--form">Sing-up</button>
+                <button type="submit" class="btn btn--full btn--form">Sign-up</button>
             </div>
         </form>
-        <div class="question-box flex-conteiner">
-            <p>Alredy have an account?</p>
+        <div class="question-box flex-container">
+            <p>Already have an account?</p>
             <a class="link" href="/login">Login</a>
         </div>
     </section>

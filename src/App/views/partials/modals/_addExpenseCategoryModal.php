@@ -1,23 +1,23 @@
 <section id="modal-add-expense-category" class="modal-box">
     <div id="expense-add-category" class="modal-content">
-        <div class="modal-header flex-conteiner">
+        <div class="modal-header flex-container">
 
             <span class="close-add-category">&times;</span>
             <ion-icon class="header-icon" name="remove-circle"></ion-icon>
             <p>Add new category</p>
         </div>
-        <div class="modal-body flex-conteiner">
+        <div class="modal-body flex-container">
 
             <?php $currentUrl = htmlspecialchars($_SERVER['REQUEST_URI']); ?>
 
             <!-- FORM -->
-            <form id="form-add-expense-category" method="post" action="/api/addNewExpenseCategory" class="modal-form-box flex-conteiner">
+            <form id="form-add-expense-category" method="post" action="/api/addNewExpenseCategory" class="modal-form-box flex-container">
 
                 <?php include $this->resolve("partials/_csrf.php"); ?>
 
                 <input type="hidden" name="redirect_to" value="<?= $currentUrl; ?>">
 
-                <div class="input-form-box flex-conteiner">
+                <div class="input-form-box flex-container">
                     <label for="newExpenseCategoryName">New category</label>
                     <input type="text" id="newExpenseCategoryName" name="newCategoryName" value="<?php echo e($oldFormData['newCategoryName'] ?? ''); ?>" placeholder="Insert new category name">
                     <ion-icon

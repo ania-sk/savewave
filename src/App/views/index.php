@@ -1,9 +1,9 @@
 <?php include $this->resolve("partials/_header.php"); ?>
 
 <body>
-    <header class="header flex-conteiner">
+    <header class="header flex-container">
         <div class="logo-box">
-            <a class="link flex-conteiner" href="/">
+            <a class="link flex-container" href="/">
                 <img
                     class="logo-sw"
                     src="/assets/imgs/save-wave-circle.png"
@@ -13,9 +13,9 @@
         </div>
         <!-- NAVIGATION -->
         <nav class="header-nav">
-            <div class="btn-box flex-conteiner">
+            <div class="btn-box flex-container">
                 <a href="/login" class="btn">Login</a>
-                <a href="/register" class="btn btn--full">Sing-up</a>
+                <a href="/register" class="btn btn--full">Sign-up</a>
             </div>
         </nav>
 
@@ -28,10 +28,10 @@
     <main>
         <!-- HERO SECTION -->
         <section class="section-hero grid-cols-2 mrg-bottom">
-            <div class="hero-img-box flex-conteiner">
+            <div class="hero-img-box flex-container">
                 <img class="hero-img" src="/assets/imgs/hero.png" alt="" />
             </div>
-            <div class="hero-text-box flex-conteiner">
+            <div class="hero-text-box flex-container">
                 <h1 class="heading">
                     Wave Goodbye to Worries,<br />
                     Save Money for What Matters!
@@ -40,9 +40,9 @@
                     SaveWave is the app for those riding the wave of savings.
                 </p>
 
-                <div class="btn-box flex-conteiner">
+                <div class="btn-box flex-container">
                     <a href="/login" class="btn">Login</a>
-                    <a href="/register" class="btn btn--full">Sing-up</a>
+                    <a href="/register" class="btn btn--full">Sign-up</a>
                 </div>
             </div>
         </section>
@@ -53,7 +53,7 @@
                 Saving has never been this easy and fun!
             </h2>
             <div class="features-box">
-                <div class="feature-box flex-conteiner">
+                <div class="feature-box flex-container">
                     <img
                         src="/assets/imgs/illustrations/track.png"
                         alt=""
@@ -61,7 +61,7 @@
                     <p class="feature-text">Track your expenses and incomes</p>
                 </div>
 
-                <div class="feature-box flex-conteiner">
+                <div class="feature-box flex-container">
                     <p class="feature-text">Compare balances over time</p>
                     <img
                         src="/assets/imgs/illustrations/compare.png"
@@ -69,7 +69,7 @@
                         class="feature-img" />
                 </div>
 
-                <div class="feature-box flex-conteiner">
+                <div class="feature-box flex-container">
                     <img
                         src="/assets/imgs/illustrations/cours.png"
                         alt=""
