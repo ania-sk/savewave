@@ -9,7 +9,8 @@ use App\Services\{
     UserService,
     TransactionService,
     CategoryService,
-    GoalService
+    GoalService,
+    OcrService
 };
 
 return [
@@ -44,5 +45,10 @@ return [
         $db = $container->get(Database::class);
 
         return new GoalService($db);
+    },
+    OcrService::class => function (Container $container) {
+        $categoryService = $container->get(CategoryService::class);
+
+        return new OcrService($categoryService);
     }
 ];

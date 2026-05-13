@@ -5,9 +5,14 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use Framework\TemplateEngine;
-use App\Services\{TransactionService, CategoryService, ValidatorService};
+use App\Services\{
+    TransactionService,
+    CategoryService,
+    ValidatorService,
+    OcrService
+};
 use Framework\Exceptions\ValidationException;
-use thiagoalessio\TesseractOCR\TesseractOCR;
+
 
 class ExpensesController
 {
@@ -15,7 +20,8 @@ class ExpensesController
         private TemplateEngine $view,
         private TransactionService $transactionService,
         private CategoryService $categoryService,
-        private ValidatorService $validatorService
+        private ValidatorService $validatorService,
+        private OcrService $ocrService
     ) {}
 
     public function expenses()
@@ -101,41 +107,32 @@ class ExpensesController
 
     public function uploadReceipt()
     {
-        $userId = (int)$_SESSION['user'];
-        if ($userId === 0) {
-            header('Content-Type: application/json');
-            echo json_encode(['error' => 'Unauthorized']);
-            exit;
-        }
-
+        $userId = (int)$_SESSION['user'] ?? 0;
         $file = $_FILES['receipt'] ?? null;
 
         if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
             header('Content-Type: application/json');
-            echo json_encode(['error' => 'Błąd przesyłania pliku.']);
+            echo json_encode(['status' => 'error', 'message' => 'Błąd pliku.']);
             exit;
         }
 
         try {
-            // Tesseract odczyta tekst bezpośrednio z folderu tymczasowego PHP
-            $ocr = new TesseractOCR($file['tmp_name']);
-            $ocr->lang('pol');
+            $ocrData = $this->ocrService->processReceipt($file['tmp_name'], $userId);
 
-            // Jeśli Tesseract nie jest w PATH na serwerze (DigitalOcean), odkomentuj:
-            // $ocr->executable('/usr/bin/tesseract'); 
-
-            $text = $ocr->run();
-
+            header('Content-Type: application/json');
             echo json_encode([
                 'status' => 'success',
-                'text' => $text
+                'text' => $ocrData['raw_text'],
+                'extracted' => [
+                    'amount' => $ocrData['amount'],
+                    'date' => $ocrData['date'],
+                    'categoryId' => $ocrData['category_id']
+                ]
             ]);
         } catch (\Exception $e) {
-            echo json_encode([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
+            header('Content-Type: application/json');
+            echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
         }
-        exit; // Przerywamy, aby nie wyrenderować reszty widoku
+        exit;
     }
 }

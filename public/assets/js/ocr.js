@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       console.log("OCR RESULT:", response.text);
 
+      console.log("EXTRACTED DATA:", response.extracted);
       // here
       // open modal
       // parse categories

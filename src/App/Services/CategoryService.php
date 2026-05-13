@@ -75,6 +75,22 @@ class CategoryService
         return $this->db->fetchAll();
     }
 
+    public function getExpenseCategoryIdByName(int $userId, string $categoryName): ?int
+    {
+        $category = $this->db->query(
+            "SELECT id 
+            FROM expenses_category_assigned_to_users 
+            WHERE user_id = :user_id 
+            AND LOWER(name) = LOWER(:name)",
+            [
+                'user_id' => $userId,
+                'name' => $categoryName
+            ]
+        )->find();
+
+        return $category ? (int) $category['id'] : 0;
+    }
+
     public function createUserIncomeCategory(array $formData, int $userId)
     {
         $newCategoryName = $this->normalizeCategoryName($formData['newCategoryName'] ?? '');
