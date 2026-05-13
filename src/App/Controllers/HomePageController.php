@@ -11,7 +11,13 @@ use App\Config\Paths;
 class HomePageController
 {
 
-    public function __construct(private TemplateEngine $view, private CategoryService $categoryService, private UserService $userService, private GoalService $goalService, private TransactionService $transactionService) {}
+    public function __construct(
+        private TemplateEngine $view,
+        private CategoryService $categoryService,
+        private UserService $userService,
+        private GoalService $goalService,
+        private TransactionService $transactionService
+    ) {}
 
     public function homePage()
     {

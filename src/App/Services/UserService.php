@@ -96,7 +96,7 @@ class UserService
 
     public function getUsername(int $userId)
     {
-        return $username = $this->db->query(
+        return  $this->db->query(
             "SELECT username FROM users WHERE id = :id",
             [
                 'id' => $userId
@@ -106,7 +106,7 @@ class UserService
 
     public function getUserEmail(int $userId)
     {
-        return $email = $this->db->query(
+        return $this->db->query(
             "SELECT email FROM users WHERE id = :id",
             [
                 'id' => $userId

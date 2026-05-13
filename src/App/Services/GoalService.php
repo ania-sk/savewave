@@ -252,41 +252,6 @@ class GoalService
         );
     }
 
-    // public function getUserGoal(string $id)
-    // {
-    //     return $this->db->query(
-    //         "SELECT *, DATE_FORMAT(deadline, '%Y-%m-%d') as formatted_date
-    //         FROM goals
-    //         WHERE id = :id AND user_id = :user_id",
-    //         [
-    //             'id' => $id,
-    //             'user_id' => $_SESSION['user']
-    //         ]
-    //     )->find();
-    // }
-
-    // public function updateGoal(array $formData, int $id)
-    // {
-    //     $formattedDate = "{$formData['deadline']} 00:00:00";
-
-    //     $this->db->query(
-    //         "UPDATE goals 
-    //         SET goal_name = :goal_name,
-    //         amount_needed = :amount_needed,
-    //         goal_description = :goal_description,
-    //         deadline = :deadline
-    //         WHERE id = :id AND user_id = :user_id",
-    //         [
-    //             'user_id' => $_SESSION['user'],
-    //             'id' => $id,
-    //             'goal_name' => $formData['goalName'],
-    //             'amount_needed' => $formData['goalAmount'],
-    //             'goal_description' => $formData['goalDescription'],
-    //             'deadline' => $formattedDate
-    //         ]
-    //     );
-    // }
-
     private function normalizeGoalName(string $name): string
     {
         $clean = preg_replace('/\s+/', ' ', trim($name));

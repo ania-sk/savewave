@@ -133,7 +133,7 @@ include $this->resolve("partials/_header.php");
                 <div class="expenses-box">
                     <div class="flex-container">
                         <h4>Expenses</h4>
-                        <a href="/incomes" class="btn--link">View all →</a>
+                        <a href="/expenses" class="btn--link">View all →</a>
                     </div>
 
                     <?php foreach ($expenses as $expense): ?>

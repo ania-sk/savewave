@@ -7,7 +7,7 @@ namespace App\Controllers;
 use App\Services\{CategoryService, GoalService, TransactionService};
 use Framework\TemplateEngine;
 
-class   BalanceController
+class BalanceController
 {
     public function __construct(
         private TemplateEngine $view,
