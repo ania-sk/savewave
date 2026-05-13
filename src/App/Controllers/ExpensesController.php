@@ -7,6 +7,7 @@ namespace App\Controllers;
 use Framework\TemplateEngine;
 use App\Services\{TransactionService, CategoryService, ValidatorService};
 use Framework\Exceptions\ValidationException;
+use thiagoalessio\TesseractOCR\TesseractOCR;
 
 class ExpensesController
 {
@@ -54,6 +55,7 @@ class ExpensesController
             'cssLink' => 'expenses.css',
             'cssLink2' => 'main.css',
             'jsLink' => 'expenses.js',
+            'jsLink2' => 'ocr.js',
             'expenses' => $expenses,
             'incomeCategories' => $incomeCategories,
             'expenseCategories' => $expenseCategories,
@@ -95,5 +97,45 @@ class ExpensesController
         $this->transactionService->deleteExpense($expenseId, $userId);
 
         redirectTo('/expenses');
+    }
+
+    public function uploadReceipt()
+    {
+        $userId = (int)$_SESSION['user'];
+        if ($userId === 0) {
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'Unauthorized']);
+            exit;
+        }
+
+        $file = $_FILES['receipt'] ?? null;
+
+        if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'Błąd przesyłania pliku.']);
+            exit;
+        }
+
+        try {
+            // Tesseract odczyta tekst bezpośrednio z folderu tymczasowego PHP
+            $ocr = new TesseractOCR($file['tmp_name']);
+            $ocr->lang('pol');
+
+            // Jeśli Tesseract nie jest w PATH na serwerze (DigitalOcean), odkomentuj:
+            // $ocr->executable('/usr/bin/tesseract'); 
+
+            $text = $ocr->run();
+
+            echo json_encode([
+                'status' => 'success',
+                'text' => $text
+            ]);
+        } catch (\Exception $e) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+        exit; // Przerywamy, aby nie wyrenderować reszty widoku
     }
 }

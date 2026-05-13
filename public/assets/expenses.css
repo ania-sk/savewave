@@ -190,7 +190,251 @@
 #modal-edit-expense {
   display: none;
 }
+/* ===========================
+  OCR SECTION
+=========================== */
+/* =========================================
+   OCR RECEIPT CARD
+========================================= */
 
+.receipt-ocr-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid #edf2f7;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* HEADER */
+
+.receipt-ocr-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.receipt-ocr-title-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.receipt-ocr-icon {
+  font-size: 3rem;
+  color: #0d7c66;
+
+  background: #e7f2f0;
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.receipt-ocr-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+.receipt-ocr-subtitle {
+  font-size: 1.4rem;
+  color: #666;
+}
+
+/* FORM */
+
+.receipt-ocr-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* BUTTON */
+
+.btn--ocr-upload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: fit-content;
+
+  padding: 14px 22px;
+
+  background: #0d7c66;
+  color: white;
+
+  border-radius: 14px;
+
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn--ocr-upload:hover {
+  background: #0a6855;
+  transform: translateY(-1px);
+}
+
+/* LOADER */
+
+.ocr-loader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  background: #f7f9fb;
+  border-radius: 16px;
+  padding: 16px 18px;
+}
+
+.ocr-loader-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ocr-loader-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.ocr-loader-subtitle {
+  font-size: 1.2rem;
+  color: #777;
+}
+
+/* SPINNER */
+
+.spinner {
+  width: 24px;
+  height: 24px;
+
+  border: 3px solid #d9e2ec;
+  border-top-color: #0d7c66;
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* STATUS */
+
+.ocr-status {
+  padding: 14px 16px;
+  border-radius: 14px;
+
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.ocr-status.success {
+  background: #e7f7ef;
+  color: #15803d;
+}
+
+.ocr-status.error {
+  background: #fef2f2;
+  color: #cf0b01;
+}
+
+/* HELPERS */
+
+.hidden {
+  display: none;
+}
+
+/* =========================================
+   OCR INFO TOOLTIP
+========================================= */
+
+.ocr-info-tooltip {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ocr-info-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 4rem;
+  height: 4rem;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #f4f7fa;
+  color: #0d7c66;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.ocr-info-btn ion-icon {
+  font-size: 2.2rem;
+}
+
+.ocr-info-btn:hover {
+  background: #e7f2f0;
+  transform: translateY(-1px);
+}
+
+/* TOOLTIP BOX */
+
+.ocr-tooltip-box {
+  position: absolute;
+
+  top: calc(100% + 1.2rem);
+  right: 0;
+
+  width: 30rem;
+
+  padding: 1.6rem;
+
+  background: #fff;
+
+  border-radius: 1.6rem;
+
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+
+  border: 1px solid #edf2f7;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+
+  transition: all 0.2s ease;
+
+  z-index: 10;
+}
+
+.ocr-tooltip-box p {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+/* HOVER DESKTOP */
+
+.ocr-info-tooltip:hover .ocr-tooltip-box {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
 /* ===========================
   MEDIA
 =========================== */
@@ -198,6 +442,10 @@
 @media (max-width: 1024px) {
 }
 @media (max-width: 768px) {
+  .ocr-tooltip-box {
+    width: 26rem;
+    right: -1rem;
+  }
 }
 @media (max-width: 430px) {
   .expense-heading {
@@ -244,5 +492,112 @@
   .table-expense th:nth-child(7),
   .table-expense td:nth-child(7) {
     width: 15%;
+  }
+  /* OCR SECTION MOBILE */
+
+  .receipt-ocr-card {
+    margin-top: 8rem;
+    padding: 1.6rem;
+    border-radius: 1.8rem;
+    gap: 1.8rem;
+  }
+
+  /* HEADER */
+
+  .receipt-ocr-header {
+    position: relative;
+
+    display: flex;
+    align-items: flex-start;
+
+    width: 100%;
+  }
+
+  /* TITLE SECTION */
+
+  .receipt-ocr-title-box {
+    width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 1.2rem;
+
+    padding-right: 5rem; /* miejsce dla ikonki info */
+  }
+
+  /* CAMERA ICON */
+
+  .receipt-ocr-icon {
+    flex-shrink: 0;
+    border-radius: 1.2rem;
+  }
+
+  /* TEXT CONTENT */
+
+  .receipt-ocr-title-box div {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .receipt-ocr-title {
+    width: 100%;
+
+    font-size: 1.7rem;
+    line-height: 1.3;
+
+    word-break: break-word;
+  }
+
+  .receipt-ocr-subtitle {
+    width: 100%;
+
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+
+  /* INFO ICON TOP RIGHT */
+
+  .ocr-info-tooltip {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    flex-shrink: 0;
+  }
+
+  .ocr-info-btn {
+    width: 3.4rem;
+    height: 3.4rem;
+  }
+
+  .ocr-info-btn ion-icon {
+    font-size: 1.9rem;
+  }
+  .ocr-info-btn ion-icon {
+    font-size: 2rem;
+  }
+
+  .ocr-tooltip-box {
+    right: 0;
+
+    width: 22rem;
+
+    max-width: calc(100vw - 4rem);
+  }
+
+  .ocr-tooltip-box p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+
+  /* MOBILE TOUCH SUPPORT */
+
+  .ocr-info-tooltip:active .ocr-tooltip-box,
+  .ocr-info-tooltip:focus-within .ocr-tooltip-box {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 }

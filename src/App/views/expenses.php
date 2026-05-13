@@ -22,8 +22,86 @@ include $this->resolve("partials/_header.php");
                     name="remove-circle"></ion-icon>
             </button>
         </div>
+
+        <!-- OCR RECEIPT SECTION -->
+        <section class="receipt-ocr-card">
+
+            <!-- HEADER -->
+            <div class="receipt-ocr-header">
+
+                <div class="receipt-ocr-title-box">
+                    <ion-icon name="camera-outline" class="receipt-ocr-icon"></ion-icon>
+
+                    <div>
+                        <h3 class="receipt-ocr-title">Scanning a receipt</h3>
+                        <p class="receipt-ocr-subtitle">
+                            Automatic expense recognition with OCR
+                        </p>
+                    </div>
+                </div>
+                <!-- INFO TOOLTIP -->
+                <div class="ocr-info-tooltip">
+
+                    <button
+                        type="button"
+                        class="ocr-info-btn"
+                        aria-label="Instrukcja skanowania paragonu">
+                        <ion-icon name="information-circle-outline"></ion-icon>
+                    </button>
+
+                    <div class="ocr-tooltip-box">
+                        <p>
+                            Click the "Add Receipt" button, select a receipt image,
+                            and SaveWave will automatically read the expenses and prepare the data
+                            for adding.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- FORM -->
+            <form id="ocr-form" class="receipt-ocr-form">
+                <?php include $this->resolve("partials/_csrf.php"); ?>
+
+                <input
+                    type="file"
+                    id="receipt-upload"
+                    name="receipt"
+                    accept="image/*"
+                    hidden />
+
+                <canvas id="resize-canvas" hidden></canvas>
+
+                <!-- ACTION -->
+                <label for="receipt-upload" class="btn btn--ocr-upload">
+                    <ion-icon name="cloud-upload-outline"></ion-icon>
+                    Add Receipt
+                </label>
+
+                <!-- LOADER -->
+                <div id="ocr-loader" class="ocr-loader hidden">
+                    <div class="spinner"></div>
+
+                    <div class="ocr-loader-content">
+                        <p id="ocr-loader-text" class="ocr-loader-title">
+                            Trwa analiza paragonu...
+                        </p>
+
+                        <span class="ocr-loader-subtitle">
+                            To może potrwać kilka sekund
+                        </span>
+                    </div>
+                </div>
+
+                <!-- STATUS -->
+                <div id="ocr-status" class="ocr-status hidden"></div>
+            </form>
+        </section>
+
+        <div id="status"></div>
         <!-- DATE FILTER -->
-        <div class="flex-container">
+        <section class="flex-container">
             <form method="get" action="/expenses" class="date-filter date-form-box">
                 <div class="">
                     <label for="start_date">From</label>
@@ -38,7 +116,7 @@ include $this->resolve("partials/_header.php");
                 <button type="submit" class="btn btn--form">Find</button>
                 <a href="/expenses" class="btn btn--link btn--clean">Clean filter</a>
             </form>
-        </div>
+        </section>
 
         <!-- EXPENSES CHART -->
         <section class="section-chart">

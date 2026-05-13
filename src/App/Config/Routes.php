@@ -72,4 +72,5 @@ function registerRoutes(App $app)
     $app->get('/api/checkCategoryLimit', [CategoryController::class, 'checkCategoryLimit'])->add(AuthRequiredMiddleware::class);
     $app->post('/api/addNewIncomeCategory', [CategoryController::class, 'addNewIncomeCategoryAjax'])->add(AuthRequiredMiddleware::class);
     $app->post('/api/addNewExpenseCategory', [CategoryController::class, 'addNewExpenseCategoryAjax'])->add(AuthRequiredMiddleware::class);
+    $app->post('/uploadRecipe', [ExpensesController::class, 'uploadReceipt'])->add(AuthRequiredMiddleware::class);
 }

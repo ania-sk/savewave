@@ -8,7 +8,8 @@
   "autoload": {
     "psr-4": {
       "Framework\\": "src/Framework",
-      "App\\": "src/App"
+      "App\\": "src/App",
+      "thiagoalessio\\TesseractOCR\\": "vendor/thiagoalessio/tesseract-ocr-php/src"
     },
     "files": [
       "src/App/Config/Routes.php",
