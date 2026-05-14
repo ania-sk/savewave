@@ -36,7 +36,7 @@ include $this->resolve("partials/_header.php");
         <!-- BALANCE -->
         <section class="section-balance">
             <div class="balance-box flex-container">
-                <p>Your savings: <?php echo e($balance); ?></p>
+                <p>Your savings: <?php echo e(number_format((float)$balance, 2, '.', '')); ?></p>
                 <?php if ($balance > 0): ?>
                     <ion-icon name="thumbs-up-outline"></ion-icon>
                 <?php else: ?>
@@ -52,7 +52,7 @@ include $this->resolve("partials/_header.php");
                     <p>Incomes</p>
                 </div>
                 <div class="total-box flex-container">
-                    <p>Total: <?php echo e($totalIncome); ?></p>
+                    <p>Total: <?php echo e(number_format((float)$totalIncome, 2, '.', '')); ?></p>
                     <ion-icon name="trending-up-outline"></ion-icon>
 
                 </div>
@@ -71,7 +71,7 @@ include $this->resolve("partials/_header.php");
                     <p>Expenses</p>
                 </div>
                 <div class="total-box flex-container">
-                    <p>Total: <?php echo e($totalExpense); ?></p>
+                    <p>Total: <?php echo e(number_format((float)$totalExpense, 2, '.', '')); ?></p>
                     <ion-icon name="trending-down-outline"></ion-icon>
 
                 </div>
@@ -91,7 +91,7 @@ include $this->resolve("partials/_header.php");
                     <p>Contributions</p>
                 </div>
                 <div class="total-box flex-container">
-                    <p>Total: <?php echo e($totalContributions); ?></p>
+                    <p>Total: <?php echo e(number_format((float)$totalContributions, 2, '.', '')); ?></p>
                     <i class="ph-fill ph-hand-coins"></i>
 
                 </div>
@@ -127,7 +127,7 @@ include $this->resolve("partials/_header.php");
                     <?php foreach ($transactions as $transaction): ?>
                         <tr>
                             <td data-label="No."><?php echo e($i); ?>.</td>
-                            <td data-label="Amount"><?php echo e($transaction['amount']); ?></td>
+                            <td data-label="Amount"><?php echo e(number_format((float)$transaction['amount'], 2, '.', '')); ?></td>
                             <td data-label="Type"><?php echo e($transaction['type']); ?></td>
                             <td data-label="Category"><?php echo e($transaction['category']); ?> <?php if ($transaction['type'] === "Expense" && $transaction['monthly_limit'] !== null && $transaction['monthly_limit'] != 0) : ?>
                                     <span class="limit-label"><?= e((int)$transaction['monthly_limit']) ?></span>

@@ -21,7 +21,7 @@ include $this->resolve("partials/_header.php");
         <section class="section-balance flex-container">
             <div class="balance-box">
                 <div class=" flex-container">
-                    <p>Your savings: <?php echo e($balance); ?></p>
+                    <p>Your savings: <?php echo e(number_format((float)$balance, 2, '.', '')); ?></p>
                     <?php if ($balance > 0): ?>
                         <ion-icon name="thumbs-up-outline"></ion-icon>
                     <?php else: ?>
@@ -29,7 +29,7 @@ include $this->resolve("partials/_header.php");
                     <?php endif; ?>
                 </div>
                 <div class="mini-stats">
-                    <p>+<?php echo e($incomeSum); ?> zł / -<?php echo e($expenseSum); ?> zł</p>
+                    <p>+<?php echo e(number_format((float)$incomeSum, 2, '.', '')); ?> zł / -<?php echo e(number_format((float)$expenseSum, 2, '.', '')); ?> zł</p>
                 </div>
             </div>
         </section>
@@ -63,8 +63,8 @@ include $this->resolve("partials/_header.php");
                         <div class="grid-rows-2 goal-data-box">
                             <p class="amount">
                                 <ion-icon name="ribbon-outline"></ion-icon>
-                                <?php echo e($goal['amount_saved']); ?> /
-                                <?php echo e($goal['amount_needed']); ?> zł
+                                <?php echo e(number_format((float)$goal['amount_saved'], 2, '.', '')); ?> /
+                                <?php echo e(number_format((float)$goal['amount_needed'], 2, '.', '')); ?> zł
                             </p>
 
                             <p class="deadline">
@@ -84,7 +84,7 @@ include $this->resolve("partials/_header.php");
                             <div class="flex-container stats-box">
                                 <ion-icon name="color-fill-outline"></ion-icon>
 
-                                <span class="goal-remaining"><?php echo e($goal['amount_remaining']); ?> zł left</span>
+                                <span class="goal-remaining"><?php echo e(number_format((float)$goal['amount_remaining'], 2, '.', '')); ?> zł left</span>
                             </div>
 
                         <?php endif; ?>
@@ -123,7 +123,7 @@ include $this->resolve("partials/_header.php");
 
                             <div class="transaction-right">
                                 <p class="transaction-amount positive">
-                                    +<?php echo e($income['amount']); ?> zł
+                                    +<?php echo e(number_format((float)$income['amount'], 2, '.', '')); ?> zł
                                 </p>
                             </div>
                         </div>
@@ -149,7 +149,7 @@ include $this->resolve("partials/_header.php");
 
                             <div class="transaction-right">
                                 <p class="transaction-amount negative">
-                                    -<?php echo e($expense['amount']); ?> zł
+                                    -<?php echo e(number_format((float)$expense['amount'], 2, '.', '')); ?> zł
                                 </p>
                             </div>
                         </div>
@@ -175,7 +175,7 @@ include $this->resolve("partials/_header.php");
 
                             <div class="transaction-right">
                                 <p class="transaction-amount">
-                                    <?php echo e($contribution['amount']); ?> zł
+                                    <?php echo e(number_format((float)$contribution['amount'], 2, '.', '')); ?> zł
                                 </p>
                             </div>
                         </div>

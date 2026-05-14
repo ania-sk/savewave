@@ -31,7 +31,7 @@ include $this->resolve("partials/_header.php");
         <!-- BALANCE -->
         <section class="section-balance flex-container mrg-bottom ">
             <div class="balance-box flex-container">
-                <p>Your savings: <?php echo e($balance); ?></p>
+                <p>Your savings: <?php echo e(number_format((float)$balance, 2, '.', '')); ?></p>
                 <?php if ($balance > 0): ?>
                     <ion-icon name="thumbs-up-outline"></ion-icon>
                 <?php else: ?>
@@ -104,8 +104,8 @@ include $this->resolve("partials/_header.php");
 
                             <p class="amount">
                                 <ion-icon name="ribbon-outline"></ion-icon>
-                                <?php echo e($goal['amount_saved']); ?> /
-                                <?php echo e($goal['amount_needed']); ?> zł
+                                <?php echo e(number_format((float)$goal['amount_saved'], 2, '.', '')); ?> /
+                                <?php echo e(number_format((float)$goal['amount_needed'], 2, '.', '')); ?> zł
                             </p>
 
                             <p class="deadline">
