@@ -16,7 +16,8 @@ use App\Controllers\{
     CategoryController,
     SettingsController,
     BalanceController,
-    GoalsController
+    GoalsController,
+    PrivacyPolicyController
 };
 use App\Middleware\{AuthRequiredMiddleware, GuestOnlyMiddleware};
 
@@ -73,4 +74,5 @@ function registerRoutes(App $app)
     $app->post('/api/addNewIncomeCategory', [CategoryController::class, 'addNewIncomeCategoryAjax'])->add(AuthRequiredMiddleware::class);
     $app->post('/api/addNewExpenseCategory', [CategoryController::class, 'addNewExpenseCategoryAjax'])->add(AuthRequiredMiddleware::class);
     $app->post('/uploadRecipe', [ExpensesController::class, 'uploadReceipt'])->add(AuthRequiredMiddleware::class);
+    $app->get('/privacy-policy', [PrivacyPolicyController::class, 'privacyPolicy']);
 }

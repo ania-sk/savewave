@@ -1,0 +1,74 @@
+.header {
+  background-color: #ebe1f8;
+  justify-content: space-between;
+  padding: 0.4rem 2.4rem;
+  box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
+  z-index: 999;
+  position: fixed;
+  width: 100vw;
+}
+
+.logo-box .link {
+  gap: 1.2rem;
+}
+
+.logo-box {
+  margin-right: auto;
+}
+
+.btn-box {
+  margin-right: 2.4rem;
+}
+
+.container-privacy {
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: 20rem 2.4rem;
+}
+
+.section-privacy {
+  background-color: #fff;
+  padding: 4rem;
+  border-radius: 12px;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.05);
+}
+
+.last-update {
+  text-align: center;
+  font-size: 1.4rem;
+  color: #6c6279;
+  margin-bottom: 4.8rem;
+}
+
+.privacy-content {
+  line-height: 1.6;
+  color: #444;
+}
+
+.privacy-content p {
+  margin-bottom: 2.4rem;
+}
+
+.sub-heading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0d7c66;
+  margin: 2.4rem 0 1.2rem 0;
+}
+
+.privacy-list {
+  margin-bottom: 2.4rem;
+  padding-left: 3.2rem;
+}
+
+.privacy-list li {
+  margin-bottom: 0.8rem;
+}
+
+.heading-tertiary {
+  text-align: left !important;
+  padding: 3.2rem 0 1.6rem 0 !important;
+  border-bottom: 1px solid #ebe1f8;
+  margin-bottom: 2.4rem;
+  color: #333;
+}
