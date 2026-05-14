@@ -137,5 +137,48 @@ class UserService
         DELETE FROM users WHERE id = :id", [
             'id' => $id
         ]);
+        $this->logout();
+    }
+
+    public function getFullUserData(int $userId): array
+    {
+        return [
+            'user_info' => $this->db->query(
+                "SELECT username, email, created_at FROM users WHERE id = :id",
+                ['id' => $userId]
+            )->find(),
+            'transactions' => [
+                'incomes' => $this->db->query(
+                    "SELECT amount, date_of_income AS date, income_comment AS description
+                 FROM incomes
+                 WHERE user_id = :id",
+                    ['id' => $userId]
+                )->fetchAll(),
+                'expenses' => $this->db->query(
+                    "SELECT amount, date_of_expense AS date, expense_comment AS description
+                 FROM expenses
+                 WHERE user_id = :id",
+                    ['id' => $userId]
+                )->fetchAll(),
+                'contributions' => $this->db->query(
+                    "SELECT gc.amount, gc.contribution_date AS date, g.goal_name
+                    FROM goal_contributions gc
+                    JOIN goals g ON gc.goal_id = g.id
+                    WHERE gc.user_id = :id",
+                    ['id' => $userId]
+                )->fetchAll(),
+            ],
+            'goals' => $this->db->query(
+                "SELECT g.goal_name AS name,
+                    g.amount_needed AS target_amount,
+                    COALESCE(SUM(gc.amount), 0) AS current_amount,
+                    g.created_at
+             FROM goals g
+             LEFT JOIN goal_contributions gc ON gc.goal_id = g.id
+             WHERE g.user_id = :id
+             GROUP BY g.id",
+                ['id' => $userId]
+            )->fetchAll()
+        ];
     }
 }

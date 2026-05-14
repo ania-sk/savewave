@@ -124,4 +124,32 @@ class SettingsController
 
         redirectTo('/');
     }
+
+    public function exportData()
+    {
+        $userId = (int)$_SESSION['user'];
+
+        $userData = $this->userService->getFullUserData($userId);
+
+        $export = [
+            'export_info' => [
+                'app' => 'SaveWave',
+                'export_date' => date('Y-m-d H:i:s'),
+            ],
+            'data' => $userData
+        ];
+
+        $jsonContent = json_encode($export, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
+
+        header('Content-Type: application/json');
+        header('Content-Disposition: attachment; filename="savewave_data_' . date('Y-m-d') . '.json"');
+
+        header('Cache-Control: no-cache, no-store, must-revalidate');
+        header('Pragma: no-cache');
+        header('Expires: 0');
+
+        echo $jsonContent;
+        exit;
+    }
 }

@@ -60,15 +60,16 @@ function registerRoutes(App $app)
     $app->post('/contributions/update', [GoalsController::class, 'updateContribution'])->add(AuthRequiredMiddleware::class);
     $app->delete('/contributions/{contribution}', [GoalsController::class, 'deleteContribution'])->add(AuthRequiredMiddleware::class);
 
-    $app->post('/settings/email/update', [SettingsController::class, 'updateEmail'])->add(AuthRequiredMiddleware::class);;
-    $app->post('/settings/update/username', [SettingsController::class, 'updateUsername'])->add(AuthRequiredMiddleware::class);;
-    $app->post('/settings/update/password', [SettingsController::class, 'updatePassword'])->add(AuthRequiredMiddleware::class);;
-    $app->post('/settings/deleteAccount', [SettingsController::class, 'deleteAccount'])->add(AuthRequiredMiddleware::class);;
+    $app->post('/settings/email/update', [SettingsController::class, 'updateEmail'])->add(AuthRequiredMiddleware::class);
+    $app->post('/settings/update/username', [SettingsController::class, 'updateUsername'])->add(AuthRequiredMiddleware::class);
+    $app->post('/settings/update/password', [SettingsController::class, 'updatePassword'])->add(AuthRequiredMiddleware::class);
+    $app->post('/settings/exportData', [SettingsController::class, 'exportData'])->add(AuthRequiredMiddleware::class);
+    $app->post('/settings/deleteAccount', [SettingsController::class, 'deleteAccount'])->add(AuthRequiredMiddleware::class);
 
-    $app->get('/settings/{category}', [CategoryController::class, 'editCategory'])->add(AuthRequiredMiddleware::class);;
-    $app->post('/settings/{category}', [CategoryController::class, 'updateCategory'])->add(AuthRequiredMiddleware::class);;
+    $app->get('/settings/{category}', [CategoryController::class, 'editCategory'])->add(AuthRequiredMiddleware::class);
+    $app->post('/settings/{category}', [CategoryController::class, 'updateCategory'])->add(AuthRequiredMiddleware::class);
     $app->post('/settings/{category}/limit', [CategoryController::class, 'addCategoryLimit'])->add(AuthRequiredMiddleware::class);
-    $app->post('/settings/{category}/delete', [CategoryController::class, 'deleteCategory'])->add(AuthRequiredMiddleware::class);;
+    $app->post('/settings/{category}/delete', [CategoryController::class, 'deleteCategory'])->add(AuthRequiredMiddleware::class);
 
     $app->get('/api/checkCategoryLimit', [CategoryController::class, 'checkCategoryLimit'])->add(AuthRequiredMiddleware::class);
     $app->post('/api/addNewIncomeCategory', [CategoryController::class, 'addNewIncomeCategoryAjax'])->add(AuthRequiredMiddleware::class);

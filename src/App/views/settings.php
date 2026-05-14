@@ -259,6 +259,22 @@ $currentUrl = e($_SERVER['REQUEST_URI']);
                     </form>
                 </div>
 
+                <section class="account-form flex-container">
+                    <h2 class="settings-heading">Data Management</h2>
+                    <div class="account-details-container account-edit-section">
+                        <h3 class="sub-heading">Export Your Data</h3>
+                        <p class="settings-description">
+                            You can download a copy of all your transactions, goals, and profile information in a structured JSON format at any time.
+                        </p>
+                        <form action="/settings/exportData" method="post">
+                            <?php include $this->resolve("partials/_csrf.php"); ?>
+                            <button type="submit" class="btn btn--full btn--set">
+                                Download My Data (.json)
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
                 <!-- delete account -->
                 <div class="account-delete">
                     <p>Danger Zone</p>
