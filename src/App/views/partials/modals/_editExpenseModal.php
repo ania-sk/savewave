@@ -19,8 +19,8 @@
                 <!-- "Amount" -->
                 <div class="input-form-box flex-container">
                     <label for="edit-amount">Amount</label>
-                    <input id="edit-expense-amount" type="number" name="expenseAmount"
-                        value="<?php echo e($oldFormData['expenseAmount'] ??  '0'); ?>" />
+                    <input id="edit-expense-amount" type="number" name="expenseAmount" step="any" min="0.01
+                        value=" <?php echo e($oldFormData['expenseAmount'] ??  '0'); ?>" />
                     <ion-icon id="cash-icon" class="modal-icon" name="cash-outline"></ion-icon>
                     <?php if ($activeForm === 'editExpense' && isset($errors['expenseAmount'])): ?>
                         <div>

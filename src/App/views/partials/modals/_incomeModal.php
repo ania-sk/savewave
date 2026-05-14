@@ -22,8 +22,8 @@
                     <input
                         id="amount"
                         type="number"
-                        step="0.01"
-                        min="0"
+                        step="any"
+                        min="0.01"
                         name="incomeAmount"
                         placeholder="0"
                         value="<?php echo e(($oldFormData['incomeAmount'] ?? '')); ?>" />

@@ -23,8 +23,8 @@
                         <input
                             id="expenseAmount"
                             type="number"
-                            step="0.01"
-                            min="0"
+                            step="any"
+                            min="0.01"
                             placeholder="0"
                             name="expenseAmount"
                             value="<?php echo e(($oldFormData['expenseAmount'] ?? '')); ?>" />
