@@ -13,34 +13,36 @@ class OcrService
     {
         $processedPath = $this->preprocessImage($imagePath);
 
-        $tesseract = new TesseractOCR($processedPath);
-        $text = $tesseract
-            ->lang('pol')
-            ->psm(6)
-            ->oem(1)
-            ->run();
+        try {
+            $tesseract = new TesseractOCR($processedPath);
+            $text = $tesseract
+                ->lang('pol')
+                ->psm(6)
+                ->oem(1)
+                ->run();
 
-        if (file_exists($processedPath) && $processedPath !== $imagePath) {
-            unlink($processedPath);
-        }
+            if (empty(trim($text))) {
+                return [
+                    'raw_text' => '',
+                    'amount' => '0.00',
+                    'date' => date('Y-m-d'),
+                    'category_id' => null
+                ];
+            }
 
-        if (empty(trim($text))) {
+            $amount = $this->parseAmount($text);
+
             return [
-                'raw_text' => '',
-                'amount' => '0.00',
-                'date' => date('Y-m-d'),
-                'category_id' => null
+                'raw_text' => $text,
+                'amount' => number_format($amount, 2, '.', ''),
+                'date' => $this->parseDate($text),
+                'category_id' => $this->detectCategory($text, $userId)
             ];
+        } finally {
+            if (file_exists($processedPath) && $processedPath !== $imagePath) {
+                unlink($processedPath);
+            }
         }
-
-        $amount = $this->parseAmount($text);
-
-        return [
-            'raw_text' => $text,
-            'amount' => number_format($amount, 2, '.', ''), // 👈 zawsze np. "4.40"
-            'date' => $this->parseDate($text),
-            'category_id' => $this->detectCategory($text, $userId)
-        ];
     }
 
 
@@ -53,9 +55,7 @@ class OcrService
         imagefilter($img, IMG_FILTER_BRIGHTNESS, 40);
         imagefilter($img, IMG_FILTER_CONTRAST, -25);
 
-        // $destPath = realpath(__DIR__ . '/../../../public/debug_ocr.jpg');
-        $baseDir = realpath(__DIR__ . '/../../../');
-        $destPath = $baseDir . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'debug_ocr.jpg';
+        $destPath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'ocr_tmp_' . uniqid() . '.jpg';
         imagejpeg($img, $destPath, 85);
         imagedestroy($img);
 
